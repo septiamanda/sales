@@ -224,6 +224,12 @@
     text-align: inherit;
     text-align: -webkit-match-parent;
   }
+
+  .myBackground {
+    background-image: url('../img/telkombackground.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
   
   label {
     display: inline-block;
