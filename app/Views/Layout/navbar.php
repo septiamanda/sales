@@ -8,13 +8,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-
-
 <body>
     <nav class="navbar bg-body-tertiary">
-        <a href="/">
-            <img src="https://www.kahfeveryday.com/wp-content/uploads/2020/07/logo_kahf.png" width="100">
-        </a>
+        
+
+        <div class="company-name">
+            <a href="/">
+                <img src="./img/logofull.png" width="100">
+            </a>
+        </div>
+
+        
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -33,6 +37,13 @@
             </li>
         </ul>
     </nav>
+
+    <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./img/logofull.png" alt="Logo" width="30" class="d-inline-block align-text-top">
+                Bootstrap
+            </a>
+        </div>
 
     <nav class="nav flex-column">
         <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
@@ -56,4 +67,5 @@
         <a class="nav-link disabled" aria-disabled="true">Logout</a>
     </nav>
 </body>
+
 </html>
