@@ -1,6 +1,7 @@
 <?= $this->extend('auth/templates/index'); ?>
 
 <?= $this->section('content'); ?>
+<body class="myBackground">
     <div class="container">
 
         <!-- Outer Row -->
@@ -53,4 +54,5 @@
             </div>
         </div>
     </div>
+</body>
 <?= $this->endSection(); ?>
