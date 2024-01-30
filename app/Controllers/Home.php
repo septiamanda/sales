@@ -12,4 +12,8 @@ class Home extends BaseController
     {
         return view('auth/register');
     }
+    public function dash(): string
+    {
+        return view('user/index');
+    }
 }
