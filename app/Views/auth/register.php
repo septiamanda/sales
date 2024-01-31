@@ -1,6 +1,6 @@
-<?= $this->extend('auth/templates/index'); ?>
+<?= $this->extend('Layout/navbar'); ?>
 
-<?= $this->section('content'); ?>
+<?= $this->section('pageContent'); ?>
 <div class="container">
     <div class="row justify-content-center">
     <div class="col-md-6">
