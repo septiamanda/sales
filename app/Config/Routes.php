@@ -7,4 +7,4 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('home/regis', 'Home::regis');
-$routes->get('home/dash', 'Home::dash');
+$routes->get('home/login', 'Home::login');

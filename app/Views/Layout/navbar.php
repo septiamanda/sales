@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url(); ?>/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="/img/logo.png">
 
 </head>
 

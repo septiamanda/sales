@@ -12,7 +12,7 @@ class Home extends BaseController
     {
         return view('auth/register');
     }
-    public function dash(): string
+    public function login(): string
     {
         return view('auth/login');
     }
