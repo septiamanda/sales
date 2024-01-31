@@ -4,6 +4,10 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
+    public function sto(): string
+    {
+        return view('Pages/STO');
+    }
     public function index(): string
     {
         return view('Pages/dashboard');
@@ -16,4 +20,5 @@ class Home extends BaseController
     {
         return view('auth/login');
     }
+    
 }
