@@ -30,9 +30,10 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-text mx-3">
-                    <img src="/img/logofull.png" alt="Logo yee" width="100">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <img src="/img/logo.png" alt="Logo yee" width="70">
                 </div>
+                <div class="sidebar-brand-text mx-3">Telkom Indonesia</div>
             </a>
 
             <!-- Divider -->
@@ -118,7 +119,7 @@
 
             <li class="nav-item">
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="nav-link" href="tables.html" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout
                 </a>
@@ -204,7 +205,7 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                                
+
                             </div>
                         </li>
 
@@ -227,11 +228,11 @@
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                 Earnings (Monthly)</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
                                         </div>
