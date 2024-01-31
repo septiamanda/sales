@@ -98,7 +98,7 @@
 
     <li class="nav-item">
         <div class="dropdown-divider"></div>
-        <a class="nav-link" href="tables.html" data-toggle="modal" data-target="#logoutModal">
+        <a class="nav-link" href="<?= site_url('login') ?>" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
             Logout
         </a>

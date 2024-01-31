@@ -7,5 +7,5 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('dashboard', 'Home::index');
 $routes->get('home/regis', 'Home::regis');
-$routes->get('home/login', 'Home::login');
+$routes->get('login', 'Home::login');
 $routes->get('sto', 'Home::sto');

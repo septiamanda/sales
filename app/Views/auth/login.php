@@ -36,7 +36,7 @@
                                                 <label class="custom-control-label" for="customCheck" style="color: white;">Remember Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block" style="background-color: #184240; border:#184240">
+                                        <a href="<?= site_url('dashboard') ?>" class="btn btn-primary btn-user btn-block" style="background-color: #184240; border:#184240">
                                             Login
                                         </a>
                                     </form>
