@@ -20,5 +20,8 @@ class Home extends BaseController
     {
         return view('auth/login');
     }
-    
+    public function sektor(): string
+    {
+        return view('Pages/sektor');
+    }
 }
