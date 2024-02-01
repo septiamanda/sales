@@ -30,7 +30,18 @@
                                 </a>
                             </div>
                         </div>
+                        
+                        <!-- form pencarian -->
                         <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6"></div>
+                                <div class="col-md-6 d-flex justify-content-end">
+                                    <form class="form-inline my-2 my-lg-0">
+                                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                    </form>
+                                </div>
+                            </div>
+
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -59,7 +70,7 @@
                                                 <td><?= $row[1]; ?></td>
                                                 <td><?= $row[2]; ?></td>
                                                 <td>
-                                                    <!-- Tambahkan action --!>
+                                                    <!-- Tambahkan action -->
                                                     <a href="#" class="btn btn-info btn-sm">Edit</a>
                                                     <a href="#" class="btn btn-danger btn-sm">Delete</a>
                                                 </td>
@@ -76,6 +87,25 @@
                                         </tr>
                                     </tfoot>
                                 </table>
+                            </div>
+                            <!-- Fitur paginasi -->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"></div>
+                                <div class="dataTables_paginate paging_simple_numbers">
+                                    <ul class="pagination">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
+                                        </li>
+                                        <li class="page-item active" aria-current="page">
+                                            <a class="page-link" href="#">1</a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -107,5 +137,4 @@
 
     <!-- Tambahkan JS DataTables -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
-
 </div>
