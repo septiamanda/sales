@@ -11,11 +11,12 @@
                     <form action="<?= base_url('/laporan/cari') ?>" method="post">
                         <div class="form-group">
                             <label for="jenis_laporan">Jenis Laporan</label>
-                            <select class="form-control" name="jenis_laporan" id="jenis_laporan">
+                            <select class="form-control" name="jenis_laporan" id="jenis_laporan" placeholder="Pilih Jenis Laporan">
+                                <option value="" disabled selected>Pilih Jenis Laporan</option>
                                 <option value="RE">Data RE</option>
                                 <option value="FCC">Data FCC</option>
-                                <option value="PI">Data PI</option>
-                                <option value="PS">Data PS</option>
+                                <option value="PI">Data PI (Provesioning Issues)</option>
+                                <option value="PS">Data PS (Provesioning Service)</option>
                             </select>
                         </div>
 

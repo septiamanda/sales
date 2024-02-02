@@ -13,6 +13,7 @@ $routes->get('sto', 'Home::sto');
 $routes->get('re', 'Home::re');
 $routes->get('fcc', 'Home::fcc');
 $routes->get('laporan', 'Home::laporan');
+$routes->get('tambahDataSektor', 'Sektor::tambahDataSektor');
 $routes->get('pi', 'Home::pi');
 $routes->get('ps', 'Home::ps');
 $routes->get('listA', 'Home::listA');

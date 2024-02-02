@@ -25,9 +25,10 @@
                         <div class="card-header py-3 d-sm-flex justify-content-between align-items-center">
                             <h6 class="m-0 font-weight-bold text-primary">List Data Sektor</h6>
                             <div class="d-sm-flex align-items-center ">
-                                <a href="#" class="d-none d-sm-inline-block btn btn-danger shadow-sm ml-auto">
+                                <a href="<?= base_url('tambahDataSektor'); ?>" class="d-none d-sm-inline-block btn btn-primary shadow-sm ml-auto">
                                     <i class="fas fa-plus fa-sm"></i> Tambah Data Sektor
                                 </a>
+                                
                             </div>
                         </div>
                         
@@ -47,20 +48,20 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
+                                            <th>Datel (Daerah Telkom) </th> 
+                                            <th>Kode Sektor</th>    
                                             <th>Nama Sektor</th>
                                             <th>Penanggung Jawab</th>
-                                            <th>Sektor/Hero</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         $dataDummy = [
-                                            ['Tokyo', 'Naruto', 'Hero A'],
-                                            ['Shibuya', 'Sasuke', 'Hero B'],
-                                            ['Nagoya', 'Shikamaru', 'Hero C'],
-                                            ['Kyoto', 'Gaara', 'Hero D'],
-                                            ['Fukuoka', 'Neji', 'Hero E'],
+                                            ['Datel BKT', 'HERO BKT', 'Hero Bukittinggi', 'Uzumaki Naruto'],
+                                            ['Datel BKT', 'PYK', 'Payakumbuh', 'Uchiha Sasuke'],
+                                            ['Datel SLK', 'HERO SLK', 'Hero Solok', 'Nara Shikamaru'],
+                                            ['Datel SLK', 'NON HERO', 'NON HERO', 'Hyuga Neji'],  
                                         ];
 
                                         foreach ($dataDummy as $index => $row) : ?>
@@ -69,6 +70,7 @@
                                                 <td><?= $row[0]; ?></td>
                                                 <td><?= $row[1]; ?></td>
                                                 <td><?= $row[2]; ?></td>
+                                                <td><?= $row[3]; ?></td>
                                                 <td>
                                                     <!-- Tambahkan action -->
                                                     <a href="#" class="btn btn-info btn-sm">Edit</a>
@@ -77,15 +79,7 @@
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Nama Sektor</th>
-                                            <th>Penanggung Jawab</th>
-                                            <th>Sektor/Hero</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
+
                                 </table>
                             </div>
                             <!-- Fitur paginasi -->
