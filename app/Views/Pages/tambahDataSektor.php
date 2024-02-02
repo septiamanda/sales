@@ -13,9 +13,9 @@
                             <label for="datel">Datel (Daerah Telkom)</label>
                             <select class="form-control" name="datel" id="datel">
                                 <option value="" disabled selected>Pilih Datel</option>
-                                <option value="Datel BKT">Datel BKT</option>
-                                <option value="Datel SLK">Datel SLK</option>
-                                <option value="Inner PDG">Inner PDG</option>
+                                <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
+                                <option value="Datel SLK">Datel SLK (Solok)</option>
+                                <option value="Inner PDG">Inner PDG (Padang)</option>
                             </select>
                         </div>
 
@@ -57,19 +57,19 @@
         switch (selectedDatel) {
             case "Datel BKT":
                 addOption(sektorDropdown, "Pilih Sektor", "");
-                addOption(sektorDropdown, "Hero BKT", "hero_bkt");
-                addOption(sektorDropdown, "PYK", "pyk");
+                addOption(sektorDropdown, "Hero BKT (Bukittinggi)", "hero_bkt");
+                addOption(sektorDropdown, "PYK (Payakumbuh)", "pyk");
                 addOption(sektorDropdown, "Non Hero", "non_hero");
                 break;
             case "Datel SLK":
                 addOption(sektorDropdown, "Pilih Sektor", "");
-                addOption(sektorDropdown, "Hero SLK", "hero_slk");
+                addOption(sektorDropdown, "Hero SLK (Solok)", "hero_slk");
                 addOption(sektorDropdown, "Non Hero", "non_hero_slk");
                 break;
             case "Inner PDG":
                 addOption(sektorDropdown, "Pilih Sektor", "");
-                addOption(sektorDropdown, "Hero BDT", "hero_bdt");
-                addOption(sektorDropdown, "HERO KJI", "hero_kji");
+                addOption(sektorDropdown, "Hero BDT (Bandar Buat)", "hero_bdt");
+                addOption(sektorDropdown, "Hero KJI (Kuranji)", "hero_kji");
                 addOption(sektorDropdown, "PAM", "pam");
                 addOption(sektorDropdown, "Non Hero", "non_hero_pdg");
                 break;
