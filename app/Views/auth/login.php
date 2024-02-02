@@ -21,34 +21,29 @@
                             <div class="col-lg-6" style="background-color: #DE5858;">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4  mb-4" style="font-weight: bold; color:white;"><?= lang('Auth.loginTitle') ?></h1>
+                                        <h1 class="h4  mb-4" style="font-weight: bold; color:white;">Login</h1>
                                     </div>
 
-                                    <?= view('Myth\Auth\Views\_message_block') ?>
-                                    <form action="<?= url_to('login') ?>" method="post" class="user">
-                                        <?= csrf_field() ?>
+                                    <form class="user">
 
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user <?php if (session('errors.login')) : ?>is-invalid<?php endif ?>" name="login" placeholder="<?= lang('Auth.email') ?>">
-                                            <div class="invalid-feedback">
-                                                <?= session('errors.login') ?>
-                                            </div>
+                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter your email...">
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>" name="password" placeholder="<?= lang('Auth.password') ?>">
+                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
                                         </div>
 
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox small">
-                                                    <input type="checkbox" class="custom-control-input" name="remember" <?php if (old('remember')) : ?> checked <?php endif ?>>
-                                                    <label class="custom-control-label" for="customCheck" style="color: white;"><?= lang('Auth.rememberMe') ?></label>
-                                                </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck" style="color: white;">Remember Me</label>
                                             </div>
+                                        </div>
 
-                                        <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color: #184240; border:#184240">
-                                            <?= lang('Auth.loginAction') ?>
-                                        </button>
+                                        <a href="index.html" class="btn btn-primary btn-user btn-block" style="background-color: #184240; border:#184240">
+                                            Login
+                                        </a>
                                     </form>
                                     <hr>
                                 </div>
