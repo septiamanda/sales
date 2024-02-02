@@ -32,4 +32,8 @@ class Home extends BaseController
     {
         return view('Pages/sektor');
     }
+    public function laporan(): string
+    {
+        return view('Pages/laporan');
+    }
 }
