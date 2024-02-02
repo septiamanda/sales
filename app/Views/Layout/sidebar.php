@@ -38,8 +38,8 @@
                 <a class="collapse-item" href="buttons.html">Data Sales</a>
                 <a class="collapse-item" href="<?= site_url('re') ?>">Data RE</a>
                 <a class="collapse-item" href="<?= site_url('fcc') ?>">Data FCC</a>
-                <a class="collapse-item" href="cards.html">Data PI</a>
-                <a class="collapse-item" href="buttons.html">Data PS</a>
+                <a class="collapse-item" href="<?= site_url('pi') ?>">Data PI</a>
+                <a class="collapse-item" href="<?= site_url('ps') ?>">Data PS</a>
             </div>
         </div>
     </li>
@@ -69,8 +69,8 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Akun:</h6>
-                <a class="collapse-item" href="admin.html">Admin</a>
-                <a class="collapse-item" href="karyawan.html">Karyawan</a>
+                <a class="collapse-item" href="<?= site_url('listA') ?>">Admin</a>
+                <a class="collapse-item" href="<?= site_url('listK') ?>">Karyawan</a>
             </div>
         </div>
     </li>

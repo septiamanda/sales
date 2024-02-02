@@ -12,6 +12,14 @@ class Home extends BaseController
     {
         return view('Pages/FCC');
     }
+    public function pi(): string
+    {
+        return view('Pages/PI');
+    }
+    public function ps(): string
+    {
+        return view('Pages/PS');
+    }
     public function sto(): string
     {
         return view('Pages/STO');
@@ -35,5 +43,13 @@ class Home extends BaseController
     public function laporan(): string
     {
         return view('Pages/laporan');
+    }
+    public function listA(): string
+    {
+        return view('Pages/listAdmin');
+    }
+    public function listK(): string
+    {
+        return view('Pages/listKaryawan');
     }
 }
