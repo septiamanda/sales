@@ -13,4 +13,11 @@ class ModelLogin extends Model
         'userId', 'username', 'userEmail', 'userPass', 'levelId'
     ];
 
+    public function getAdmin(){
+        return $this->where('levelId', 1)->findAll();
+    }
+    public function getKaryawan(){
+        return $this->where('levelId', 2)->findAll();
+    }
+
 }
