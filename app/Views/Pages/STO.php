@@ -42,7 +42,9 @@
                                         <tr>
                                             <th>No.</th>
                                             <th>Nama STO</th>
-                                            <th>Sektor/Hero</th>
+                                            <th>STO</th>
+                                            <th>Hero</th>
+                                            <th>Sektor</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
