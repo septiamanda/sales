@@ -10,7 +10,7 @@
     </div>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="#" class="d-none d-sm-inline-block btn btn-danger shadow-sm ml-auto">
+        <a href="<?= base_url('TambahSTO'); ?>" class="d-none d-sm-inline-block btn btn-danger shadow-sm ml-auto">
             <i class="fas fa-plus fa-sm text-white-50"></i> Sentral Telepon Otomat
         </a>
     </div>
@@ -42,13 +42,11 @@
                                         <tr>
                                             <th>No.</th>
                                             <th>Nama STO</th>
-                                            <th>STO</th>
-                                            <th>Penanggung Jawab</th>
                                             <th>Sektor/Hero</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                            
+                                    
                                 </table>
                             </div>
                         </div>
