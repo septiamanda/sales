@@ -47,6 +47,12 @@ class Filters extends BaseConfig
             ]
         ],
         'after' => [
+            'filterAdmin' => [
+                'except' => ['dashboard', 're', 'fcc', 'pi', 'ps','listA', 'listK', 'sektor','sto', 'laporan',]
+            ],
+            'filterKaryawan' => [
+                'except' => ['dashboard', 're', 'fcc', 'pi', 'ps', 'laporan']
+            ],
             'toolbar',
             // 'honeypot',
             // 'secureheaders',
