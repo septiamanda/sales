@@ -9,8 +9,8 @@ $routes->get('regis', 'Home::regis');
 $routes->get('login', 'Login::login');
 $routes->post('login/cekUser', 'Login::cekUser');
 $routes->get('logout', 'Login::logout');
-$routes->get('listA', 'Home::listA');
-$routes->get('listK', 'Home::listK');
+$routes->get('listA', 'Admin::listA');
+$routes->get('listK', 'Karyawan::listK');
 
 $routes->get('dashboard', 'Home::index');
 

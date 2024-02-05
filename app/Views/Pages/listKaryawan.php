@@ -45,6 +45,22 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        <?php $no = 1;
+                                        foreach ($karyawanData as $kar) : ?>
+                                            <tr>
+                                                <th scope='row'><?= $no; ?></th>
+                                                <td><?= $kar['username']; ?></td>
+                                                <td><?= $kar['userEmail']; ?></td>
+                                                <td>
+                                                    <!-- Tambahkan action -->
+                                                    <a href="#" class="btn btn-info btn-sm">Edit</a>
+                                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                                </td>
+                                            </tr>
+                                        <?php $no++;
+                                        endforeach; ?>
+                                    </tbody>
                                 </table>
                             </div>
                             <!-- Fitur paginasi -->
