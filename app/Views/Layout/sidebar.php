@@ -35,7 +35,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Data Master:</h6>
-                <a class="collapse-item" href="buttons.html">Data Sales</a>
+                <a class="collapse-item" href="<?= site_url('sales')?>">Data Sales</a>
                 <a class="collapse-item" href="<?= site_url('re') ?>">Data RE</a>
                 <a class="collapse-item" href="<?= site_url('fcc') ?>">Data FCC</a>
                 <a class="collapse-item" href="<?= site_url('pi') ?>">Data PI</a>

@@ -13,27 +13,35 @@
                                 <div class="text-center">
                                     <h1 class="h4 mb-4" style="color:white; font-weight: bold;">Create an Account!</h1>
                                 </div>
-                                <form class="user">
+
+                                <?php
+                                $formAction = base_url('simpanA');
+                                $defaultRole = "Admin";
+
+                                if (strpos(current_url(), 'tambahK' ) !== false) {
+                                    $formAction = base_url('simpanK');
+                                    $defaultRole = "Karyawan";
+                                }
+                                ?>
+
+                                <form action="<?= $formAction; ?>" method="POST" class="user">
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address">
+                                        <input type="email" class="form-control form-control-user" name="email" placeholder="Email Address">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="exampleInputUsername" placeholder="Username">
+                                        <input type="text" class="form-control form-control-user" name="username" placeholder="Username">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="exampleInputRole" placeholder="Account Role">
+                                        <input type="text" class="form-control form-control-user" name="role" value="<?= $defaultRole; ?>" readonly>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
+                                        <div class="col-sm mb-3 mb-sm-0">
+                                            <input type="password" class="form-control form-control-user" name="password" placeholder="Password">
                                         </div>
                                     </div>
-                                    <a href="login.html" class="btn btn-primary btn-user btn-block" style="background-color: #184240; border:#184240">
+                                    <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color: #184240; border:#184240">
                                         Register Account
-                                    </a>
+                                    </button>
                                 </form>
                                 <hr>
                             </div>
