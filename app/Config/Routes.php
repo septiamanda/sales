@@ -18,3 +18,5 @@ $routes->get('pi', 'Home::pi');
 $routes->get('ps', 'Home::ps');
 $routes->get('listA', 'Home::listA');
 $routes->get('listK', 'Home::listK');
+$routes->get('sales', 'Home::sales');
+

@@ -52,5 +52,9 @@ class Home extends BaseController
     {
         return view('Pages/listKaryawan');
     }
+    public function sales(): string
+    {
+        return view('Pages/SALES');
+    }
 }
 
