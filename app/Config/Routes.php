@@ -5,12 +5,15 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('regis', 'Home::regis');
 $routes->get('login', 'Login::login');
 $routes->post('login/cekUser', 'Login::cekUser');
 $routes->get('logout', 'Login::logout');
 $routes->get('listA', 'Admin::listA');
+$routes->get('tambahA', 'Admin::tambahA');
+$routes->post('simpanA', 'Admin::simpanA');
 $routes->get('listK', 'Karyawan::listK');
+$routes->get('tambahK', 'Karyawan::tambahK');
+$routes->post('simpanK', 'Karyawan::simpanK');
 
 $routes->get('dashboard', 'Home::index');
 

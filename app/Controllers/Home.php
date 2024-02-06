@@ -28,10 +28,6 @@ class Home extends BaseController
     {
         return view('Pages/dashboard');
     }
-    public function regis(): string
-    {
-        return view('auth/register');
-    }
     public function sektor(): string
     {
         return view('Pages/sektor');

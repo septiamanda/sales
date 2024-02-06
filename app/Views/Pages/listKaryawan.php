@@ -10,7 +10,7 @@
     </div>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="<?= site_url('regis') ?>" class="d-none d-sm-inline-block btn btn-danger shadow-sm ml-auto">
+        <a href="<?= site_url('tambahK') ?>" class="d-none d-sm-inline-block btn btn-danger shadow-sm ml-auto">
             <i class="fas fa-plus fa-sm text-white-50"></i> Karyawan
         </a>
     </div>
