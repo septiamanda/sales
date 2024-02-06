@@ -26,5 +26,9 @@ $routes->get('laporan', 'Home::laporan');
 $routes->get('tambahDataSektor', 'Sektor::tambahDataSektor');
 $routes->get('pi', 'Home::pi');
 $routes->get('ps', 'Home::ps');
+$routes->get('listA', 'Home::listA');
+$routes->get('listK', 'Home::listK');
+$routes->get('sales', 'Home::sales');
+
 
 $routes->get('laporan', 'Home::laporan');
