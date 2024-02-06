@@ -63,22 +63,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- Fitur paginasi -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"></div>
-                                <div class="dataTables_paginate paging_simple_numbers">
-                                    <ul class="pagination">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
-                                        </li>
-                                        <li class="page-item active" aria-current="page">
-                                            <a class="page-link" href="#">1</a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
