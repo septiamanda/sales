@@ -2,7 +2,7 @@
 <?= $this->section('pageContent'); ?>
 
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
@@ -29,9 +29,15 @@
                             <label for="tanggal_akhir">Tanggal Akhir</label>
                             <input class="form-control" type="date" name="tanggal_akhir" id="tanggal_akhir">
                         </div>
+                        
+                        <div class="input-group mb-3 d-flex justify-content-center">
+                                <!-- Tombol cari digabungkan ke dalam input group -->
+                                <button type="submit" name="cari" class="btn btn-primary btn mb-4 mr-2">Cari</button>
+                                <button type="submit" name="print" class="btn btn-primary btn mb-4">Print</button>
+                        </div>
 
-                        <button type="submit" name="cari" class="btn btn-primary btn mb-4 mr-2">Cari</button>
-                        <button type="submit" name="print" class="btn btn-primary btn mb-4">Print</button>
+                        <!-- <button type="submit" name="cari" class="btn btn-primary btn mb-4 mr-2 justify-content-center">Cari</button> -->
+                        <!-- <button type="submit" name="print" class="btn btn-primary btn mb-4 justify-content-center">Print</button> -->
                     </form>
                 </div>
             </div>
