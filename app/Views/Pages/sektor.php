@@ -25,62 +25,38 @@
                         <div class="card-header py-3 d-sm-flex justify-content-between align-items-center">
                             <h6 class="m-0 font-weight-bold text-primary">List Data Sektor</h6>
                         </div>
-                        
-                        <!-- form pencarian -->
+
+                        <!-- Form pencarian -->
                         <div class="card-body">
-                            <div class="row mb-3">
-                                <div class="col-md-6 d-flex justify-content-start align-items-center">
-                                    <form class="form-inline my-2">
-                                        <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
-                                    </form>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="cari" placeholder="Cari..." aria-label="Cari.." aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Cari</button>
                                 </div>
-                                <div class="col-md-6 d-flex justify-content-end align-items-center ">
+                                <div class="col-md-6 d-flex justify-content-end align-items-center">
                                     <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
-                                        <i class="fas fa-plus fa-sm"></i> Tambah Data Sektor
+                                        <i class="fas fa-plus fa-sm"></i> + Tambah Data Sektor
                                     </a>
                                 </div>
                             </div>
 
-
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="sektorTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Datel (Daerah Telkom) </th> 
-                                            <th>Kode Sektor</th>    
+                                            <th>Datel (Daerah Telkom)</th>
                                             <th>Nama Sektor</th>
                                             <th>Penanggung Jawab</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                        $dataDummy = [
-                                            ['Datel BKT', 'HERO BKT', 'Hero Bukittinggi', 'Uzumaki Naruto'],
-                                            ['Datel BKT', 'PYK', 'Payakumbuh', 'Uchiha Sasuke'],
-                                            ['Datel SLK', 'HERO SLK', 'Hero Solok', 'Nara Shikamaru'],
-                                            ['Datel SLK', 'NON HERO', 'NON HERO', 'Hyuga Neji'],  
-                                        ];
 
-                                        foreach ($dataDummy as $index => $row) : ?>
-                                            <tr>
-                                                <td><?= $index + 1; ?></td>
-                                                <td><?= $row[0]; ?></td>
-                                                <td><?= $row[1]; ?></td>
-                                                <td><?= $row[2]; ?></td>
-                                                <td><?= $row[3]; ?></td>
-                                                <td>
-                                                    <!-- Tambahkan action -->
-                                                    <a href="#" class="btn btn-info btn-sm">Edit</a>
-                                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
                                     </tbody>
-
                                 </table>
                             </div>
+
                             <!-- Fitur paginasi -->
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"></div>
@@ -130,4 +106,10 @@
 
     <!-- Tambahkan JS DataTables -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#sektorTable').DataTable();
+        });
+    </script>
 </div>

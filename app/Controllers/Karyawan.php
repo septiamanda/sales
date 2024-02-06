@@ -18,4 +18,27 @@ class Karyawan extends BaseController
         $data['karyawanData'] = $this->modelLogin->getKaryawan();
         return view('Pages/listKaryawan', $data);
     }
+
+    public function tambahK()
+    {
+        return view('auth/register');
+    }
+    public function simpanK()
+    {
+        $email = $this->request->getVar('email');
+        $username = $this->request->getVar('username');
+        $password = $this->request->getVar('password');
+
+        $levelId = 2;
+
+        $data=[
+            'userEmail'=> $email,
+            'username'=> $username,
+            'levelId'=> $levelId,
+            'userPass'=> $password
+        ];
+
+        $this->modelLogin->save($data);
+        return redirect()->to('listK');
+    }
 }
