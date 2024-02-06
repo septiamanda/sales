@@ -1,3 +1,7 @@
+<?php
+
+use App\Controllers\loginUser;
+?>
 <?= $this->extend('auth/templates/index'); ?>
 
 <?= $this->section('content'); ?>
@@ -23,29 +27,41 @@
                                     <div class="text-center">
                                         <h1 class="h4  mb-4" style="font-weight: bold; color:white;">Login</h1>
                                     </div>
+                                    <?= form_open('login/cekUser', ['class' => 'user']); ?>
+                                    <?= csrf_field(); ?>
+                                    <div class="form-group">
+                                        <?php
+                                        $isInvalidUser = (session()->getFlashdata('errEmail')) ? 'is-invalid' : '';
+                                        ?>
+                                        <input type="email" class="form-control form-control-user <?= $isInvalidUser ?>" name="email" aria-describedby="emailHelp" placeholder="Enter your email..." autofocus>
+                                        <?php
+                                        if (session()->getFlashdata('errEmail')) {
+                                            echo '<div id= "validationServer03Feedback" class="invalid-feedback">
+                                            ' . session()->getFlashdata('errEmail') . '
+                                            </div>';
+                                        }
+                                        ?>
+                                    </div>
 
-                                    <form class="user">
+                                    <div class="form-group">
+                                    <?php
+                                        $isInvalidUser = (session()->getFlashdata('errPassword')) ? 'is-invalid' : '';
+                                        ?>
+                                        <input type="password" class="form-control form-control-user <?= $isInvalidUser ?>" name="password" placeholder="Password">
+                                        <?php
+                                        if (session()->getFlashdata('errPassword')) {
+                                            echo '<div id= "validationServer03Feedback" class="invalid-feedback">
+                                            ' . session()->getFlashdata('errPassword') . '
+                                            </div>';
+                                        }
+                                        ?>
+                                    </div>
 
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter your email...">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck" style="color: white;">Remember Me</label>
-                                            </div>
-                                        </div>
-
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block" style="background-color: #184240; border:#184240">
-                                            Login
-                                        </a>
-                                    </form>
+                                    <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color: #184240; border:#184240">
+                                        Login
+                                    </button>
                                     <hr>
+                                    <?= form_close(); ?>
                                 </div>
                             </div>
                         </div>

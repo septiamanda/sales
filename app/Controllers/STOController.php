@@ -2,10 +2,32 @@
 
 namespace App\Controllers;
 
-class DashboardController extends BaseController
+use App\Models\STOModel;
+
+class STOController extends BaseController
 {
-    public function index(): string
+    protected $stoModel;
+    public function __construct()
     {
-        return view('Pages/dashboard');
+        $this->stoModel = new STOModel();
+    }
+    public function sto(): string
+    {
+        $sto = $this->stoModel->findAll();
+
+        $data = [
+            'title' => 'Data Sentral Telephone Otomat',
+            'sto' => $sto
+        ];
+
+        // $STOModel = new STOModel();
+        
+
+        return view('Pages/sto', $data);
+    }
+
+    public function TambahSTO(): string
+    {
+        return view('Pages/TambahSTO');
     }
 }

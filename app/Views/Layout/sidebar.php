@@ -61,34 +61,36 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Kelola Akun</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Akun:</h6>
-                <a class="collapse-item" href="<?= site_url('listA') ?>">Admin</a>
-                <a class="collapse-item" href="<?= site_url('listK') ?>">Karyawan</a>
+    <?php if (session()->levelId == 1) : ?>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Kelola Akun</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Akun:</h6>
+                    <a class="collapse-item" href="<?= site_url('listA') ?>">Admin</a>
+                    <a class="collapse-item" href="<?= site_url('listK') ?>">Karyawan</a>
+                </div>
             </div>
-        </div>
-    </li>
+        </li>
 
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="<?= site_url('sektor') ?>">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Data Sektor</span></a>
-    </li>
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link" href="<?= site_url('sektor') ?>">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Data Sektor</span></a>
+        </li>
 
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="<?= site_url('sto') ?>">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Data STO</span></a>
-    </li>
-
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link" href="<?= site_url('sto') ?>">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Data STO</span></a>
+        </li>
+    <?php endif; ?>
+    
     <!-- Nav Item - Tables -->
     <li class="nav-item">
         <a class="nav-link" href="<?= site_url('laporan') ?>">
@@ -98,7 +100,7 @@
 
     <li class="nav-item">
         <div class="dropdown-divider"></div>
-        <a class="nav-link" href="<?= site_url('login') ?>" data-toggle="modal" data-target="#logoutModal">
+        <a class="nav-link" href="<?= site_url('logout') ?>" >
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
             Logout
         </a>
