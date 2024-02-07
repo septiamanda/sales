@@ -29,6 +29,9 @@ $routes->get('sektor', 'Home::sektor');
 
 $routes->get('laporan', 'Home::laporan');
 $routes->get('tambahDataSektor', 'Sektor::tambahDataSektor');
+$routes->post('simpanDataSektor', 'TambahSektor::simpanDataSektor');
+$routes->post('sektor', 'TambahSektor::simpanDataSektor');
+$routes->get('editSektor/(:num)', 'Sektor::editSektor/$1');
 $routes->get('pi', 'Home::pi');
 $routes->get('ps', 'Home::ps');
 $routes->get('listA', 'Home::listA');
