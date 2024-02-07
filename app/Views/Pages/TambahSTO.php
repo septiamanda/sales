@@ -68,7 +68,7 @@
                             </select>
                         </div>
 
-                        <button type="submit" name="Simpan" class="btn btn-primary btn mb-4 mr-2">Simpan</button>
+                        <button type="submit" name="Simpan" class="btn btn-info btn mb-4 mr-2">Simpan</button>
                         <a href="<?= base_url('sto'); ?>" class="btn btn-danger btn mb-4">Cancel</a>
 
                 </div>

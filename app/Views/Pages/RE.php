@@ -33,7 +33,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                    <thead style="background-color: #184240; color: white; text-align: center;">
                                         <tr>
                                             <th>No.</th>
                                             <th>No. SC</th>
@@ -43,7 +43,7 @@
                                             <th>STO</th>
                                         </tr>
                                     </thead>
-                            
+
                                 </table>
                             </div>
                         </div>

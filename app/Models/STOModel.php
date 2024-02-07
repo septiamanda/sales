@@ -17,7 +17,4 @@ class STOModel extends Model
     {
         return $this->findAll();
     }
-
-    
-
 }

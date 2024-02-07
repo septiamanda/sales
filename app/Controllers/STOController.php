@@ -37,8 +37,10 @@ class STOController extends BaseController
             'Sektor' => $sektor
         ];
 
+        session()->setFlashdata('Pesan', 'Data Berhasil Ditambahkan.');
+
         $this->stoModel->save($data);
-        return redirect()->to(base_url('sto'));
+        return redirect()->to('/sto');
 
     }
 }
