@@ -2,7 +2,7 @@
 <?= $this->section('pageContent'); ?>
 
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
@@ -32,8 +32,14 @@
                             <input type="text" class="form-control" name="pj" id="penanggungJawab">
                         </div>
 
-                        <button type="submit" name="Simpan" class="btn btn-primary btn mb-4 mr-2">Simpan</button>
-                        <a href="<?= base_url('sektor'); ?>" class="btn btn-danger btn mb-4">Cancel</a>
+                        <!-- <button type="submit" name="Simpan" class="btn btn-primary btn mb-4 mr-2">Simpan</button>
+                        <a href="<?= base_url('sektor'); ?>" class="btn btn-danger btn mb-4">Cancel</a> -->
+
+                        <div class="input-group mb-3 d-flex justify-content-center">
+                            <button type="submit" name="simpan" class="btn btn-primary btn mb-4 mr-2">Simpan</button>
+                            <a href="<?= base_url('sektor'); ?>" class="btn btn-danger btn mb-4">Cancel</a>
+                        </div>
+
                     </form>
                 </div>
             </div>

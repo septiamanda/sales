@@ -11,6 +11,10 @@
 
     <title>Dashboard Sales</title>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
     <!-- Custom fonts for this template-->
     <link href="<?= base_url(); ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -18,6 +22,8 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url(); ?>/css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="/img/logo.png">
+
+
 
 </head>
 
@@ -27,7 +33,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?= $this->include ('Layout/sidebar'); ?>
+        <?= $this->include('Layout/sidebar'); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -48,13 +54,13 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <!-- <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2021</span>
                     </div>
                 </div>
-            </footer>
+            </footer> -->
             <!-- End of Footer -->
 
         </div>
@@ -103,7 +109,7 @@
     <!-- Page level custom scripts -->
     <script src="<?= base_url(); ?>/js/demo/chart-area-demo.js"></script>
     <script src="<?= base_url(); ?>/js/demo/chart-pie-demo.js"></script>
-    
+
 </body>
 
 </html>

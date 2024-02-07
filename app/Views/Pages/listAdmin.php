@@ -10,7 +10,7 @@
     </div>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="<?= site_url('regis') ?>" class="d-none d-sm-inline-block btn btn-danger shadow-sm ml-auto">
+        <a href="<?= base_url('tambahA') ?>" class="d-none d-sm-inline-block btn btn-danger shadow-sm ml-auto">
             <i class="fas fa-plus fa-sm text-white-50"></i> Admin
         </a>
     </div>
@@ -52,7 +52,7 @@
                                                 <th scope='row'><?= $no; ?></th>
                                                 <td><?= $ad['username']; ?></td>
                                                 <td><?= $ad['userEmail']; ?></td>
-                                                <td>
+                                                <td class="text-center">
                                                     <!-- Tambahkan action -->
                                                     <a href="#" class="btn btn-info btn-sm">Edit</a>
                                                     <a href="#" class="btn btn-danger btn-sm">Delete</a>
@@ -63,22 +63,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- Fitur paginasi -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"></div>
-                                <div class="dataTables_paginate paging_simple_numbers">
-                                    <ul class="pagination">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
-                                        </li>
-                                        <li class="page-item active" aria-current="page">
-                                            <a class="page-link" href="#">1</a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
