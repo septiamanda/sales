@@ -57,7 +57,7 @@
                                         <?php $i = 1; ?>
                                         <?php foreach ($dataSTO as $s) : ?>
                                             <tr>
-                                                <th scope="row"><?= $i++; ?></th>
+                                                <th scope="row" style="width: 70px; text-align: center;"><?= $i++; ?></th>
                                                 <td><?= $s['Nama_STO']; ?></td>
                                                 <td><?= $s['STO']; ?></td>
                                                 <td><?= $s['Hero']; ?></td>
