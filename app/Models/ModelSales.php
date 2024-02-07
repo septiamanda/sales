@@ -9,4 +9,3 @@ class ModelSales extends Model
     protected $primaryKey = "noSC";
     protected $allowedFields = ['nama_pengguna', 'alamat_instl', 'sektor', 'sto', 'status'];
 }
-?>
