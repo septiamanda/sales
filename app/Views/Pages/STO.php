@@ -48,7 +48,22 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($dataSTO as $s) : ?>
+                                        <tr>
+                                            <th scope="row"><?=$i++; ?></th>
+                                            <td><?= $s['Nama_STO']; ?></td>
+                                            <td><?= $s['STO']; ?></td>
+                                            <td><?= $s['Hero']; ?></td>
+                                            <td><?= $s['Sektor']; ?></td>
+                                            <td>
+                                                <a href="" class="btn btn-primary">Edit</a>
+                                                <a href="" class="btn btn-danger">Hapus</a>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

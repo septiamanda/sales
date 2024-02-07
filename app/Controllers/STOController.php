@@ -13,15 +13,7 @@ class STOController extends BaseController
     }
     public function sto(): string
     {
-        $sto = $this->stoModel->findAll();
-
-        $data = [
-            'title' => 'Data Sentral Telephone Otomat',
-            'sto' => $sto
-        ];
-
-        // $STOModel = new STOModel();
-        
+        $data['dataSTO'] = $this->stoModel->getsto();
 
         return view('Pages/sto', $data);
     }
@@ -29,5 +21,24 @@ class STOController extends BaseController
     public function TambahSTO(): string
     {
         return view('Pages/TambahSTO');
+    }
+
+    public function save()
+    {
+        $name = $this->request->getVar('NamaSTO');
+        $sto = $this->request->getVar('STO');
+        $hero = $this->request->getVar('Hero');
+        $sektor = $this->request->getVar('Sektor');
+
+        $data=[
+            'Nama_STO' => $name, 
+            'STO'=> $sto, 
+            'Hero'=> $hero, 
+            'Sektor' => $sektor
+        ];
+
+        $this->stoModel->save($data);
+        return redirect()->to(base_url('sto'));
+
     }
 }
