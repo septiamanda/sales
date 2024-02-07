@@ -14,11 +14,17 @@
                                     <h1 class="h4 mb-4" style="color:white; font-weight: bold;">Create an Account!</h1>
                                 </div>
 
+                                <?php if (session()->has('error')) : ?>
+                                    <div class="alert alert-danger" role="alert">
+                                        <?= session('error') ?>
+                                    </div>
+                                <?php endif; ?>
+
                                 <?php
                                 $formAction = base_url('simpanA');
                                 $defaultRole = "Admin";
 
-                                if (strpos(current_url(), 'tambahK' ) !== false) {
+                                if (strpos(current_url(), 'tambahK') !== false) {
                                     $formAction = base_url('simpanK');
                                     $defaultRole = "Karyawan";
                                 }
