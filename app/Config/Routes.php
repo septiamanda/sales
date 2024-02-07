@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\STOController;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -23,13 +24,20 @@ $routes->post('updateK', 'Karyawan::updateK');
 
 $routes->get('dashboard', 'Home::index');
 
-$routes->get('sektor', 'Home::sektor');
-$routes->get('sto', 'Home::sto');
+$routes->get('sto', 'STOController::sto');
 $routes->get('TambahSTO', 'STOController::TambahSTO');
+$routes->post('save', 'STOController::save');
+
 $routes->get('re', 'Home::re');
 $routes->get('fcc', 'Home::fcc');
+
+$routes->get('sektor', 'Home::sektor');
+
 $routes->get('laporan', 'Home::laporan');
 $routes->get('tambahDataSektor', 'Sektor::tambahDataSektor');
+$routes->post('simpanDataSektor', 'TambahSektor::simpanDataSektor');
+$routes->post('sektor', 'TambahSektor::simpanDataSektor');
+$routes->get('editSektor/(:num)', 'Sektor::editSektor/$1');
 $routes->get('pi', 'Home::pi');
 $routes->get('ps', 'Home::ps');
 $routes->get('sales', 'Home::sales');

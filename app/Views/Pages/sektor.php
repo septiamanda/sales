@@ -1,3 +1,18 @@
+
+<?php
+
+//Koneksi Database
+$server = "localhost";
+$user = "root";
+$password = "";
+$database = "salesyak";
+
+//Buat Koneksi
+$koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_error($koneksi));
+
+?>
+
+
 <?= $this->extend('Layout/navbar'); ?>
 
 <?= $this->section('pageContent'); ?>
@@ -25,62 +40,58 @@
                         <div class="card-header py-3 d-sm-flex justify-content-between align-items-center">
                             <h6 class="m-0 font-weight-bold text-primary">List Data Sektor</h6>
                         </div>
-                        
-                        <!-- form pencarian -->
+
+                        <!-- Form pencarian -->
                         <div class="card-body">
-                            <div class="row mb-3">
-                                <div class="col-md-6 d-flex justify-content-start align-items-center">
-                                    <form class="form-inline my-2">
-                                        <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
-                                    </form>
+                        <form action="<?= base_url('sektor'); ?>" method="post">
+                            <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="cari" placeholder="Cari..." aria-label="Cari.." aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit" id="cari_sektor">Cari</button>
                                 </div>
-                                <div class="col-md-6 d-flex justify-content-end align-items-center ">
+                                <div class="col-md-6 d-flex justify-content-end align-items-center">
                                     <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
-                                        <i class="fas fa-plus fa-sm"></i> Tambah Data Sektor
+                                        <i class="fas fa-plus fa-sm"></i> + Tambah Data Sektor
                                     </a>
                                 </div>
                             </div>
+                        </form>
 
 
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="sektorTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Datel (Daerah Telkom) </th> 
-                                            <th>Kode Sektor</th>    
+                                            <th>Datel (Daerah Telkom)</th>
                                             <th>Nama Sektor</th>
-                                            <th>Penanggung Jawab</th>
-                                            <th>Action</th>
+                                            <th>HERO Sektor</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                        $dataDummy = [
-                                            ['Datel BKT', 'HERO BKT', 'Hero Bukittinggi', 'Uzumaki Naruto'],
-                                            ['Datel BKT', 'PYK', 'Payakumbuh', 'Uchiha Sasuke'],
-                                            ['Datel SLK', 'HERO SLK', 'Hero Solok', 'Nara Shikamaru'],
-                                            ['Datel SLK', 'NON HERO', 'NON HERO', 'Hyuga Neji'],  
-                                        ];
-
-                                        foreach ($dataDummy as $index => $row) : ?>
-                                            <tr>
-                                                <td><?= $index + 1; ?></td>
-                                                <td><?= $row[0]; ?></td>
-                                                <td><?= $row[1]; ?></td>
-                                                <td><?= $row[2]; ?></td>
-                                                <td><?= $row[3]; ?></td>
-                                                <td>
-                                                    <!-- Tambahkan action -->
-                                                    <a href="#" class="btn btn-info btn-sm">Edit</a>
-                                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
+                                        <?php 
+                                        // Persiapan menampilkan data
+                                        $no = 1;
+                                        $tampil = mysqli_query($koneksi, "SELECT * FROM sektor ORDER BY id_sektor ASC");
+                                        while ($data = mysqli_fetch_array($tampil)) :
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $no++; ?></td>
+                                            <td><?php echo $data['datel']; ?></td>
+                                            <td><?php echo $data['nama_sektor']; ?></td>
+                                            <td><?php echo $data['hero_sektor']; ?></td>
+                                            <td>
+                                                <a href="<?= base_url('editSektor/'. $data['id_sektor']); ?>" class="btn btn-primary">Edit</a>
+                                                <!-- <a href="<?= base_url('editSektor?id='. $data['id_sektor']); ?>" class="btn btn-primary">Edit</a> -->
+                                                <a href="<?= base_url('deleteSektor/'. $data['id_sektor']); ?>" class="btn btn-danger" onclick="return confirmDelete();">Delete</a>
+                                            </td>
+                                        </tr>
+                                        <?php endwhile; ?>
                                     </tbody>
-
                                 </table>
                             </div>
+
                             <!-- Fitur paginasi -->
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"></div>
@@ -130,4 +141,31 @@
 
     <!-- Tambahkan JS DataTables -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
-</div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var input = document.querySelector('input[name="cari"]').value.toLowerCase().trim();
+            var rows = document.querySelectorAll('#sektorTable tbody tr');
+        
+        rows.forEach(function(row) {
+            var datel = row.cells[1].textContent.toLowerCase();
+            var namaSektor = row.cells[2].textContent.toLowerCase();
+            var heroSektor = row.cells[3].textContent.toLowerCase();
+            
+            if (datel.includes(input) || namaSektor.includes(input) || heroSektor.includes(input)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+
+        function confirmDelete() {
+            return confirm('Apakah Anda yakin ingin menghapus data ini?');
+        }
+
+        $(document).ready(function () {
+            $('#koneksi').DataTable();
+        });
+    </script>
