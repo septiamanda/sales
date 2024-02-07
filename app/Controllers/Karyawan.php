@@ -23,13 +23,19 @@ class Karyawan extends BaseController
     {
         return view('auth/register');
     }
+
     public function simpanK()
     {
         $email = $this->request->getVar('email');
         $username = $this->request->getVar('username');
         $password = $this->request->getVar('password');
 
-        $levelId = 2;
+        $existingUser = $this->modelLogin->where('userEmail', $email)->first();
+        if ($existingUser) {
+            return redirect()->back()->withInput()->with('error', 'Email sudah terdaftar.');
+        }
+
+        $levelId = 1;
 
         $data = [
             'userEmail' => $email,

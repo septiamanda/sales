@@ -31,6 +31,11 @@ class Admin extends BaseController
         $username = $this->request->getVar('username');
         $password = $this->request->getVar('password');
 
+        $existingUser = $this->modelLogin->where('userEmail', $email)->first();
+        if ($existingUser) {
+            return redirect()->back()->withInput()->with('error', 'Email sudah terdaftar.');
+        }
+
         $levelId = 1;
 
         $data = [
@@ -43,6 +48,7 @@ class Admin extends BaseController
         $this->modelLogin->save($data);
         return redirect()->to('listA');
     }
+
 
     public function editA($id)
     {
