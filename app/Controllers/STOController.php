@@ -40,7 +40,7 @@ class STOController extends BaseController
         session()->setFlashdata('Pesan', 'Data Berhasil Ditambahkan.');
 
         $this->stoModel->save($data);
-        return redirect()->to('/sto');
+        return redirect()->to('sto');
 
     }
 }

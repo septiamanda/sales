@@ -7,12 +7,13 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Sentral Telepon Otomat</h1>
-        <?php if (session()->getFlashdata('Pesan')) : ?>
-            <div class="alert alert-success" role="alert">
-                <?= session()->getFlashdata('Pesan'); ?>
-            </div>
-        <?php endif; ?>
+
     </div>
+    <?php if (session()->getFlashdata('Pesan')) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('Pesan'); ?>
+        </div>
+    <?php endif; ?>
 
     <hr>
 
@@ -62,7 +63,7 @@
                                                 <td><?= $s['Hero']; ?></td>
                                                 <td style="width: 250px;"><?= $s['Sektor']; ?></td>
                                                 <td style="width: 200px;">
-                                                    <a href="#" class="btn btn" style="border-color: black; color: black;">
+                                                    <a href="#" class="btn btn" style="border-color: #184240; color: #184240;">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </a>
                                                     <a href="#" class="btn btn-danger">

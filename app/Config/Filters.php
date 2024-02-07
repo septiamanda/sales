@@ -48,7 +48,8 @@ class Filters extends BaseConfig
         ],
         'after' => [
             'filterAdmin' => [
-                'except' => ['dashboard', 're', 'fcc', 'pi', 'ps','listA', 'listK', 'sektor','sto', 'laporan', 'TambahSTO', 'tambahDataSektor', 'regis', 'tambahA', 'simpanA','tambahK', 'simpanK', 'sales', 'editA*', 'editK*', 'updateA', 'updateK']
+                'except' => ['dashboard', 're', 'fcc', 'pi', 'ps','listA', 'listK', 'sektor','sto', 'laporan', 'TambahSTO', 'save', 'tambahDataSektor', 'regis', 'tambahA', 'simpanA','tambahK', 'simpanK', 'sales', 'editA*', 'editK*', 'updateA', 'updateK']
+
             ],
             'filterKaryawan' => [
                 'except' => ['dashboard', 're', 'fcc', 'pi', 'ps', 'laporan']
