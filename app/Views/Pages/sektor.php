@@ -1,3 +1,18 @@
+
+<?php
+
+//Koneksi Database
+$server = "localhost";
+$user = "root";
+$password = "";
+$database = "salesyak";
+
+//Buat Koneksi
+$koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_error($koneksi));
+
+?>
+
+
 <?= $this->extend('Layout/navbar'); ?>
 
 <?= $this->section('pageContent'); ?>
@@ -47,12 +62,29 @@
                                             <th>No.</th>
                                             <th>Datel (Daerah Telkom)</th>
                                             <th>Nama Sektor</th>
-                                            <th>Penanggung Jawab</th>
-                                            <th>Action</th>
+                                            <th>HERO Sektor</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <?php 
+                                        // Persiapan menampilkan data
+                                        $no = 1;
+                                        $tampil = mysqli_query($koneksi, "SELECT * FROM sektor ORDER BY id_sektor ASC");
+                                        while ($data = mysqli_fetch_array($tampil)) :
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $no++; ?></td>
+                                            <td><?php echo $data['datel']; ?></td>
+                                            <td><?php echo $data['nama_sektor']; ?></td>
+                                            <td><?php echo $data['hero_sektor']; ?></td>
+                                            <td>
+                                            <a href="<?= base_url('editSektor/'. $data['id_sektor']); ?>" class="btn btn-primary">Edit</a>
+                                                <!-- <a href="<?= base_url('editSektor?id='. $data['id_sektor']); ?>" class="btn btn-primary">Edit</a> -->
+                                                <a href="delete.php?id=<?php echo $data['id_sektor']; ?>" class="btn btn-danger">Delete</a>
+                                            </td>
+                                        </tr>
+                                        <?php endwhile; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -109,7 +141,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#sektorTable').DataTable();
+            $('#koneksi').DataTable();
         });
     </script>
 </div>

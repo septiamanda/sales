@@ -21,4 +21,12 @@ class Sektor extends BaseController
     {
         return view('Pages/tambahDataSektor');
     }
+    public function editSektor($id_sektor): string
+    {
+        $data['sektor'] = $this->model->find($id_sektor);
+
+        return view('Pages/editSektor', $data);
+    }
 }
+
+
