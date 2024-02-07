@@ -54,7 +54,7 @@
                                                 <td><?= $kar['userEmail']; ?></td>
                                                 <td class="text-center">
                                                     <!-- Tambahkan action -->
-                                                    <a href="#" class="btn btn-info btn-sm">Edit</a>
+                                                    <a href="<?= base_url('editK' . $kar['userId']); ?>" class="btn btn-info btn-sm">Edit</a>
                                                     <a href="#" class="btn btn-danger btn-sm">Delete</a>
                                                 </td>
                                             </tr>

@@ -40,7 +40,7 @@ class Filters extends BaseConfig
             // 'csrf',
             // 'invalidchars',
             'filterAdmin' => [
-                'except' => ['login/*', 'login/', '/']
+                'except' => ['login/*', 'login/', '/'],
             ],
             'filterKaryawan' => [
                 'except' => ['login/*', 'login/', '/']
@@ -48,6 +48,7 @@ class Filters extends BaseConfig
         ],
         'after' => [
             'filterAdmin' => [
+                'except' => ['dashboard', 're', 'fcc', 'pi', 'ps','listA', 'listK', 'sektor','sto', 'laporan', 'TambahSTO', 'tambahDataSektor', 'regis', 'tambahA', 'simpanA','tambahK', 'simpanK', 'sales', 'editA*', 'editK*', 'updateA', 'updateK']
                 'except' => ['dashboard', 're', 'fcc', 'pi', 'ps','listA', 'listK', 'sektor','sto', 'laporan', 'TambahSTO', 'save', 'tambahDataSektor', 'regis', 'sales', 'tambahA', 'simpanA','tambahK', 'simpanK', 'sales']
             ],
             'filterKaryawan' => [
