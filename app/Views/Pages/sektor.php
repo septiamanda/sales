@@ -43,10 +43,11 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
 
                         <!-- Form pencarian -->
                         <div class="card-body">
+                        <form action="<?= base_url('sektor'); ?>" method="post">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="cari" placeholder="Cari..." aria-label="Cari.." aria-describedby="button-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Cari</button>
+                                    <input type="text" class="form-control" name="cari" placeholder="Cari..." aria-label="Cari.." aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit" id="cari_sektor">Cari</button>
                                 </div>
                                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                                     <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
@@ -54,6 +55,8 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
                                     </a>
                                 </div>
                             </div>
+                        </form>
+
 
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="sektorTable" width="100%" cellspacing="0">
@@ -79,9 +82,9 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
                                             <td><?php echo $data['nama_sektor']; ?></td>
                                             <td><?php echo $data['hero_sektor']; ?></td>
                                             <td>
-                                            <a href="<?= base_url('editSektor/'. $data['id_sektor']); ?>" class="btn btn-primary">Edit</a>
+                                                <a href="<?= base_url('editSektor/'. $data['id_sektor']); ?>" class="btn btn-primary">Edit</a>
                                                 <!-- <a href="<?= base_url('editSektor?id='. $data['id_sektor']); ?>" class="btn btn-primary">Edit</a> -->
-                                                <a href="delete.php?id=<?php echo $data['id_sektor']; ?>" class="btn btn-danger">Delete</a>
+                                                <a href="<?= base_url('deleteSektor/'. $data['id_sektor']); ?>" class="btn btn-danger" onclick="return confirmDelete();">Delete</a>
                                             </td>
                                         </tr>
                                         <?php endwhile; ?>
@@ -140,8 +143,29 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
     <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var input = document.querySelector('input[name="cari"]').value.toLowerCase().trim();
+            var rows = document.querySelectorAll('#sektorTable tbody tr');
+        
+        rows.forEach(function(row) {
+            var datel = row.cells[1].textContent.toLowerCase();
+            var namaSektor = row.cells[2].textContent.toLowerCase();
+            var heroSektor = row.cells[3].textContent.toLowerCase();
+            
+            if (datel.includes(input) || namaSektor.includes(input) || heroSektor.includes(input)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+
+        function confirmDelete() {
+            return confirm('Apakah Anda yakin ingin menghapus data ini?');
+        }
+
         $(document).ready(function () {
             $('#koneksi').DataTable();
         });
     </script>
-</div>

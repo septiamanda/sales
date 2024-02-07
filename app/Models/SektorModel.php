@@ -7,6 +7,7 @@ use CodeIgniter\Database\ConnectionInterface;
 
 class SektorModel extends Model
 {
+
     protected $table = 'sektor';
     protected $primaryKey = 'id_sektor';
     protected $useAutoIncrement = true;
@@ -17,5 +18,11 @@ class SektorModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('sektor');
     }
+    public function deleteSektor ($id_sektor)
+    {
+        return $this->db->where('id_sektor', $id_sektor)->delete();
+    }
+    
+
 
 }
