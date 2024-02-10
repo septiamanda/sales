@@ -63,7 +63,7 @@
                                                 <td><?= $s['Hero']; ?></td>
                                                 <td style="width: 250px;"><?= $s['Sektor']; ?></td>
                                                 <td style="width: 200px;">
-                                                    <a href="#" class="btn btn" style="border-color: #184240; color: #184240;">
+                                                    <a href="<?= base_url('editSTO'); ?>" class="btn btn" style="border-color: #184240; color: #184240;">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </a>
                                                     <a href="#" class="btn btn-danger">

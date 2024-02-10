@@ -43,4 +43,9 @@ class STOController extends BaseController
         return redirect()->to('sto');
 
     }
+
+    public function edit(): string
+    {
+        return view('Pages/editSTO');
+    }
 }
