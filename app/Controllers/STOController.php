@@ -25,15 +25,20 @@ class STOController extends BaseController
 
     public function save()
     {
+        if (!$this->validate([
+            'NamaSTO' => 'required'
+        ])) {
+            return redirect()->to('TambahSTO');
+        }
         $name = $this->request->getVar('NamaSTO');
         $sto = $this->request->getVar('STO');
         $hero = $this->request->getVar('Hero');
         $sektor = $this->request->getVar('Sektor');
 
-        $data=[
-            'Nama_STO' => $name, 
-            'STO'=> $sto, 
-            'Hero'=> $hero, 
+        $data = [
+            'Nama_STO' => $name,
+            'STO' => $sto,
+            'Hero' => $hero,
             'Sektor' => $sektor
         ];
 
@@ -41,11 +46,16 @@ class STOController extends BaseController
 
         $this->stoModel->save($data);
         return redirect()->to('sto');
-
     }
 
     public function edit(): string
     {
         return view('Pages/editSTO');
+    }
+
+    public function deleteSTO($id)
+    {
+        $this->stoModel->deleteSTO($id);
+        return redirect()->to('sto');
     }
 }
