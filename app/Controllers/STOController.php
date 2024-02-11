@@ -48,14 +48,38 @@ class STOController extends BaseController
         return redirect()->to('sto');
     }
 
-    public function edit(): string
+    public function editSTO($id)
     {
-        return view('Pages/editSTO');
+        $data['stoModel'] = $this->stoModel->getsto($id);
+        return view('Pages/editSTO', $data);
     }
 
     public function deleteSTO($id)
     {
         $this->stoModel->deleteSTO($id);
+        session()->setFlashdata('Pesan', 'Data Berhasil Dihapus.');
+        return redirect()->to('sto');
+    }
+
+    public function updateSTO()
+    {
+        $id=$this->request->getVar('kode');
+        $name = $this->request->getVar('NamaSTO');
+        $sto = $this->request->getVar('STO');
+        $hero = $this->request->getVar('Hero');
+        $sektor = $this->request->getVar('Sektor');
+
+        $data = [
+            'id' => $id,
+            'Nama_STO' => $name,
+            'STO' => $sto,
+            'Hero' => $hero,
+            'Sektor' => $sektor
+        ];
+
+        session()->setFlashdata('Pesan', 'Data Berhasil Di Update.');
+
+        $this->stoModel->save($data);
         return redirect()->to('sto');
     }
 }

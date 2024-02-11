@@ -27,8 +27,9 @@ $routes->get('dashboard', 'Home::index');
 $routes->get('sto', 'STOController::sto');
 $routes->get('TambahSTO', 'STOController::TambahSTO');
 $routes->post('save', 'STOController::save');
-$routes->post('editSTO', 'STOController::editSTO');
+$routes->get('editSTO/(:num)', 'STOController::editSTO/$1');
 $routes->post('deleteSTO/(:num)', 'STOController::deleteSTO/$1');
+$routes->post('updateSTO', 'STOController::updateSTO');
 
 $routes->get('re', 'Home::re');
 $routes->get('fcc', 'Home::fcc');

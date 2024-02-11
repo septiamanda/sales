@@ -19,29 +19,31 @@
         <div class="col-md-8 mx-auto">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0">Tambah Data Sentral Telepon Otomat</h3>
+                    <h3 class="mb-0">Edit Data Sentral Telepon Otomat</h3>
                 </div>
                 <div class="card-body">
-                    <form action="<?= base_url('save'); ?>" method="post">
+                    <form action="<?= base_url('updateSTO'); ?>" method="post">
+                        <input type="hidden" name="kode" value="<?= $stoModel['id']; ?>">
 
                         <div class="form-group">
                             <label for="pj">Nama STO</label>
-                            <input type="text" class="form-control" name="NamaSTO" id="ns">
+                            <input type="text" class="form-control" name="NamaSTO" value="<?= $stoModel['Nama_STO']; ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="pj">STO</label>
-                            <input type="text" class="form-control" name="STO" id="sto">
+                            <input type="text" class="form-control" name="STO" value="<?= $stoModel['STO']; ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="pj">Hero</label>
-                            <input type="text" class="form-control" name="Hero" id="hero">
+                            <input type="text" class="form-control" name="Hero" value="<?= $stoModel['Hero']; ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="Sektor">Sektor</label>
-                            <select class="form-control" name="Sektor" id="sektor">
+                            <select class="form-control" name="Sektor">
+                                <option value="<?= $stoModel['Sektor']; ?>"><?= $stoModel['Sektor']; ?></option>
                                 <option value="" disabled selected>Pilih Sektor</option>
                                 <option value="Hero BKT (Bukittinggi)">Hero BKT (Bukittinggi)</option>
                                 <option value="Hero PYK (Payakumbuh)">Hero PYK (Payakumbuh)</option>

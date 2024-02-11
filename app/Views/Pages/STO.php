@@ -41,6 +41,7 @@
                             <h6 class="m-0 font-weight-bold text-#184240">Data Sentral Telepon Otomat</h6>
                         </div>
                         <div class="card-body">
+
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead style="background-color: #184240; color: white; text-align: center;">
@@ -63,12 +64,16 @@
                                                 <td><?= $s['Hero']; ?></td>
                                                 <td style="width: 250px;"><?= $s['Sektor']; ?></td>
                                                 <td style="width: 200px;">
-                                                    <a href="<?= base_url('editSTO'); ?>" class="btn btn" style="border-color: #184240; color: #184240;">
+                                                    <a href="<?= base_url('editSTO/' . $s['id']); ?>" class="btn btn" style="border-color: #184240; color: #184240;">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </a>
-                                                    <a href="<?= base_url('deleteSTO'); ?>" class="btn btn-danger">
-                                                        <i class="fas fa-trash-alt"></i> Hapus
-                                                    </a>
+
+                                                    <form action="<?= base_url('deleteSTO/' . $s['id']); ?>" method="post" class="d-inline">
+                                                    <input type="hidden" name="_method" id="DELETE">
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin?');">
+                                                            <i class="fas fa-trash-alt"></i> Hapus
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
