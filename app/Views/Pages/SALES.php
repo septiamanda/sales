@@ -27,14 +27,12 @@
                         </div>
 
                         <div class="card-body">
-                            <div class="row ml-4">
+                            <div class="row ml-5 md-3">
                                 <div class="col-4">
-                                    <div class="col">
+                                    <div class="row">
                                         <h6> Pilih Tanggal </h6>
                                     </div>
-                                    <div class="w-100 "></div>
-
-                                    <div class="col">
+                                    <div class="row">
                                         <select class="form-select" aria-label="Default select example">
                                             <option selected>Open this select menu</option>
                                             <option value="1">One</option>
@@ -45,13 +43,10 @@
                                 </div>
 
                                 <div class="col-4">
-
-                                    <div class="col">
+                                    <div class="row">
                                         <h6> Pilih Tanggal </h6>
                                     </div>
-                                    <div class="w-100 "></div>
-
-                                    <div class="col">
+                                    <div class="row">
                                         <select class="form-select" aria-label="Default select example">
                                             <option selected>Open this select menu</option>
                                             <option value="1">One</option>
@@ -63,12 +58,10 @@
                                 </div>
                                 <div class="col-4">
 
-                                    <div class="col">
+                                    <div class="row">
                                         <h6> Pilih Tanggal </h6>
                                     </div>
-                                    <div class="w-100 "></div>
-
-                                    <div class="col">
+                                    <div class="row">
                                         <select class="form-select" aria-label="Default select example">
                                             <option selected>Open this select menu</option>
                                             <option value="1">One</option>
@@ -76,7 +69,6 @@
                                             <option value="3">Three</option>
                                         </select>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -98,8 +90,8 @@
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-md-6 d-flex justify-content-start align-items-center">
-                            <form class="form-inline my-2">
-                                <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+                            <form action="" method="get" class="form-inline my-2">
+                                <input class="form-control" type="text" placeholder="Search..." aria-label="Search" name="carisales">
                             </form>
                         </div>
                         <!-- Button trigger modal -->
@@ -111,44 +103,45 @@
 
                         <!-- Modal -->
                         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h3>Tambah Data Sektor</h3>
+                                    <div class="modal-header center">
+                                        <h3>Tambah Sales</h3>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="pj">Nomor SC</label>
-                                            <input type="text" class="form-control" name="nomorSC" id="nomorSC">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="pj">Nama Pelanggan</label>
-                                            <input type="text" class="form-control" name="namaPelanggan" id="namaPelanggan">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="pj">Alamat Instalasi</label>
-                                            <input type="text" class="form-control" name="alamatInstalasi" id="alamatInstalasi">
-                                        </div>
-                                        <form action="#" method="post">
-                                            <div class="form-group">
-                                                <label for="datel">Datel (Daerah Telkom)</label>
-                                                <select class="form-control" name="datel" id="datel">
-                                                    <option value="" disabled selected>Pilih Datel</option>
-                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
-                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
-                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
-                                                </select>
+                                        <div class="mb-3 row">
+                                            <label for="inputNoSC" class="col-sm-3 col-form-label">Nomor SC</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="inputNomorSC">
                                             </div>
-
-                                            <div class="form-group">
-                                                <label for="nama-sektor">Sektor</label>
-                                                <select class="form-control" name="nama_sektor" id="namaSektor">
-                                                    <option value="" disabled selected>Pilih Sektor</option>
-                                                    <!-- Pilihan akan diisi melalui JavaScript -->
-                                                </select>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="namaPel" class="col-sm-3 col-form-label">Nama Pelanggan</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="namaPel">
                                             </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="alamatInt" class="col-sm-3 col-form-label">Alamat Instalasi</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="alamatInt">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="sektorsales" class="col-sm-3 col-form-label">Sektor</label>
+                                            <div class="col-sm-9">
+                                                <form action="#" method="post">
+                                                    <select class="form-control" name="sektorsales" id="sektorsales">
+                                                        <option value="" disabled selected>Pilih Sektor</option>
+                                                        <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
+                                                        <option value="Datel SLK">Datel SLK (Solok)</option>
+                                                        <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                    </select>
+
+                                                </form>
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -167,21 +160,18 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Datel (Daerah Telkom) </th>
-                                    <th>Kode Sektor</th>
-                                    <th>Nama Sektor</th>
-                                    <th>Penanggung Jawab</th>
+                                    <th>Nomor SC </th>
+                                    <th>Nama Pengguna</th>
+                                    <th>Alamat Instalasi</th>
+                                    <th>Sektor</th>
+                                    <th>STO</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $dataDummy = [
-                                    ['Datel BKT', 'HERO BKT', 'Hero Bukittinggi', 'Uzumaki Naruto'],
-                                    ['Datel BKT', 'PYK', 'Payakumbuh', 'Uchiha Sasuke'],
-                                    ['Datel SLK', 'HERO SLK', 'Hero Solok', 'Nara Shikamaru'],
-                                    ['Datel SLK', 'NON HERO', 'NON HERO', 'Hyuga Neji'],
-                                ];
+                                
 
                                 foreach ($dataDummy as $index => $row) : ?>
                                     <tr>
