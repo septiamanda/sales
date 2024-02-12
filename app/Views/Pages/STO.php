@@ -7,12 +7,13 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Sentral Telepon Otomat</h1>
-        <?php if (session()->getFlashdata('Pesan')) : ?>
-            <div class="alert alert-success" role="alert">
-                <?= session()->getFlashdata('Pesan'); ?>
-            </div>
-        <?php endif; ?>
+
     </div>
+    <?php if (session()->getFlashdata('Pesan')) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('Pesan'); ?>
+        </div>
+    <?php endif; ?>
 
     <hr>
 
@@ -40,6 +41,7 @@
                             <h6 class="m-0 font-weight-bold text-#184240">Data Sentral Telepon Otomat</h6>
                         </div>
                         <div class="card-body">
+
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead style="background-color: #184240; color: white; text-align: center;">
@@ -56,18 +58,22 @@
                                         <?php $i = 1; ?>
                                         <?php foreach ($dataSTO as $s) : ?>
                                             <tr>
-                                                <th scope="row"><?= $i++; ?></th>
+                                                <th scope="row" style="width: 70px; text-align: center;"><?= $i++; ?></th>
                                                 <td><?= $s['Nama_STO']; ?></td>
                                                 <td><?= $s['STO']; ?></td>
                                                 <td><?= $s['Hero']; ?></td>
                                                 <td style="width: 250px;"><?= $s['Sektor']; ?></td>
                                                 <td style="width: 200px;">
-                                                    <a href="#" class="btn btn" style="border-color: black; color: black;">
+                                                    <a href="<?= base_url('editSTO/' . $s['id']); ?>" class="btn btn" style="border-color: #184240; color: #184240;">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </a>
-                                                    <a href="#" class="btn btn-danger">
-                                                        <i class="fas fa-trash-alt"></i> Hapus
-                                                    </a>
+
+                                                    <form action="<?= base_url('deleteSTO/' . $s['id']); ?>" method="post" class="d-inline">
+                                                    <input type="hidden" name="_method" id="DELETE">
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin?');">
+                                                            <i class="fas fa-trash-alt"></i> Hapus
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

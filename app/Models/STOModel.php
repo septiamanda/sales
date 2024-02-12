@@ -13,8 +13,16 @@ class STOModel extends Model
     protected $allowedFields = ['id', 'Nama_STO', 'STO', 'Hero', 'Sektor'];
     protected $useTimestaps = true;
 
-    public function getsto()
+    public function getsto($id = false)
     {
-        return $this->findAll();
+        if ($id === false) {
+            return $this->findAll();
+        } else {
+            return $this->where(['id' => $id])->first();
+        }
+    }
+    public function deleteSTO($id)
+    {
+        return $this->delete($id);
     }
 }

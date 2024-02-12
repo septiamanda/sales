@@ -9,6 +9,12 @@
         <h1 class="h3 mb-0 text-gray-800">Kelola Admin</h1>
     </div>
 
+    <?php if (session()->getFlashdata('Pesan')) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('Pesan'); ?>
+        </div>
+    <?php endif; ?>
+
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <a href="<?= base_url('tambahA') ?>" class="d-none d-sm-inline-block btn btn-danger shadow-sm ml-auto">
             <i class="fas fa-plus fa-sm text-white-50"></i> Admin
@@ -32,12 +38,12 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Akun Admin</h6>
+                            <h6 class="m-0 font-weight-bold text-#184240">Data Akun Admin</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                    <thead style="background-color: #184240; color: white; text-align: center;">
                                         <tr>
                                             <th>No.</th>
                                             <th>Username</th>
@@ -54,8 +60,16 @@
                                                 <td><?= $ad['userEmail']; ?></td>
                                                 <td class="text-center">
                                                     <!-- Tambahkan action -->
-                                                    <a href="#" class="btn btn-info btn-sm">Edit</a>
-                                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                                    <a href="<?= base_url('editA' . $ad['userId']); ?>" class="btn btn" style="border-color: #184240; color: #184240;">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </a>
+
+                                                    <form action="<?= base_url('deleteAdmin' . $ad['userId']); ?>" method="post" class="d-inline">
+                                                    <input type="hidden" name="_method" id="DELETE">
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin?');">
+                                                            <i class="fas fa-trash-alt"></i> Delete
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         <?php $no++;

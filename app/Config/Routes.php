@@ -14,12 +14,15 @@ $routes->get('listA', 'Admin::listA');
 $routes->get('tambahA', 'Admin::tambahA');
 $routes->post('simpanA', 'Admin::simpanA');
 $routes->get('editA(:num)', 'Admin::editA/$1');
+
+$routes->post('deleteAdmin(:num)', 'Admin::deleteAdmin/$1');
 $routes->post('updateA', 'Admin::updateA');
 
 $routes->get('listK', 'Karyawan::listK');
 $routes->get('tambahK', 'Karyawan::tambahK');
 $routes->post('simpanK', 'Karyawan::simpanK');
 $routes->get('editK(:num)', 'Karyawan::editK/$1');
+$routes->post('deleteKaryawan(:num)', 'Karyawan::deleteKaryawan/$1');
 $routes->post('updateK', 'Karyawan::updateK');
 
 $routes->get('dashboard', 'Home::index');
