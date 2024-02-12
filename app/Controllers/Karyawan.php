@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ModelLogin;
 
 class Karyawan extends BaseController
-{   
+{
     protected $modelLogin;
     public function __construct()
     {
@@ -23,21 +23,61 @@ class Karyawan extends BaseController
     {
         return view('auth/register');
     }
+
     public function simpanK()
     {
         $email = $this->request->getVar('email');
         $username = $this->request->getVar('username');
         $password = $this->request->getVar('password');
 
-        $levelId = 2;
+        $existingUser = $this->modelLogin->where('userEmail', $email)->first();
+        if ($existingUser) {
+            return redirect()->back()->withInput()->with('error', 'Email sudah terdaftar.');
+        }
 
-        $data=[
-            'userEmail'=> $email,
-            'username'=> $username,
-            'levelId'=> $levelId,
-            'userPass'=> $password
+        $levelId = 1;
+
+        $data = [
+            'userEmail' => $email,
+            'username' => $username,
+            'levelId' => $levelId,
+            'userPass' => $password
         ];
 
+        $this->modelLogin->save($data);
+        return redirect()->to('listK');
+    }
+
+    public function editK($id)
+    {
+        $data['karyawanData'] = $this->modelLogin->getKaryawan($id);
+        return view('auth/edit', $data);
+    }
+
+    public function updateK()
+    {
+        $id = $this->request->getVar('kode');
+        $email = $this->request->getVar('email');
+        $username = $this->request->getVar('username');
+        $password = $this->request->getVar('password');
+
+        $userData = $this->modelLogin->find($id);
+
+        if (!empty($password)) {
+            $data = [
+                'userId' => $id,
+                'userEmail' => $email,
+                'username' => $username,
+                'userPass' => $password
+            ];
+        } else {
+            $data = [
+                'userId' => $id,
+                'userEmail' => $email,
+                'username' => $username,
+                'userPass' => $userData['userPass']
+            ];
+        }
         $this->modelLogin->save($data);
         return redirect()->to('listK');
     }

@@ -54,7 +54,7 @@
                                                 <td><?= $ad['userEmail']; ?></td>
                                                 <td class="text-center">
                                                     <!-- Tambahkan action -->
-                                                    <a href="#" class="btn btn-info btn-sm">Edit</a>
+                                                    <a href="<?= base_url('editA' . $ad['userId']); ?>" class="btn btn-info btn-sm">Edit</a>
                                                     <a href="#" class="btn btn-danger btn-sm">Delete</a>
                                                 </td>
                                             </tr>

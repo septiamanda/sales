@@ -1,74 +1,64 @@
 <?= $this->extend('Layout/navbar'); ?>
 <?= $this->section('pageContent'); ?>
 
+<style>
+    .card-header {
+        background-color: #184240;
+        border-color: #184240;
+        color: white;
+        text-align: center;
+    }
+
+    .form-control {
+        border-color: #184240;
+    }
+</style>
+
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 mx-auto">
             <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Tambah Data Sentral Telepon Otomat</h3>
+                </div>
                 <div class="card-body">
-                    <h3 class="mb-4">Tambah Data Sentral Telepon Otomat</h3>
+                    <form action="<?= base_url('save'); ?>" method="post">
 
-                    <div class="form-group">
-                        <label for="pj">Nama STO</label>
-                        <input type="text" class="form-control" name="pj" id="penanggungJawab">
-                    </div>
+                        <div class="form-group">
+                            <label for="pj">Nama STO</label>
+                            <input type="text" class="form-control" name="NamaSTO" id="ns">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="pj">STO</label>
-                        <input type="text" class="form-control" name="pj" id="penanggungJawab">
-                    </div>
+                        <div class="form-group">
+                            <label for="pj">STO</label>
+                            <input type="text" class="form-control" name="STO" id="sto">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="pj">Hero</label>
-                        <input type="text" class="form-control" name="pj" id="penanggungJawab">
-                    </div>
+                        <div class="form-group">
+                            <label for="pj">Hero</label>
+                            <input type="text" class="form-control" name="Hero" id="hero">
+                        </div>
 
-                    <!-- <form action="#" method="post"> -->
-                    <!-- <div class="form-group">
-                            <label for="hero">Hero</label>
-                            <select class="form-control" name="hero" id="hero">
-                                <option value="" disabled selected>Pilih Hero</option>
-                                <option value="STO Kekey">Kekey</option>
-                                <option value="STO Bpk. Pinto">Bpk. Pinto</option>
-                                <option value="STO Wiwi">Wiwi</option>
-                                <option value="Non-Hero1">Non-Hero 1</option>
-                                <option value="STO Sidi">Sidi</option>
-                                <option value="STO Pak Elpi">Pak Elpi</option>
-                                <option value="STO Khadafi">Khadapi</option>
-                                <option value="Non-Hero2">Non-Hero 2</option>
-                                <option value="Non-Hero3">Non-Hero 3</option>
-                                <option value="Non-Hero4">Non-Hero 4</option>
-                                <option value="Non-Hero5">Non-Hero 5</option>
-                            </select>
-                        </div> -->
-
-                    <!-- <div class="form-group">
-                            <label for="nama-STO">Nama STO</label>
-                            <select class="form-control" name="nama_STO" id="nama_STO">
-                                <option value="" disabled selected>Pilih STO</option> -->
-                    <!-- Pilihan akan diisi melalui JavaScript -->
-                    <!-- </select>
-                        </div> -->
-
-                    <form action="#" method="post">
-                    <div class="form-group">
-                            <label for="sektor">Sektor</label>
-                            <select class="form-control" name="sektor" id="sektor">
+                        <div class="form-group">
+                            <label for="Sektor">Sektor</label>
+                            <select class="form-control" name="Sektor" id="sektor">
                                 <option value="" disabled selected>Pilih Sektor</option>
-                                <option value="STO Kekey">Hero BKT (Bukittinggi)</option>
-                                <option value="STO Bpk. Pinto">Hero PYK (Payakumbuh)</option>
-                                <option value="STO Khadafi">Non Hero BKT</option>
-                                <option value="STO Wiwi">Hero SLK (Solok)</option>
-                                <option value="STO Khadafi">Non Hero SLK</option>
-                                <option value="Non-Hero1">Hero BDT (Bandar Buat)</option>
-                                <option value="STO Sidi">Hero KJI (Kuranji)</option>
-                                <option value="STO Pak Elpi">Hero PAM</option>
-                                <option value="STO Khadafi">Non Hero PDG</option>
+                                <option value="Hero BKT (Bukittinggi)">Hero BKT (Bukittinggi)</option>
+                                <option value="Hero PYK (Payakumbuh)">Hero PYK (Payakumbuh)</option>
+                                <option value="Non Hero BKT">Non Hero BKT</option>
+                                <option value="Hero SLK (Solok)">Hero SLK (Solok)</option>
+                                <option value="Non Hero SLK">Non Hero SLK</option>
+                                <option value="Hero BDT (Bandar Buat)">Hero BDT (Bandar Buat)</option>
+                                <option value="Hero KJI (Kuranji)">Hero KJI (Kuranji)</option>
+                                <option value="Hero PAM">Hero PAM</option>
+                                <option value="Non Hero PDG">Non Hero PDG</option>
                             </select>
                         </div>
 
-                    <button type="submit" name="Simpan" class="btn btn-primary btn mb-4 mr-2">Simpan</button>
-                    <a href="<?= base_url('sto'); ?>" class="btn btn-danger btn mb-4">Cancel</a>
+                        <div class="text-center">
+                            <button type="submit" name="Simpan" class="btn btn-success btn mb-4 mr-2">Simpan</button>
+                            <a href="<?= base_url('sto'); ?>" class="btn btn-danger btn mb-4">Cancel</a>
+                        </div>
                     </form>
                 </div>
             </div>
