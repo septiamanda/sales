@@ -29,4 +29,14 @@ class ModelLogin extends Model
         }
     }
 
+    public function deleteAdmin($id)
+    {
+        return $this->delete($id);
+    }
+
+    public function deleteKaryawan($id)
+    {
+        return $this->delete($id);
+    }
+
 }
