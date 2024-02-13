@@ -2458,6 +2458,12 @@
     background-color: #1cc88a;
     border-color: #1cc88a;
   }
+
+  .btn-berhasil{
+    color: #fff;
+    background-color: #184240;
+    border-color: #184240;
+  }
   
   .btn-success:hover {
     color: #fff;

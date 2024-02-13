@@ -3,25 +3,25 @@
 
 <style>
     .card-header {
-        background-color: #184240;
-        border-color: #184240;
+        background-color: #DE5858;
+        border-color: #DE5858;
         color: white;
         text-align: center;
     }
 
     .form-control {
-        border-color: #184240;
+        border-color: #DE5858;
     }
 
     body {
-        background-color: #184240;
+        background-color: #DE5858;
     }
 </style>
 
 <div class="container">
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <div class="card text-center" style="background-color: #184240; border-color: #184240;">
+            <div class="card text-center" style="background-color: #DE5858; border-color: #DE5858;">
                 <div class="card-header">
                     <h3 class="h3 mb-4 mt-5" style="color:white; font-weight: bold;">Tambah Data Sentral Telepon Otomat</h3>
                 </div>
@@ -30,19 +30,19 @@
 
                         <div class="row g-3">
                             <div class="col-md-8">
-                                <input type="text" class="form-control form-control-lg" placeholder="Nama STO" name="NamaSTO" id="ns" style="border-radius: 50px; font-size: 1rem;">
+                                <input type="text" class="form-control" placeholder="Nama STO" name="NamaSTO" id="ns" style="border-radius: 50px; height: 50px;">
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control form-control-lg" placeholder="STO" name="STO" id="sto" style="border-radius: 50px; font-size: 1rem;">
+                                <input type="text" class="form-control" placeholder="STO" name="STO" id="sto" style="border-radius: 50px; height: 50px;">
                             </div>
                         </div>
 
                         <div class="form-group mt-4">
-                            <input type="text" class="form-control form-control-lg" placeholder="Hero" name="Hero" id="hero" style="border-radius: 50px; font-size: 1rem;">
+                            <input type="text" class="form-control" placeholder="Hero" name="Hero" id="hero" style="border-radius: 50px; height: 50px;">
                         </div>
 
                         <div class="form-group mt-4">
-                            <select class="form-control form-control-lg" name="Sektor" id="sektor" style="border-radius: 50px; font-size: 1rem;">
+                            <select class="form-control" name="Sektor" id="sektor" style="border-radius: 50px; height: 50px;">
                                 <option value="" disabled selected>Pilih Sektor</option>
                                 <option value="Hero BKT (Bukittinggi)">Hero BKT (Bukittinggi)</option>
                                 <option value="Hero PYK (Payakumbuh)">Hero PYK (Payakumbuh)</option>
@@ -57,8 +57,8 @@
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" name="Simpan" class="btn btn-success mb-4 mr-2 mt-4 btn-user btn-block" style="border-radius: 50px;">Simpan</button>
-                            <a href="<?= base_url('sto'); ?>" class="btn btn-danger mb-4 mt-4 btn-user btn-block" style="border-radius: 50px;">Cancel</a>
+                            <button type="submit" name="Simpan" class="btn btn-berhasil mb-4 mr-2 mt-4 btn-user btn-block" style="border-radius: 50px;">Simpan</button>
+                            <a href="<?= base_url('sto'); ?>" class="btn btn-warning btn mb-4 btn-user btn-block" style="border-radius: 50px; margin-top: -15px;">Cancel</a>
                         </div>
                     </form>
                 </div>
