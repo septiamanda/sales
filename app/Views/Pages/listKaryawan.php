@@ -55,10 +55,10 @@
                                         <?php $no = 1;
                                         foreach ($karyawanData as $kar) : ?>
                                             <tr>
-                                                <th scope='row'><?= $no; ?></th>
+                                                <th scope='row'style="width: 70px;"><?= $no; ?></th>
                                                 <td><?= $kar['username']; ?></td>
-                                                <td><?= $kar['userEmail']; ?></td>
-                                                <td class="text-center">
+                                                <td style="width: 480px;"><?= $kar['userEmail']; ?></td>
+                                                <td class="text-center" style="width: 200px;">
                                                     <!-- Tambahkan action -->
                                                     <a href="<?= base_url('editK' . $kar['userId']); ?>" class="btn btn" style="border-color: #184240; color: #184240;">
                                                         <i class="fas fa-edit"></i> Edit

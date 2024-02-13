@@ -55,10 +55,10 @@
                                         <?php $no = 1; 
                                         foreach ($adminData as $ad) : ?>
                                             <tr>
-                                                <th scope='row'><?= $no; ?></th>
+                                                <th scope='row' style="width: 70px;"><?= $no; ?></th>
                                                 <td><?= $ad['username']; ?></td>
-                                                <td><?= $ad['userEmail']; ?></td>
-                                                <td class="text-center">
+                                                <td style="width: 480px;"><?= $ad['userEmail']; ?></td>
+                                                <td class="text-center" style="width: 200px;">
                                                     <!-- Tambahkan action -->
                                                     <a href="<?= base_url('editA' . $ad['userId']); ?>" class="btn btn" style="border-color: #184240; color: #184240;">
                                                         <i class="fas fa-edit"></i> Edit
