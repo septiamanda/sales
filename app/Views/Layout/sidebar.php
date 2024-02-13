@@ -39,7 +39,7 @@
                 <a class="collapse-item" href="<?= site_url('re') ?>">Data RE</a>
                 <a class="collapse-item" href="<?= site_url('fcc') ?>">Data FCC</a>
                 <a class="collapse-item" href="<?= site_url('listPI') ?>">Data PI</a>
-                <a class="collapse-item" href="<?= site_url('ps') ?>">Data PS</a>
+                <a class="collapse-item" href="<?= site_url('listPS') ?>">Data PS</a>
             </div>
         </div>
     </li>
