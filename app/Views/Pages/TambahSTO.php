@@ -12,36 +12,37 @@
     .form-control {
         border-color: #184240;
     }
+
+    body {
+        background-color: #184240;
+    }
 </style>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 mx-auto">
-            <div class="card">
+        <div class="col-md-6 mx-auto">
+            <div class="card text-center" style="background-color: #184240; border-color: #184240;">
                 <div class="card-header">
-                    <h3 class="mb-0">Tambah Data Sentral Telepon Otomat</h3>
+                    <h3 class="h3 mb-4 mt-5" style="color:white; font-weight: bold;">Tambah Data Sentral Telepon Otomat</h3>
                 </div>
                 <div class="card-body">
                     <form action="<?= base_url('save'); ?>" method="post">
 
-                        <div class="form-group">
-                            <label for="pj">Nama STO</label>
-                            <input type="text" class="form-control" name="NamaSTO" id="ns">
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="Nama STO" name="NamaSTO" id="ns" style="border-radius: 50px;">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="STO" name="STO" id="sto" style="border-radius: 50px;">
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="pj">STO</label>
-                            <input type="text" class="form-control" name="STO" id="sto">
+                        <div class="form-group mt-4">
+                            <input type="text" class="form-control" placeholder="Hero" name="Hero" id="hero" style="border-radius: 50px;">
                         </div>
 
-                        <div class="form-group">
-                            <label for="pj">Hero</label>
-                            <input type="text" class="form-control" name="Hero" id="hero">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Sektor">Sektor</label>
-                            <select class="form-control" name="Sektor" id="sektor">
+                        <div class="form-group mt-4">
+                            <select class="form-control" name="Sektor" id="sektor" style="border-radius: 50px;">
                                 <option value="" disabled selected>Pilih Sektor</option>
                                 <option value="Hero BKT (Bukittinggi)">Hero BKT (Bukittinggi)</option>
                                 <option value="Hero PYK (Payakumbuh)">Hero PYK (Payakumbuh)</option>
@@ -56,8 +57,8 @@
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" name="Simpan" class="btn btn-success btn mb-4 mr-2">Simpan</button>
-                            <a href="<?= base_url('sto'); ?>" class="btn btn-danger btn mb-4">Cancel</a>
+                            <button type="submit" name="Simpan" class="btn btn-success mb-4 mr-2 mt-4" style="border-radius: 50px;">Simpan</button>
+                            <a href="<?= base_url('sto'); ?>" class="btn btn-danger mb-4 mt-4" style="border-radius: 50px;">Cancel</a>
                         </div>
                     </form>
                 </div>
