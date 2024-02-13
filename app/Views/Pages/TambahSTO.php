@@ -30,19 +30,19 @@
 
                         <div class="row g-3">
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="Nama STO" name="NamaSTO" id="ns" style="border-radius: 50px;">
+                                <input type="text" class="form-control form-control-lg" placeholder="Nama STO" name="NamaSTO" id="ns" style="border-radius: 50px; font-size: 1rem;">
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="STO" name="STO" id="sto" style="border-radius: 50px;">
+                                <input type="text" class="form-control form-control-lg" placeholder="STO" name="STO" id="sto" style="border-radius: 50px; font-size: 1rem;">
                             </div>
                         </div>
 
                         <div class="form-group mt-4">
-                            <input type="text" class="form-control" placeholder="Hero" name="Hero" id="hero" style="border-radius: 50px;">
+                            <input type="text" class="form-control form-control-lg" placeholder="Hero" name="Hero" id="hero" style="border-radius: 50px; font-size: 1rem;">
                         </div>
 
                         <div class="form-group mt-4">
-                            <select class="form-control" name="Sektor" id="sektor" style="border-radius: 50px;">
+                            <select class="form-control form-control-lg" name="Sektor" id="sektor" style="border-radius: 50px; font-size: 1rem;">
                                 <option value="" disabled selected>Pilih Sektor</option>
                                 <option value="Hero BKT (Bukittinggi)">Hero BKT (Bukittinggi)</option>
                                 <option value="Hero PYK (Payakumbuh)">Hero PYK (Payakumbuh)</option>
@@ -57,8 +57,8 @@
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" name="Simpan" class="btn btn-success mb-4 mr-2 mt-4" style="border-radius: 50px;">Simpan</button>
-                            <a href="<?= base_url('sto'); ?>" class="btn btn-danger mb-4 mt-4" style="border-radius: 50px;">Cancel</a>
+                            <button type="submit" name="Simpan" class="btn btn-success mb-4 mr-2 mt-4 btn-user btn-block" style="border-radius: 50px;">Simpan</button>
+                            <a href="<?= base_url('sto'); ?>" class="btn btn-danger mb-4 mt-4 btn-user btn-block" style="border-radius: 50px;">Cancel</a>
                         </div>
                     </form>
                 </div>
