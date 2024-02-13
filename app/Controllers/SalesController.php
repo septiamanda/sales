@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\ModelSales;
 
-class Admin extends BaseController
+class SalesController extends BaseController
 {
     protected $modelSales;
     public function __construct()

@@ -203,11 +203,11 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $noo = 1;
+                                $no = 1;
                                 foreach ($salesData as $sd) :
                                 ?>
                                     <tr>
-                                        <td><?= $noo; ?></td>
+                                        <th scope='row'><?= $no; ?></th>
                                         <td><?= $sd['noSC']; ?></td>
                                         <td><?= $sd['nama_pengguna']; ?></td>
                                         <td><?= $sd['alamat_instl']; ?></td>
@@ -220,7 +220,7 @@
                                         </td>
                                     </tr>
                                 <?php
-                                    $noo++;
+                                    $no++;
                                 endforeach;
                                 ?>
                             </tbody>
