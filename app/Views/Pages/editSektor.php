@@ -69,7 +69,7 @@
         // Lakukan validasi di sisi klien di sini
         // Jika validasi berhasil, izinkan formulir untuk dikirim
         // Jika tidak, cegah formulir dari pengiriman dan tampilkan error
-    });
+            });
 </script>
 
 <?= $this->endSection(); ?>

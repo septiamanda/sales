@@ -45,6 +45,8 @@ class Admin extends BaseController
             'userPass' => $password
         ];
 
+        session()->setFlashdata('Pesan', 'Akun Berhasil Ditambahkan.');
+
         $this->modelLogin->save($data);
         return redirect()->to('listA');
     }
@@ -81,7 +83,16 @@ class Admin extends BaseController
             ];
         }
 
+        session()->setFlashdata('Pesan', ' Akun Berhasil Di Update.');
+
         $this->modelLogin->save($data);
+        return redirect()->to('listA');
+    }
+
+    public function deleteAdmin($id)
+    {
+        $this->modelLogin->deleteAdmin($id);
+        session()->setFlashdata('Pesan', 'Akun Berhasil Dihapus.');
         return redirect()->to('listA');
     }
 }

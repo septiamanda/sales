@@ -1,17 +1,15 @@
-
 <?php
 
-//Koneksi Database
+// Koneksi Database
 $server = "localhost";
 $user = "root";
 $password = "";
 $database = "salesyak";
 
-//Buat Koneksi
+// Buat Koneksi
 $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_error($koneksi));
 
 ?>
-
 
 <?= $this->extend('Layout/navbar'); ?>
 
@@ -23,6 +21,12 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Data Sektor</h1>
     </div>
+
+    <?php if (session()->getFlashdata('Pesan')) : ?>
+        <div id="alert-simpan" class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('Pesan'); ?>
+        </div>
+    <?php endif; ?>
 
     <hr>
 
@@ -43,24 +47,24 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
 
                         <!-- Form pencarian -->
                         <div class="card-body">
-                        <form action="<?= base_url('sektor'); ?>" method="post">
-                            <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="cari" placeholder="Cari..." aria-label="Cari.." aria-describedby="button-addon2">
+                            <form action="<?= base_url('sektor'); ?>" method="post">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control col-8" name="cari" placeholder="Cari..." aria-label="Cari.." aria-describedby="button-addon2">
                                     <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit" id="cari_sektor">Cari</button>
+                                        <button class="btn btn-primary" type="submit" id="cari_sektor">Cari</button>
+                                    </div>
+                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                        <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
+                                            <i class="fas fa-plus fa-sm"></i> + Tambah Data Sektor
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                    <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
-                                        <i class="fas fa-plus fa-sm"></i> + Tambah Data Sektor
-                                    </a>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
 
 
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="sektorTable" width="100%" cellspacing="0">
-                                    <thead>
+                                    <thead style="text-align: center;">
                                         <tr>
                                             <th>No.</th>
                                             <th>Datel (Daerah Telkom)</th>
@@ -70,23 +74,49 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
+                                        <?php
                                         // Persiapan menampilkan data
                                         $no = 1;
                                         $tampil = mysqli_query($koneksi, "SELECT * FROM sektor ORDER BY id_sektor ASC");
                                         while ($data = mysqli_fetch_array($tampil)) :
                                         ?>
-                                        <tr>
-                                            <td><?php echo $no++; ?></td>
-                                            <td><?php echo $data['datel']; ?></td>
-                                            <td><?php echo $data['nama_sektor']; ?></td>
-                                            <td><?php echo $data['hero_sektor']; ?></td>
-                                            <td>
-                                                <a href="<?= base_url('editSektor/'. $data['id_sektor']); ?>" class="btn btn-primary">Edit</a>
-                                                <!-- <a href="<?= base_url('editSektor?id='. $data['id_sektor']); ?>" class="btn btn-primary">Edit</a> -->
-                                                <a href="<?= base_url('deleteSektor/'. $data['id_sektor']); ?>" class="btn btn-danger" onclick="return confirmDelete();">Delete</a>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td><?= $no++; ?></td>
+                                                <td><?= $data['id_datel']; ?></td>
+                                                <td><?= $data['nama_sektor']; ?></td>
+                                                <td><?= $data['hero_sektor']; ?></td>
+                                                <td>
+                                                    <a href="<?= base_url('editSektor/' . $data['id_sektor']); ?>" class="btn btn-primary">Edit</a>
+
+                                                    <!-- Tombol hapus dengan atribut data-id -->
+                                                    <button type="button" class="btn btn-danger btn-hapus" data-id="<?= $data['id_sektor']; ?>" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $no ?>"> Hapus</button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="hapusModal<?= $no ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="staticBackdropLabel">Konfirmasi Hapus Data</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+
+                                                                <form method="post" action="<?= base_url('deleteSektor/'.$data['id_sektor']); ?>">
+                                                                    <input type="hidden" name="id_sektor" value="<?= $data['id_sektor']?>">
+                                                                    <div class="modal-body"> 
+                                                                        <h6 class="text-center">Apakah Anda yakin akan menghapus data ini? <br> 
+                                                                            <span class="text-danger"><?= $data['id_datel']?> - <?= $data['nama_sektor']?> - <?= $data['hero_sektor']?></span>
+                                                                        </h6>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" class="btn btn-danger" name="btnYa">Ya</button>
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         <?php endwhile; ?>
                                     </tbody>
                                 </table>
@@ -113,19 +143,15 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
-
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
-
+    
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -142,30 +168,34 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
     <!-- Tambahkan JS DataTables -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-xNjISw2W5T/uJT9abC1rQBu5Ez2XmVL1d31VX6r1TcCDYI7IB8nKzhIQ+rJZyJ6H" crossorigin="anonymous"></script>
+
+    <!-- Skrip JavaScript untuk menangani penghapusan -->
     <script>
-        document.querySelector('form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var input = document.querySelector('input[name="cari"]').value.toLowerCase().trim();
-            var rows = document.querySelectorAll('#sektorTable tbody tr');
-        
-        rows.forEach(function(row) {
-            var datel = row.cells[1].textContent.toLowerCase();
-            var namaSektor = row.cells[2].textContent.toLowerCase();
-            var heroSektor = row.cells[3].textContent.toLowerCase();
-            
-            if (datel.includes(input) || namaSektor.includes(input) || heroSektor.includes(input)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
+        $(document).ready(function() {
+    // Tangkap klik pada tombol hapus
+    $('.btn-hapus').click(function() {
+        var idSektor = $(this).data('id');
+
+        // Tampilkan modal konfirmasi hapus
+        $('#hapusModal' + idSektor).modal('show');
+
+        // Tangkap klik pada tombol "Ya" di modal konfirmasi hapus
+        $('#btnYa').click(function() {
+            // Menghapus data menggunakan AJAX
+            $.ajax({
+                type: "POST",
+                url: "<?= base_url('deleteSektor'); ?>/" + idSektor,
+                success: function(response) {
+                    // Redirect ke halaman sektor setelah penghapusan data
+                    window.location.href = "<?= base_url('sektor'); ?>";
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
         });
     });
+});
 
-        function confirmDelete() {
-            return confirm('Apakah Anda yakin ingin menghapus data ini?');
-        }
-
-        $(document).ready(function () {
-            $('#koneksi').DataTable();
-        });
     </script>

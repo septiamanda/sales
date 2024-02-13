@@ -44,6 +44,8 @@ class Karyawan extends BaseController
             'userPass' => $password
         ];
 
+        session()->setFlashdata('Pesan', 'Akun Berhasil Ditambahkan.');
+
         $this->modelLogin->save($data);
         return redirect()->to('listK');
     }
@@ -78,7 +80,17 @@ class Karyawan extends BaseController
                 'userPass' => $userData['userPass']
             ];
         }
+
+        session()->setFlashdata('Pesan', ' Akun Berhasil Di Update.');
+
         $this->modelLogin->save($data);
+        return redirect()->to('listK');
+    }
+
+    public function deleteKaryawan($id)
+    {
+        $this->modelLogin->deleteKaryawan($id);
+        session()->setFlashdata('Pesan', 'Akun Berhasil Dihapus.');
         return redirect()->to('listK');
     }
 }
