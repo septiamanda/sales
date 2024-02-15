@@ -22,7 +22,7 @@ class SalesController extends BaseController
 
     public function simpanSales()
     {
-        var_dump($this->request->getPost()); // Check if form data is received
+        // var_dump($this->request->getPost()); // Check if form data is received
 
         $validationRules = [
             'inputNomorSC' => 'required',
@@ -34,11 +34,34 @@ class SalesController extends BaseController
             'status' => 'required'
         ];
 
-        if (!$this->validate($validationRules)) {
+        // Set custom error messages
+        $validationMessages = [
+            'inputNomorSC' => [
+                'required' => 'Kolom Nomor SC harus diisi'
+            ],
+            'namaPel' => [
+                'required' => 'Kolom Nama Pelanggan harus diisi'
+            ],
+            'alamatInt' => [
+                'required' => 'Kolom Alamat Instalasi harus diisi'
+            ],
+            'tanggal_sales' => [
+                'required' => 'Kolom Tanggal Order harus diisi'
+            ],
+            'sektorsales' => [
+                'required' => 'Kolom Sektor harus diisi'
+            ],
+            'stosales' => [
+                'required' => 'Kolom STO harus diisi'
+            ],
+            'status' => [
+                'required' => 'Kolom Status harus diisi'
+            ]
+        ];
 
-            $validationErrors = $this->validator->getErrors();
+        if (!$this->validate($validationRules, $validationMessages)) {
             // Simpan pesan-pesan kesalahan dalam session flashdata
-            session()->setFlashdata('errors', $validationErrors);
+            session()->setFlashdata('errors', $this->validator->getErrors());
 
             // Kembali ke halaman sebelumnya dengan data input yang dikirim
             return redirect()->back()->withInput();
