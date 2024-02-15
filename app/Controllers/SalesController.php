@@ -8,6 +8,7 @@ use App\Models\ModelSales;
 class SalesController extends BaseController
 {
     protected $modelSales;
+
     public function __construct()
     {
         $this->modelSales = new ModelSales();
@@ -18,32 +19,52 @@ class SalesController extends BaseController
         $data['salesData'] = $this->modelSales->getSales();
         return view('Pages/SALES', $data);
     }
-    public function tambahSales()
-    {
-        return view('Pages/SALES');
-    }
+
     public function simpanSales()
     {
+        var_dump($this->request->getPost()); // Check if form data is received
+
         $validationRules = [
-            'noSC' => 'required'
+            'inputNomorSC' => 'required',
+            'namaPel' => 'required',
+            'alamatInt' => 'required',
+            'tanggal_sales'=>'required',
+            'sektorsales' => 'required',
+            'stosales' => 'required',
+            'status' => 'required'
         ];
 
         if (!$this->validate($validationRules)) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+
+            $validationErrors = $this->validator->getErrors();
+            // Simpan pesan-pesan kesalahan dalam session flashdata
+            session()->setFlashdata('errors', $validationErrors);
+
+            // Kembali ke halaman sebelumnya dengan data input yang dikirim
+            return redirect()->back()->withInput();
         }
 
+        $nosc = $this->request->getVar('inputNomorSC');
+        $namapel = $this->request->getVar('namaPel');
+        $almatint = $this->request->getVar('alamatInt');
+        $tanggalder = $this->request->getVar('tanggal_sales');
+        $sektorles = $this->request->getVar('sektorsales');
+        $stoles = $this->request->getVar('stosales');
+        $status = $this->request->getVar('status');
+
         $data = [
-            'noSC' => $this->request->getPost('noSC'),
-            'nama_pengguna' => $this->request->getPost('namaPel'),
-            'alamat_instl' => $this->request->getPost('alamatInt'),
-            'sektor' => $this->request->getPost('sektorsales'),
-            'sto' => $this->request->getPost('stosales'),
-            'status' => $this->request->getPost('status')
+            'noSC' => $nosc,
+            'nama_pengguna' => $namapel,
+            'alamat_instl' => $almatint,
+            'tanggal_order' => $tanggalder,
+            'sektor' => $sektorles,
+            'sto' => $stoles,
+            'status' => $status
         ];
 
         $this->modelSales->save($data);
 
-        session()->setFlashdata('Pesan', 'Data Berhasil Ditambahkan.');
+        session()->setFlashdata('success', 'Data Berhasil Ditambahkan.');
 
         return redirect()->to('listSales');
     }

@@ -45,7 +45,8 @@ $routes->post('deleteSektor/(:num)', 'Sektor::deleteSektor/$1');
 
 $routes->get('listPI', 'PIController::listPI');
 $routes->get('ps', 'Home::ps');
-$routes->get('listSales', 'SalesController::listSales');
 
+$routes->get('listSales', 'SalesController::listSales');
+$routes->post('simpanSales','SalesController::simpanSales');
 
 $routes->get('laporan', 'Home::laporan');

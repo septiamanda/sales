@@ -3,8 +3,8 @@
 <?= $this->extend('Layout/navbar'); ?>
 <?= $this->section('pageContent'); ?>
 
-<div class="container" style="max-width: 800px;>
-    <div class="row justify-content-center">
+<div class="container" style="max-width: 800px;">
+    <div class ="row justify-content-center">
         <div class="col-md-8 mx-auto">
             <div class="card">
                 <div class="card-body">

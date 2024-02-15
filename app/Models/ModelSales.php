@@ -8,15 +8,11 @@ class ModelSales extends Model
     protected $table = "datasales";
     protected $primaryKey = "id_sales";
     protected $useAutoIncrement = "true";
-    protected $allowedFields = ['id_sales','noSC','nama_pengguna', 'alamat_instl', 'sektor', 'sto', 'status'];
+    protected $allowedFields = ['noSC','nama_pengguna', 'alamat_instl','tanggal_order', 'sektor', 'sto', 'status'];
 
     public function getSales()
     {
         return $this->findAll();
     }
 
-    public function getPI()
-    {
-        return $this->where('status', 'PI')->findAll();
-    }
 }
