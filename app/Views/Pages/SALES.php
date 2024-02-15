@@ -2,15 +2,17 @@
 
 <?= $this->section('pageContent'); ?>
 
-
-
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Data Sales</h1>
     </div>
-
+    <?php if (session()->getFlashdata('Pesan')) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('Pesan'); ?>
+        </div>
+    <?php endif; ?>
     <hr>
 
     <!-- Page Wrapper -->
@@ -20,7 +22,7 @@
             <!-- Main Content -->
             <div id="content">
                 <!-- Begin Page Content -->
-                <div class="container-fluid">'
+                <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class=" card-header py-3 d-sm-flex justify-content-between align-items-center">
                             <h6 class="m-0 font-weight-bold text-primary">Cari Data Sales</h6>
@@ -141,10 +143,38 @@
                                                 </form>
                                             </div>
                                         </div>
+                                        <div class="mb-3 row">
+                                            <label for="sektorsales" class="col-sm-3 col-form-label">STO</label>
+                                            <div class="col-sm-9">
+                                                <form action="#" method="post">
+                                                    <select class="form-control" name="stosales" id="stosales">
+                                                        <option value="" disabled selected>Pilih STO</option>
+                                                        <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
+                                                        <option value="Datel SLK">Datel SLK (Solok)</option>
+                                                        <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                    </select>
 
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="sektorsales" class="col-sm-3 col-form-label">Status</label>
+                                            <div class="col-sm-9">
+                                                <form action="#" method="post">
+                                                    <select class="form-control" name="stosales" id="stosales">
+                                                        <option value="" disabled selected>Pilih Status</option>
+                                                        <option value="Datel BKT">RE</option>
+                                                        <option value="Datel SLK">FCC</option>
+                                                        <option value="Inner PDG">PI</option>
+                                                        <option value="Inner PDG">PS</option>
+                                                    </select>
+
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                         <button type="submit" name="Simpan" class="btn btn-primary btn">Simpan</button>
                                     </div>
                                 </div>
@@ -166,7 +196,7 @@
                                     <th>Sektor</th>
                                     <th>STO</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -176,6 +206,13 @@
                                 ?>
                                     <tr>
                                         <td><?= $noo; ?></td>
+
+                                <?php
+                                $no = 1;
+                                foreach ($salesData as $sd) :
+                                ?>
+                                    <tr>
+                                        <th scope='row'><?= $no; ?></th>
                                         <td><?= $sd['noSC']; ?></td>
                                         <td><?= $sd['nama_pengguna']; ?></td>
                                         <td><?= $sd['alamat_instl']; ?></td>
@@ -188,11 +225,10 @@
                                         </td>
                                     </tr>
                                 <?php
-                                    $noo++;
+                                    $no++;
                                 endforeach;
                                 ?>
                             </tbody>
-
                         </table>
                     </div>
                     <!-- Fitur paginasi -->
@@ -244,4 +280,3 @@
 
 <!-- Tambahkan JS DataTables -->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
-</div>

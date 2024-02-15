@@ -63,7 +63,7 @@ class STOController extends BaseController
 
     public function updateSTO()
     {
-        $id=$this->request->getVar('kode');
+        $id = $this->request->getVar('kode');
         $name = $this->request->getVar('NamaSTO');
         $sto = $this->request->getVar('STO');
         $hero = $this->request->getVar('Hero');

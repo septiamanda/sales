@@ -35,7 +35,7 @@ class Karyawan extends BaseController
             return redirect()->back()->withInput()->with('error', 'Email sudah terdaftar.');
         }
 
-        $levelId = 1;
+        $levelId = 2;
 
         $data = [
             'userEmail' => $email,

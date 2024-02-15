@@ -3,46 +3,47 @@
 
 <style>
     .card-header {
-        background-color: #184240;
-        border-color: #184240;
+        background-color: #DE5858;
+        border-color: #DE5858;
         color: white;
         text-align: center;
     }
 
     .form-control {
-        border-color: #184240;
+        border-color: #DE5858;
+    }
+
+    body {
+        background-color: #DE5858;
     }
 </style>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 mx-auto">
-            <div class="card">
+        <div class="col-md-6 mx-auto">
+            <div class="card text-center" style="background-color: #DE5858; border-color: #DE5858;">
                 <div class="card-header">
-                    <h3 class="mb-0">Edit Data Sentral Telepon Otomat</h3>
+                    <h3 class="h3 mb-4 mt-5" style="color:white; font-weight: bold;">Edit Data Sentral Telepon Otomat</h3>
                 </div>
                 <div class="card-body">
                     <form action="<?= base_url('updateSTO'); ?>" method="post">
                         <input type="hidden" name="kode" value="<?= $stoModel['id']; ?>">
 
-                        <div class="form-group">
-                            <label for="pj">Nama STO</label>
-                            <input type="text" class="form-control" name="NamaSTO" value="<?= $stoModel['Nama_STO']; ?>">
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="Nama STO" name="NamaSTO" id="ns" style="border-radius: 50px; height: 50px;;" value="<?= $stoModel['Nama_STO']; ?>">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="STO" name="STO" id="sto" style="border-radius: 50px; height: 50px;;" value="<?= $stoModel['STO']; ?>">
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="pj">STO</label>
-                            <input type="text" class="form-control" name="STO" value="<?= $stoModel['STO']; ?>">
+                        <div class="form-group mt-4">
+                            <input type="text" class="form-control" placeholder="Hero" name="Hero" value="<?= $stoModel['Hero']; ?>" style="border-radius: 50px; height: 50px;;">
                         </div>
 
-                        <div class="form-group">
-                            <label for="pj">Hero</label>
-                            <input type="text" class="form-control" name="Hero" value="<?= $stoModel['Hero']; ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Sektor">Sektor</label>
-                            <select class="form-control" name="Sektor">
+                        <div class="form-group mt-4">
+                            <select class="form-control" name="Sektor" style="border-radius: 50px; height: 50px;;">
                                 <option value="<?= $stoModel['Sektor']; ?>"><?= $stoModel['Sektor']; ?></option>
                                 <option value="" disabled selected>Pilih Sektor</option>
                                 <option value="Hero BKT (Bukittinggi)">Hero BKT (Bukittinggi)</option>
@@ -58,8 +59,8 @@
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" name="Simpan" class="btn btn-success btn mb-4 mr-2">Simpan</button>
-                            <a href="<?= base_url('sto'); ?>" class="btn btn-danger btn mb-4">Cancel</a>
+                            <button type="submit" name="Simpan" class="btn btn-berhasil btn mb-4 mr-2 mt-4 btn-user btn-block" style="border-radius: 50px; font-size: 1rem;">Simpan</button>
+                            <a href="<?= base_url('sto'); ?>" class="btn btn-warning btn mb-4 btn-user btn-block" style="border-radius: 50px; font-size: 1rem; margin-top: -15px;">Cancel</a>
                         </div>
                     </form>
                 </div>

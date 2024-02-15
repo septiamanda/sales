@@ -14,7 +14,6 @@ $routes->get('listA', 'Admin::listA');
 $routes->get('tambahA', 'Admin::tambahA');
 $routes->post('simpanA', 'Admin::simpanA');
 $routes->get('editA(:num)', 'Admin::editA/$1');
-
 $routes->post('deleteAdmin(:num)', 'Admin::deleteAdmin/$1');
 $routes->post('updateA', 'Admin::updateA');
 
@@ -47,6 +46,9 @@ $routes->post('deleteSektor/(:num)', 'Sektor::deleteSektor/$1');
 $routes->get('pi', 'Home::pi');
 $routes->get('ps', 'Home::ps');
 $routes->get('sales', 'Home::sales');
+$routes->get('listPI', 'PIController::listPI');
+$routes->get('listPS', 'PSController::listPS');
+$routes->get('listSales', 'SalesController::listSales');
 
 
 $routes->get('laporan', 'Home::laporan');

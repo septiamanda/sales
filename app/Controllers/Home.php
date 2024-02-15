@@ -12,10 +12,7 @@ class Home extends BaseController
     {
         return view('Pages/FCC');
     }
-    public function pi(): string
-    {
-        return view('Pages/PI');
-    }
+
     public function ps(): string
     {
         return view('Pages/PS');

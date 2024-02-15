@@ -43,7 +43,20 @@
                                             <th>STO</th>
                                         </tr>
                                     </thead>
-
+                                    <tbody>
+                                        <?php $no = 1;
+                                        foreach ($dataPI as $pi) : ?>
+                                            <tr>
+                                                <th scope='row'><?= $no; ?></th>
+                                                <td><?= $pi['noSC']; ?></td>
+                                                <td><?= $pi['nama_pengguna']; ?></td>
+                                                <td><?= $pi['alamat_instl']; ?></td>
+                                                <td><?= $pi['sektor']; ?></td>
+                                                <td><?= $pi['sto']; ?></td>
+                                            </tr>
+                                        <?php $no++;
+                                        endforeach; ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
