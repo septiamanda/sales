@@ -34,6 +34,7 @@ class Filters extends BaseConfig
      *
      * @var array<string, array<string, array<string, string>>>|array<string, list<string>>
      */
+    
     public array $globals = [
         'before' => [
             // 'honeypot',
@@ -48,11 +49,10 @@ class Filters extends BaseConfig
         ],
         'after' => [
             'filterAdmin' => [
-                'except' => ['dashboard', 're', 'fcc', 'listPI', 'ps','listA', 'listK', 'sektor','sto', 'laporan', 'TambahSTO', 'editSTO*', 'deleteSTO*', 'updateSTO', 'save', 'tambahDataSektor', 'deleteSektor', 'regis', 'tambahA', 'simpanA','tambahK', 'simpanK', 'listSales', 'editA*', 'editK*', 'updateA', 'updateK', 'simpanSales']
-
+                'except' => ['dashboard', 're', 'fcc', 'listPI', 'listPS', 'listA', 'listK', 'sektor', 'sto', 'laporan', 'TambahSTO', 'editSTO*', 'deleteSTO*', 'updateSTO', 'save', 'tambahDataSektor', 'editSektor', 'updateSektor', 'deleteSektor', 'simpan', 'regis', 'tambahA', 'simpanA', 'tambahK', 'simpanK', 'listSales', 'editA*', 'editK*', 'updateA', 'updateK', 'simpanSales', 'deleteAdmin', 'deleteKaryawan']
             ],
             'filterKaryawan' => [
-                'except' => ['dashboard', 're', 'fcc', 'listPI', 'ps', 'laporan', 'simpanSales']
+                'except' => ['dashboard', 're', 'fcc', 'listPI', 'listPS', 'laporan', 'simpanSales']
             ],
             'toolbar',
             // 'honeypot',

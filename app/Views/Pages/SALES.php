@@ -224,6 +224,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php
+                                $noo = 1;
+                                foreach ($salesData as $sd) :
+                                ?>
+                                    <tr>
+                                        <td><?= $noo; ?></td>
+
                                 <?php
                                 $no = 1;
                                 foreach ($salesData as $sd) :
