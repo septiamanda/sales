@@ -203,7 +203,7 @@
                             </form>
                         </div>
 
-                        
+
 
                     </div>
 
@@ -224,19 +224,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php
-                                $noo = 1;
-                                foreach ($salesData as $sd) :
-                                ?>
+                                <?php $no = 1;
+                                foreach ($salesData as $sd) : ?>
                                     <tr>
-                                        <td><?= $noo; ?></td>
-
-                                <?php
-                                $no = 1;
-                                foreach ($salesData as $sd) :
-                                ?>
-                                    <tr>
-                                        <th scope='row'><?= $no; ?></th>
+                                        <td><?= $no++; ?></td>
                                         <td><?= $sd['tanggal_order']; ?></td>
                                         <td><?= $sd['noSC']; ?></td>
                                         <td><?= $sd['nama_pengguna']; ?></td>
@@ -249,10 +240,7 @@
                                             <button type="button" class="btn btn-danger">Delete</button>
                                         </td>
                                     </tr>
-                                <?php
-                                    $no++;
-                                endforeach;
-                                ?>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -317,6 +305,7 @@
 
 <!-- Tambahkan CSS DataTables -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+</link>
 
 <!-- Tambahkan JS DataTables -->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
