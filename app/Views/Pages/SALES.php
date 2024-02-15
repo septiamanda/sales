@@ -170,23 +170,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                
-
-                                foreach ($dataDummy as $index => $row) : ?>
+                            <?php
+                                $noo = 1;
+                                foreach ($salesData as $sd) :
+                                ?>
                                     <tr>
-                                        <td><?= $index + 1; ?></td>
-                                        <td><?= $row[0]; ?></td>
-                                        <td><?= $row[1]; ?></td>
-                                        <td><?= $row[2]; ?></td>
-                                        <td><?= $row[3]; ?></td>
+                                        <td><?= $noo; ?></td>
+                                        <td><?= $sd['noSC']; ?></td>
+                                        <td><?= $sd['nama_pengguna']; ?></td>
+                                        <td><?= $sd['alamat_instl']; ?></td>
+                                        <td><?= $sd['sektor']; ?></td>
+                                        <td><?= $sd['sto']; ?></td>
+                                        <td><?= $sd['status']; ?></td>
                                         <td>
-                                            <!-- Tambahkan action -->
-                                            <a href="#" class="btn btn-info btn-sm">Edit</a>
-                                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                            <button type="button" class="btn btn-warning">Edit</button>
+                                            <button type="button" class="btn btn-danger">Delete</button>
                                         </td>
                                     </tr>
-                                <?php endforeach; ?>
+                                <?php
+                                    $noo++;
+                                endforeach;
+                                ?>
                             </tbody>
 
                         </table>

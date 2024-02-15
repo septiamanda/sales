@@ -37,12 +37,13 @@ $routes->post('updateSTO', 'STOController::updateSTO');
 $routes->get('re', 'Home::re');
 $routes->get('fcc', 'Home::fcc');
 
-$routes->get('sektor', 'Home::sektor');
+$routes->get('sektor', 'Sektor::sektor');
+$routes->post('simpan', 'Sektor::simpan');
 $routes->get('tambahDataSektor', 'Sektor::tambahDataSektor');
-$routes->post('simpanDataSektor', 'Sektor::simpanDataSektor');
-$routes->post('sektor', 'Sektor::simpanDataSektor');
 $routes->get('editSektor/(:num)', 'Sektor::editSektor/$1');
+$routes->post('updateSektor', 'Sektor::updateSektor');
 $routes->post('deleteSektor/(:num)', 'Sektor::deleteSektor/$1');
+
 $routes->get('pi', 'Home::pi');
 $routes->get('ps', 'Home::ps');
 $routes->get('sales', 'Home::sales');

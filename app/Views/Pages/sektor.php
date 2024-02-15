@@ -1,15 +1,4 @@
-<?php
-
-// Koneksi Database
-$server = "localhost";
-$user = "root";
-$password = "";
-$database = "salesyak";
-
-// Buat Koneksi
-$koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_error($koneksi));
-
-?>
+<?php include 'koneksi.php'; ?>
 
 <?= $this->extend('Layout/navbar'); ?>
 
@@ -19,16 +8,9 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Sektor</h1>
+        <h1 style="color: black" class="h3 mb-0 text-black-800">Data Sektor</h1>
     </div>
 
-    <?php if (session()->getFlashdata('Pesan')) : ?>
-        <div id="alert-simpan" class="alert alert-success" role="alert">
-            <?= session()->getFlashdata('Pesan'); ?>
-        </div>
-    <?php endif; ?>
-
-    <hr>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -45,11 +27,11 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
                             <h6 class="m-0 font-weight-bold text-primary">List Data Sektor</h6>
                         </div>
 
-                        <!-- Form pencarian -->
+                        <!-- Form pencarian dan Tambah Data Sektor -->
                         <div class="card-body">
-                            <form action="<?= base_url('sektor'); ?>" method="post">
+                            <form action="<?= base_url('sektor'); ?>" method="get">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control col-8" name="cari" placeholder="Cari..." aria-label="Cari.." aria-describedby="button-addon2">
+                                    <input type="text" class="form-control col-8" name="cari" placeholder="Masukkan kata kunci..." aria-label="Cari.." aria-describedby="button-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit" id="cari_sektor">Cari</button>
                                     </div>
@@ -61,10 +43,9 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
                                 </div>
                             </form>
 
-
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="sektorTable" width="100%" cellspacing="0">
-                                    <thead style="text-align: center;">
+                                    <thead style="text-align:center; color:black;" >
                                         <tr>
                                             <th>No.</th>
                                             <th>Datel (Daerah Telkom)</th>
@@ -82,33 +63,33 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
                                         ?>
                                             <tr>
                                                 <td><?= $no++; ?></td>
-                                                <td><?= $data['id_datel']; ?></td>
+                                                <td><?= $data['nama_datel']; ?></td>
                                                 <td><?= $data['nama_sektor']; ?></td>
                                                 <td><?= $data['hero_sektor']; ?></td>
                                                 <td>
-                                                    <a href="<?= base_url('editSektor/' . $data['id_sektor']); ?>" class="btn btn-primary">Edit</a>
+                                                     <a href="<?= base_url('editSektor/'.$data['id_sektor']); ?>" class="btn btn-primary"> 
+                                                        <i class="fas fa-edit"></i> Edit </a> 
 
-                                                    <!-- Tombol hapus dengan atribut data-id -->
-                                                    <button type="button" class="btn btn-danger btn-hapus" data-id="<?= $data['id_sektor']; ?>" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $no ?>"> Hapus</button>
-
+                                                    <button type="button" class="btn btn-danger btn-hapus"  data-id="<?= $data['id_sektor']; ?>" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $no ?>"> Hapus</button>
+                                                    
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="hapusModal<?= $no ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="staticBackdropLabel">Konfirmasi Hapus Data</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"> </button>
                                                                 </div>
 
                                                                 <form method="post" action="<?= base_url('deleteSektor/'.$data['id_sektor']); ?>">
                                                                     <input type="hidden" name="id_sektor" value="<?= $data['id_sektor']?>">
                                                                     <div class="modal-body"> 
                                                                         <h6 class="text-center">Apakah Anda yakin akan menghapus data ini? <br> 
-                                                                            <span class="text-danger"><?= $data['id_datel']?> - <?= $data['nama_sektor']?> - <?= $data['hero_sektor']?></span>
+                                                                            <span class="text-danger"><?= $data['nama_datel']?> - <?= $data['nama_sektor']?> - <?= $data['hero_sektor']?></span>
                                                                         </h6>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="submit" class="btn btn-danger" name="btnYa">Ya</button>
+                                                                        <button type="submit" class="btn btn-primary" name="btnYa">Ya</button>
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
                                                                     </div>
                                                                 </form>
@@ -159,6 +140,9 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
 
     <?= $this->endSection(); ?>
 
+    <!-- Bootsrap Ikon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <!-- Tambahkan CSS DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 
@@ -173,29 +157,25 @@ $koneksi = mysqli_connect($server, $user, $password, $database) or die(mysqli_er
     <!-- Skrip JavaScript untuk menangani penghapusan -->
     <script>
         $(document).ready(function() {
-    // Tangkap klik pada tombol hapus
-    $('.btn-hapus').click(function() {
-        var idSektor = $(this).data('id');
-
-        // Tampilkan modal konfirmasi hapus
-        $('#hapusModal' + idSektor).modal('show');
-
-        // Tangkap klik pada tombol "Ya" di modal konfirmasi hapus
-        $('#btnYa').click(function() {
-            // Menghapus data menggunakan AJAX
-            $.ajax({
-                type: "POST",
-                url: "<?= base_url('deleteSektor'); ?>/" + idSektor,
-                success: function(response) {
-                    // Redirect ke halaman sektor setelah penghapusan data
-                    window.location.href = "<?= base_url('sektor'); ?>";
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
+        // Tangkap klik pada tombol hapus
+        $('.btn-hapus').click(function() {
+            var id_sektor = $(this).data('id_sektor');
+            $('#hapusModal' + id_sektor).modal('show');
+            $('#btnYa').click(function() {
+                // Menghapus data menggunakan AJAX
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url('deleteSektor'); ?>/" + id_sektor,
+                    success: function(response) {
+                        // Redirect ke halaman sektor setelah penghapusan data
+                        window.location.href = "<?= base_url('sektor'); ?>"
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
             });
         });
     });
-});
 
     </script>
