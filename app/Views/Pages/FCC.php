@@ -37,14 +37,29 @@
                                     <thead style="background-color: #184240; color: white; text-align: center;">
                                         <tr>
                                             <th>No.</th>
+                                            <th>Tanggal Order</th>
                                             <th>No. SC</th>
                                             <th>Nama Pengguna</th>
                                             <th>Alamat Instalasi</th>
-                                            <th>Sektor/Hero</th>
+                                            <th>Sektor</th>
                                             <th>STO</th>
                                         </tr>
                                     </thead>
-
+                                    <tbody>
+                                        <?php $no = 1;
+                                        foreach ($dataFCC as $fcc) : ?>
+                                            <tr>
+                                                <th scope='row'><?= $no; ?></th>
+                                                <td><?= $fcc['tanggal_order']; ?></td>
+                                                <td><?= $fcc['noSC']; ?></td>
+                                                <td><?= $fcc['nama_pengguna']; ?></td>
+                                                <td><?= $fcc['alamat_instl']; ?></td>
+                                                <td><?= $fcc['sektor']; ?></td>
+                                                <td><?= $fcc['sto']; ?></td>
+                                            </tr>
+                                        <?php $no++;
+                                        endforeach; ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

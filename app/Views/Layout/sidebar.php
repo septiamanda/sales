@@ -36,8 +36,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Data Master:</h6>
                 <a class="collapse-item" href="<?= site_url('listSales')?>">Data Sales</a>
-                <a class="collapse-item" href="<?= site_url('re') ?>">Data RE</a>
-                <a class="collapse-item" href="<?= site_url('fcc') ?>">Data FCC</a>
+                <a class="collapse-item" href="<?= site_url('listRE') ?>">Data RE</a>
+                <a class="collapse-item" href="<?= site_url('listFCC') ?>">Data FCC</a>
                 <a class="collapse-item" href="<?= site_url('listPI') ?>">Data PI</a>
                 <a class="collapse-item" href="<?= site_url('listPS') ?>">Data PS</a>
             </div>

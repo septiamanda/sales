@@ -25,4 +25,14 @@ class ModelSales extends Model
         return $this->where('status', 'PS')->findAll();
     }
 
+    public function getRE()
+    {
+        return $this->where('status', 'RE')->findAll();
+    }
+
+    public function getFCC()
+    {
+        return $this->where('status', 'FCC')->findAll();
+    }
+
 }
