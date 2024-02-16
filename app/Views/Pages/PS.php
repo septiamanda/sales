@@ -36,6 +36,7 @@
                                     <thead style="background-color: #184240; color: white; text-align: center;">
                                         <tr>
                                             <th>No.</th>
+                                            <th>Tanggal Order</th>
                                             <th>No. SC</th>
                                             <th>Nama Pengguna</th>
                                             <th>Alamat Instalasi</th>
@@ -48,6 +49,7 @@
                                         foreach ($dataPS as $ps) : ?>
                                             <tr>
                                                 <th scope='row'><?= $no; ?></th>
+                                                <td><?= $ps['tanggal_order']; ?></td>
                                                 <td><?= $ps['noSC']; ?></td>
                                                 <td><?= $ps['nama_pengguna']; ?></td>
                                                 <td><?= $ps['alamat_instl']; ?></td>

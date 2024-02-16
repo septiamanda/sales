@@ -36,6 +36,7 @@
                                     <thead style="background-color: #184240; color: white; text-align: center;">
                                         <tr>
                                             <th>No.</th>
+                                            <th>Tanggal Order</th>
                                             <th>No. SC</th>
                                             <th>Nama Pengguna</th>
                                             <th>Alamat Instalasi</th>
@@ -48,6 +49,7 @@
                                         foreach ($dataPI as $pi) : ?>
                                             <tr>
                                                 <th scope='row'><?= $no; ?></th>
+                                                <td><?= $pi['tanggal_order']; ?></td>
                                                 <td><?= $pi['noSC']; ?></td>
                                                 <td><?= $pi['nama_pengguna']; ?></td>
                                                 <td><?= $pi['alamat_instl']; ?></td>
