@@ -36,14 +36,28 @@
                                     <thead style="background-color: #184240; color: white; text-align: center;">
                                         <tr>
                                             <th>No.</th>
+                                            <th>Tanggal Order</th>
                                             <th>No. SC</th>
                                             <th>Nama Pengguna</th>
                                             <th>Alamat Instalasi</th>
-                                            <th>Sektor/Hero</th>
+                                            <th>Sektor</th>
                                             <th>STO</th>
                                         </tr>
                                     </thead>
-
+                                    <tbody>
+                                        <?php $no = 1;
+                                        foreach ($dataRE as $re) : ?>
+                                            <tr>
+                                                <th scope='row'><?= $no; ?></th>
+                                                <td><?= $re['tanggal_order']; ?></td>
+                                                <td><?= $re['noSC']; ?></td>
+                                                <td><?= $re['nama_pengguna']; ?></td>
+                                                <td><?= $re['alamat_instl']; ?></td>
+                                                <td><?= $re['sektor']; ?></td>
+                                                <td><?= $re['sto']; ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

@@ -8,7 +8,7 @@ class ModelSales extends Model
     protected $table = "datasales";
     protected $primaryKey = "id_sales";
     protected $useAutoIncrement = "true";
-    protected $allowedFields = ['id_sales','noSC','nama_pengguna', 'alamat_instl', 'sektor', 'sto', 'status'];
+    protected $allowedFields = ['noSC','nama_pengguna', 'alamat_instl','tanggal_order', 'sektor', 'sto', 'status'];
 
     public function getSales()
     {
@@ -17,11 +17,22 @@ class ModelSales extends Model
 
     public function getPI()
     {
-        return $this->where('status', 'PI')->findAll();
+        return $this->where('status', 'PI')->orderBy('tanggal_order', 'ASC')->findAll();
     }
 
     public function getPS()
     {
-        return $this->where('status', 'PS')->findAll();
+        return $this->where('status', 'PS')->orderBy('tanggal_order', 'ASC')->findAll();
     }
+
+    public function getRE()
+    {
+        return $this->where('status', 'RE')->findAll();
+    }
+
+    public function getFCC()
+    {
+        return $this->where('status', 'FCC')->findAll();
+    }
+
 }
