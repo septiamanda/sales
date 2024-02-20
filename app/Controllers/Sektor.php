@@ -17,6 +17,19 @@ class Sektor extends BaseController
         return view('Pages/sektor', $data);
     }
 
+    public function cari()
+    {
+        $cari = $this->request->getVar('cari');
+
+        if ($cari) {
+            $data['sektor'] = $this->modelSektor->search($cari);
+        } else {
+            $data['sektor'] = $this->modelSektor->getSektor();
+        }
+
+        return view('Pages/sektor', $data);
+    }
+
     public function tambahDataSektor()
     {
         return view('Pages/tambahDataSektor');
@@ -57,8 +70,8 @@ class Sektor extends BaseController
             'hero_sektor'=>$hero_sektor
         ];
 
-        $this->modelSektor->save($data);
-        return redirect()->to('/Sektor'); 
+        $this->modelSektor->update($id_sektor, $data);
+        return redirect()->to(base_url('/sektor'));
     }
 
     public function deleteSektor($id_sektor)
