@@ -34,6 +34,7 @@ $routes->post('deleteSTO/(:num)', 'STOController::deleteSTO/$1');
 $routes->post('updateSTO', 'STOController::updateSTO');
 
 $routes->get('sektor', 'Sektor::sektor');
+$routes->get('sektor/cari', 'Sektor::cari');
 $routes->post('simpan', 'Sektor::simpan');
 $routes->get('tambahDataSektor', 'Sektor::tambahDataSektor');
 $routes->get('editSektor/(:num)', 'Sektor::editSektor/$1');
