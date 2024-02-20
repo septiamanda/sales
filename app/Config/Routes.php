@@ -37,6 +37,7 @@ $routes->get('re', 'Home::re');
 $routes->get('fcc', 'Home::fcc');
 
 $routes->get('sektor', 'Sektor::sektor');
+$routes->get('sektor/cari', 'Sektor::cari');
 $routes->post('simpan', 'Sektor::simpan');
 $routes->get('tambahDataSektor', 'Sektor::tambahDataSektor');
 $routes->get('editSektor/(:num)', 'Sektor::editSektor/$1');

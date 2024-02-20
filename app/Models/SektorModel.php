@@ -24,6 +24,15 @@ class SektorModel extends Model
     {
         return $this->delete($id_sektor);
     }
-
+    
+    public function search($keyword)
+    {
+        $query = "SELECT * FROM `sektor` WHERE
+                                `nama_datel` LIKE '%$keyword%' OR
+                                `nama_sektor` LIKE '%$keyword%' OR
+                                `hero_sektor` LIKE '%$keyword%' OR
+                                ORDER BY `id_sektor` DESC";
+        return view($query);
+    }
 
 }

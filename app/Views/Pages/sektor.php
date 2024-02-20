@@ -29,11 +29,11 @@
 
                         <!-- Form pencarian dan Tambah Data Sektor -->
                         <div class="card-body">
-                            <form action="<?= base_url('sektor'); ?>" method="get">
+                            <form action="<?= base_url('sektor/cari'); ?>" method="get">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control col-8" name="cari" placeholder="Masukkan kata kunci..." aria-label="Cari.." aria-describedby="button-addon2">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit" id="cari_sektor">Cari</button>
+                                        <button class="btn btn-primary" type="submit" id="cari">Cari</button>
                                     </div>
                                     <div class="col-md-6 d-flex justify-content-end align-items-center">
                                         <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
@@ -58,8 +58,8 @@
                                         <?php
                                         // Persiapan menampilkan data
                                         $no = 1;
-                                        $tampil = mysqli_query($koneksi, "SELECT * FROM sektor ORDER BY id_sektor ASC");
-                                        while ($data = mysqli_fetch_array($tampil)) :
+                                        if (!empty($sektor)) {
+                                            foreach ($sektor as $data) :
                                         ?>
                                             <tr>
                                                 <td><?= $no++; ?></td>
@@ -98,7 +98,13 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        <?php endwhile; ?>
+                                        <?php endforeach; 
+                                        } else { ?>
+                                            <tr>
+                                                <td colspan="5" class="text-center">Data tidak ditemukan.</td>
+                                            </tr>
+                                        <?php } 
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
