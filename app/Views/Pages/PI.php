@@ -23,7 +23,7 @@
                     </div>
                     <div class="card-body">
                         <div class="chart-area">
-                            <canvas id="myAreaChart"></canvas>
+                            <canvas id="chartPI"></canvas>
                         </div>
                     </div>
                 </div>
