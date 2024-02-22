@@ -51,5 +51,6 @@ $routes->get('listPS', 'PSController::listPS');
 
 $routes->get('listSales', 'SalesController::listSales');
 $routes->post('simpanSales','SalesController::simpanSales');
+$routes->post('editSales','SalesController::editSales');
 
 $routes->get('laporan', 'Home::laporan');

@@ -49,10 +49,10 @@ class Filters extends BaseConfig
         ],
         'after' => [
             'filterAdmin' => [
-                'except' => ['dashboard', 're', 'fcc', 'listPI', 'listPS', 'listA', 'listK', 'sektor', 'sto', 'laporan', 'TambahSTO', 'editSTO*', 'deleteSTO*', 'updateSTO', 'save', 'tambahDataSektor', 'editSektor', 'updateSektor', 'deleteSektor', 'simpan', 'regis', 'tambahA', 'simpanA', 'tambahK', 'simpanK', 'listSales', 'editA*', 'editK*', 'updateA', 'updateK', 'simpanSales', 'deleteAdmin', 'deleteKaryawan']
+                'except' => ['dashboard', 're', 'fcc', 'listPI', 'listPS', 'listA', 'listK', 'sektor', 'sto', 'laporan', 'TambahSTO', 'editSTO*', 'deleteSTO*', 'updateSTO', 'save', 'tambahDataSektor', 'editSektor', 'updateSektor', 'deleteSektor', 'simpan', 'regis', 'tambahA', 'simpanA', 'tambahK', 'simpanK', 'listSales', 'editA*', 'editK*', 'updateA', 'updateK', 'simpanSales', 'deleteAdmin', 'deleteKaryawan', 'editSales']
             ],
             'filterKaryawan' => [
-                'except' => ['dashboard', 're', 'fcc', 'listPI', 'listPS', 'laporan', 'simpanSales']
+                'except' => ['dashboard', 're', 'fcc', 'listPI', 'listPS', 'laporan', 'simpanSales', 'editSales']
             ],
             'toolbar',
             // 'honeypot',
