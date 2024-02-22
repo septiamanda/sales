@@ -14,6 +14,7 @@ class Sektor extends BaseController
     public function sektor()
     {
         $data ['sektor'] = $this->modelSektor->getSektor();
+
         return view('Pages/sektor', $data);
     }
 
@@ -37,6 +38,12 @@ class Sektor extends BaseController
 
     public function simpan()
     {
+        if (!$this->validate([
+            'nama_datel' => 'required'
+        ])) {
+            return redirect()->to('tambahDataSektor');
+        }
+
         $nama_datel = $this->request->getVar('nama_datel');
         $nama_sektor = $this->request->getVar('nama_sektor');
         $hero_sektor = $this->request->getVar('hero_sektor');
@@ -47,6 +54,8 @@ class Sektor extends BaseController
             'hero_sektor'=>$hero_sektor
         ];
 
+        session()->setFlashdata('Pesan', 'Data Berhasil Ditambahkan');
+    
         $this->modelSektor->save($data);
         return redirect()->to('sektor');
     }
@@ -64,19 +73,24 @@ class Sektor extends BaseController
         $hero_sektor = $this->request->getVar('hero_sektor');
 
         $data = [
-            'id_sektor'=>$id_sektor,
             'nama_datel'=>$nama_datel,
             'nama_sektor'=>$nama_sektor,
             'hero_sektor'=>$hero_sektor
         ];
 
         $this->modelSektor->update($id_sektor, $data);
-        return redirect()->to(base_url('/sektor'));
+
+        session()->setFlashdata('Pesan', 'Data Berhasil Diperbarui');
+
+        return redirect()->to('sektor');
     }
 
     public function deleteSektor($id_sektor)
     {
         $this->modelSektor->deleteSektor($id_sektor);
+
+        session()->setFlashdata('Pesan', 'Data Berhasil Dihapus');
+
         return redirect()->to('sektor');
     }
 
