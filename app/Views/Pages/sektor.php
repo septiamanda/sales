@@ -11,6 +11,13 @@
         <h1 style="color: black" class="h3 mb-0 text-black-800">Data Sektor</h1>
     </div>
 
+    <?php if (session()->getFlashdata('Pesan')) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('Pesan'); ?>
+        </div>
+    <?php endif; ?>
+
+    <hr>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -29,16 +36,17 @@
 
                         <!-- Form pencarian dan Tambah Data Sektor -->
                         <div class="card-body">
-                            <form action="<?= base_url('sektor'); ?>" method="get">
+                            <form action="<?= base_url('sektor/cari'); ?>" method="get">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control col-8" name="cari" placeholder="Masukkan kata kunci..." aria-label="Cari.." aria-describedby="button-addon2">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit" id="cari_sektor">Cari</button>
+                                        <button class="btn btn-primary" type="submit" id="cari">Cari</button>
                                     </div>
-                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                    <div class="col-md-6 d-flex justify-content-end align-items-center ml-auto">
                                         <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
-                                            <i class="fas fa-plus fa-sm"></i> + Tambah Data Sektor
+                                            <i class="fas fa-plus fa-sm"></i> Tambah Data Sektor
                                         </a>
+                                        <button class="btn btn-success ml-2" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
                                     </div>
                                 </div>
                             </form>
@@ -50,7 +58,7 @@
                                             <th>No.</th>
                                             <th>Datel (Daerah Telkom)</th>
                                             <th>Nama Sektor</th>
-                                            <th>HERO Sektor</th>
+                                            <th style="width: 20%;">HERO Sektor</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -58,11 +66,11 @@
                                         <?php
                                         // Persiapan menampilkan data
                                         $no = 1;
-                                        $tampil = mysqli_query($koneksi, "SELECT * FROM sektor ORDER BY id_sektor ASC");
-                                        while ($data = mysqli_fetch_array($tampil)) :
+                                        if (!empty($sektor)) {
+                                            foreach ($sektor as $data) :
                                         ?>
                                             <tr>
-                                                <td><?= $no++; ?></td>
+                                                <td style="text-align:center;"><?= $no++; ?></td>
                                                 <td><?= $data['nama_datel']; ?></td>
                                                 <td><?= $data['nama_sektor']; ?></td>
                                                 <td><?= $data['hero_sektor']; ?></td>
@@ -70,7 +78,7 @@
                                                      <a href="<?= base_url('editSektor/'.$data['id_sektor']); ?>" class="btn btn-primary"> 
                                                         <i class="fas fa-edit"></i> Edit </a> 
 
-                                                    <button type="button" class="btn btn-danger btn-hapus"  data-id="<?= $data['id_sektor']; ?>" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $no ?>"> Hapus</button>
+                                                    <button type="button" class="btn btn-danger btn-hapus"  data-id="<?= $data['id_sektor']; ?>" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $no ?>"                                                     <button type="button" class="btn btn-danger btn-hapus" data-id_sektor="<?= $data['id_sektor']; ?>" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $no ?>"><i class="fas fa-trash-alt"></i> Hapus</button>
                                                     
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="hapusModal<?= $no ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -98,7 +106,13 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        <?php endwhile; ?>
+                                        <?php endforeach; 
+                                        } else { ?>
+                                            <tr>
+                                                <td colspan="5" class="text-center">Data tidak ditemukan.</td>
+                                            </tr>
+                                        <?php } 
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -161,7 +175,7 @@
         $('.btn-hapus').click(function() {
             var id_sektor = $(this).data('id_sektor');
             $('#hapusModal' + id_sektor).modal('show');
-            $('#btnYa').click(function() {
+            $('#hapusModal' + id_sektor + ' button[name="btnYa"]').click(function() {
                 // Menghapus data menggunakan AJAX
                 $.ajax({
                     type: "POST",
