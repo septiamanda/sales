@@ -11,6 +11,13 @@
         <h1 style="color: black" class="h3 mb-0 text-black-800">Data Sektor</h1>
     </div>
 
+    <?php if (session()->getFlashdata('Pesan')) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('Pesan'); ?>
+        </div>
+    <?php endif; ?>
+
+    <hr>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -35,10 +42,11 @@
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit" id="cari">Cari</button>
                                     </div>
-                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                    <div class="col-md-6 d-flex justify-content-end align-items-center ml-auto">
                                         <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
                                             <i class="fas fa-plus fa-sm"></i> + Tambah Data Sektor
                                         </a>
+                                        <button class="btn btn-success ml-2" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
                                     </div>
                                 </div>
                             </form>
@@ -47,11 +55,11 @@
                                 <table class="table table-bordered" id="sektorTable" width="100%" cellspacing="0">
                                     <thead style="text-align:center; color:black;" >
                                         <tr>
-                                            <th>No.</th>
-                                            <th>Datel (Daerah Telkom)</th>
-                                            <th>Nama Sektor</th>
-                                            <th>HERO Sektor</th>
-                                            <th>Aksi</th>
+                                            <th style="width: 5%;">No.</th>
+                                            <th style="width: 20%;">Datel (Daerah Telkom)</th>
+                                            <th style="width: 20%;">Nama Sektor</th>
+                                            <th style="width: 20%;">HERO Sektor</th>
+                                            <th style="width: 15%;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -62,7 +70,7 @@
                                             foreach ($sektor as $data) :
                                         ?>
                                             <tr>
-                                                <td><?= $no++; ?></td>
+                                                <td style="text-align:center;"><?= $no++; ?></td>
                                                 <td><?= $data['nama_datel']; ?></td>
                                                 <td><?= $data['nama_sektor']; ?></td>
                                                 <td><?= $data['hero_sektor']; ?></td>
@@ -167,7 +175,7 @@
         $('.btn-hapus').click(function() {
             var id_sektor = $(this).data('id_sektor');
             $('#hapusModal' + id_sektor).modal('show');
-            $('#btnYa').click(function() {
+            $('#hapusModal' + id_sektor + ' button[name="btnYa"]').click(function() {
                 // Menghapus data menggunakan AJAX
                 $.ajax({
                     type: "POST",
