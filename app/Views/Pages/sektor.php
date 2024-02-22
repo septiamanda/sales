@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="col-md-6 d-flex justify-content-end align-items-center ml-auto">
                                         <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
-                                            <i class="fas fa-plus fa-sm"></i> + Tambah Data Sektor
+                                            <i class="fas fa-plus fa-sm"></i> Tambah Data Sektor
                                         </a>
                                         <button class="btn btn-success ml-2" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
                                     </div>
@@ -55,11 +55,11 @@
                                 <table class="table table-bordered" id="sektorTable" width="100%" cellspacing="0">
                                     <thead style="text-align:center; color:black;" >
                                         <tr>
-                                            <th style="width: 5%;">No.</th>
-                                            <th style="width: 20%;">Datel (Daerah Telkom)</th>
-                                            <th style="width: 20%;">Nama Sektor</th>
+                                            <th>No.</th>
+                                            <th>Datel (Daerah Telkom)</th>
+                                            <th>Nama Sektor</th>
                                             <th style="width: 20%;">HERO Sektor</th>
-                                            <th style="width: 15%;">Aksi</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -78,7 +78,7 @@
                                                      <a href="<?= base_url('editSektor/'.$data['id_sektor']); ?>" class="btn btn-primary"> 
                                                         <i class="fas fa-edit"></i> Edit </a> 
 
-                                                    <button type="button" class="btn btn-danger btn-hapus"  data-id="<?= $data['id_sektor']; ?>" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $no ?>"> Hapus</button>
+                                                    <button type="button" class="btn btn-danger btn-hapus"  data-id="<?= $data['id_sektor']; ?>" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $no ?>"                                                     <button type="button" class="btn btn-danger btn-hapus" data-id_sektor="<?= $data['id_sektor']; ?>" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $no ?>"><i class="fas fa-trash-alt"></i> Hapus</button>
                                                     
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="hapusModal<?= $no ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

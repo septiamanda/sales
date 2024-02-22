@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Models;
 
 use CodeIgniter\Model;
@@ -8,7 +9,7 @@ class ModelSales extends Model
     protected $table = "datasales";
     protected $primaryKey = "id_sales";
     protected $useAutoIncrement = "true";
-    protected $allowedFields = ['noSC','nama_pengguna', 'alamat_instl','tanggal_order', 'sektor', 'sto', 'status'];
+    protected $allowedFields = ['noSC', 'nama_pengguna', 'alamat_instl', 'tanggal_order', 'sektor', 'sto', 'status'];
 
     public function getSales()
     {
@@ -19,6 +20,20 @@ class ModelSales extends Model
     {
         return $this->where('status', 'PI')->orderBy('tanggal_order', 'ASC')->findAll();
     }
+
+    public function dataChartPI($tahun)
+    {
+        return $this->db->table('datasales as ds')
+            ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total')
+            ->where('status', 'PI')
+            ->where('YEAR(tanggal_order)', $tahun)
+            ->groupBy('MONTH(tanggal_order)')
+            ->orderBy('MONTH(tanggal_order)')
+            ->get()
+            ->getResultArray();
+    }
+
+
 
     public function getPS()
     {

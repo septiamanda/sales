@@ -1,5 +1,3 @@
-
-
 <?= $this->extend('Layout/navbar'); ?>
 
 <?= $this->section('pageContent'); ?>
@@ -16,7 +14,14 @@
     </symbol>
 </svg>
 
-<!--kalau sukses-->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Data Sales</h1>
+    </div>
+
+    <!--kalau sukses-->
     <?php if (session()->has('success')) : ?>
         <div class="alert alert-success" role="alert">
             <svg class="bi flex-shrink-0 me-2" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" role="img" aria-label="Success:">
@@ -27,30 +32,31 @@
         </div>
     <?php endif; ?>
 
-<!--kalau eror-->
+    <!--kalau takjadi-->
+    <?php if (session()->has('gagal')) : ?>
+        <div class="alert alert-warning" role="alert">
+        <svg class="bi flex-shrink-2 me-2 " width="16" height="16" viewBox="0 0 16 16" fill="currentColor" role="img" aria-label="Warning:">
+                    <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
 
-<?php if (session()->has('errors')) : ?>
+            <?= session()->getFlashdata('gagal'); ?>
+        </div>
+    <?php endif; ?>
 
-    <div class="alert alert-danger" role="alert">
-        <?php foreach (session('errors') as $error) : ?>
-            <svg class="bi flex-shrink-2 me-2 " width="16" height="16" viewBox="0 0 16 16" fill="currentColor" role="img" aria-label="Warning:">
-                <use xlink:href="#exclamation-triangle-fill" />
-            </svg>
-            <?= esc($error) ?><br>
-        <?php endforeach; ?>
-    </div>
-<?php endif; ?>
+    <!--kalau eror-->
 
+    <?php if (session()->has('errors')) : ?>
 
-<div class="container-fluid">
-
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Sales</h1>
-    </div>
-
+        <div class="alert alert-danger" role="alert">
+            <?php foreach (session('errors') as $error) : ?>
+                <svg class="bi flex-shrink-2 me-2 " width="16" height="16" viewBox="0 0 16 16" fill="currentColor" role="img" aria-label="Warning:">
+                    <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+                <?= esc($error) ?><br>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
     <hr>
-
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Content Wrapper -->
@@ -140,98 +146,6 @@
                             </button>
                         </div>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="tambahSales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <form action="<?= base_url('simpanSales') ?>" method="post">
-                                <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header center">
-                                            <h3>Tambah Sales</h3>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <div class="mb-3 row">
-                                                <label for="inputNoSC" class="col-sm-3 col-form-label">Nomor SC</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="inputNomorSC">
-                                                </div>
-                                            </div>
-                                            <div class="mb-3 row">
-                                                <label for="namaPel" class="col-sm-3 col-form-label">Nama Pelanggan</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="namaPel">
-                                                </div>
-                                            </div>
-                                            <div class="mb-3 row">
-                                                <label for="alamatInt" class="col-sm-3 col-form-label">Alamat Instalasi</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="alamatInt">
-                                                </div>
-                                            </div>
-
-                                            <div class="mb-3 row">
-                                                <label for="tanggal_sales" class="col-sm-3 col-form-label">Tanggal Order</label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="date" name="tanggal_sales">
-                                                </div>
-                                            </div>
-
-                                            <div class="mb-3 row">
-                                                <label for="sektorsales" class="col-sm-3 col-form-label">Sektor</label>
-                                                <div class="col-sm-9">
-
-                                                    <select class="form-control" name="sektorsales">
-                                                        <option value="" disabled selected>Pilih Sektor</option>
-                                                        <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
-                                                        <option value="Datel SLK">Datel SLK (Solok)</option>
-                                                        <option value="Inner PDG">Inner PDG (Padang)</option>
-                                                    </select>
-
-                                                </div>
-
-
-                                            </div>
-                                            <div class="mb-3 row">
-                                                <label for="sektorsales" class="col-sm-3 col-form-label">STO</label>
-                                                <div class="col-sm-9">
-
-                                                    <select class="form-control" name="stosales">
-                                                        <option value="" disabled selected>Pilih STO</option>
-                                                        <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
-                                                        <option value="Datel SLK">Datel SLK (Solok)</option>
-                                                        <option value="Inner PDG">Inner PDG (Padang)</option>
-                                                    </select>
-
-
-                                                </div>
-                                            </div>
-                                            <div class="mb-3 row">
-                                                <label for="sektorsales" class="col-sm-3 col-form-label">Status</label>
-                                                <div class="col-sm-9">
-
-                                                    <select class="form-control" name="status">
-                                                        <option value="" disabled selected>Pilih Status</option>
-                                                        <option value="RE">RE</option>
-                                                        <option value="FCC">FCC</option>
-                                                        <option value="PI">PI</option>
-                                                        <option value="PS">PS</option>
-                                                    </select>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                            <button type="submit" id="tombolSimpanSales" name="Simpan" class="btn btn-primary btn">Simpan</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-
-
                     </div>
 
 
@@ -263,7 +177,9 @@
                                         <td><?= $sd['sto']; ?></td>
                                         <td><?= $sd['status']; ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-warning">Edit</button>
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>" data-status="<?= $sd['status']; ?>">
+                                                Edit
+                                            </button>
                                             <button type="button" class="btn btn-danger">Delete</button>
                                         </td>
                                     </tr>
@@ -290,6 +206,190 @@
                             </ul>
                         </div>
                     </div>
+
+
+                    <!-- Modal tambah sales-->
+                    <div class="modal fade" id="tambahSales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <form action="<?= base_url('simpanSales') ?>" method="post">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header center">
+                                        <h3>Tambah Sales</h3>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="mb-3 row">
+                                            <label for="inputNoSC" class="col-sm-3 col-form-label">Nomor SC</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="inputNomorSC">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="namaPel" class="col-sm-3 col-form-label">Nama Pelanggan</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="namaPel">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="alamatInt" class="col-sm-3 col-form-label">Alamat Instalasi</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="alamatInt">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="tanggal_sales" class="col-sm-3 col-form-label">Tanggal Order</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="date" name="tanggal_sales">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="sektorsales" class="col-sm-3 col-form-label">Sektor</label>
+                                            <div class="col-sm-9">
+
+                                                <select class="form-control" name="sektorsales">
+                                                    <option value="" disabled selected>Pilih Sektor</option>
+                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
+                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
+                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                </select>
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="sektorsales" class="col-sm-3 col-form-label">STO</label>
+                                            <div class="col-sm-9">
+
+                                                <select class="form-control" name="stosales">
+                                                    <option value="" disabled selected>Pilih STO</option>
+                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
+                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
+                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                </select>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="sektorsales" class="col-sm-3 col-form-label">Status</label>
+                                            <div class="col-sm-9">
+
+                                                <select class="form-control" name="status">
+                                                    <option value="" disabled selected>Pilih Status</option>
+                                                    <option value="RE">RE</option>
+                                                    <option value="FCC">FCC</option>
+                                                    <option value="PI">PI</option>
+                                                    <option value="PS">PS</option>
+                                                </select>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                        <button type="submit" id="tombolSimpanSales" name="Simpan" class="btn btn-primary btn">Simpan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Modal edit sales-->
+                    <div class="modal fade" id="editSales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <form action="<?= base_url('editSales') ?>" method="post">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header center">
+                                        <h3>Ubah Data Sales</h3>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <input type="hidden" name="id_sales" id="id_sales">
+
+                                        <div class="mb-3 row">
+                                            <label for="inputNoSC" class="col-sm-3 col-form-label">Nomor SC</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="inputNomorSC" id="nomorSC">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="namaPel" class="col-sm-3 col-form-label">Nama Pelanggan</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="namaPel" id="namaPel">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="alamatInt" class="col-sm-3 col-form-label">Alamat Instalasi</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="alamatInt" id="alamatInt">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="tanggal_sales" class="col-sm-3 col-form-label">Tanggal Order</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="date" name="tanggal_sales" id="tanggal_sales">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="sektorsales" class="col-sm-3 col-form-label">Sektor</label>
+                                            <div class="col-sm-9">
+
+                                                <select class="form-control" name="sektorsales" id="sektorsales">
+                                                    <option value=""></option>
+                                                    <option value="" disabled selected> Pilih Sektor</option>
+                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
+                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
+                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                </select>
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="sektorsales" class="col-sm-3 col-form-label">STO</label>
+                                            <div class="col-sm-9">
+
+                                                <select class="form-control" name="stosales" id="stosales">
+                                                    <option value="" disabled selected></option>
+                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
+                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
+                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                </select>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="sektorsales" class="col-sm-3 col-form-label">Status</label>
+                                            <div class="col-sm-9">
+
+                                                <select class="form-control" name="status" id="status">
+                                                    <option value="" disabled selected></option>
+                                                    <option value="RE">RE</option>
+                                                    <option value="FCC">FCC</option>
+                                                    <option value="PI">PI</option>
+                                                    <option value="PS">PS</option>
+                                                </select>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                        <button type="submit" id="tombolUbahSales" name="Ubah" class="btn btn-primary btn">Ubah</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -312,6 +412,21 @@
 
 <!-- Tambahkan JS jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+    $(document).on('click', '#btn-edit', function() {
+        var id = $(this).data('id'); // Mengambil ID sales dari tombol
+        $('.modal-body #id_sales').val(id);
+        $('.modal-body #id_sales').val($(this).data('id'));
+        $('.modal-body #tanggal_sales').val($(this).data('tanggal'));
+        $('.modal-body #nomorSC').val($(this).data('nosc'));
+        $('.modal-body #namaPel').val($(this).data('nama'));
+        $('.modal-body #alamatInt').val($(this).data('alamat'));
+        $('.modal-body #sektorsales').val($(this).data('sektor'));
+        $('.modal-body #stosales').val($(this).data('sto'));
+        $('.modal-body #status').val($(this).data('status'));
+
+    })
+</script>
 
 <?= $this->endSection(); ?>
 

@@ -42,6 +42,8 @@ $routes->post('updateSektor', 'Sektor::updateSektor');
 $routes->post('deleteSektor/(:num)', 'Sektor::deleteSektor/$1');
 
 $routes->get('listPI', 'PIController::listPI');
+$routes->post('chartPI', 'PIController::tampilChartPI');
+
 $routes->get('listPS', 'PSController::listPS');
 
 $routes->get('listRE', 'REController::listRE');
@@ -51,5 +53,6 @@ $routes->get('listFCC', 'FCCController::listFCC');
 
 $routes->get('listSales', 'SalesController::listSales');
 $routes->post('simpanSales','SalesController::simpanSales');
+$routes->post('editSales','SalesController::editSales');
 
 $routes->get('laporan', 'Home::laporan');

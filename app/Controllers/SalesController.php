@@ -28,7 +28,7 @@ class SalesController extends BaseController
             'inputNomorSC' => 'required',
             'namaPel' => 'required',
             'alamatInt' => 'required',
-            'tanggal_sales'=>'required',
+            'tanggal_sales' => 'required',
             'sektorsales' => 'required',
             'stosales' => 'required',
             'status' => 'required'
@@ -74,8 +74,10 @@ class SalesController extends BaseController
         $sektorles = $this->request->getVar('sektorsales');
         $stoles = $this->request->getVar('stosales');
         $status = $this->request->getVar('status');
+        $id_sales = $this->request->getVar('id_sales');
 
         $data = [
+            'id_sales' => $id_sales,
             'noSC' => $nosc,
             'nama_pengguna' => $namapel,
             'alamat_instl' => $almatint,
@@ -90,5 +92,42 @@ class SalesController extends BaseController
         session()->setFlashdata('success', 'Data Berhasil Ditambahkan.');
 
         return redirect()->to('listSales');
+    }
+
+    public function editSales()
+    {
+
+        # code...
+        $id = $this->request->getVar('id_sales');
+
+        $nosc = $this->request->getVar('inputNomorSC');
+        $namapel = $this->request->getVar('namaPel');
+        $almatint = $this->request->getVar('alamatInt');
+        $tanggalder = $this->request->getVar('tanggal_sales');
+        $sektorles = $this->request->getVar('sektorsales');
+        $stoles = $this->request->getVar('stosales');
+        $status = $this->request->getVar('status');
+
+        $data = [
+            'id_sales' => $id,
+            'noSC' => $nosc,
+            'nama_pengguna' => $namapel,
+            'alamat_instl' => $almatint,
+            'tanggal_order' => $tanggalder,
+            'sektor' => $sektorles,
+            'sto' => $stoles,
+            'status' => $status
+        ];
+
+
+        $successs = $this->modelSales->save($data);
+
+        if ($successs) {
+            session()->setFlashdata('success', 'Data Berhasil Diubah.');
+            return redirect()->to('listSales');
+        } else {
+            session()->setFlashdata('gagal', 'Data tidak diubah');
+            return redirect()->back()->withInput();
+        }
     }
 }
