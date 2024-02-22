@@ -18,4 +18,15 @@ class REController extends BaseController
         $data['dataRE'] = $this->modelSales->getRE();
         return view('Pages/RE', $data);
     }
+
+    public function tampilChartRE()
+    {
+        $tahun = $this->request->getVar('tahun');
+        $dataChart = $this->modelSales->getREChart($tahun);
+        $response = [
+            'status' => true,
+            'data' => $dataChart
+        ];
+        echo json_encode($response);
+    }
 }

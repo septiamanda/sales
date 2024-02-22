@@ -43,7 +43,10 @@ $routes->post('deleteSektor/(:num)', 'Sektor::deleteSektor/$1');
 
 $routes->get('listPI', 'PIController::listPI');
 $routes->get('listPS', 'PSController::listPS');
+
 $routes->get('listRE', 'REController::listRE');
+$routes->post('chartRE', 'REController::tampilChartRE');
+
 $routes->get('listFCC', 'FCCController::listFCC');
 
 $routes->get('listSales', 'SalesController::listSales');

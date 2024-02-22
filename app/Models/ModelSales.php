@@ -35,4 +35,16 @@ class ModelSales extends Model
         return $this->where('status', 'FCC')->findAll();
     }
 
+    public function getREChart($tahun)
+    {
+        return $this->db->table('datasales as ds')
+            ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total')
+            ->where('status', 'RE')
+            ->where('YEAR(tanggal_order)', $tahun)
+            ->groupBy('MONTH(tanggal_order)')
+            ->orderBy('MONTH(tanggal_order)')
+            ->get()
+            ->getResultArray();
+    }
+
 }
