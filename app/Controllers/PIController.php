@@ -27,4 +27,15 @@ class PIController extends BaseController
         $data['dataPI'] = $formattedDataPI;
         return view('Pages/PI', $data);
     }
+
+    public function tampilChartPI()
+    {
+        $tahun = $this->request->getVar('tahun');
+        $dataChart = $this->modelSales->dataChartPI($tahun);
+        $response = [
+            'status' => true,
+            'data' => $dataChart
+        ];
+        echo json_encode($response);
+    }
 }
