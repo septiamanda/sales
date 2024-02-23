@@ -18,8 +18,8 @@
             <!-- Main Content -->
             <div id="content">
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3 mb-3">
-                        <h6 class="m-0 font-weight-bold text-#184240">Grafik</h6>
+                    <div class="card-header py-3 mb-3" style="background-color: #DE5858;">
+                        <h6 class="m-0 font-weight-bold text-white">Grafik</h6>
                         <div class="col-sm-3 mt-3">
                             <input type="number" value="<?= date('Y')?>" id="tahunPI" class="form-control" onchange="getDataSales()">
                         </div>
