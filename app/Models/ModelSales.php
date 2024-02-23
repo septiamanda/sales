@@ -67,4 +67,22 @@ class ModelSales extends Model
             ->getResultArray();
     }
 
+    public function getFCC()
+    {
+        return $this->where('status', 'FCC')->findAll();
+    }
+
+    public function getFCCChart($tahun)
+    {
+        return $this->db->table('datasales as ds')
+            ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total')
+            ->where('status', 'FCC')
+            ->where('YEAR(tanggal_order)', $tahun)
+            ->groupBy('MONTH(tanggal_order)')
+            ->orderBy('MONTH(tanggal_order)')
+            ->get()
+            ->getResultArray();
+    }
+
+
 }
