@@ -45,6 +45,7 @@ $routes->get('listPI', 'PIController::listPI');
 $routes->post('chartPI', 'PIController::tampilChartPI');
 
 $routes->get('listPS', 'PSController::listPS');
+$routes->post('chartPS', 'PSController::tampilChartPS');
 
 $routes->get('listRE', 'REController::listRE');
 $routes->post('chartRE', 'REController::tampilChartRE');
