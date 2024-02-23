@@ -181,6 +181,7 @@
                                                 Edit
                                             </button>
                                             <button type="button" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-danger">Update</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
