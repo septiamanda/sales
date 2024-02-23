@@ -50,6 +50,7 @@ $routes->get('listRE', 'REController::listRE');
 $routes->post('chartRE', 'REController::tampilChartRE');
 
 $routes->get('listFCC', 'FCCController::listFCC');
+$routes->post('chartFCC', 'FCCController::tampilChartFCC');
 
 $routes->get('listSales', 'SalesController::listSales');
 $routes->post('simpanSales','SalesController::simpanSales');

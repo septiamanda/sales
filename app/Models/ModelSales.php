@@ -34,7 +34,6 @@ class ModelSales extends Model
     }
 
 
-
     public function getPS()
     {
         return $this->where('status', 'PS')->orderBy('tanggal_order', 'ASC')->findAll();
@@ -45,16 +44,28 @@ class ModelSales extends Model
         return $this->where('status', 'RE')->findAll();
     }
 
-    public function getFCC()
-    {
-        return $this->where('status', 'FCC')->findAll();
-    }
-
     public function getREChart($tahun)
     {
         return $this->db->table('datasales as ds')
             ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total')
             ->where('status', 'RE')
+            ->where('YEAR(tanggal_order)', $tahun)
+            ->groupBy('MONTH(tanggal_order)')
+            ->orderBy('MONTH(tanggal_order)')
+            ->get()
+            ->getResultArray();
+    }
+
+    public function getFCC()
+    {
+        return $this->where('status', 'FCC')->findAll();
+    }
+
+    public function getFCCChart($tahun)
+    {
+        return $this->db->table('datasales as ds')
+            ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total')
+            ->where('status', 'FCC')
             ->where('YEAR(tanggal_order)', $tahun)
             ->groupBy('MONTH(tanggal_order)')
             ->orderBy('MONTH(tanggal_order)')

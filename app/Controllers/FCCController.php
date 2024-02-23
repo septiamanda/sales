@@ -18,4 +18,15 @@ class FCCController extends BaseController
         $data['dataFCC'] = $this->modelSales->getFCC();
         return view('Pages/FCC', $data);
     }
+
+    public function tampilChartFCC()
+    {
+        $tahun = $this->request->getVar('tahun');
+        $dataChart = $this->modelSales->getFCCChart($tahun);
+        $response = [
+            'status' => true,
+            'data' => $dataChart
+        ];
+        echo json_encode($response);
+    }
 }
