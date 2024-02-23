@@ -151,12 +151,8 @@
                         }],
                         yAxes: [{
                             ticks: {
-                                maxTicksLimit: 5,
-                                padding: 10,
-                                // Include a dollar sign in the ticks
-                                callback: function(value, index, values) {
-                                    return number_format(value);
-                                }
+                                stepSize: 1,
+                                maxTicksLimit: 7,
                             },
                             gridLines: {
                                 color: "rgb(234, 236, 244)",
