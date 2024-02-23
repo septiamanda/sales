@@ -56,5 +56,6 @@ $routes->post('chartFCC', 'FCCController::tampilChartFCC');
 $routes->get('listSales', 'SalesController::listSales');
 $routes->post('simpanSales','SalesController::simpanSales');
 $routes->post('editSales','SalesController::editSales');
+$routes->post('deleteSales/(:num)', 'SalesController::deleteSales/$1');
 
 $routes->get('laporan', 'Home::laporan');

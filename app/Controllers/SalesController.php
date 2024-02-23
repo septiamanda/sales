@@ -130,4 +130,18 @@ class SalesController extends BaseController
             return redirect()->back()->withInput();
         }
     }
+
+    public function deleteSales($id_sales)
+    {
+
+        $successs = $this->modelSales->deleteSales($id_sales);
+
+        if ($successs) {
+            session()->setFlashdata('success', 'Data Berhasil Dihapus.');
+            return redirect()->to('listSales');
+        } else {
+            session()->setFlashdata('gagal', 'Terdapat kesalahan dalam penghapusan data');
+            return redirect()->back()->withInput();
+        }
+    }
 }
