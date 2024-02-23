@@ -1,4 +1,3 @@
-<?php include "koneksi.php"; ?>
 
 <?= $this->extend('Layout/navbar'); ?>
 <?= $this->section('pageContent'); ?>

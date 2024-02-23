@@ -1,5 +1,3 @@
-<?php include 'koneksi.php'; ?>
-
 <?= $this->extend('Layout/navbar'); ?>
 
 <?= $this->section('pageContent'); ?>
@@ -13,6 +11,8 @@
 
     <?php if (session()->getFlashdata('Pesan')) : ?>
         <div class="alert alert-success" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" role="img" aria-label="Success:">
+            <use xlink:href="#check-circle-fill" /> </svg>
             <?= session()->getFlashdata('Pesan'); ?>
         </div>
     <?php endif; ?>
@@ -75,20 +75,28 @@
                                                 <td><?= $data['nama_sektor']; ?></td>
                                                 <td><?= $data['hero_sektor']; ?></td>
                                                 <td>
-                                                     <a href="<?= base_url('editSektor/'.$data['id_sektor']); ?>" class="btn btn-primary"> 
-                                                        <i class="fas fa-edit"></i> Edit </a> 
+                                                    <div style="display:flex; justify-content:center; gap:10px;">
+                                                        <a href="<?= base_url('editSektor/'.$data['id_sektor']); ?>" class="btn btn" style="border-color: #184240; color: #184240;">  
+                                                            <i class="fas fa-edit"></i> Edit  
+                                                        </a>  
 
-                                                    <button type="button" class="btn btn-danger btn-hapus"  data-id="<?= $data['id_sektor']; ?>" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $no ?>"                                                     <button type="button" class="btn btn-danger btn-hapus" data-id_sektor="<?= $data['id_sektor']; ?>" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $no ?>"><i class="fas fa-trash-alt"></i> Hapus</button>
-                                                    
+                                                        <button type="button" class="btn btn-danger btn-hapus" data-id_sektor="<?= $data['id_sektor']; ?>" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $no ?>">
+                                                            <i class="fas fa-trash-alt"></i> Hapus
+                                                        </button>
+                                                    </div>
+
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="hapusModal<?= $no ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="staticBackdropLabel">Konfirmasi Hapus Data</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"> </button>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                                                                        </svg>
+                                                                    </button>
                                                                 </div>
-
                                                                 <form method="post" action="<?= base_url('deleteSektor/'.$data['id_sektor']); ?>">
                                                                     <input type="hidden" name="id_sektor" value="<?= $data['id_sektor']?>">
                                                                     <div class="modal-body"> 
@@ -109,7 +117,7 @@
                                         <?php endforeach; 
                                         } else { ?>
                                             <tr>
-                                                <td colspan="5" class="text-center">Data tidak ditemukan.</td>
+                                                <td colspan="5" class="text-center">Data tidak ditemukan</td>
                                             </tr>
                                         <?php } 
                                         ?>
