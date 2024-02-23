@@ -110,6 +110,8 @@
 
     <!-- Page level custom scripts -->
     <script src="<?= base_url(); ?>/js/demo/chart-area-demo.js"></script>
+    <script src="<?= base_url(); ?>/js/demo/chart_area_PI.js"></script>
+    <script src="<?= base_url(); ?>/js/demo/chart_area_PS.js"></script>
     <script src="<?= base_url(); ?>/js/demo/chart-pie-demo.js"></script>
 
 </body>

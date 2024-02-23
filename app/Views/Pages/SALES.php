@@ -181,6 +181,7 @@
                                                 Edit
                                             </button>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i>Delete</button>
+                                            <button type="button" class="btn btn-danger">Update</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
