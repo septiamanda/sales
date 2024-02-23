@@ -21,6 +21,7 @@ class STOModel extends Model
             return $this->where(['id' => $id])->first();
         }
     }
+
     public function deleteSTO($id)
     {
         return $this->delete($id);

@@ -152,7 +152,7 @@
                         yAxes: [{
                             ticks: {
                                 stepSize: 1,
-                                maxTicksLimit: 7
+                                maxTicksLimit: 7,
                             },
                             gridLines: {
                                 color: "rgb(234, 236, 244)",

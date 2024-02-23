@@ -26,4 +26,15 @@ class PSController extends BaseController
         $data['dataPS'] = $formattedDataPS;
         return view('Pages/PS', $data);
     }
+
+    public function tampilChartPS()
+    {
+        $tahun = $this->request->getVar('tahun');
+        $dataChart = $this->modelSales->dataChartPS($tahun);
+        $response = [
+            'status' => true,
+            'data' => $dataChart
+        ];
+        echo json_encode($response);
+    }
 }
