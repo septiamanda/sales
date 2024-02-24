@@ -30,13 +30,13 @@
                         
                         <!-- Field Hero Sektor -->
                         <div class="form-group">
-                            <label style="color: black" for="hero-sektor">Hero Sektor</label>
+                            <label style="color: black" for="hero-sektor" >Hero Sektor</label>
                             <input type="text" class="form-control" placeholder="Masukkan hero sektor"  name="hero_sektor" id="hero_sektor" value="<?= $modelSektor['hero_sektor']; ?>" required >
                         </div>
 
                         <div class="input-group mb-3 d-flex justify-content-center">
-                            <button type="submit" name="simpan" id="btn-simpan" class="btn btn-primary btn mb-4 mr-2">Update</button>
-                            <a href="<?= base_url('sektor'); ?>" class="btn btn-danger btn mb-4">Cancel</a>
+                            <button type="submit" name="simpan" id="btn-simpan" class="btn btn-primary btn mt-2 mb-1 mr-2">Update</button>
+                            <a href="<?= base_url('sektor'); ?>" class="btn btn-danger btn mt-2 mb-1">Cancel</a>
                         </div>
                     </form>
                 </div>

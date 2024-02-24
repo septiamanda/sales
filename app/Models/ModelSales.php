@@ -95,5 +95,9 @@ class ModelSales extends Model
             ->getResultArray();
     }
 
+    public function deleteSales($id_sales)
+    {
+        return $this->delete($id_sales);
+    }
 
 }

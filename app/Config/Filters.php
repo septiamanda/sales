@@ -49,10 +49,10 @@ class Filters extends BaseConfig
         ],
         'after' => [
             'filterAdmin' => [
-                'except' => ['dashboard', 'chartSales', 'listRE', 'chartRE', 'listFCC', 'chartFCC', 'listPI', 'chartPI', 'listPS', 'chartPS', 'listA', 'listK', 'sektor', 'sto', 'laporan', 'TambahSTO', 'editSTO*', 'deleteSTO*', 'updateSTO', 'save', 'tambahDataSektor', 'editSektor', 'updateSektor', 'deleteSektor', 'simpan', 'regis', 'tambahA', 'simpanA', 'tambahK', 'simpanK', 'listSales', 'editA*', 'editK*', 'updateA', 'updateK', 'simpanSales', 'deleteAdmin', 'deleteKaryawan', 'editSales']
+                'except' => ['dashboard', 'chartSales', 'listRE', 'chartRE', 'listFCC', 'chartFCC', 'listPI', 'chartPI', 'listPS', 'chartPS', 'listA', 'listK', 'sektor', 'sto', 'laporan', 'TambahSTO', 'editSTO*', 'deleteSTO*', 'updateSTO', 'save', 'tambahDataSektor', 'editSektor*', 'updateSektor', 'deleteSektor*', 'simpan', 'regis', 'tambahA', 'simpanA', 'tambahK', 'simpanK', 'listSales', 'editA*', 'editK*', 'updateA', 'updateK', 'simpanSales', 'deleteAdmin', 'deleteKaryawan', 'editSales', 'deleteSales*']
             ],
             'filterKaryawan' => [
-                'except' => ['dashboard', 'chartSales', 'listRE', 'chartRE', 'chartRE', 'listFCC', 'chartFCC', 'listPI', 'chartPI', 'listPS', 'chartPS', 'laporan', 'simpanSales']
+                'except' => ['dashboard', 'chartSales', 'listRE', 'chartRE', 'chartRE', 'listFCC', 'chartFCC', 'listPI', 'chartPI', 'listPS', 'chartPS', 'laporan', 'simpanSales', 'editSales', 'deleteSales*']
             ],
             'toolbar',
             // 'honeypot',
