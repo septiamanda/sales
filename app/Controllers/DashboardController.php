@@ -2,10 +2,24 @@
 
 namespace App\Controllers;
 
+use App\Models\ModelSales;
+
 class DashboardController extends BaseController
 {
+    protected $modelSales;
+    public function __construct()
+    {
+        $this->modelSales = new ModelSales();
+    }
+
     public function index(): string
     {
         return view('Pages/dashboard');
+    }
+
+    public function tampilPieSales(){
+        $tahun = date('Y');
+        $dataset = $this->modelSales->dataPieSales($tahun);
+        dd($dataset);
     }
 }
