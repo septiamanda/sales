@@ -35,9 +35,9 @@
     <!--kalau takjadi-->
     <?php if (session()->has('gagal')) : ?>
         <div class="alert alert-warning" role="alert">
-        <svg class="bi flex-shrink-2 me-2 " width="16" height="16" viewBox="0 0 16 16" fill="currentColor" role="img" aria-label="Warning:">
-                    <use xlink:href="#exclamation-triangle-fill" />
-                </svg>
+            <svg class="bi flex-shrink-2 me-2 " width="16" height="16" viewBox="0 0 16 16" fill="currentColor" role="img" aria-label="Warning:">
+                <use xlink:href="#exclamation-triangle-fill" />
+            </svg>
 
             <?= session()->getFlashdata('gagal'); ?>
         </div>
@@ -180,7 +180,7 @@
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>" data-status="<?= $sd['status']; ?>">
                                                 Edit
                                             </button>
-                                            <button type="button" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
                                             <button type="button" class="btn btn-danger">Update</button>
                                         </td>
                                     </tr>
@@ -391,6 +391,28 @@
                             </div>
                         </form>
                     </div>
+
+                    <!-- Modal delete sales-->
+                    <div class="modal fade" id="deleteSales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <div class="modal-body">
+                                    Apakah Anda ingin menghapus data ini?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <form action="<?= base_url('deleteSales/' . $sd['id_sales']); ?>" method="post" class="d-inline">
+                                        <input type="hidden" name="_method" id="DELETE">
+                                        <button type="submit" class="btn btn-danger">
+                                             Hapus
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -427,6 +449,11 @@
         $('.modal-body #status').val($(this).data('status'));
 
     })
+
+    $(document).on('click', '#btn-delete', function() {
+        var id = $(this).data('id'); // Mengambil ID sales dari tombol
+    })
+
 </script>
 
 <?= $this->endSection(); ?>

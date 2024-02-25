@@ -16,6 +16,17 @@ class ModelSales extends Model
         return $this->findAll();
     }
 
+    public function getSalesChart($tahun)
+    {
+        return $this->db->table('datasales as ds')
+            ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total')
+            ->where('YEAR(tanggal_order)', $tahun)
+            ->groupBy('MONTH(tanggal_order)')
+            ->orderBy('MONTH(tanggal_order)')
+            ->get()
+            ->getResultArray();
+    }
+
     public function dataPieSales($tahun)
     {
         return $this->db->table('datasales as ds')
@@ -95,5 +106,9 @@ class ModelSales extends Model
             ->getResultArray();
     }
 
+    public function deleteSales($id_sales)
+    {
+        return $this->delete($id_sales);
+    }
 
 }

@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Controllers;
-
 use App\Models\ModelSales;
 
 class DashboardController extends BaseController
 {
+
     protected $modelSales;
     public function __construct()
     {
@@ -15,6 +15,17 @@ class DashboardController extends BaseController
     public function index(): string
     {
         return view('Pages/dashboard');
+    }
+
+    public function tampilChartSales()
+    {
+        $tahun = $this->request->getVar('tahun');
+        $dataChart = $this->modelSales->getSalesChart($tahun);
+        $response = [
+            'status' => true,
+            'data' => $dataChart
+        ];
+        echo json_encode($response);
     }
 
     public function tampilPieSales(){
