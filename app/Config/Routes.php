@@ -26,7 +26,7 @@ $routes->post('updateK', 'Karyawan::updateK');
 
 $routes->get('dashboard', 'Home::index');
 $routes->post('chartSales', 'DashboardController::tampilChartSales');
-$routes->get('pieSales', 'DashboardController::tampilPieSales');
+$routes->post('pieSales', 'DashboardController::tampilPieSales');
 
 $routes->get('sto', 'STOController::sto');
 $routes->get('TambahSTO', 'STOController::TambahSTO');
@@ -56,11 +56,9 @@ $routes->get('listFCC', 'FCCController::listFCC');
 $routes->post('chartFCC', 'FCCController::tampilChartFCC');
 
 $routes->get('listSales', 'SalesController::listSales');
-$routes->post('simpanSales','SalesController::simpanSales');
-$routes->post('editSales','SalesController::editSales');
+$routes->post('simpanSales', 'SalesController::simpanSales');
+$routes->post('editSales', 'SalesController::editSales');
 $routes->post('deleteSales/(:num)', 'SalesController::deleteSales/$1');
+$routes->post('updateStatus/(:num)', 'SalesController::updateStatus/$1');
 
 $routes->get('laporan', 'Home::laporan');
-$routes->get('/laporan', 'LaporanController::index');
-$routes->post('/laporan/cari', 'LaporanController::cari');
-$routes->get('/laporan/print', 'LaporanController::print');

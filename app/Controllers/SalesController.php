@@ -144,4 +144,49 @@ class SalesController extends BaseController
             return redirect()->back()->withInput();
         }
     }
+
+    public function updateStatus($id_sales)
+    {
+        // Get the current status of the sales data
+        $currentStatus = $this->modelSales->getStatus($id_sales);
+
+        // Define the mapping of current status to new status
+        $statusMapping = [
+            'RE' => 'FCC',
+            'FCC' => 'PI',
+            'PI' => 'PS'
+        ];
+
+        // Check if the current status exists in the mapping
+        if (array_key_exists($currentStatus, $statusMapping)) {
+            // Get the new status based on the mapping
+            $newStatus = $statusMapping[$currentStatus];
+
+            // Update the status of the sales data
+            $success = $this->modelSales->updateStatus($id_sales, $newStatus);
+
+            if ($success) {
+                // Move updated data to historical table
+                $this->modelSales->moveToHistorical($id_sales);
+                $response = [
+                    'success' => true,
+                    'message' => 'Status Data Berhasil Diperbarui dan Data Dipindahkan ke Tabel Historis.'
+                ];
+            } else {
+                $response = [
+                    'success' => false,
+                    'message' => 'Gagal Memperbarui Status Data.'
+                ];
+            }
+        } else {
+            $response = [
+                'success' => false,
+                'message' => 'Status Saat Ini Tidak Valid.'
+            ];
+        }
+
+        return $this->response->setJSON($response);
+        // Redirect back to the listSales page
+        return redirect()->to('listSales')->with('response', $response);
+    }
 }

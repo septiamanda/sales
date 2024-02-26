@@ -102,25 +102,13 @@
         <div class="col-xl-8 col-lg-7">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-danger">Earnings Overview</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
+                <div class="card-header py-3 mb-3" style="background-color: #DE5858;">
+                    <h6 class="m-0 font-weight-bold text-white">Perkembangan Sales</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
+                        <canvas id="SalesAreaChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -256,13 +244,9 @@
             }
 
             function getDataSales() {
-                var tahun = $('#tahunSales').val()
                 $.ajax({
                     url: "/chartSales",
                     method: "post",
-                    data: {
-                        tahun: tahun
-                    },
                     success: function(response) {
                         var result = JSON.parse(response);
                         var dataset = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -274,21 +258,22 @@
                 });
             }
         </script>
+
         <script>
             $(document).ready(function() {
-                pieSales();
+                getDataPie();
             });
 
-            function pieSales() {
+            function pieSales(dataset) {
                 var ctx = document.getElementById("pieSales");
                 var myPieChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ["Direct", "Referral", "Social"],
+                        labels: ["RE", "FCC", "PI", "PS"],
                         datasets: [{
-                            data: [55, 30, 15],
-                            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-                            hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                            data: dataset,
+                            backgroundColor: ['#DE5858', 'gold', 'darkturquoise', 'chartreuse'],
+                            hoverBackgroundColor: ['#BF4949', '#bfa000', '#239693', '#259F39'],
                             hoverBorderColor: "rgba(234, 236, 244, 1)",
                         }],
                     },
@@ -311,6 +296,35 @@
                     },
                 });
             }
+
+            function getDataPie() {
+                $.ajax({
+                    url: "/pieSales",
+                    method: "post",
+                    success: function(response) {
+                        var result = JSON.parse(response);
+                        var dataset = [0, 0, 0, 0];
+                        $.each(result.data, function(i, item) {
+                            switch (item.status) {
+                                case 'RE':
+                                    dataset[0] = item.total;
+                                    break;
+                                case 'FCC':
+                                    dataset[1] = item.total;
+                                    break;
+                                case 'PI':
+                                    dataset[2] = item.total;
+                                    break;
+                                case 'PS':
+                                    dataset[3] = item.total;
+                                    break;
+                            }
+                        });
+                        pieSales(dataset);
+                    }
+                });
+            }
         </script>
+
 
         <?= $this->endSection(); ?>
