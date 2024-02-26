@@ -66,52 +66,26 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
-                        <div class=" card-header py-3 d-sm-flex justify-content-between align-items-center">
+                        <div class="card-header py-3 d-sm-flex justify-content-between align-items-center">
                             <h6 class="m-0 font-weight-bold text-primary">Cari Data Sales</h6>
                         </div>
-
                         <div class="card-body">
-                            <div class="row ml-5 md-3">
-                                <div class="col-4">
+                            <div class="row ml-2 md-3">
+                                <div class="col-lg-6">
                                     <div class="row">
-                                        <h6> Pilih Tanggal </h6>
-                                    </div>
-                                    <div class="row">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-4">
-                                    <div class="row">
-                                        <h6> Pilih Tanggal </h6>
-                                    </div>
-                                    <div class="row">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                    </div>
-
-                                </div>
-                                <div class="col-4">
-
-                                    <div class="row">
-                                        <h6> Pilih Tanggal </h6>
-                                    </div>
-                                    <div class="row">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
+                                        <div class="col">
+                                            <label for="tanggal_awal">Tanggal Awal</label>
+                                            <input class="form-control" type="date" name="tanggal_awal" id="tanggal_awal">
+                                        </div>
+                                        <div class="col">
+                                            <label for="tanggal_akhir">Tanggal Akhir</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="date" name="tanggal_akhir" id="tanggal_akhir">
+                                            </div>
+                                        </div>
+                                        <div class="col d-flex justify-content-end align-items-center ">
+                                            <button class="btn btn-primary mt-4" type="button">Cari</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -119,11 +93,9 @@
                     </div>
                 </div>
 
-
-            </div>
+                </div>
 
             <hr>
-
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
