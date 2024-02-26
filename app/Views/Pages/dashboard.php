@@ -19,8 +19,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                Sales (Amount)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                Total Sales (Amount)</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalSalesAmount">Loading...</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -36,9 +36,9 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="color:darkturquoise">
                                 RE (Amount)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalRE">Loading...</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -54,16 +54,11 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">PI (Amount)
+                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="color:gold">PI (Amount)
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="totalPI">Loading...</div>
                                 </div>
                             </div>
                         </div>
@@ -81,9 +76,9 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: chartreuse">
                                 PS (Amount)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalPS">Loading...</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -126,13 +121,13 @@
                     </div>
                     <div class="mt-4 text-center small">
                         <span class="mr-2">
-                            <i class="fas fa-circle" style="color:#DE5858"></i> RE
+                            <i class="fas fa-circle" style="color:darkturquoise"></i> RE
                         </span>
                         <span class="mr-2">
-                            <i class="fas fa-circle" style="color:gold"></i> FCC
+                            <i class="fas fa-circle" style="color:darkorange"></i> FCC
                         </span>
                         <span class="mr-2">
-                            <i class="fas fa-circle" style="color:darkturquoise"></i> PI
+                            <i class="fas fa-circle" style="color:gold"></i> PI
                         </span>
                         <span class="mr-2">
                             <i class="fas fa-circle" style="color:chartreuse"></i> PS
@@ -148,6 +143,74 @@
 
         <!-- Load Chart.js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $.ajax({
+                    url: '<?= base_url('totalSales') ?>',
+                    type: 'GET',
+                    success: function(response) {
+                        console.log(response); 
+                        var totalSales = response.data;
+                        $('#totalSalesAmount').text(totalSales);
+                    },
+                    error: function() {
+                        $('#totalSalesAmount').text('Error');
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $.ajax({
+                    url: '<?= base_url('totalRE') ?>',
+                    type: 'GET',
+                    success: function(response) {
+                        console.log(response); 
+                        var totalSales = response.data;
+                        $('#totalRE').text(totalSales);
+                    },
+                    error: function() {
+                        $('#totalRE').text('Error');
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $.ajax({
+                    url: '<?= base_url('totalPI') ?>',
+                    type: 'GET',
+                    success: function(response) {
+                        console.log(response); 
+                        var totalSales = response.data;
+                        $('#totalPI').text(totalSales);
+                    },
+                    error: function() {
+                        $('#totalPI').text('Error');
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $.ajax({
+                    url: '<?= base_url('totalPS') ?>',
+                    type: 'GET',
+                    success: function(response) {
+                        console.log(response); 
+                        var totalSales = response.data;
+                        $('#totalPS').text(totalSales);
+                    },
+                    error: function() {
+                        $('#totalPS').text('Error');
+                    }
+                });
+            });
+        </script>
 
         <script>
             $(document).ready(function() {
@@ -272,8 +335,7 @@
                         labels: ["RE", "FCC", "PI", "PS"],
                         datasets: [{
                             data: dataset,
-                            backgroundColor: ['#DE5858', 'gold', 'darkturquoise', 'chartreuse'],
-                            hoverBackgroundColor: ['#BF4949', '#bfa000', '#239693', '#259F39'],
+                            backgroundColor: ['darkturquoise', 'darkorange', 'gold', 'chartreuse'],
                             hoverBorderColor: "rgba(234, 236, 244, 1)",
                         }],
                     },
