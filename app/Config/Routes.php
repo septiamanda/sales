@@ -26,7 +26,7 @@ $routes->post('updateK', 'Karyawan::updateK');
 
 $routes->get('dashboard', 'Home::index');
 $routes->post('chartSales', 'DashboardController::tampilChartSales');
-$routes->get('pieSales', 'DashboardController::tampilPieSales');
+$routes->post('pieSales', 'DashboardController::tampilPieSales');
 
 $routes->get('sto', 'STOController::sto');
 $routes->get('TambahSTO', 'STOController::TambahSTO');

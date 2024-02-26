@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\ModelSales;
 
 class DashboardController extends BaseController
@@ -28,9 +29,14 @@ class DashboardController extends BaseController
         echo json_encode($response);
     }
 
-    public function tampilPieSales(){
+    public function tampilPieSales()
+    {
         $tahun = date('Y');
-        $dataset = $this->modelSales->dataPieSales($tahun);
-        dd($dataset);
+        $dataChart = $this->modelSales->dataPieSales($tahun);
+        $response = [
+            'status' => true,
+            'data' => $dataChart
+        ];
+        echo json_encode($response);
     }
 }

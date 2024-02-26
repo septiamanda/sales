@@ -261,19 +261,19 @@
 
         <script>
             $(document).ready(function() {
-                pieSales();
+                getDataPie();
             });
 
-            function pieSales() {
+            function pieSales(dataset) {
                 var ctx = document.getElementById("pieSales");
                 var myPieChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ["Direct", "Referral", "Social"],
+                        labels: ["RE", "FCC", "PI", "PS"],
                         datasets: [{
-                            data: [55, 30, 15],
-                            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-                            hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                            data: dataset,
+                            backgroundColor: ['#DE5858', 'gold', 'darkturquoise', 'chartreuse'],
+                            hoverBackgroundColor: ['#BF4949', '#bfa000', '#239693', '#259F39'],
                             hoverBorderColor: "rgba(234, 236, 244, 1)",
                         }],
                     },
@@ -296,6 +296,35 @@
                     },
                 });
             }
+
+            function getDataPie() {
+                $.ajax({
+                    url: "/pieSales",
+                    method: "post",
+                    success: function(response) {
+                        var result = JSON.parse(response);
+                        var dataset = [0, 0, 0, 0];
+                        $.each(result.data, function(i, item) {
+                            switch (item.status) {
+                                case 'RE':
+                                    dataset[0] = item.total;
+                                    break;
+                                case 'FCC':
+                                    dataset[1] = item.total;
+                                    break;
+                                case 'PI':
+                                    dataset[2] = item.total;
+                                    break;
+                                case 'PS':
+                                    dataset[3] = item.total;
+                                    break;
+                            }
+                        });
+                        pieSales(dataset);
+                    }
+                });
+            }
         </script>
+
 
         <?= $this->endSection(); ?>
