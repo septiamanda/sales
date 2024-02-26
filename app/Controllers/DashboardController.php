@@ -27,4 +27,10 @@ class DashboardController extends BaseController
         ];
         echo json_encode($response);
     }
+
+    public function tampilPieSales(){
+        $tahun = date('Y');
+        $dataset = $this->modelSales->dataPieSales($tahun);
+        dd($dataset);
+    }
 }
