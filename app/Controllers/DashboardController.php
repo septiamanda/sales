@@ -19,7 +19,7 @@ class DashboardController extends BaseController
 
     public function tampilChartSales()
     {
-        $tahun = $this->request->getVar('tahun');
+        $tahun = date('Y');
         $dataChart = $this->modelSales->getSalesChart($tahun);
         $response = [
             'status' => true,
