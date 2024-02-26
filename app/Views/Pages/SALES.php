@@ -181,7 +181,14 @@
                                                 Edit
                                             </button>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
-                                            <button type="button" class="btn btn-danger">Update</button>
+
+                                            <form action="<?= base_url('updateStatus/' . $sd['id_sales']); ?>" method="post" class="d-inline">
+                                                <input type="hidden" name="_method" id="DELETE">
+                                                <button type="submit" class="btn btn-danger">
+                                                    Update
+                                                </button>
+                                            </form>
+
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -405,7 +412,7 @@
                                     <form action="<?= base_url('deleteSales/' . $sd['id_sales']); ?>" method="post" class="d-inline">
                                         <input type="hidden" name="_method" id="DELETE">
                                         <button type="submit" class="btn btn-danger">
-                                             Hapus
+                                            Hapus
                                         </button>
                                     </form>
 
@@ -453,7 +460,6 @@
     $(document).on('click', '#btn-delete', function() {
         var id = $(this).data('id'); // Mengambil ID sales dari tombol
     })
-
 </script>
 
 <?= $this->endSection(); ?>
@@ -465,5 +471,32 @@
 
 <!-- Tambahkan JS DataTables -->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.btn-update').click(function() {
+            var id_sales = $(this).data('id');
+
+            // Kirim permintaan AJAX untuk memperbarui status
+            $.ajax({
+                url: "updateStatus/" + id_sales,
+                method: "post",
+                success: function(response) {
+                    // Tampilkan pesan sukses atau gagal
+                    alert(response.message);
+
+                    // Muat ulang halaman jika berhasil
+                    if (response.success) {
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
 
 </div>
