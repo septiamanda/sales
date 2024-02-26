@@ -61,3 +61,6 @@ $routes->post('editSales','SalesController::editSales');
 $routes->post('deleteSales/(:num)', 'SalesController::deleteSales/$1');
 
 $routes->get('laporan', 'Home::laporan');
+$routes->get('/laporan', 'LaporanController::index');
+$routes->post('/laporan/cari', 'LaporanController::cari');
+$routes->get('/laporan/print', 'LaporanController::print');
