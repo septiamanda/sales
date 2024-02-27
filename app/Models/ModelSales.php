@@ -118,7 +118,7 @@ class ModelSales extends Model
 
     public function getPI()
     {
-        return $this->where('status', 'PI')->findAll();
+        return $this->where('status', 'PI')->orderBy('tanggal_order', 'asc')->findAll();
     }
 
     public function dataChartPI($tahun)
@@ -135,7 +135,7 @@ class ModelSales extends Model
 
     public function getPS()
     {
-        return $this->where('status', 'PS')->findAll();
+        return $this->where('status', 'PS')->orderBy('tanggal_order', 'asc')->findAll();
     }
 
     public function dataChartPS($tahun)
@@ -152,7 +152,7 @@ class ModelSales extends Model
 
     public function getRE()
     {
-        return $this->where('status', 'RE')->findAll();
+        return $this->where('status', 'RE')->orderBy('tanggal_order', 'asc')->findAll();
     }
 
     public function getREChart($tahun)
@@ -169,7 +169,7 @@ class ModelSales extends Model
 
     public function getFCC()
     {
-        return $this->where('status', 'FCC')->findAll();
+        return $this->where('status', 'FCC')->orderBy('tanggal_order', 'asc')->findAll();
     }
 
     public function getFCCChart($tahun)

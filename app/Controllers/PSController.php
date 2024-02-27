@@ -15,15 +15,7 @@ class PSController extends BaseController
 
     public function listPS(): string
     {
-        $dataPS = $this->modelSales->getPS();
-        $formattedDataPS = [];
-
-        foreach ($dataPS as $sales) {
-            $sales['tanggal_order'] = date('d/m/Y', strtotime($sales['tanggal_order']));
-            $formattedDataPS[] = $sales;
-        }
-
-        $data['dataPS'] = $formattedDataPS;
+        $data['dataPS'] = $this->modelSales->getPS();
         return view('Pages/PS', $data);
     }
 
