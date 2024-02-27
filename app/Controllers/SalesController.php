@@ -166,27 +166,6 @@ class SalesController extends BaseController
             $success = $this->modelSales->updateStatus($id_sales, $newStatus);
 
             if ($success) {
-                // Jika status baru adalah "PS", tambahkan data ke tabel histori
-                // if ($newStatus == 'PS') {
-                //     // Ambil data yang akan dipindahkan
-                //     $salesData = $this->modelSales->find($id_sales);
-
-                //     // Buat data histori
-                //     $historicalData = [
-                //         'id_sales' => $salesData['id_sales'],
-                //         'noSC' => $salesData['noSC'],
-                //         'nama_pengguna' => $salesData['nama_pengguna'],
-                //         'alamat_instl' => $salesData['alamat_instl'],
-                //         'tanggal_order' => $salesData['tanggal_order'],
-                //         'sektor' => $salesData['sektor'],
-                //         'sto' => $salesData['sto'],
-                //         'status' => $salesData['status']
-                //     ];
-
-                //     // Masukkan data ke tabel histori
-                //     $this->modelSales->moveToHistorical($historicalData);
-                // }
-
                 // Tampilkan pesan sukses
                 $response = [
                     'success' => true,
