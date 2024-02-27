@@ -70,30 +70,31 @@
                             <h6 class="m-0 font-weight-bold text-gray-800">Cari Data Sales</h6>
                         </div>
                         <div class="card-body">
-                            <div class="row ml-2 justify-content">
-                                <div class="col-lg-6">
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="tanggal_awal">Tanggal Awal</label>
-                                            <input class="form-control" type="date" name="tanggal_awal" id="tanggal_awal">
-                                        </div>
-                                        <div class="col">
-                                            <label for="tanggal_akhir">Tanggal Akhir</label>
-                                            <div class="input-group">
-                                                <input class="form-control" type="date" name="tanggal_akhir" id="tanggal_akhir">
-                                            </div>
-                                        </div>
-                                        <div class="col d-flex justify-content-end align-items-center ">
-                                            <button class="btn btn-primary mt-4" type="button">Cari</button>
-                                        </div>
+                            <div class="row ml-2">
+                                <div class="col-5 ">
+
+                                        <label for="tanggal_awal">Tanggal Awal</label>
+                                        <input class="form-control" type="date" name="tanggal_awal" id="tanggal_awal">
+                                </div>
+                                <div class="col-5 ">
+                                        <label for="tanggal_akhir">Tanggal Akhir</label>
+                                        <input class="form-control" type="date" name="tanggal_akhir" id="tanggal_akhir">
+                                </div>
+
+                                
+                                <div class="col-2 ">
+
+                                    <div class="col d-flex justify-content-end align-items-center ">
+                                        <button class="btn btn-primary mt-4 mr-4" type="button">Cari</button>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
 
-                </div>
+            </div>
 
             <hr>
 
@@ -115,8 +116,8 @@
                         <!-- Button trigger modal tambahdata & lewat-->
                         <div class="col-md-6 d-flex justify-content-end align-items-center ">
 
-                        <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal" data-bs-target="#tambahFCC" id="btn-FCC"><i class="fas fa-plus fa-sm"></i> FCC</button>
-                            <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal" data-bs-target="#tambahPI" ?>" id="btn-PI"><i class="fas fa-plus fa-sm"></i> PI</button>
+                            <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal" data-bs-target="#tambahFCC" id="btn-FCC"><i class="fas fa-plus fa-sm"></i> FCC</button>
+                            <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal" data-bs-target="#tambahPI" id="btn-PI"><i class="fas fa-plus fa-sm"></i> PI</button>
                             <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal" data-bs-target="#tambahPS" id="btn-PS"><i class="fas fa-plus fa-sm"></i> PS</button>
 
                             <button class="btn btn-danger shadow-sm ml-2" data-bs-toggle="modal" data-bs-target="#tambahSales">
@@ -488,7 +489,7 @@
                             </div>
                         </form>
                     </div>
-                    
+
                     <!-- /.container-fluid -->
 
                 </div>
@@ -522,10 +523,10 @@
 
             })
 
-    $(document).on('click', '#btn-delete', function() {
-        var id = $(this).data('id'); // Mengambil ID sales dari tombol
-    })
-</script>
+            $(document).on('click', '#btn-delete', function() {
+                var id = $(this).data('id'); // Mengambil ID sales dari tombol
+            })
+        </script>
 
         <?= $this->endSection(); ?>
 
@@ -537,31 +538,31 @@
         <!-- Tambahkan JS DataTables -->
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('.btn-update').click(function() {
-            var id_sales = $(this).data('id');
+        <script>
+            $(document).ready(function() {
+                $('.btn-update').click(function() {
+                    var id_sales = $(this).data('id');
 
-            // Kirim permintaan AJAX untuk memperbarui status
-            $.ajax({
-                url: "updateStatus/" + id_sales,
-                method: "post",
-                success: function(response) {
-                    // Tampilkan pesan sukses atau gagal
-                    alert(response.message);
+                    // Kirim permintaan AJAX untuk memperbarui status
+                    $.ajax({
+                        url: "updateStatus/" + id_sales,
+                        method: "post",
+                        success: function(response) {
+                            // Tampilkan pesan sukses atau gagal
+                            alert(response.message);
 
-                    // Muat ulang halaman jika berhasil
-                    if (response.success) {
-                        location.reload();
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
+                            // Muat ulang halaman jika berhasil
+                            if (response.success) {
+                                location.reload();
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
             });
-        });
-    });
-</script>
+        </script>
 
 
     </div>
