@@ -12,7 +12,7 @@
     <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
     </symbol>
-    
+
 </svg>
 
 
@@ -73,25 +73,34 @@
                         </div>
                         <div class="card-body">
                             <form class="form-inline" method="post" id="caridata">
-                                <div class="row ml-2">
-                                    <div class="col-5 ">
-    
-                                            <label for="tanggal_awal">Tanggal Awal</label>
-                                            <input class="form-control" type="date" name="tanggal_awal" id="tanggal_awal">
+                                <div class="row mb-3">
+                                    <div class="col-md-6 d-flex justify-content-start align-items-center">
+                                        <div class="form-group">
+                                            <div class="col">
+                                                <label for="tanggal_awal">Tanggal Awal</label>
+                                            </div>
+                                            <div class="col">
+                                                <input class="form-control" type="date" name="tanggal_awal" id="tanggal_awal">
+                                            </div>
+                                        </div>
+                                        <div class="form-group ml-5">
+                                            <div class="col">
+                                                <label for="tanggal_akhir">Tanggal Akhir</label>
+                                            </div>
+                                            <div class="col">
+                                                <input class="form-control" type="date" name="tanggal_akhir" id="tanggal_akhir">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-5 ">
-                                            <label for="tanggal_akhir">Tanggal Akhir</label>
-                                            <input class="form-control" type="date" name="tanggal_akhir" id="tanggal_akhir">
-                                    </div>
-    
                                     
-                                    <div class="col-2 ">
-                                            <button class="btn btn-outline-secondary mt-4 ml-4" type="submit"><i class="bi bi-search"></i> Cari</button>
+                                    <!-- Button trigger modal tambahdata & lewat-->
+                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                        <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i> Cari</button>
                                     </div>
-    
                                 </div>
                             </form>
                         </div>
+
                     </div>
                 </div>
 
@@ -396,7 +405,7 @@
                         </div>
                     </div>
 
-                    
+
 
                     <!-- /.container-fluid -->
 
