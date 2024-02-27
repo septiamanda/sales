@@ -152,11 +152,33 @@ class ModelSales extends Model
 
     public function updateStatus($id_sales, $newStatus)
     {
-        // Update the status of the sales data
-        $data = [
-            'status' => $newStatus
-        ];
+        $success = false;
 
-        $this->update($id_sales, $data);
+        // Begin transaction
+        $this->db->transBegin();
+
+        try {
+            // Update status in datasales table
+            $this->db->table('datasales')
+                ->where('id_sales', $id_sales)
+                ->update(['status' => $newStatus]);
+
+            // Get the updated data
+            $updatedData = $this->find($id_sales);
+
+            // Insert the updated data into historical_sales table
+            $this->db->table('historical_sales')->insert($updatedData);
+
+            // Commit transaction
+            $this->db->transCommit();
+
+            $success = true;
+        } catch (\Exception $e) {
+            // Rollback transaction if any error occurs
+            $this->db->transRollback();
+            log_message('error', $e->getMessage());
+        }
+
+        return $success;
     }
 }
