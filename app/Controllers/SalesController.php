@@ -186,7 +186,5 @@ class SalesController extends BaseController
         }
 
         return $this->response->setJSON($response);
-        // Redirect back to the listSales page
-        return redirect()->to('listSales')->with('response', $response);
     }
 }

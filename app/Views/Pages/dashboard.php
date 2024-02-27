@@ -114,7 +114,7 @@
                 <!-- Card Body -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 mb-3" style="background-color: #DE5858;">
-                        <h6 class="m-0 font-weight-bold text-white">Sales per Tahap</h6>
+                        <h6 class="m-0 font-weight-bold text-white">Growth</h6>
                     </div>
                     <div class="chart-pie pt-4 pb-2">
                         <canvas id="pieSales"></canvas>
