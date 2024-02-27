@@ -67,10 +67,10 @@
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-sm-flex justify-content-between align-items-center">
-                            <h6 class="m-0 font-weight-bold text-primary">Cari Data Sales</h6>
+                            <h6 class="m-0 font-weight-bold text-gray-800">Cari Data Sales</h6>
                         </div>
                         <div class="card-body">
-                            <div class="row ml-2 md-3">
+                            <div class="row ml-2 justify-content">
                                 <div class="col-lg-6">
                                     <div class="row">
                                         <div class="col">
@@ -100,7 +100,7 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-sm-flex justify-content-between align-items-center">
-                    <h6 class="m-0 font-weight-bold text-primary">List Data Sales</h6>
+                    <h6 class="m-0 font-weight-bold text-gray-800">List Data Sales</h6>
                 </div>
 
                 <!-- form pencarian -->
@@ -111,9 +111,15 @@
                                 <input class="form-control" type="text" placeholder="Search..." aria-label="Search" name="carisales">
                             </form>
                         </div>
-                        <!-- Button trigger modal -->
+
+                        <!-- Button trigger modal tambahdata & lewat-->
                         <div class="col-md-6 d-flex justify-content-end align-items-center ">
-                            <button class="btn btn-primary shadow-sm ml-auto" data-bs-toggle="modal" data-bs-target="#tambahSales">
+
+                        <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal" data-bs-target="#tambahFCC" id="btn-FCC"><i class="fas fa-plus fa-sm"></i> FCC</button>
+                            <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal" data-bs-target="#tambahPI" ?>" id="btn-PI"><i class="fas fa-plus fa-sm"></i> PI</button>
+                            <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal" data-bs-target="#tambahPS" id="btn-PS"><i class="fas fa-plus fa-sm"></i> PS</button>
+
+                            <button class="btn btn-danger shadow-sm ml-2" data-bs-toggle="modal" data-bs-target="#tambahSales">
                                 <i class="fas fa-plus fa-sm"></i> Tambah Data Sales
                             </button>
                         </div>
@@ -123,7 +129,7 @@
 
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+                            <thead style="background-color: #184240; color: white; text-align: center;">
                                 <tr>
                                     <th>No.</th>
                                     <th>Tanggal Order </th>
@@ -140,23 +146,23 @@
                                 <?php $no = 1;
                                 foreach ($salesData as $sd) : ?>
                                     <tr>
-                                        <td><?= $no++; ?></td>
+                                        <td style="width: 3
+                                        0px; text-align: center;"><?= $no++; ?></td>
                                         <td><?= $sd['tanggal_order']; ?></td>
                                         <td><?= $sd['noSC']; ?></td>
                                         <td><?= $sd['nama_pengguna']; ?></td>
                                         <td><?= $sd['alamat_instl']; ?></td>
                                         <td><?= $sd['sektor']; ?></td>
                                         <td><?= $sd['sto']; ?></td>
-                                        <td><?= $sd['status']; ?></td>
-                                        <td>
+                                        <td> <?= $sd['status']; ?></td>
+                                        <td style="width: 200px;">
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>" data-status="<?= $sd['status']; ?>">
-                                                Edit
-                                            </button>
+                                                <i class="fas fa-edit"> </i></button>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
 
                                             <form action="<?= base_url('updateStatus/' . $sd['id_sales']); ?>" method="post" class="d-inline">
                                                 <input type="hidden" name="_method" id="DELETE">
-                                                <button type="submit" class="btn btn-danger">
+                                                <button type="submit" class="btn btn-outline-danger">
                                                     Update
                                                 </button>
                                             </form>
@@ -377,7 +383,7 @@
                             <div class="modal-content">
 
                                 <div class="modal-body">
-                                    Apakah Anda ingin menghapus data ini?
+                                    <h5 class="font-weight-bold" style="text-align: center;"> Apakah Anda ingin menghapus data ini? </h5>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -392,57 +398,144 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Modal tambah FCC-->
+                    <div class="modal fade" id="tambahSales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <form action="<?= base_url('simpanSales') ?>" method="post">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header center">
+                                        <h3>Tambah Sales</h3>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="mb-3 row">
+                                            <label for="inputNoSC" class="col-sm-3 col-form-label">Nomor SC</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="inputNomorSC">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="namaPel" class="col-sm-3 col-form-label">Nama Pelanggan</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="namaPel">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="alamatInt" class="col-sm-3 col-form-label">Alamat Instalasi</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="alamatInt">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="tanggal_sales" class="col-sm-3 col-form-label">Tanggal Order</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="date" name="tanggal_sales">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="sektorsales" class="col-sm-3 col-form-label">Sektor</label>
+                                            <div class="col-sm-9">
+
+                                                <select class="form-control" name="sektorsales">
+                                                    <option value="" disabled selected>Pilih Sektor</option>
+                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
+                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
+                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                </select>
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="sektorsales" class="col-sm-3 col-form-label">STO</label>
+                                            <div class="col-sm-9">
+
+                                                <select class="form-control" name="stosales">
+                                                    <option value="" disabled selected>Pilih STO</option>
+                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
+                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
+                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                </select>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="sektorsales" class="col-sm-3 col-form-label">Status</label>
+                                            <div class="col-sm-9">
+
+                                                <select class="form-control" name="status">
+                                                    <option value="" disabled selected>Pilih Status</option>
+                                                    <option value="RE">RE</option>
+                                                    <option value="FCC">FCC</option>
+                                                    <option value="PI">PI</option>
+                                                    <option value="PS">PS</option>
+                                                </select>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                        <button type="submit" id="tombolSimpanSales" name="Simpan" class="btn btn-primary btn">Simpan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- /.container-fluid -->
+
                 </div>
+                <!-- End of Main Content -->
+
             </div>
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- /.container-fluid -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Main Content -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-</div>
-<!-- End of Content Wrapper -->
+        <!-- Tambahkan JS jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script>
+            $(document).on('click', '#btn-edit', function() {
+                var id = $(this).data('id'); // Mengambil ID sales dari tombol
+                $('.modal-body #id_sales').val(id);
+                $('.modal-body #id_sales').val($(this).data('id'));
+                $('.modal-body #tanggal_sales').val($(this).data('tanggal'));
+                $('.modal-body #nomorSC').val($(this).data('nosc'));
+                $('.modal-body #namaPel').val($(this).data('nama'));
+                $('.modal-body #alamatInt').val($(this).data('alamat'));
+                $('.modal-body #sektorsales').val($(this).data('sektor'));
+                $('.modal-body #stosales').val($(this).data('sto'));
+                $('.modal-body #status').val($(this).data('status'));
 
-</div>
-<!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Tambahkan JS jQuery -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script>
-    $(document).on('click', '#btn-edit', function() {
-        var id = $(this).data('id'); // Mengambil ID sales dari tombol
-        $('.modal-body #id_sales').val(id);
-        $('.modal-body #id_sales').val($(this).data('id'));
-        $('.modal-body #tanggal_sales').val($(this).data('tanggal'));
-        $('.modal-body #nomorSC').val($(this).data('nosc'));
-        $('.modal-body #namaPel').val($(this).data('nama'));
-        $('.modal-body #alamatInt').val($(this).data('alamat'));
-        $('.modal-body #sektorsales').val($(this).data('sektor'));
-        $('.modal-body #stosales').val($(this).data('sto'));
-        $('.modal-body #status').val($(this).data('status'));
-
-    })
+            })
 
     $(document).on('click', '#btn-delete', function() {
         var id = $(this).data('id'); // Mengambil ID sales dari tombol
     })
 </script>
 
-<?= $this->endSection(); ?>
+        <?= $this->endSection(); ?>
 
 
-<!-- Tambahkan CSS DataTables -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-</link>
+        <!-- Tambahkan CSS DataTables -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+        </link>
 
-<!-- Tambahkan JS DataTables -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+        <!-- Tambahkan JS DataTables -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -471,4 +564,4 @@
 </script>
 
 
-</div>
+    </div>
