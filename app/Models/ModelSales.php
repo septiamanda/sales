@@ -13,7 +13,7 @@ class ModelSales extends Model
 
     public function getSales()
     {
-        return $this->findAll();
+        return $this->orderBy('tanggal_order', 'asc')->findAll();
     }
 
     public function getTotalSales($tahun)
@@ -118,7 +118,7 @@ class ModelSales extends Model
 
     public function getPI()
     {
-        return $this->where('status', 'PI')->orderBy('tanggal_order', 'ASC')->findAll();
+        return $this->where('status', 'PI')->findAll();
     }
 
     public function dataChartPI($tahun)
@@ -135,7 +135,7 @@ class ModelSales extends Model
 
     public function getPS()
     {
-        return $this->where('status', 'PS')->orderBy('tanggal_order', 'ASC')->findAll();
+        return $this->where('status', 'PS')->findAll();
     }
 
     public function dataChartPS($tahun)
