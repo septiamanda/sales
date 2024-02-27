@@ -46,7 +46,7 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?= site_url('growth') ?>">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Growth</span>
         </a>

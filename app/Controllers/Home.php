@@ -45,5 +45,9 @@ class Home extends BaseController
     {
         return view('Pages/SALES');
     }
+    public function growth(): string
+    {
+        return view('Pages/growth');
+    }
 }
 
