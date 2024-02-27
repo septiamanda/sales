@@ -34,7 +34,7 @@
                 </div>
 
 
-                    <form action="<?= base_url('/laporan/print') ?>" method="post">
+                    <!-- <form action="<?= base_url('/laporan/print') ?>" method="post"> -->
                         <!-- <div class="form-group row">
                             <div class="col-md-6">
                                 <label for="tanggal_awal">Tanggal Awal</label>
