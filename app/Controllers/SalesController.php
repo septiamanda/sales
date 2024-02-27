@@ -144,4 +144,72 @@ class SalesController extends BaseController
             return redirect()->back()->withInput();
         }
     }
+
+    public function updateStatus($id_sales)
+    {
+        // Get the current status of the sales data
+        $currentStatus = $this->modelSales->getStatus($id_sales);
+
+        // Define the mapping of current status to new status
+        $statusMapping = [
+            'RE' => 'FCC',
+            'FCC' => 'PI',
+            'PI' => 'PS'
+        ];
+
+        // Check if the current status exists in the mapping
+        if (array_key_exists($currentStatus, $statusMapping)) {
+            // Get the new status based on the mapping
+            $newStatus = $statusMapping[$currentStatus];
+
+            // Update the status of the sales data
+            $success = $this->modelSales->updateStatus($id_sales, $newStatus);
+
+            if ($success) {
+                // Jika status baru adalah "PS", tambahkan data ke tabel histori
+                if ($newStatus == 'PS') {
+                    // Ambil data yang akan dipindahkan
+                    $salesData = $this->modelSales->find($id_sales);
+
+                    // Buat data histori
+                    $historicalData = [
+                        'id_sales' => $salesData['id_sales'],
+                        'noSC' => $salesData['noSC'],
+                        'nama_pengguna' => $salesData['nama_pengguna'],
+                        'alamat_instl' => $salesData['alamat_instl'],
+                        'tanggal_order' => $salesData['tanggal_order'],
+                        'sektor' => $salesData['sektor'],
+                        'sto' => $salesData['sto'],
+                        'status' => $salesData['status']
+                    ];
+
+                    // Masukkan data ke tabel histori
+                    $this->modelSales->moveToHistorical($historicalData);
+                }
+
+                // Tampilkan pesan sukses
+                $response = [
+                    'success' => true,
+                    'message' => 'Status Data Berhasil Diperbarui.'
+                ];
+
+                // Kembalikan view halaman list sales
+                return redirect()->to('listSales');
+            } else {
+                // Tampilkan pesan gagal
+                $response = [
+                    'success' => false,
+                    'message' => 'Gagal Memperbarui Status Data.'
+                ];
+            }
+        } else {
+            // Tampilkan pesan error jika status tidak valid
+            $response = [
+                'success' => false,
+                'message' => 'Status Saat Ini Tidak Valid.'
+            ];
+        }
+
+        return $this->response->setJSON($response);
+    }
 }

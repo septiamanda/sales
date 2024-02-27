@@ -25,6 +25,12 @@ $routes->post('deleteKaryawan(:num)', 'Karyawan::deleteKaryawan/$1');
 $routes->post('updateK', 'Karyawan::updateK');
 
 $routes->get('dashboard', 'Home::index');
+$routes->post('chartSales', 'DashboardController::tampilChartSales');
+$routes->post('pieSales', 'DashboardController::tampilPieSales');
+$routes->get('totalSales', 'DashboardController::getTotalSales');
+$routes->get('totalRE', 'DashboardController::getTotalRE');
+$routes->get('totalPI', 'DashboardController::getTotalPI');
+$routes->get('totalPS', 'DashboardController::getTotalPS');
 
 $routes->get('sto', 'STOController::sto');
 $routes->get('TambahSTO', 'STOController::TambahSTO');
@@ -54,8 +60,9 @@ $routes->get('listFCC', 'FCCController::listFCC');
 $routes->post('chartFCC', 'FCCController::tampilChartFCC');
 
 $routes->get('listSales', 'SalesController::listSales');
-$routes->post('simpanSales','SalesController::simpanSales');
-$routes->post('editSales','SalesController::editSales');
+$routes->post('simpanSales', 'SalesController::simpanSales');
+$routes->post('editSales', 'SalesController::editSales');
 $routes->post('deleteSales/(:num)', 'SalesController::deleteSales/$1');
+$routes->post('updateStatus/(:num)', 'SalesController::updateStatus/$1');
 
 $routes->get('laporan', 'Home::laporan');

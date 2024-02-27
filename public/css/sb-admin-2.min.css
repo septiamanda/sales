@@ -10087,7 +10087,7 @@
   }
   
   .border-left-success {
-    border-left: 0.25rem solid #1cc88a !important;
+    border-left: 0.25rem solid darkturquoise !important;
   }
   
   .border-bottom-success {
@@ -10095,7 +10095,7 @@
   }
   
   .border-left-info {
-    border-left: 0.25rem solid #36b9cc !important;
+    border-left: 0.25rem solid gold !important;
   }
   
   .border-bottom-info {
@@ -10103,7 +10103,7 @@
   }
   
   .border-left-warning {
-    border-left: 0.25rem solid #f6c23e !important;
+    border-left: 0.25rem solid chartreuse !important;
   }
   
   .border-bottom-warning {

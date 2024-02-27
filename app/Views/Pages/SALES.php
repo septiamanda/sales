@@ -66,41 +66,36 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
-                        <div class=" card-header py-3 d-sm-flex justify-content-between align-items-center">
+                        <div class="card-header py-3 d-sm-flex justify-content-between align-items-center">
                             <h6 class="m-0 font-weight-bold text-gray-800">Cari Data Sales</h6>
                         </div>
-
                         <div class="card-body">
-                            <div class="row ml-5 justify-content">
-                                <div class="col-4">
+                            <div class="row ml-2 justify-content">
+                                <div class="col-lg-6">
                                     <div class="row">
-                                        <h6> Pilih Tanggal </h6>
-                                    </div>
-                                    <div class="row">
-                                        <input class="form-control" type="date" name="tanggal_sales">
+                                        <div class="col">
+                                            <label for="tanggal_awal">Tanggal Awal</label>
+                                            <input class="form-control" type="date" name="tanggal_awal" id="tanggal_awal">
+                                        </div>
+                                        <div class="col">
+                                            <label for="tanggal_akhir">Tanggal Akhir</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="date" name="tanggal_akhir" id="tanggal_akhir">
+                                            </div>
+                                        </div>
+                                        <div class="col d-flex justify-content-end align-items-center ">
+                                            <button class="btn btn-primary mt-4" type="button">Cari</button>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="col-4 ml-5 ">
-                                    <div class="row">
-                                        <h6> Pilih Tanggal </h6>
-                                    </div>
-                                    <div class="row">
-                                        <input class="form-control" type="date" name="tanggal_sales">
-                                    </div>
-
-                                </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
 
-
-            </div>
+                </div>
 
             <hr>
-
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
@@ -164,7 +159,14 @@
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>" data-status="<?= $sd['status']; ?>">
                                                 <i class="fas fa-edit"> </i></button>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
-                                            <button type="button" class="btn btn-outline-danger">Update</button>
+
+                                            <form action="<?= base_url('updateStatus/' . $sd['id_sales']); ?>" method="post" class="d-inline">
+                                                <input type="hidden" name="_method" id="DELETE">
+                                                <button type="submit" class="btn btn-outline-danger">
+                                                    Update
+                                                </button>
+                                            </form>
+
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -520,10 +522,10 @@
 
             })
 
-            $(document).on('click', '#btn-delete', function() {
-                var id = $(this).data('id'); // Mengambil ID sales dari tombol
-            })
-        </script>
+    $(document).on('click', '#btn-delete', function() {
+        var id = $(this).data('id'); // Mengambil ID sales dari tombol
+    })
+</script>
 
         <?= $this->endSection(); ?>
 
@@ -534,5 +536,32 @@
 
         <!-- Tambahkan JS DataTables -->
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.btn-update').click(function() {
+            var id_sales = $(this).data('id');
+
+            // Kirim permintaan AJAX untuk memperbarui status
+            $.ajax({
+                url: "updateStatus/" + id_sales,
+                method: "post",
+                success: function(response) {
+                    // Tampilkan pesan sukses atau gagal
+                    alert(response.message);
+
+                    // Muat ulang halaman jika berhasil
+                    if (response.success) {
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
 
     </div>
