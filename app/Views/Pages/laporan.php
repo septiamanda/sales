@@ -9,16 +9,26 @@
                     <h3 class="mb-4">Laporan Data</h3>
                     
                     <form action="<?= base_url('/laporan/cari') ?>" method="post">
-                        <div class="form-group">
-                            <label for="jenis_laporan">Jenis Laporan</label>
-                            <select class="form-control" name="jenis_laporan" id="jenis_laporan" placeholder="Pilih Jenis Laporan">
-                                <option value="" disabled selected>Pilih Jenis Laporan</option>
-                                <option value="RE">Data RE (Registrasi) </option>
-                                <option value="FCC">Data FCC (Verifikasi) </option>
-                                <option value="PI">Data PI (Provesioning Issues)</option>
-                                <option value="PS">Data PS (Provesioning Service)</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                    <label>Jenis Laporan</label><br>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="jenis_laporan" id="jenis_laporan_RE" value="RE">
+                        <label class="form-check-label" for="jenis_laporan_RE">Data RE (Registrasi)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="jenis_laporan" id="jenis_laporan_FCC" value="FCC">
+                        <label class="form-check-label" for="jenis_laporan_FCC">Data FCC (Verifikasi)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="jenis_laporan" id="jenis_laporan_PI" value="PI">
+                        <label class="form-check-label" for="jenis_laporan_PI">Data PI (Provisioning Issues)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="jenis_laporan" id="jenis_laporan_PS" value="PS">
+                        <label class="form-check-label" for="jenis_laporan_PS">Data PS (Provisioning Service)</label>
+                    </div>
+                </div>
+
 
                     <form action="<?= base_url('/laporan/cari') ?>" method="post">
                         <div class="form-group row">
@@ -34,8 +44,7 @@
                         </div>
 
                         <div class="form-group d-flex justify-content-center">
-                            <button type="submit" name="cari" class="btn btn-primary btn mb-4 mr-2">Cari</button>
-                            <button type="submit" name="print" class="btn btn-primary btn mb-4">Print</button>
+                            <button type="submit" name="print" class="btn btn-primary btn m">Print</button>
                         </div>
                     </form>
                 </div>

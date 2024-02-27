@@ -16,6 +16,83 @@ class ModelSales extends Model
         return $this->findAll();
     }
 
+    public function getTotalSales($tahun)
+    {
+        if (!$tahun) {
+            $tahun = date('Y');
+        }
+
+        $result = $this->db->table('datasales as ds')
+            ->select('COUNT(*) as total')
+            ->where('YEAR(tanggal_order)', $tahun)
+            ->get()
+            ->getRow();
+
+        if ($result) {
+            return $result->total;
+        } else {
+            return 0;
+        }
+    }
+
+    public function getTotalRE($tahun)
+    {
+        if (!$tahun) {
+            $tahun = date('Y');
+        }
+
+        $result = $this->db->table('datasales as ds')
+            ->select('COUNT(*) as total')
+            ->where('status', 'RE')
+            ->where('YEAR(tanggal_order)', $tahun)
+            ->get()
+            ->getRow();
+
+        if ($result) {
+            return $result->total;
+        } else {
+            return 0;
+        }
+    }
+    public function getTotalPI($tahun)
+    {
+        if (!$tahun) {
+            $tahun = date('Y');
+        }
+
+        $result = $this->db->table('datasales as ds')
+            ->select('COUNT(*) as total')
+            ->where('status', 'PI')
+            ->where('YEAR(tanggal_order)', $tahun)
+            ->get()
+            ->getRow();
+
+        if ($result) {
+            return $result->total;
+        } else {
+            return 0;
+        }
+    }
+    public function getTotalPS($tahun)
+    {
+        if (!$tahun) {
+            $tahun = date('Y');
+        }
+
+        $result = $this->db->table('datasales as ds')
+            ->select('COUNT(*) as total')
+            ->where('status', 'PS')
+            ->where('YEAR(tanggal_order)', $tahun)
+            ->get()
+            ->getRow();
+
+        if ($result) {
+            return $result->total;
+        } else {
+            return 0;
+        }
+    }
+
     public function getSalesChart($tahun)
     {
         return $this->db->table('datasales as ds')
@@ -30,13 +107,14 @@ class ModelSales extends Model
     public function dataPieSales($tahun)
     {
         return $this->db->table('datasales as ds')
-            ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total')
+            ->select('status, COUNT(*) as total')
             ->where('YEAR(tanggal_order)', $tahun)
-            ->groupBy('MONTH(tanggal_order)')
-            ->orderBy('MONTH(tanggal_order)')
+            ->whereIn('status', ['RE', 'FCC', 'PI', 'PS'])
+            ->groupBy('status')
             ->get()
             ->getResultArray();
     }
+
 
     public function getPI()
     {

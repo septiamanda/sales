@@ -26,7 +26,11 @@ $routes->post('updateK', 'Karyawan::updateK');
 
 $routes->get('dashboard', 'Home::index');
 $routes->post('chartSales', 'DashboardController::tampilChartSales');
-$routes->get('pieSales', 'DashboardController::tampilPieSales');
+$routes->post('pieSales', 'DashboardController::tampilPieSales');
+$routes->get('totalSales', 'DashboardController::getTotalSales');
+$routes->get('totalRE', 'DashboardController::getTotalRE');
+$routes->get('totalPI', 'DashboardController::getTotalPI');
+$routes->get('totalPS', 'DashboardController::getTotalPS');
 
 $routes->get('sto', 'STOController::sto');
 $routes->get('TambahSTO', 'STOController::TambahSTO');
