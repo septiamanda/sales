@@ -41,3 +41,12 @@
 
     </ul>
 </nav>
+
+<style>
+        @media print {
+            .navbar-nav, #formCariSektor, .pagination, .input-group mb-3,
+            .btn, th:nth-child(5),td:nth-child(5) {
+                display: none;
+            }
+        }
+    </style>
