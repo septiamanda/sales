@@ -73,19 +73,26 @@ class SalesController extends BaseController
         $namapel = $this->request->getVar('namaPel');
         $almatint = $this->request->getVar('alamatInt');
         $tanggalder = $this->request->getVar('tanggal_sales');
-        $tanggalup = date('Y-m-d');
         $sektorles = $this->request->getVar('sektorsales');
         $stoles = $this->request->getVar('stosales');
         $status = $this->request->getVar('status');
         $id_sales = $this->request->getVar('id_sales');
+
+        if ($status == 'RE') {
+            $tanggal_order = $tanggalder; // Jika status RE, gunakan tanggal update sebagai tanggal order
+            $tanggal_update = $tanggal_order;
+        } else {
+            $tanggal_order = $tanggalder; // Jika status bukan RE, gunakan tanggal order yang dimasukkan
+            $tanggal_update = date('Y-m-d'); // Gunakan tanggal sekarang sebagai tanggal update
+        }
 
         $data = [
             'id_sales' => $id_sales,
             'noSC' => $nosc,
             'nama_pengguna' => $namapel,
             'alamat_instl' => $almatint,
-            'tanggal_order' => $tanggalder,
-            'tanggal_update' => $tanggalup,
+            'tanggal_order' => $tanggal_order,
+            'tanggal_update' => $tanggal_update,
             'sektor' => $sektorles,
             'sto' => $stoles,
             'status' => $status
