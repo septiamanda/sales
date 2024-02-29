@@ -17,8 +17,10 @@ class SalesController extends BaseController
     public function listSales(): string
     {
         $data['salesData'] = $this->modelSales->getSales();
+        $data['sd'] = ['id_sales' => 0]; // Inisialisasi $sd dengan data yang sesuai
         return view('Pages/SALES', $data);
     }
+
 
     public function simpanSales()
     {

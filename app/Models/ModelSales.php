@@ -9,7 +9,7 @@ class ModelSales extends Model
     protected $table = "datasales";
     protected $primaryKey = "id_sales";
     protected $useAutoIncrement = "true";
-    protected $allowedFields = ['noSC', 'nama_pengguna', 'alamat_instl', 'tanggal_order', 'sektor', 'sto', 'status'];
+    protected $allowedFields = ['noSC', 'nama_pengguna', 'alamat_instl', 'tanggal_order', 'tanggal_update', 'sektor', 'sto', 'status'];
 
     public function getSales()
     {
@@ -158,7 +158,7 @@ class ModelSales extends Model
     public function getREChart($tahun)
     {
         return $this->db->table('datasales as ds')
-            ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total')
+            ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total, tanggal_update')
             ->where('status', 'RE')
             ->where('YEAR(tanggal_order)', $tahun)
             ->groupBy('MONTH(tanggal_order)')
@@ -189,30 +189,6 @@ class ModelSales extends Model
         return $this->delete($id_sales);
     }
 
-    // public function moveToHistorical($id_sales)
-    // {
-    //     // Get the sales data to be moved
-    //     $salesData = $this->find($id_sales);
-
-    //     // Create historical data
-    //     $historicalData = [
-    //         'id_sales' => $salesData['id_historis'],
-    //         'noSC' => $salesData['noSC'],
-    //         'nama_pengguna' => $salesData['nama_pengguna'],
-    //         'alamat_instl' => $salesData['alamat_instl'],
-    //         'tanggal_order' => $salesData['tanggal_order'],
-    //         'sektor' => $salesData['sektor'],
-    //         'sto' => $salesData['sto'],
-    //         'status' => $salesData['status'] // Status dari tabel sales
-    //     ];
-
-    //     // Insert historical data into historical sales table
-    //     $this->db->table('histori_sales')->insert($historicalData);
-
-    //     // Delete the data from sales table
-    //     $this->delete($id_sales);
-    // }
-
     public function getStatus($id_sales)
     {
         // Get the status of the sales data based on ID
@@ -236,12 +212,12 @@ class ModelSales extends Model
         $this->db->transBegin();
 
         try {
-            // Update status in datasales table along with update date
+            // Update status and tanggal_update in datasales table
             $this->db->table('datasales')
                 ->where('id_sales', $id_sales)
                 ->update([
                     'status' => $newStatus,
-                    'tanggal_order' => date('Y-m-d H:i:s') // Update tanggal pembaruan
+                    'tanggal_update' => date('Y-m-d H:i:s') // Update tanggal_update
                 ]);
 
             // Commit transaction

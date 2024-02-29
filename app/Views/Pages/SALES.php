@@ -130,6 +130,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Tanggal Order </th>
+                                    <th>Tanggal Update </th>
                                     <th>Nomor SC </th>
                                     <th>Nama Pengguna</th>
                                     <th>Alamat Instalasi</th>
@@ -146,6 +147,7 @@
                                         <td style="width: 3
                                         0px; text-align: center;"><?= $no++; ?></td>
                                         <td><?= $sd['tanggal_order']; ?></td>
+                                        <td><?= $sd['tanggal_update']; ?></td>
                                         <td><?= $sd['noSC']; ?></td>
                                         <td><?= $sd['nama_pengguna']; ?></td>
                                         <td><?= $sd['alamat_instl']; ?></td>
