@@ -73,6 +73,7 @@ class SalesController extends BaseController
         $namapel = $this->request->getVar('namaPel');
         $almatint = $this->request->getVar('alamatInt');
         $tanggalder = $this->request->getVar('tanggal_sales');
+        $tanggalup = date('Y-m-d');
         $sektorles = $this->request->getVar('sektorsales');
         $stoles = $this->request->getVar('stosales');
         $status = $this->request->getVar('status');
@@ -84,6 +85,7 @@ class SalesController extends BaseController
             'nama_pengguna' => $namapel,
             'alamat_instl' => $almatint,
             'tanggal_order' => $tanggalder,
+            'tanggal_update' => $tanggalup,
             'sektor' => $sektorles,
             'sto' => $stoles,
             'status' => $status
