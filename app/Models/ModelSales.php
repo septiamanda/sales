@@ -96,10 +96,10 @@ class ModelSales extends Model
     public function getSalesChart($tahun)
     {
         return $this->db->table('datasales as ds')
-            ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total')
-            ->where('YEAR(tanggal_order)', $tahun)
-            ->groupBy('MONTH(tanggal_order)')
-            ->orderBy('MONTH(tanggal_order)')
+            ->select('MONTH(tanggal_update) as bulan, COUNT(*) as total')
+            ->where('YEAR(tanggal_update)', $tahun)
+            ->groupBy('MONTH(tanggal_update)')
+            ->orderBy('MONTH(tanggal_update)')
             ->get()
             ->getResultArray();
     }
