@@ -79,11 +79,11 @@ class SalesController extends BaseController
         $id_sales = $this->request->getVar('id_sales');
 
         if ($status == 'RE') {
-            $tanggal_order = $tanggalder; // Jika status RE, gunakan tanggal update sebagai tanggal order
+            $tanggal_order = $tanggalder;
             $tanggal_update = $tanggal_order;
         } else {
-            $tanggal_order = $tanggalder; // Jika status bukan RE, gunakan tanggal order yang dimasukkan
-            $tanggal_update = date('Y-m-d'); // Gunakan tanggal sekarang sebagai tanggal update
+            $tanggal_order = $tanggalder; 
+            $tanggal_update = date('Y-m-d');
         }
 
         $data = [
