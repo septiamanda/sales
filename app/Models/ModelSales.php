@@ -124,10 +124,10 @@ class ModelSales extends Model
     public function dataChartPI($tahun)
     {
         return $this->db->table('datasales as ds')
-            ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total')
+            ->select('MONTH(tanggal_update) as bulan, COUNT(*) as total')
             ->where('status', 'PI')
-            ->where('YEAR(tanggal_order)', $tahun)
-            ->groupBy('MONTH(tanggal_order)')
+            ->where('YEAR(tanggal_update)', $tahun)
+            ->groupBy('MONTH(tanggal_update)')
             ->orderBy('MONTH(tanggal_order)')
             ->get()
             ->getResultArray();
@@ -141,10 +141,10 @@ class ModelSales extends Model
     public function dataChartPS($tahun)
     {
         return $this->db->table('datasales as ds')
-            ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total')
+            ->select('MONTH(tanggal_update) as bulan, COUNT(*) as total')
             ->where('status', 'PS')
-            ->where('YEAR(tanggal_order)', $tahun)
-            ->groupBy('MONTH(tanggal_order)')
+            ->where('YEAR(tanggal_update)', $tahun)
+            ->groupBy('MONTH(tanggal_update)')
             ->orderBy('MONTH(tanggal_order)')
             ->get()
             ->getResultArray();
@@ -175,10 +175,10 @@ class ModelSales extends Model
     public function getFCCChart($tahun)
     {
         return $this->db->table('datasales as ds')
-            ->select('MONTH(tanggal_order) as bulan, COUNT(*) as total')
+            ->select('MONTH(tanggal_update) as bulan, COUNT(*) as total')
             ->where('status', 'FCC')
-            ->where('YEAR(tanggal_order)', $tahun)
-            ->groupBy('MONTH(tanggal_order)')
+            ->where('YEAR(tanggal_update)', $tahun)
+            ->groupBy('MONTH(tanggal_update)')
             ->orderBy('MONTH(tanggal_order)')
             ->get()
             ->getResultArray();

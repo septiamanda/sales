@@ -43,6 +43,7 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Tanggal Order</th>
+                                        <th>Tanggal Update</th>
                                         <th>No. SC</th>
                                         <th>Nama Pengguna</th>
                                         <th>Alamat Instalasi</th>
@@ -56,6 +57,7 @@
                                         <tr>
                                             <th scope='row'><?= $no; ?></th>
                                             <td><?= $pi['tanggal_order']; ?></td>
+                                            <td><?= $pi['tanggal_update']; ?></td>
                                             <td><?= $pi['noSC']; ?></td>
                                             <td><?= $pi['nama_pengguna']; ?></td>
                                             <td><?= $pi['alamat_instl']; ?></td>

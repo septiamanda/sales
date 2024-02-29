@@ -50,6 +50,7 @@
                                         <tr>
                                             <th>No.</th>
                                             <th>Tanggal Order</th>
+                                            <th>Tanggal Update</th>
                                             <th>No. SC</th>
                                             <th>Nama Pengguna</th>
                                             <th>Alamat Instalasi</th>
@@ -63,6 +64,7 @@
                                             <tr>
                                                 <th scope='row'><?= $no; ?></th>
                                                 <td><?= $fcc['tanggal_order']; ?></td>
+                                                <td><?= $fcc['tanggal_update']; ?></td>
                                                 <td><?= $fcc['noSC']; ?></td>
                                                 <td><?= $fcc['nama_pengguna']; ?></td>
                                                 <td><?= $fcc['alamat_instl']; ?></td>
