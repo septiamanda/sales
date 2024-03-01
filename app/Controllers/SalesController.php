@@ -82,7 +82,7 @@ class SalesController extends BaseController
             $tanggal_order = $tanggalder;
             $tanggal_update = $tanggal_order;
         } else {
-            $tanggal_order = $tanggalder; 
+            $tanggal_order = $tanggalder;
             $tanggal_update = date('Y-m-d');
         }
 
@@ -183,7 +183,7 @@ class SalesController extends BaseController
                     'message' => 'Status Data Berhasil Diperbarui.'
                 ];
 
-                // Kembalikan view halaman list sales
+                session()->setFlashdata('success', 'Status Data Berhasil Diperbarui.');
                 return redirect()->to('listSales');
             } else {
                 // Tampilkan pesan gagal
