@@ -232,4 +232,19 @@ class ModelSales extends Model
 
         return $success;
     }
+ 
+    public function cariDataSales() {
+        $tanggalAwal = $this->request->getGet('tanggal_awal');
+        $tanggalAkhir = $this->request->getGet('tanggal_akhir');
+        $data = $this->getDataSalesByRange($tanggalAwal, $tanggalAkhir);
+        // Proses data dan kirim sebagai respons
+        // Misalnya, Anda bisa mengembalikan data sebagai JSON
+        return $this->response->setJSON($data);
+    }
+    
+    public function getDataSalesByRange($tanggalAwal, $tanggalAkhir) {
+        return $this->where('tanggal_order >=', $tanggalAwal)
+                    ->where('tanggal_order <=', $tanggalAkhir)
+                    ->findAll();
+    }
 }
