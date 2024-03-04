@@ -45,12 +45,12 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link" href="<?= site_url('growth') ?>">
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Growth</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -92,11 +92,11 @@
     <?php endif; ?>
     
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="<?= site_url('laporan') ?>">
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="">
             <i class="fas fa-fw fa-table"></i>
             <span>Laporan</span></a>
-    </li>
+    </li> -->
 
     <li class="nav-item">
         <div class="dropdown-divider"></div>

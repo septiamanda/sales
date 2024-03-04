@@ -247,9 +247,15 @@
 
                                                 <select class="form-control" name="sektorsales">
                                                     <option value="" disabled selected>Pilih Sektor</option>
-                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
-                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
-                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                    <option value="Hero BKT">Hero BKT</option>
+                                                    <option value="Hero Non-BKT">Non-Hero BKT</option>
+                                                    <option value="Hero PYK">Hero Pyk</option>
+                                                    <option value="Hero SLK">Hero Slk</option>
+                                                    <option value="Hero Non-SLK">Non-Hero Slk</option>
+                                                    <option value="Hero BDT">Hero Bdt</option>
+                                                    <option value="Hero KJI">Hero Kji</option>
+                                                    <option value="Hero PAM">Hero Pam</option>
+                                                    <option value="Hero PDG-Non">Hero Pdg (Non-Hero)</option>
                                                 </select>
 
                                             </div>
@@ -266,8 +272,6 @@
                                                     <option value="Datel SLK">Datel SLK (Solok)</option>
                                                     <option value="Inner PDG">Inner PDG (Padang)</option>
                                                 </select>
-
-
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -340,9 +344,15 @@
                                                 <select class="form-control" name="sektorsales" id="sektorsales">
                                                     <option value=""></option>
                                                     <option value="" disabled selected> Pilih Sektor</option>
-                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
-                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
-                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                    <option value="Hero BKT">Hero BKT</option>
+                                                    <option value="Hero Non-BKT">Non-Hero BKT</option>
+                                                    <option value="Hero PYK">Hero Pyk</option>
+                                                    <option value="Hero SLK">Hero Slk</option>
+                                                    <option value="Hero Non-SLK">Non-Hero Slk</option>
+                                                    <option value="Hero BDT">Hero Bdt</option>
+                                                    <option value="Hero KJI">Hero Kji</option>
+                                                    <option value="Hero PAM">Hero Pam</option>
+                                                    <option value="Hero PDG-Non">Hero Pdg (Non-Hero)</option>
                                                 </select>
 
                                             </div>
@@ -367,8 +377,8 @@
                                             <label for="sektorsales" class="col-sm-3 col-form-label">Status</label>
                                             <div class="col-sm-9">
 
-                                                <select class="form-control" name="status" id="status">
-                                                    <option value="" disabled selected></option>
+                                                <select class="form-control" name="status" id="status" disabled>
+                                                    <option value="" disabled selected> </option>
                                                     <option value="RE">RE</option>
                                                     <option value="FCC">FCC</option>
                                                     <option value="PI">PI</option>
