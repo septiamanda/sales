@@ -5,18 +5,6 @@
         <i class="fa fa-bars"></i>
     </button>
 
-    <!-- Topbar Search -->
-    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-        <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-danger" type="button" style="background-color: #DE5858;">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-            </div>
-        </div>
-    </form>
-
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
@@ -48,19 +36,37 @@
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= session()->get('username'); ?></span>
                 <img class="img-profile rounded-circle" src="<?= base_url(); ?>/img/undraw_profile_1.svg">
             </a>
-            <!-- Dropdown - User Information -->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
-                </a>
-
-            </div>
+            
         </li>
 
     </ul>
 </nav>
+
+<style>
+/* Gaya umum */
+@media print {
+    .navbar-nav, .pagination, #container-sales, #cari-sales, #alert, #debug-icon,
+    .btn, th:nth-child(10), td:nth-child(10) {
+        display: none;
+    }
+    th {
+        font-weight: bold; /* Atur tebal judul kolom */
+        color: black; /* Atur warna teks judul kolom */
+        text-align: center; /* Tengahkan judul kolom */
+    }
+    td {
+        color: black; /* Atur warna teks isi kolom */
+    }
+    #judul-sales {
+        font-size: 32px;
+        color: black;
+        text-align: center;
+        font-weight: bold;
+        margin-top: auto;
+        margin-left: auto;
+        margin-right: auto;
+        text-transform: uppercase; /* Jadikan teks menjadi huruf kapital */
+    }
+}
+</style>
+

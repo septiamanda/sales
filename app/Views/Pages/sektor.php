@@ -46,7 +46,6 @@
                                         <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
                                             <i class="fas fa-plus fa-sm"></i> Tambah Data Sektor
                                         </a>
-                                        <button class="btn btn-success ml-2" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
                                     </div>
                                 </div>
                             </form>

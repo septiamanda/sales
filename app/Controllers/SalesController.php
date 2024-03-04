@@ -17,8 +17,10 @@ class SalesController extends BaseController
     public function listSales(): string
     {
         $data['salesData'] = $this->modelSales->getSales();
+        $data['sd'] = ['id_sales' => 0]; // Inisialisasi $sd dengan data yang sesuai
         return view('Pages/SALES', $data);
     }
+
 
     public function simpanSales()
     {
@@ -76,12 +78,21 @@ class SalesController extends BaseController
         $status = $this->request->getVar('status');
         $id_sales = $this->request->getVar('id_sales');
 
+        if ($status == 'RE') {
+            $tanggal_order = $tanggalder;
+            $tanggal_update = $tanggal_order;
+        } else {
+            $tanggal_order = $tanggalder;
+            $tanggal_update = date('Y-m-d');
+        }
+
         $data = [
             'id_sales' => $id_sales,
             'noSC' => $nosc,
             'nama_pengguna' => $namapel,
             'alamat_instl' => $almatint,
-            'tanggal_order' => $tanggalder,
+            'tanggal_order' => $tanggal_order,
+            'tanggal_update' => $tanggal_update,
             'sektor' => $sektorles,
             'sto' => $stoles,
             'status' => $status
@@ -172,7 +183,7 @@ class SalesController extends BaseController
                     'message' => 'Status Data Berhasil Diperbarui.'
                 ];
 
-                // Kembalikan view halaman list sales
+                session()->setFlashdata('success', 'Status Data Berhasil Diperbarui.');
                 return redirect()->to('listSales');
             } else {
                 // Tampilkan pesan gagal

@@ -25,6 +25,36 @@
     <link rel="shortcut icon" type="image/png" href="/img/logo.png">
     <script src="/public/js/jquery.min.js"></script>
 
+    <style>
+/* Gaya umum */
+@media print {
+    .navbar-nav, .pagination, #container-sales, #cari-sales, #alert, #debug-icon,
+    .btn, th:nth-child(10), td:nth-child(10) {
+        display: none;
+    }
+    th {
+        font-weight: bold; /* Atur tebal judul kolom */
+        color: black; /* Atur warna teks judul kolom */
+        text-align: center; /* Tengahkan judul kolom */
+    }
+    td {
+        color: black; /* Atur warna teks isi kolom */
+    }
+    #judul-sales {
+        font-size: 32px;
+        color: black;
+        text-align: center;
+        font-weight: bold;
+        margin-top: auto;
+        margin-left: auto;
+        margin-right: auto;
+        text-transform: uppercase; /* Jadikan teks menjadi huruf kapital */
+    }
+}
+</style>
+
+    
+
 
 
 </head>

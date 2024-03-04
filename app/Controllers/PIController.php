@@ -16,15 +16,7 @@ class PIController extends BaseController
 
     public function listPI(): string
     {
-        $dataPI = $this->modelSales->getPI();
-        $formattedDataPI = [];
-
-        foreach ($dataPI as $sales) {
-            $sales['tanggal_order'] = date('d/m/Y', strtotime($sales['tanggal_order']));
-            $formattedDataPI[] = $sales;
-        }
-
-        $data['dataPI'] = $formattedDataPI;
+        $data['dataPI'] = $this->modelSales->getPI();
         return view('Pages/PI', $data);
     }
 

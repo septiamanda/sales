@@ -45,12 +45,12 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link" href="<?= site_url('growth') ?>">
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Growth</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -92,11 +92,11 @@
     <?php endif; ?>
     
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="<?= site_url('laporan') ?>">
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="">
             <i class="fas fa-fw fa-table"></i>
             <span>Laporan</span></a>
-    </li>
+    </li> -->
 
     <li class="nav-item">
         <div class="dropdown-divider"></div>
@@ -117,3 +117,32 @@
 
 
 </ul>
+
+<style>
+/* Gaya umum */
+@media print {
+    .navbar-nav, .pagination, #container-sales, #cari-sales, #alert, #debug-icon,
+    .btn, th:nth-child(10), td:nth-child(10) {
+        display: none;
+    }
+    th {
+        font-weight: bold; /* Atur tebal judul kolom */
+        color: black; /* Atur warna teks judul kolom */
+        text-align: center; /* Tengahkan judul kolom */
+    }
+    td {
+        color: black; /* Atur warna teks isi kolom */
+    }
+    #judul-sales {
+        font-size: 32px;
+        color: black;
+        text-align: center;
+        font-weight: bold;
+        margin-top: auto;
+        margin-left: auto;
+        margin-right: auto;
+        text-transform: uppercase; /* Jadikan teks menjadi huruf kapital */
+    }
+}
+</style>
+

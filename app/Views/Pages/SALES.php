@@ -21,12 +21,12 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Sales</h1>
+        <h1 class="h3 mb-0 mt-3 text-gray-800" id="judul-sales">Data Sales</h1>
     </div>
 
     <!--kalau sukses-->
     <?php if (session()->has('success')) : ?>
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success" role="alert" id="alert">
             <svg class="bi flex-shrink-0 me-2" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" role="img" aria-label="Success:">
                 <use xlink:href="#check-circle-fill" />
             </svg>
@@ -68,7 +68,7 @@
             <div id="content">
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <div class="card shadow mb-4">
+                    <div class="card shadow mb-4" id="container-sales">
                         <div class="card-header py-3 d-sm-flex justify-content-between align-items-center">
                             <h6 class="m-0 font-weight-bold text-gray-800">Cari Data Sales</h6>
                         </div>
@@ -118,7 +118,7 @@
 
                 <!-- form pencarian -->
                 <div class="card-body">
-                    <div class="row mb-3">
+                    <div class="row mb-3" id="cari-sales">
                         <div class="col-md-6 d-flex justify-content-start align-items-center">
                             <form action="" method="get" class="form-inline my-2">
                                 <input class="form-control" type="text" placeholder="Search..." aria-label="Search" name="carisales">
@@ -130,6 +130,9 @@
                             <button class="btn btn-danger shadow-sm ml-2" data-bs-toggle="modal" data-bs-target="#tambahSales">
                                 <i class="fas fa-plus fa-sm"></i> Tambah Data Sales
                             </button>
+
+                            <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
+
                         </div>
 
                     </div>
@@ -141,6 +144,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Tanggal Order </th>
+                                    <th>Tanggal Update </th>
                                     <th>Nomor SC </th>
                                     <th>Nama Pengguna</th>
                                     <th>Alamat Instalasi</th>
@@ -158,6 +162,7 @@
                                         <td style="width: 3
                                         0px; text-align: center;"><?= $no++; ?></td>
                                         <td><?= $sd['tanggal_order']; ?></td>
+                                        <td><?= $sd['tanggal_update']; ?></td>
                                         <td><?= $sd['noSC']; ?></td>
                                         <td><?= $sd['nama_pengguna']; ?></td>
                                         <td><?= $sd['alamat_instl']; ?></td>
@@ -247,9 +252,15 @@
 
                                                 <select class="form-control" name="sektorsales">
                                                     <option value="" disabled selected>Pilih Sektor</option>
-                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
-                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
-                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                    <option value="Hero BKT">Hero BKT</option>
+                                                    <option value="Hero Non-BKT">Non-Hero BKT</option>
+                                                    <option value="Hero PYK">Hero Pyk</option>
+                                                    <option value="Hero SLK">Hero Slk</option>
+                                                    <option value="Hero Non-SLK">Non-Hero Slk</option>
+                                                    <option value="Hero BDT">Hero Bdt</option>
+                                                    <option value="Hero KJI">Hero Kji</option>
+                                                    <option value="Hero PAM">Hero Pam</option>
+                                                    <option value="Hero PDG-Non">Hero Pdg (Non-Hero)</option>
                                                 </select>
 
                                             </div>
@@ -266,8 +277,6 @@
                                                     <option value="Datel SLK">Datel SLK (Solok)</option>
                                                     <option value="Inner PDG">Inner PDG (Padang)</option>
                                                 </select>
-
-
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -340,9 +349,15 @@
                                                 <select class="form-control" name="sektorsales" id="sektorsales">
                                                     <option value=""></option>
                                                     <option value="" disabled selected> Pilih Sektor</option>
-                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
-                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
-                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                    <option value="Hero BKT">Hero BKT</option>
+                                                    <option value="Hero Non-BKT">Non-Hero BKT</option>
+                                                    <option value="Hero PYK">Hero Pyk</option>
+                                                    <option value="Hero SLK">Hero Slk</option>
+                                                    <option value="Hero Non-SLK">Non-Hero Slk</option>
+                                                    <option value="Hero BDT">Hero Bdt</option>
+                                                    <option value="Hero KJI">Hero Kji</option>
+                                                    <option value="Hero PAM">Hero Pam</option>
+                                                    <option value="Hero PDG-Non">Hero Pdg (Non-Hero)</option>
                                                 </select>
 
                                             </div>
@@ -367,8 +382,8 @@
                                             <label for="sektorsales" class="col-sm-3 col-form-label">Status</label>
                                             <div class="col-sm-9">
 
-                                                <select class="form-control" name="status" id="status" aria-label="Disabled select example" disabled>
-                                                    <option value="" disabled selected></option>
+                                                <select class="form-control" name="status" id="status" disabled aria-label="Disabled select example" disabled>
+                                                    <option value="" disabled selected> </option>
                                                     <option value="RE">RE</option>
                                                     <option value="FCC">FCC</option>
                                                     <option value="PI">PI</option>
