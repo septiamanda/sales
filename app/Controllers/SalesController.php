@@ -191,4 +191,19 @@ class SalesController extends BaseController
 
         return $this->response->setJSON($response);
     }
+
+    public function cariDataSales()
+    {
+        $tanggalAwal = $this->request->getGet('tanggal_awal');
+        $tanggalAkhir = $this->request->getGet('tanggal_akhir');
+
+        // Pastikan tanggal awal dan akhir ada
+        if ($tanggalAwal && $tanggalAkhir) {
+            $data = $this->modelSales->getSalesByRange($tanggalAwal, $tanggalAkhir);
+            session()->setFlashdata('success', 'Data ditemukan');
+            return $this->response->setJSON($data);
+        } else {
+            return $this->response->setStatusCode(400, 'Bad Request');
+        }
+    }
 }

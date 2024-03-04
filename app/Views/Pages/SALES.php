@@ -15,6 +15,7 @@
 
 </svg>
 
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
 <div class="container-fluid">
 
@@ -72,29 +73,30 @@
                             <h6 class="m-0 font-weight-bold text-gray-800">Cari Data Sales</h6>
                         </div>
                         <div class="card-body">
-                            <form class="form-inline" method="post" id="caridata">
+                            <form id="filterForm" action="" method="get" class="form-inline my-2">
                                 <div class="row mb-3">
-                                    <div class="col-md-6 d-flex justify-content-start align-items-center">
+                                    <div class="col-md-5 d-flex justify-content-start align-items-center">
                                         <div class="form-group">
                                             <div class="col">
                                                 <label for="tanggal_awal">Tanggal Awal</label>
                                             </div>
                                             <div class="col">
-                                                <input class="form-control" type="date" name="tanggal_awal" id="tanggal_awal">
+                                                <input class="form-control pickdate date_range_filter" type="date" name="tanggal_awal" id="tanggal_awal">
                                             </div>
                                         </div>
-                                        <div class="form-group ml-5">
+                                    </div>
+
+                                    <div class="col-md-5 d-flex justify-content-start align-items-center">
+                                        <div class="form-group">
                                             <div class="col">
                                                 <label for="tanggal_akhir">Tanggal Akhir</label>
                                             </div>
                                             <div class="col">
-                                                <input class="form-control" type="date" name="tanggal_akhir" id="tanggal_akhir">
+                                                <input class="form-control pickdate date_range_filter2" type="date" name="tanggal_akhir" id="tanggal_akhir">
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <!-- Button trigger modal tambahdata & lewat-->
-                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                    <div class="col-md-5 d-flex justify-content-start align-items-center">
                                         <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i> Cari</button>
                                     </div>
                                 </div>
@@ -149,7 +151,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1;
+                                <?php
+                                $no = 1;
                                 foreach ($salesData as $sd) : ?>
                                     <tr>
                                         <td style="width: 3
@@ -176,6 +179,8 @@
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
+
+
                             </tbody>
                         </table>
                     </div>
@@ -362,7 +367,7 @@
                                             <label for="sektorsales" class="col-sm-3 col-form-label">Status</label>
                                             <div class="col-sm-9">
 
-                                                <select class="form-control" name="status" id="status">
+                                                <select class="form-control" name="status" id="status" aria-label="Disabled select example" disabled>
                                                     <option value="" disabled selected></option>
                                                     <option value="RE">RE</option>
                                                     <option value="FCC">FCC</option>
@@ -425,6 +430,54 @@
 
         <!-- Tambahkan JS jQuery -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+        <script>
+            
+            $(document).ready(function() {
+                var table = $('#dataTable').DataTable();
+
+                $('#filterForm').on('submit', function(e) {
+                    e.preventDefault();
+                    var tanggalAwal = $('#tanggal_awal').val();
+                    var tanggalAkhir = $('#tanggal_akhir').val();
+                    if (tanggalAwal && tanggalAkhir) {
+                        $.ajax({
+                            url: 'http://localhost:8080/index.php/cariDataSales', // Pastikan URL ini benar
+                            type: 'GET',
+                            data: {
+                                tanggal_awal: tanggalAwal,
+                                tanggal_akhir: tanggalAkhir
+                            },
+                            success: function(response) {
+                                // Hapus semua baris saat ini
+                                table.clear().draw();
+                                // Tambahkan baris baru ke tabel
+                                response.forEach(function(item) {
+                                    // Format kolom Action
+                                    var actionButtons = '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="' + item.id_sales + '">Edit</button> ' +
+                                        '<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete">Delete</button>';
+                                    table.row.add([
+                                        item.no,
+                                        item.tanggal_order,
+                                        item.noSC,
+                                        item.nama_pengguna,
+                                        item.alamat_instl,
+                                        item.sektor,
+                                        item.sto,
+                                        item.status,
+                                        actionButtons // Tambahkan kolom Action di sini
+                                    ]).draw();
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Error fetching data: ", error);
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+
         <script>
             $(document).on('click', '#btn-edit', function() {
                 var id = $(this).data('id'); // Mengambil ID sales dari tombol
@@ -454,6 +507,8 @@
 
         <!-- Tambahkan JS DataTables -->
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
         <script>
             $(document).ready(function() {
@@ -480,6 +535,7 @@
                 });
             });
         </script>
+
 
 
     </div>
