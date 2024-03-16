@@ -23,7 +23,7 @@
         <div class="col-md-6 mx-auto">
             <div class="card text-center" style="background-color: #DE5858; border-color: #DE5858;">
                 <div class="card-header">
-                    <h3 class="h3 mb-4 mt-5" style="color:white; font-weight: bold;">Edit Data Sentral Telepon Otomat</h3>
+                    <h3 class="h3 mb-4 mt-5" style="color:white; font-weight: bold;">Edit Data STO</h3>
                 </div>
                 <div class="card-body">
                     <form action="<?= base_url('updateSTO'); ?>" method="post">
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group mt-4">
-                            <input type="text" class="form-control" placeholder="Hero" name="Hero" value="<?= $stoModel['Hero']; ?>" style="border-radius: 50px; height: 50px;;">
+                            <input type="text" class="form-control" placeholder="Datel" name="Datel" value="<?= $stoModel['Datel']; ?>" style="border-radius: 50px; height: 50px;;">
                         </div>
 
                         <div class="form-group mt-4">

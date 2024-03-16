@@ -32,13 +32,13 @@ class STOController extends BaseController
         }
         $name = $this->request->getVar('NamaSTO');
         $sto = $this->request->getVar('STO');
-        $hero = $this->request->getVar('Hero');
+        $datel = $this->request->getVar('Datel');
         $sektor = $this->request->getVar('Sektor');
 
         $data = [
             'Nama_STO' => $name,
             'STO' => $sto,
-            'Hero' => $hero,
+            'Datel' => $datel,
             'Sektor' => $sektor
         ];
 
@@ -66,14 +66,14 @@ class STOController extends BaseController
         $id = $this->request->getVar('kode');
         $name = $this->request->getVar('NamaSTO');
         $sto = $this->request->getVar('STO');
-        $hero = $this->request->getVar('Hero');
+        $datel = $this->request->getVar('Datel');
         $sektor = $this->request->getVar('Sektor');
 
         $data = [
             'id' => $id,
             'Nama_STO' => $name,
             'STO' => $sto,
-            'Hero' => $hero,
+            'Datel' => $datel,
             'Sektor' => $sektor
         ];
 
