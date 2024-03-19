@@ -25,21 +25,15 @@ class STOController extends BaseController
 
     public function save()
     {
-        if (!$this->validate([
-            'NamaSTO' => 'required'
-        ])) {
-            return redirect()->to('TambahSTO');
-        }
-        $name = $this->request->getVar('NamaSTO');
-        $sto = $this->request->getVar('STO');
+        
         $datel = $this->request->getVar('Datel');
         $sektor = $this->request->getVar('Sektor');
+        $sto = $this->request->getVar('STO');
 
         $data = [
-            'Nama_STO' => $name,
-            'STO' => $sto,
             'Datel' => $datel,
-            'Sektor' => $sektor
+            'Sektor' => $sektor,
+            'STO' => $sto
         ];
 
         session()->setFlashdata('Pesan', 'Data Berhasil Ditambahkan.');
@@ -64,17 +58,15 @@ class STOController extends BaseController
     public function updateSTO()
     {
         $id = $this->request->getVar('kode');
-        $name = $this->request->getVar('NamaSTO');
-        $sto = $this->request->getVar('STO');
         $datel = $this->request->getVar('Datel');
         $sektor = $this->request->getVar('Sektor');
+        $sto = $this->request->getVar('STO');
 
         $data = [
             'id' => $id,
-            'Nama_STO' => $name,
-            'STO' => $sto,
             'Datel' => $datel,
-            'Sektor' => $sektor
+            'Sektor' => $sektor,
+            'STO' => $sto
         ];
 
         session()->setFlashdata('Pesan', 'Data Berhasil Di Update.');

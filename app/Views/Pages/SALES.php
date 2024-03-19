@@ -357,7 +357,7 @@
                                                     <option value="Hero BDT">Hero BDT</option>
                                                     <option value="Hero KJI">Hero KJI</option>
                                                     <option value="Hero PAM">Hero PAM</option>
-                                                    <option value="Hero PDG-Non">Non Hero PDG</option>
+                                                    <option value="Hero Non-PDG">Non Hero PDG</option>
                                                 </select>
 
                                             </div>

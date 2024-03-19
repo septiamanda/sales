@@ -28,15 +28,6 @@
                 <div class="card-body">
                     <form action="<?= base_url('save'); ?>" method="post">
 
-                        <div class="row g-3">
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="Nama STO" name="NamaSTO" id="ns" style="border-radius: 50px; height: 50px;">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="STO" name="STO" id="sto" style="border-radius: 50px; height: 50px;">
-                            </div>
-                        </div>
-
                         <div class="form-group mt-4">
                             <input type="text" class="form-control" placeholder="Datel" name="Datel" id="datel" style="border-radius: 50px; height: 50px;">
                         </div>
@@ -54,6 +45,10 @@
                                 <option value="Hero PAM">Hero PAM</option>
                                 <option value="Non Hero PDG">Non Hero PDG</option>
                             </select>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <input type="text" class="form-control" placeholder="STO" name="STO" id="sto" style="border-radius: 50px; height: 50px;">
                         </div>
 
                         <div class="text-center">
