@@ -29,7 +29,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-2 text-gray-800">Tables</h1>
                         <a href="<?= base_url('TambahSTO'); ?>" class="d-none d-sm-inline-block btn btn-danger shadow-sm ml-auto">
-                            <i class="fas fa-plus fa-sm text-#184240"></i> Sentral Telepon Otomat
+                            <i class="fas fa-plus fa-sm text-#184240"></i> STO
                         </a>
                     </div>
 
@@ -46,10 +46,9 @@
                                     <thead style="background-color: #184240; color: white; text-align: center;">
                                         <tr>
                                             <th>No.</th>
-                                            <th>Nama STO</th>
-                                            <th>STO</th>
-                                            <th>Hero</th>
+                                            <th>Datel</th>
                                             <th>Sektor</th>
+                                            <th>STO</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -58,17 +57,16 @@
                                         <?php foreach ($dataSTO as $s) : ?>
                                             <tr>
                                                 <th scope="row" style="width: 70px; text-align: center;"><?= $i++; ?></th>
-                                                <td><?= $s['Nama_STO']; ?></td>
+                                                <td><?= $s['Datel']; ?></td>
+                                                <td style="width: 350px;"><?= $s['Sektor']; ?></td>
                                                 <td><?= $s['STO']; ?></td>
-                                                <td><?= $s['Hero']; ?></td>
-                                                <td style="width: 250px;"><?= $s['Sektor']; ?></td>
                                                 <td style="width: 200px;">
                                                     <a href="<?= base_url('editSTO/' . $s['id']); ?>" class="btn btn" style="border-color: #184240; color: #184240;">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </a>
 
                                                     <form action="<?= base_url('deleteSTO/' . $s['id']); ?>" method="post" class="d-inline">
-                                                    <input type="hidden" name="_method" id="DELETE">
+                                                        <input type="hidden" name="_method" id="DELETE">
                                                         <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin?');">
                                                             <i class="fas fa-trash-alt"></i> Hapus
                                                         </button>

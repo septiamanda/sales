@@ -351,13 +351,13 @@
                                                     <option value="" disabled selected> Pilih Sektor</option>
                                                     <option value="Hero BKT">Hero BKT</option>
                                                     <option value="Hero Non-BKT">Non-Hero BKT</option>
-                                                    <option value="Hero PYK">Hero Pyk</option>
-                                                    <option value="Hero SLK">Hero Slk</option>
-                                                    <option value="Hero Non-SLK">Non-Hero Slk</option>
-                                                    <option value="Hero BDT">Hero Bdt</option>
-                                                    <option value="Hero KJI">Hero Kji</option>
-                                                    <option value="Hero PAM">Hero Pam</option>
-                                                    <option value="Hero PDG-Non">Hero Pdg (Non-Hero)</option>
+                                                    <option value="Hero PYK">Hero PYK</option>
+                                                    <option value="Hero SLK">Hero SLK</option>
+                                                    <option value="Hero Non-SLK">Non-Hero SLK</option>
+                                                    <option value="Hero BDT">Hero BDT</option>
+                                                    <option value="Hero KJI">Hero KJI</option>
+                                                    <option value="Hero PAM">Hero PAM</option>
+                                                    <option value="Hero Non-PDG">Non Hero PDG</option>
                                                 </select>
 
                                             </div>

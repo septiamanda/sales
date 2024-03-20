@@ -18,7 +18,7 @@
                                 <option value="" disabled selected>--Pilih Datel--</option>                                
                                 <option value="Datel BKT (Bukittinggi)">Datel BKT (Bukittinggi)</option>
                                 <option value="Datel SLK (Solok)">Datel SLK (Solok)</option>
-                                <option value="Inner PDG (Padang)">Inner PDG (Padang)</option>
+                                <option value="Non Hero PDG (Padang)">Non Hero PDG (Padang)</option>
                             </select>
                         </div>
 

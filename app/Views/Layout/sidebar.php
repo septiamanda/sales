@@ -35,7 +35,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Data Master:</h6>
-                <a class="collapse-item" href="<?= site_url('listSales')?>">Data Sales</a>
+                <a class="collapse-item" href="<?= site_url('listSales') ?>">Data Sales</a>
                 <a class="collapse-item" href="<?= site_url('listRE') ?>">Data RE</a>
                 <a class="collapse-item" href="<?= site_url('listFCC') ?>">Data FCC</a>
                 <a class="collapse-item" href="<?= site_url('listPI') ?>">Data PI</a>
@@ -56,12 +56,12 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="sidebar-heading">
-        Addons
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
     <?php if (session()->levelId == 1) : ?>
+        <div class="sidebar-heading">
+            Addons
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
@@ -90,7 +90,7 @@
                 <span>Data STO</span></a>
         </li>
     <?php endif; ?>
-    
+
     <!-- Nav Item - Tables -->
     <!-- <li class="nav-item">
         <a class="nav-link" href="">
@@ -100,7 +100,7 @@
 
     <li class="nav-item">
         <div class="dropdown-divider"></div>
-        <a class="nav-link" href="<?= site_url('logout') ?>" >
+        <a class="nav-link" href="<?= site_url('logout') ?>">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
             Logout
         </a>
@@ -119,30 +119,45 @@
 </ul>
 
 <style>
-/* Gaya umum */
-@media print {
-    .navbar-nav, .pagination, #container-sales, #cari-sales, #alert, #debug-icon,
-    .btn, th:nth-child(10), td:nth-child(10) {
-        display: none;
-    }
-    th {
-        font-weight: bold; /* Atur tebal judul kolom */
-        color: black; /* Atur warna teks judul kolom */
-        text-align: center; /* Tengahkan judul kolom */
-    }
-    td {
-        color: black; /* Atur warna teks isi kolom */
-    }
-    #judul-sales {
-        font-size: 32px;
-        color: black;
-        text-align: center;
-        font-weight: bold;
-        margin-top: auto;
-        margin-left: auto;
-        margin-right: auto;
-        text-transform: uppercase; /* Jadikan teks menjadi huruf kapital */
-    }
-}
-</style>
+    /* Gaya umum */
+    @media print {
 
+        .navbar-nav,
+        .pagination,
+        #container-sales,
+        #cari-sales,
+        #alert,
+        #debug-icon,
+        .btn,
+        th:nth-child(10),
+        td:nth-child(10) {
+            display: none;
+        }
+
+        th {
+            font-weight: bold;
+            /* Atur tebal judul kolom */
+            color: black;
+            /* Atur warna teks judul kolom */
+            text-align: center;
+            /* Tengahkan judul kolom */
+        }
+
+        td {
+            color: black;
+            /* Atur warna teks isi kolom */
+        }
+
+        #judul-sales {
+            font-size: 32px;
+            color: black;
+            text-align: center;
+            font-weight: bold;
+            margin-top: auto;
+            margin-left: auto;
+            margin-right: auto;
+            text-transform: uppercase;
+            /* Jadikan teks menjadi huruf kapital */
+        }
+    }
+</style>

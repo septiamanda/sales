@@ -23,23 +23,14 @@
         <div class="col-md-6 mx-auto">
             <div class="card text-center" style="background-color: #DE5858; border-color: #DE5858;">
                 <div class="card-header">
-                    <h3 class="h3 mb-4 mt-5" style="color:white; font-weight: bold;">Edit Data Sentral Telepon Otomat</h3>
+                    <h3 class="h3 mb-4 mt-5" style="color:white; font-weight: bold;">Edit Data STO</h3>
                 </div>
                 <div class="card-body">
                     <form action="<?= base_url('updateSTO'); ?>" method="post">
                         <input type="hidden" name="kode" value="<?= $stoModel['id']; ?>">
-
-                        <div class="row g-3">
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="Nama STO" name="NamaSTO" id="ns" style="border-radius: 50px; height: 50px;;" value="<?= $stoModel['Nama_STO']; ?>">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="STO" name="STO" id="sto" style="border-radius: 50px; height: 50px;;" value="<?= $stoModel['STO']; ?>">
-                            </div>
-                        </div>
-
+           
                         <div class="form-group mt-4">
-                            <input type="text" class="form-control" placeholder="Hero" name="Hero" value="<?= $stoModel['Hero']; ?>" style="border-radius: 50px; height: 50px;;">
+                            <input type="text" class="form-control" placeholder="Datel" name="Datel" value="<?= $stoModel['Datel']; ?>" style="border-radius: 50px; height: 50px;;">
                         </div>
 
                         <div class="form-group mt-4">
@@ -56,6 +47,10 @@
                                 <option value="Hero PAM">Hero PAM</option>
                                 <option value="Non Hero PDG">Non Hero PDG</option>
                             </select>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <input type="text" class="form-control" placeholder="STO" name="STO" id="sto" style="border-radius: 50px; height: 50px;;" value="<?= $stoModel['STO']; ?>">
                         </div>
 
                         <div class="text-center">

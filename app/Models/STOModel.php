@@ -10,7 +10,7 @@ class STOModel extends Model
     protected $table = 'sto';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['id', 'Nama_STO', 'STO', 'Hero', 'Sektor'];
+    protected $allowedFields = ['id', 'Datel', 'Sektor', 'STO'];
     protected $useTimestaps = true;
 
     public function getsto($id = false)
