@@ -457,7 +457,7 @@
                     var tanggalAkhir = $('#tanggal_akhir').val();
                     if (tanggalAwal && tanggalAkhir) {
                         $.ajax({
-                            url: 'http://localhost:8080/index.php/cariDataSales', // Pastikan URL ini benar
+                            url: <?php ?>'cariDataSales', // Pastikan URL ini benar
                             type: 'GET',
                             data: {
                                 tanggal_awal: tanggalAwal,
