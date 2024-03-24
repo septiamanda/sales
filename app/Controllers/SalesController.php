@@ -17,9 +17,30 @@ class SalesController extends BaseController
     public function listSales(): string
     {
         $data['salesData'] = $this->modelSales->getSales();
-        $data['sd'] = ['id_sales' => 0]; // Inisialisasi $sd dengan data yang sesuai
+        $data['sd'] = ['id_sales' => 0]; 
+
+        $date = $this->request->getGet('tanggal_order');
+
+        if (!empty($date)) {
+            $data = $this->modelSales->where('tanggal_order', $date)->findAll();
+            return view('Pages/SALES', ['salesData' => $data]);
+        }
         return view('Pages/SALES', $data);
     }
+
+    // public function filterSales()
+    // {
+    //     // $data['salesData'] = $this->modelSales->getSales();
+    //     // $data['sd'] = ['id_sales' => 0]; 
+
+    //     $date = $this->request->getGet('tanggal_order');
+    //     var_dump($date);
+    //     if (!empty($date)) {
+    //         $data = $this->modelSales->where('tanggal_order', $date)->findAll();
+    //         return view('Pages/SALES', ['salesData' => $data]);
+    //     }
+    //     return view('Pages/SALES');
+    // }
 
 
     public function simpanSales()
@@ -203,18 +224,4 @@ class SalesController extends BaseController
         return $this->response->setJSON($response);
     }
 
-    public function cariDataSales()
-    {
-        $tanggalAwal = $this->request->getGet('tanggal_awal');
-        $tanggalAkhir = $this->request->getGet('tanggal_akhir');
-
-        // Pastikan tanggal awal dan akhir ada
-        if ($tanggalAwal && $tanggalAkhir) {
-            $data = $this->modelSales->getSalesByRange($tanggalAwal, $tanggalAkhir);
-            session()->setFlashdata('success', 'Data ditemukan');
-            return $this->response->setJSON($data);
-        } else {
-            return $this->response->setStatusCode(400, 'Bad Request');
-        }
-    }
 }
