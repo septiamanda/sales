@@ -28,9 +28,14 @@
                 <div class="card-body">
                     <form action="<?= base_url('updateSTO'); ?>" method="post">
                         <input type="hidden" name="kode" value="<?= $stoModel['id']; ?>">
-           
-                        <div class="form-group mt-4">
-                            <input type="text" class="form-control" placeholder="Datel" name="Datel" value="<?= $stoModel['Datel']; ?>" style="border-radius: 50px; height: 50px;;">
+
+                        <div class="form-group">
+                            <select type="text" class="form-control" placeholder="Datel" name="Datel" value="<?= $stoModel['Datel']; ?>" style="border-radius: 50px; height: 50px;;">
+                                <option value="" disabled selected>Pilih Datel</option>
+                                <option value="DATEL BKT">DATEL BKT</option>
+                                <option value="DATEL SLK">DATEL SLK</option>
+                                <option value="Inner PDG">Inner PDG</option>
+                            </select>
                         </div>
 
                         <div class="form-group mt-4">
