@@ -35,4 +35,8 @@ class SektorModel extends Model
         return $this->db->query($query)->getResultArray();
     }
 
+    public function getformSektor()
+    {
+        return $this->findAll(); // Mengambil semua datasektor dari tabel
+    }
 }

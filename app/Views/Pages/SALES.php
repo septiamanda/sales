@@ -146,11 +146,11 @@
                                         <td><?= $sd['sto']; ?></td>
                                         <td><?= $sd['status']; ?></td>
                                         <td style="width: 210px;">
-                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>" data-status="<?= $sd['status']; ?>">
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
-                                            <form action="<?= base_url('updateStatus/' . $sd['id_sales']); ?>" method="post" class="d-inline">
+                                            <form action="<?= base_url('updateStatus/'  . $sd['id_sales']); ?>" method="post" class="d-inline">
                                                 <input type="hidden" name="_method" id="DELETE">
                                                 <button type="submit" class="btn btn-outline-danger">Update</button>
                                             </form>
@@ -223,30 +223,27 @@
 
                                                 <select class="form-control" name="sektorsales">
                                                     <option value="" disabled selected>Pilih Sektor</option>
-                                                    <option value="Hero BKT">Hero BKT</option>
-                                                    <option value="Hero Non-BKT">Non-Hero BKT</option>
-                                                    <option value="Hero PYK">Hero Pyk</option>
-                                                    <option value="Hero SLK">Hero Slk</option>
-                                                    <option value="Hero Non-SLK">Non-Hero Slk</option>
-                                                    <option value="Hero BDT">Hero Bdt</option>
-                                                    <option value="Hero KJI">Hero Kji</option>
-                                                    <option value="Hero PAM">Hero Pam</option>
-                                                    <option value="Hero PDG-Non">Hero Pdg (Non-Hero)</option>
-                                                </select>
+                                                    <?php if (!empty($sektors)) : ?>
+                                                        <?php foreach ($sektors as $sektor) : ?>
+                                                            <option value="<?= esc($sektor['nama_sektor']) ?>"><?= esc($sektor['nama_sektor']) ?></option>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
 
+                                                </select>
                                             </div>
 
 
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="sektorsales" class="col-sm-3 col-form-label">STO</label>
+                                            <label for="stosales" class="col-sm-3 col-form-label">STO</label>
                                             <div class="col-sm-9">
-
                                                 <select class="form-control" name="stosales">
                                                     <option value="" disabled selected>Pilih STO</option>
-                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
-                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
-                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                    <?php if (!empty($stos)) : ?>
+                                                        <?php foreach ($stos as $sto) : ?>
+                                                            <option value="<?= $sto['STO'] ?>"><?= $sto['STO'] ?></option>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -349,7 +346,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="mb-3 row">
+                                        <!-- <div class="mb-3 row">
                                             <label for="sektorsales" class="col-sm-3 col-form-label">Status</label>
                                             <div class="col-sm-9">
 
@@ -363,7 +360,7 @@
 
 
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -384,7 +381,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <form action="<?= base_url('deleteSales/' . $sd['id_sales']); ?>" method="post" class="d-inline">
+                                    <form action="<?= isset($sd['id_sales']) ? base_url('deleteSales/' . $sd['id_sales']) : '#' ?>" method="post" class="d-inline">
                                         <input type="hidden" name="_method" id="DELETE">
                                         <button type="submit" class="btn btn-danger">
                                             Hapus
@@ -419,49 +416,25 @@
 
         <script>
             $(document).ready(function() {
-                var table = $('#dataTable').DataTable();
-
-                $('#filterForm').on('submit', function(e) {
-                    e.preventDefault();
-                    var tanggalAwal = $('#tanggal_awal').val();
-                    var tanggalAkhir = $('#tanggal_akhir').val();
-                    if (tanggalAwal && tanggalAkhir) {
-                        $.ajax({
-                            url: <?php ?> 'cariDataSales', // Pastikan URL ini benar
-                            type: 'GET',
-                            data: {
-                                tanggal_awal: tanggalAwal,
-                                tanggal_akhir: tanggalAkhir
-                            },
-                            success: function(response) {
-                                // Hapus semua baris saat ini
-                                table.clear().draw();
-                                // Tambahkan baris baru ke tabel
-                                response.forEach(function(item) {
-                                    // Format kolom Action
-                                    var actionButtons = '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="' + item.id_sales + '">Edit</button> ' +
-                                        '<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete">Delete</button>';
-                                    table.row.add([
-                                        item.no,
-                                        item.tanggal_order,
-                                        item.noSC,
-                                        item.nama_pengguna,
-                                        item.alamat_instl,
-                                        item.sektor,
-                                        item.sto,
-                                        item.status,
-                                        actionButtons // Tambahkan kolom Action di sini
-                                    ]).draw();
-                                });
-                            },
-                            error: function(xhr, status, error) {
-                                console.error("Error fetching data: ", error);
-                            }
-                        });
-                    }
+                // Mengambil data STO saat modal ditampilkan
+                $('#tambahSales').on('shown.bs.modal', function() {
+                    $.ajax({
+                        url: '<?= base_url('getSTO') ?>', // Sesuaikan dengan URL method getSTO di controller Anda
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            var stoDropdown = $('#stosales');
+                            stoDropdown.empty();
+                            stoDropdown.append($('<option>').val('').text('Pilih STO'));
+                            $.each(data, function(index, sto) {
+                                stoDropdown.append($('<option>').val(sto.id).text(sto.nama_sto)); // Sesuaikan dengan struktur data STO Anda
+                            });
+                        }
+                    });
                 });
             });
         </script>
+
 
         <script>
             $(document).on('click', '#btn-edit', function() {
@@ -474,7 +447,6 @@
                 $('.modal-body #alamatInt').val($(this).data('alamat'));
                 $('.modal-body #sektorsales').val($(this).data('sektor'));
                 $('.modal-body #stosales').val($(this).data('sto'));
-                $('.modal-body #status').val($(this).data('status'));
 
             })
 
