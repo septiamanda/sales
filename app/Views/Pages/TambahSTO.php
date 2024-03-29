@@ -21,15 +21,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <div class="card text-center" style="background-color: #DE5858; border-color: #DE5858;">
+            <div class="card text-center " style="background-color: #DE5858; border-color: #DE5858;">
                 <div class="card-header">
                     <h3 class="h3 mb-4 mt-5" style="color:white; font-weight: bold;">Tambah Data STO</h3>
                 </div>
                 <div class="card-body">
                     <form action="<?= base_url('save'); ?>" method="post">
 
-                        <div class="form-group mt-4">
-                            <input type="text" class="form-control" placeholder="Datel" name="Datel" id="datel" style="border-radius: 50px; height: 50px;">
+                        <div class="form-group">
+                            <select type="text" class="form-control" placeholder="Datel" name="Datel" id="datel" style="border-radius: 50px; height: 50px;">
+                                <option value="" disabled selected>Pilih Datel</option>
+                                <option value="DATEL BKT">DATEL BKT</option>
+                                <option value="DATEL SLK">DATEL SLK</option>
+                                <option value="Inner PDG">Inner PDG</option>
+                            </select>
                         </div>
 
                         <div class="form-group mt-4">
