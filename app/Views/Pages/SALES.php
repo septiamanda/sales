@@ -73,33 +73,12 @@
                             <h6 class="m-0 font-weight-bold text-gray-800">Cari Data Sales</h6>
                         </div>
                         <div class="card-body">
-                            <form id="filterForm" action="" method="get" class="form-inline my-2">
-                                <div class="row mb-3">
-                                    <div class="col-md-5 d-flex justify-content-start align-items-center">
-                                        <div class="form-group">
-                                            <div class="col">
-                                                <label for="tanggal_awal">Tanggal Awal</label>
-                                            </div>
-                                            <div class="col">
-                                                <input class="form-control pickdate date_range_filter" type="date" name="tanggal_awal" id="tanggal_awal">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-5 d-flex justify-content-start align-items-center">
-                                        <div class="form-group">
-                                            <div class="col">
-                                                <label for="tanggal_akhir">Tanggal Akhir</label>
-                                            </div>
-                                            <div class="col">
-                                                <input class="form-control pickdate date_range_filter2" type="date" name="tanggal_akhir" id="tanggal_akhir">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5 d-flex justify-content-start align-items-center">
-                                        <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i> Cari</button>
-                                    </div>
+                            <form action="<?php base_url('SalesController/listSales') ?>" method="get">
+                                <label for="date">Tanggal:</label>
+                                <div class="form-group">
+                                    <input type="date" id="date" name="tanggal_order" class="form-control">
                                 </div>
+                                <button type="submit" class="btn btn-primary" style="height: 40px; margin-left: 10px ; margin-right: 10px">Cari</button>
                             </form>
                         </div>
 
@@ -155,12 +134,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                $no = 1;
-                                foreach ($salesData as $sd) : ?>
+                                <?php foreach ($salesData as $key => $sd) : ?>
                                     <tr>
-                                        <td style="width: 3
-                                        0px; text-align: center;"><?= $no++; ?></td>
+                                        <td style="width: 30px; text-align: center;"><?= $key + 1; ?></td>
                                         <td><?= $sd['tanggal_order']; ?></td>
                                         <td><?= $sd['tanggal_update']; ?></td>
                                         <td><?= $sd['noSC']; ?></td>
@@ -168,24 +144,19 @@
                                         <td><?= $sd['alamat_instl']; ?></td>
                                         <td><?= $sd['sektor']; ?></td>
                                         <td><?= $sd['sto']; ?></td>
-                                        <td> <?= $sd['status']; ?></td>
-                                        <td style="width: 200px;">
+                                        <td><?= $sd['status']; ?></td>
+                                        <td style="width: 210px;">
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>" data-status="<?= $sd['status']; ?>">
-                                                <i class="fas fa-edit"> </i></button>
+                                                <i class="fas fa-edit"></i>
+                                            </button>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
-
                                             <form action="<?= base_url('updateStatus/' . $sd['id_sales']); ?>" method="post" class="d-inline">
                                                 <input type="hidden" name="_method" id="DELETE">
-                                                <button type="submit" class="btn btn-outline-danger">
-                                                    Update
-                                                </button>
+                                                <button type="submit" class="btn btn-outline-danger">Update</button>
                                             </form>
-
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
-
-
                             </tbody>
                         </table>
                     </div>
@@ -447,7 +418,6 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
         <script>
-            
             $(document).ready(function() {
                 var table = $('#dataTable').DataTable();
 
@@ -457,7 +427,7 @@
                     var tanggalAkhir = $('#tanggal_akhir').val();
                     if (tanggalAwal && tanggalAkhir) {
                         $.ajax({
-                            url: 'http://localhost:8080/index.php/cariDataSales', // Pastikan URL ini benar
+                            url: <?php ?> 'cariDataSales', // Pastikan URL ini benar
                             type: 'GET',
                             data: {
                                 tanggal_awal: tanggalAwal,
