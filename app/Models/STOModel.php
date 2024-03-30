@@ -26,4 +26,10 @@ class STOModel extends Model
     {
         return $this->delete($id);
     }
+
+    
+    public function getformSTO()
+    {
+        return $this->findAll(); // Mengambil semua data STO dari tabel
+    }
 }

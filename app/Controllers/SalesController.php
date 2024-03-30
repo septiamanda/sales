@@ -4,20 +4,30 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ModelSales;
+use App\Models\SektorModel;
+use App\Models\STOModel;
 
 class SalesController extends BaseController
 {
     protected $modelSales;
+    protected $modelSTO;
+    protected $modelSektor;
 
     public function __construct()
     {
         $this->modelSales = new ModelSales();
+        $this->modelSTO = new STOModel();
+        $this->modelSektor = new SektorModel();
+
     }
 
     public function listSales(): string
     {
         $data['salesData'] = $this->modelSales->getSales();
         $data['sd'] = ['id_sales' => 0]; 
+
+        $data['stos'] = $this->modelSTO->getformSTO();
+        $data['sektors'] = $this->modelSektor->getformSektor();
 
         $date = $this->request->getGet('tanggal_order');
 
@@ -27,21 +37,6 @@ class SalesController extends BaseController
         }
         return view('Pages/SALES', $data);
     }
-
-    // public function filterSales()
-    // {
-    //     // $data['salesData'] = $this->modelSales->getSales();
-    //     // $data['sd'] = ['id_sales' => 0]; 
-
-    //     $date = $this->request->getGet('tanggal_order');
-    //     var_dump($date);
-    //     if (!empty($date)) {
-    //         $data = $this->modelSales->where('tanggal_order', $date)->findAll();
-    //         return view('Pages/SALES', ['salesData' => $data]);
-    //     }
-    //     return view('Pages/SALES');
-    // }
-
 
     public function simpanSales()
     {
@@ -138,7 +133,7 @@ class SalesController extends BaseController
         $tanggalder = $this->request->getVar('tanggal_sales');
         $sektorles = $this->request->getVar('sektorsales');
         $stoles = $this->request->getVar('stosales');
-        $status = $this->request->getVar('status');
+        // $status = $this->request->getVar('status');
 
         $data = [
             'id_sales' => $id,
@@ -148,7 +143,7 @@ class SalesController extends BaseController
             'tanggal_order' => $tanggalder,
             'sektor' => $sektorles,
             'sto' => $stoles,
-            'status' => $status
+            // 'status' => $status
         ];
 
 
