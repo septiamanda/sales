@@ -175,6 +175,21 @@ class SalesController extends BaseController
     {
         $newStatus = $this->request->getVar('status');
 
+        // Check if status can be updated based on current status
+        $currentStatus = $this->modelSales->getStatus($id_sales);
+
+        if (($currentStatus == 'FCC' || $currentStatus == 'PI' || $currentStatus == 'PS') && $newStatus == 'RE') {
+            // Status cannot be changed back to RE from FCC, PI, or PS
+            session()->setFlashdata('gagal', 'Status tidak dapat kembali ke RE.');
+            return redirect()->back();
+        }
+
+        if ($currentStatus == 'PS') {
+            // Status PS cannot be updated again
+            session()->setFlashdata('gagal', 'Status PS tidak dapat diupdate lagi.');
+            return redirect()->back();
+        }
+
         // Update the status of the sales data
         $success = $this->modelSales->updateStatus($id_sales, $newStatus);
 
@@ -185,9 +200,11 @@ class SalesController extends BaseController
         } else {
             // Tampilkan pesan gagal
             session()->setFlashdata('gagal', 'Gagal Memperbarui Status Data.');
-            return redirect()->back()->withInput();
+            return redirect()->back();
         }
     }
+
+
     public function search()
     {
         $keyword = $this->request->getPost('carisales'); // Mengambil data dari POST

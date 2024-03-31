@@ -204,6 +204,8 @@ class ModelSales extends Model
         }
     }
 
+
+    //UPDATE STATUS
     public function updateStatus($id_sales, $newStatus)
     {
         $success = false;
@@ -236,12 +238,12 @@ class ModelSales extends Model
     public function searchSales($keyword)
     {
         return $this->table('datasales')
-                    ->like('noSC', $keyword)
-                    ->orLike('nama_pengguna', $keyword)
-                    ->orLike('alamat_instl', $keyword)
-                    ->orLike('sektor', $keyword)
-                    ->orLike('sto', $keyword)
-                    ->orLike('status', $keyword)
-                    ->findAll();
+            ->like('noSC', $keyword)
+            ->orLike('nama_pengguna', $keyword)
+            ->orLike('alamat_instl', $keyword)
+            ->orLike('sektor', $keyword)
+            ->orLike('sto', $keyword)
+            ->orLike('status', $keyword)
+            ->findAll();
     }
 }

@@ -140,80 +140,7 @@
                         </div>
                     </div>
 
-                    <!-- UPDATE -->
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead style="background-color: #184240; color: white; text-align: center;">
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Tanggal Order </th>
-                                    <th>Tanggal Update </th>
-                                    <th>Nomor SC </th>
-                                    <th>Nama Pengguna</th>
-                                    <th>Alamat Instalasi</th>
-                                    <th>Sektor</th>
-                                    <th>STO</th>
-                                    <th>Status</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($salesData as $key => $sd) : ?>
-                                    <tr>
-                                        <td style="width: 30px; text-align: center;"><?= $key + 1; ?></td>
-                                        <td><?= $sd['tanggal_order']; ?></td>
-                                        <td><?= $sd['tanggal_update']; ?></td>
-                                        <td><?= $sd['noSC']; ?></td>
-                                        <td><?= $sd['nama_pengguna']; ?></td>
-                                        <td><?= $sd['alamat_instl']; ?></td>
-                                        <td><?= $sd['sektor']; ?></td>
-                                        <td><?= $sd['sto']; ?></td>
-                                        <td><?= $sd['status']; ?></td>
-                                        <td style="width: 210px;">
-                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
-                                            <!-- Formulir update status -->
-                                            <form action="<?= base_url('updateStatus/' . $sd['id_sales']); ?>" method="post" class="d-inline">
-                                                <input type="hidden" name="_method" id="DELETE">
-
-                                                <!-- Tombol untuk memunculkan modal dropdown -->
-                                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#statusModal<?= $sd['id_sales']; ?>">Update</button>
-
-                                                <!-- Modal dropdown status -->
-                                                <div class="modal fade" id="statusModal<?= $sd['id_sales']; ?>" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="statusModalLabel">Pilih Status Baru</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <select name="status" class="form-control">
-                                                                    <option value="RE">RE</option>
-                                                                    <option value="FCC">FCC</option>
-                                                                    <option value="PI">PI</option>
-                                                                    <option value="PS">PS</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
                     <!-- Fitur paginasi -->
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"></div>
@@ -447,7 +374,80 @@
                         </div>
                     </div>
 
+                    <!-- UPDATE -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead style="background-color: #184240; color: white; text-align: center;">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Tanggal Order </th>
+                                    <th>Tanggal Update </th>
+                                    <th>Nomor SC </th>
+                                    <th>Nama Pengguna</th>
+                                    <th>Alamat Instalasi</th>
+                                    <th>Sektor</th>
+                                    <th>STO</th>
+                                    <th>Status</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($salesData as $key => $sd) : ?>
+                                    <tr>
+                                        <td style="width: 30px; text-align: center;"><?= $key + 1; ?></td>
+                                        <td><?= $sd['tanggal_order']; ?></td>
+                                        <td><?= $sd['tanggal_update']; ?></td>
+                                        <td><?= $sd['noSC']; ?></td>
+                                        <td><?= $sd['nama_pengguna']; ?></td>
+                                        <td><?= $sd['alamat_instl']; ?></td>
+                                        <td><?= $sd['sektor']; ?></td>
+                                        <td><?= $sd['sto']; ?></td>
+                                        <td><?= $sd['status']; ?></td>
+                                        <td style="width: 210px;">
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
+                                            <!-- Formulir update status -->
+                                            <form action="<?= base_url('updateStatus/' . $sd['id_sales']); ?>" method="post" class="d-inline">
+                                                <input type="hidden" name="_method" id="DELETE">
 
+                                                <!-- Tombol untuk memunculkan modal dropdown -->
+                                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#statusModal<?= $sd['id_sales']; ?>">Update</button>
+
+                                                <!-- Modal dropdown status -->
+                                                <div class="modal fade" id="statusModal<?= $sd['id_sales']; ?>" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="statusModalLabel">Pilih Status Baru</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <select name="status" class="form-control">
+                                                                    <option value="RE" <?= $sd['status'] == 'RE' ? 'selected' : ''; ?>>RE</option>
+                                                                    <option value="FCC" <?= $sd['status'] == 'FCC' ? 'selected' : ''; ?>>FCC</option>
+                                                                    <option value="PI" <?= $sd['status'] == 'PI' ? 'selected' : ''; ?>>PI</option>
+                                                                    <option value="PS" <?= $sd['status'] == 'PS' ? 'selected' : ''; ?>>PS</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- END UPDATE -->
 
                     <!-- /.container-fluid -->
 
@@ -524,20 +524,18 @@
         <!-- UPDATE -->
         <script>
             $(document).ready(function() {
-                $('.btn-update').click(function() {
+                // Saat halaman dimuat, cek status setiap data penjualan
+                $('.btn-update').each(function() {
                     var id_sales = $(this).data('id');
 
-                    // Kirim permintaan AJAX untuk memperbarui status
+                    // Kirim permintaan AJAX untuk memeriksa status
                     $.ajax({
-                        url: "updateStatus/" + id_sales,
+                        url: "checkStatus/" + id_sales,
                         method: "post",
                         success: function(response) {
-                            // Tampilkan pesan sukses atau gagal
-                            alert(response.message);
-
-                            // Muat ulang halaman jika berhasil
-                            if (response.success) {
-                                location.reload();
+                            // Jika status adalah PS, nonaktifkan tombol update
+                            if (response.status == 'PS') {
+                                $('#btn-update-' + id_sales).prop('disabled', true);
                             }
                         },
                         error: function(xhr, status, error) {
@@ -548,6 +546,8 @@
             });
         </script>
 
+
+        <!-- UPDATE -->
         <script>
             $(document).ready(function() {
                 // Tampilkan modal dropdown saat tombol "Update" di klik
@@ -556,6 +556,5 @@
                 });
             });
         </script>
-
 
     </div>
