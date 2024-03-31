@@ -7,8 +7,12 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Verifikasi</h1>
-        <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
-
+        <div>
+            <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
+            <a href="<?= site_url('fcc/export') ?>" class="btn btn-success ml-3">
+                <i class="fas fa-file-download"></i> Export Excel
+            </a>
+        </div>
     </div>
 
     <hr>
