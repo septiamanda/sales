@@ -28,36 +28,28 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-2 text-gray-800">Tabel Sektor</h1>
+                        <a href="<?= base_url('tambahDataSektor'); ?>" class="d-none d-sm-inline-block btn btn-danger shadow-sm ml-auto">
+                            <i class="fas fa-plus fa-sm text-#184240"></i> Sektor
+                        </a>
+                    </div>
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-sm-flex justify-content-between align-items-center">
-                            <h6 class="m-0 font-weight-bold text-primary">List Data Sektor</h6>
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-#184240">Data Sektor</h6>
                         </div>
-
-                        <!-- Form pencarian dan Tambah Data Sektor -->
                         <div class="card-body">
-                            <form action="" method="get">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control col-8" name="cari_sektor" value="" placeholder="Masukkan kata kunci..." aria-label="Cari.." aria-describedby="button-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit" id="cariSektor">Cari</button>
-                                    </div>
-                            </form>
-                                    <div class="col-md-6 d-flex justify-content-end align-items-center ml-auto">
-                                        <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
-                                            <i class="fas fa-plus fa-sm"></i> Tambah Data Sektor
-                                        </a>
-                                    </div>
-                                </div>
 
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="sektorTable" width="100%" cellspacing="0">
-                                    <thead style="text-align:center; color:black;" >
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead style="background-color: #184240; color: white; text-align: center;">
                                         <tr>
                                             <th>No.</th>
-                                            <th>Datel (Daerah Telkom)</th>
-                                            <th>Nama Sektor</th>
-                                            <th>Aksi</th>
+                                            <th>Datel</th>
+                                            <th>Sektor</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
