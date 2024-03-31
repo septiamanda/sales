@@ -138,9 +138,9 @@
                             </button>
 
                             <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> PDF</button>
-                            <a href="<?=site_url('sales/export')?>" class="btn btn-success ml-3"> 
+                            <a href="<?= site_url('sales/export') ?>" class="btn btn-success ml-3">
                                 <i class="fas fa-file-download"></i> Export Excel
-                            </a>                           
+                            </a>
                         </div>
                     </div>
 
@@ -200,10 +200,10 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <select name="status" class="form-control">
-                                                                    <option value="RE">RE</option>
-                                                                    <option value="FCC">FCC</option>
-                                                                    <option value="PI">PI</option>
-                                                                    <option value="PS">PS</option>
+                                                                    <option value="RE" <?= $sd['status'] == 'RE' ? 'selected' : ''; ?>>RE</option>
+                                                                    <option value="FCC" <?= $sd['status'] == 'FCC' ? 'selected' : ''; ?>>FCC</option>
+                                                                    <option value="PI" <?= $sd['status'] == 'PI' ? 'selected' : ''; ?>>PI</option>
+                                                                    <option value="PS" <?= $sd['status'] == 'PS' ? 'selected' : ''; ?>>PS</option>
                                                                 </select>
                                                             </div>
                                                             <div class="modal-footer">
@@ -406,7 +406,7 @@
                                             <div class="col-sm-9">
 
                                                 <select class="form-control" name="sektorsales" id="sektorsales">
-                                                <option value="" disabled selected>Pilih Sektor</option>
+                                                    <option value="" disabled selected>Pilih Sektor</option>
                                                     <?php if (!empty($sektors)) : ?>
                                                         <?php foreach ($sektors as $sektor) : ?>
                                                             <option value="<?= esc($sektor['nama_sektor']) ?>"><?= esc($sektor['nama_sektor']) ?></option>
@@ -423,7 +423,7 @@
                                             <div class="col-sm-9">
 
                                                 <select class="form-control" name="stosales" id="stosales">
-                                                <option value="" disabled selected>Pilih STO</option>
+                                                    <option value="" disabled selected>Pilih STO</option>
                                                     <?php if (!empty($stos)) : ?>
                                                         <?php foreach ($stos as $sto) : ?>
                                                             <option value="<?= $sto['STO'] ?>"><?= $sto['STO'] ?></option>
@@ -465,80 +465,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- UPDATE -->
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead style="background-color: #184240; color: white; text-align: center;">
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Tanggal Order </th>
-                                    <th>Tanggal Update </th>
-                                    <th>Nomor SC </th>
-                                    <th>Nama Pengguna</th>
-                                    <th>Alamat Instalasi</th>
-                                    <th>Sektor</th>
-                                    <th>STO</th>
-                                    <th>Status</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($salesData as $key => $sd) : ?>
-                                    <tr>
-                                        <td style="width: 30px; text-align: center;"><?= $key + 1; ?></td>
-                                        <td><?= $sd['tanggal_order']; ?></td>
-                                        <td><?= $sd['tanggal_update']; ?></td>
-                                        <td><?= $sd['noSC']; ?></td>
-                                        <td><?= $sd['nama_pengguna']; ?></td>
-                                        <td><?= $sd['alamat_instl']; ?></td>
-                                        <td><?= $sd['sektor']; ?></td>
-                                        <td><?= $sd['sto']; ?></td>
-                                        <td><?= $sd['status']; ?></td>
-                                        <td style="width: 210px;">
-                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
-                                            <!-- Formulir update status -->
-                                            <form action="<?= base_url('updateStatus/' . $sd['id_sales']); ?>" method="post" class="d-inline">
-                                                <input type="hidden" name="_method" id="DELETE">
-
-                                                <!-- Tombol untuk memunculkan modal dropdown -->
-                                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#statusModal<?= $sd['id_sales']; ?>">Update</button>
-
-                                                <!-- Modal dropdown status -->
-                                                <div class="modal fade" id="statusModal<?= $sd['id_sales']; ?>" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="statusModalLabel">Pilih Status Baru</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <select name="status" class="form-control">
-                                                                    <option value="RE" <?= $sd['status'] == 'RE' ? 'selected' : ''; ?>>RE</option>
-                                                                    <option value="FCC" <?= $sd['status'] == 'FCC' ? 'selected' : ''; ?>>FCC</option>
-                                                                    <option value="PI" <?= $sd['status'] == 'PI' ? 'selected' : ''; ?>>PI</option>
-                                                                    <option value="PS" <?= $sd['status'] == 'PS' ? 'selected' : ''; ?>>PS</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                
                     <!-- END UPDATE -->
 
                     <!-- /.container-fluid -->
