@@ -6,27 +6,35 @@ use App\Controllers\BaseController;
 use App\Models\ModelSales;
 use App\Models\SektorModel;
 use App\Models\STOModel;
+use App\Models\ModelDatel;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 class SalesController extends BaseController
 {
     protected $modelSales;
     protected $modelSTO;
     protected $modelSektor;
+    protected $modelDatel;
 
     public function __construct()
     {
         $this->modelSales = new ModelSales();
         $this->modelSTO = new STOModel();
         $this->modelSektor = new SektorModel();
+        $this->modelDatel = new ModelDatel();
+
     }
 
     public function listSales(): string
     {
         $data['salesData'] = $this->modelSales->getSales();
-        $data['sd'] = ['id_sales' => 0];
+        $data['sd'] = ['id_sales' => 0]; 
 
         $data['stos'] = $this->modelSTO->getformSTO();
         $data['sektors'] = $this->modelSektor->getformSektor();
+        $data['datels']=$this->modelDatel->getDatel();
 
         $date = $this->request->getGet('tanggal_order');
 
@@ -46,6 +54,7 @@ class SalesController extends BaseController
             'namaPel' => 'required',
             'alamatInt' => 'required',
             'tanggal_sales' => 'required',
+            'datelsales' => 'required',
             'sektorsales' => 'required',
             'stosales' => 'required',
             'status' => 'required'
@@ -64,6 +73,9 @@ class SalesController extends BaseController
             ],
             'tanggal_sales' => [
                 'required' => 'Kolom Tanggal Order harus diisi'
+            ],
+            'datelsales' => [
+                'required' => 'Kolom Datel harus diisi'
             ],
             'sektorsales' => [
                 'required' => 'Kolom Sektor harus diisi'
@@ -88,6 +100,7 @@ class SalesController extends BaseController
         $namapel = $this->request->getVar('namaPel');
         $almatint = $this->request->getVar('alamatInt');
         $tanggalder = $this->request->getVar('tanggal_sales');
+        $datelles = $this->request->getVar('datelsales');
         $sektorles = $this->request->getVar('sektorsales');
         $stoles = $this->request->getVar('stosales');
         $status = $this->request->getVar('status');
@@ -108,6 +121,7 @@ class SalesController extends BaseController
             'alamat_instl' => $almatint,
             'tanggal_order' => $tanggal_order,
             'tanggal_update' => $tanggal_update,
+            'datel' => $datelles,
             'sektor' => $sektorles,
             'sto' => $stoles,
             'status' => $status
@@ -130,6 +144,7 @@ class SalesController extends BaseController
         $namapel = $this->request->getVar('namaPel');
         $almatint = $this->request->getVar('alamatInt');
         $tanggalder = $this->request->getVar('tanggal_sales');
+        $datelles = $this->request->getVar('datelsales');
         $sektorles = $this->request->getVar('sektorsales');
         $stoles = $this->request->getVar('stosales');
         // $status = $this->request->getVar('status');
@@ -140,6 +155,7 @@ class SalesController extends BaseController
             'nama_pengguna' => $namapel,
             'alamat_instl' => $almatint,
             'tanggal_order' => $tanggalder,
+            'datel' => $datelles,
             'sektor' => $sektorles,
             'sto' => $stoles,
             // 'status' => $status
@@ -190,8 +206,8 @@ class SalesController extends BaseController
             return redirect()->back();
         }
 
-        // Update the status of the sales data
-        $success = $this->modelSales->updateStatus($id_sales, $newStatus);
+            // Update the status of the sales data
+            $success = $this->modelSales->updateStatus($id_sales, $newStatus);
 
         if ($success) {
             // Tampilkan pesan sukses
@@ -200,17 +216,83 @@ class SalesController extends BaseController
         } else {
             // Tampilkan pesan gagal
             session()->setFlashdata('gagal', 'Gagal Memperbarui Status Data.');
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
+
+        return $this->response->setJSON($response);
     }
-
-
     public function search()
     {
-        $keyword = $this->request->getPost('carisales'); // Mengambil data dari POST
+        $sales = $this->modelSales->findAll();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
 
-        $data['salesData'] = $this->modelSales->searchSales($keyword);
+        $sheet->setCellValue('A2', 'Data Sales Telkom Witel Sumbar');
+        $sheet->mergeCells('A2:I2'); 
+        $sheet->getStyle('A2')->getFont()->setBold(true);
+        $sheet->getStyle('A2')->getFont()->setSize(13); 
+        $sheet->getStyle('A2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER); 
+        $sheet->getStyle('A2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); 
 
-        return view('Pages/SALES', $data); // Menampilkan view dengan data hasil pencarian
+        $sheet->setCellValue('A4', 'No');
+        $sheet->setCellValue('B4', 'Tanggal Order');
+        $sheet->setCellValue('C4', 'Tanggal Update');
+        $sheet->setCellValue('D4', 'Nomor SC');
+        $sheet->setCellValue('E4', 'Nama Pengguna');
+        $sheet->setCellValue('F4', 'Alamat Instalasi');
+        $sheet->setCellValue('G4', 'Sektor');
+        $sheet->setCellValue('H4', 'STO');
+        $sheet->setCellValue('I4', 'Status');
+
+        $sheet->getStyle('A4:I4')->getFont()->setBold(true);
+        $sheet->getStyle('A4:I4')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('FFFACD');
+
+       
+        $column = 5;
+        foreach ($sales as $key => $value) {
+            $sheet->setCellValue('A'.$column, ($column-4));
+            $sheet->setCellValue('B'.$column, $value['tanggal_order']); 
+            $sheet->setCellValue('C'.$column, $value['tanggal_update']);
+            $sheet->setCellValue('D'.$column, $value['noSC']);
+            $sheet->setCellValue('E'.$column, $value['nama_pengguna']); 
+            $sheet->setCellValue('F'.$column, $value['alamat_instl']); 
+            $sheet->setCellValue('G'.$column, $value['sektor']); 
+            $sheet->setCellValue('H'.$column, $value['sto']); 
+            $sheet->setCellValue('I'.$column, $value['status']); 
+            $column++;
+        }  
+        
+        $styleArray = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'],
+                ],
+            ],
+        ];
+        $endRow = max($column, 4); 
+        $sheet->getStyle('A4:I'.$endRow)->applyFromArray($styleArray);
+
+
+        $sheet->getColumnDimension('A')->SetAutoSize(true);
+        $sheet->getColumnDimension('B')->SetAutoSize(true);
+        $sheet->getColumnDimension('C')->SetAutoSize(true);
+        $sheet->getColumnDimension('D')->SetAutoSize(true);
+        $sheet->getColumnDimension('E')->SetAutoSize(true);
+        $sheet->getColumnDimension('F')->SetAutoSize(true);
+        $sheet->getColumnDimension('G')->SetAutoSize(true);
+        $sheet->getColumnDimension('H')->SetAutoSize(true);
+        $sheet->getColumnDimension('I')->SetAutoSize(true);
+
+
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=sales.xlsx');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        exit();
+            
     }
 }
