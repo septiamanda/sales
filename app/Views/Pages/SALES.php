@@ -136,7 +136,11 @@
                             <button class="btn btn-danger shadow-sm ml-2" data-bs-toggle="modal" data-bs-target="#tambahSales">
                                 <i class="fas fa-plus fa-sm"></i> Tambah Data Sales
                             </button>
-                            <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
+
+                            <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> PDF</button>
+                            <a href="<?=site_url('sales/export')?>" class="btn btn-success ml-3"> 
+                                <i class="fas fa-file-download"></i> Export Excel
+                            </a>                           
                         </div>
                     </div>
 

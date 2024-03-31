@@ -6,6 +6,9 @@ use App\Controllers\BaseController;
 use App\Models\ModelSales;
 use App\Models\SektorModel;
 use App\Models\STOModel;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 class SalesController extends BaseController
 {
@@ -18,12 +21,13 @@ class SalesController extends BaseController
         $this->modelSales = new ModelSales();
         $this->modelSTO = new STOModel();
         $this->modelSektor = new SektorModel();
+
     }
 
     public function listSales(): string
     {
         $data['salesData'] = $this->modelSales->getSales();
-        $data['sd'] = ['id_sales' => 0];
+        $data['sd'] = ['id_sales' => 0]; 
 
         $data['stos'] = $this->modelSTO->getformSTO();
         $data['sektors'] = $this->modelSektor->getformSektor();
@@ -173,27 +177,124 @@ class SalesController extends BaseController
 
     public function updateStatus($id_sales)
     {
-        $newStatus = $this->request->getVar('status');
+        // Get the current status of the sales data
+        $currentStatus = $this->modelSales->getStatus($id_sales);
 
-        // Update the status of the sales data
-        $success = $this->modelSales->updateStatus($id_sales, $newStatus);
+        // Define the mapping of current status to new status
+        $statusMapping = [
+            'RE' => 'FCC',
+            'FCC' => 'PI',
+            'PI' => 'PS'
+        ];
 
-        if ($success) {
-            // Tampilkan pesan sukses
-            session()->setFlashdata('success', 'Status Data Berhasil Diperbarui.');
-            return redirect()->to('listSales');
+        // Check if the current status exists in the mapping
+        if (array_key_exists($currentStatus, $statusMapping)) {
+            // Get the new status based on the mapping
+            $newStatus = $statusMapping[$currentStatus];
+
+            // Update the status of the sales data
+            $success = $this->modelSales->updateStatus($id_sales, $newStatus);
+
+            if ($success) {
+                // Tampilkan pesan sukses
+                $response = [
+                    'success' => true,
+                    'message' => 'Status Data Berhasil Diperbarui.'
+                ];
+
+                session()->setFlashdata('success', 'Status Data Berhasil Diperbarui.');
+                return redirect()->to('listSales');
+            } else {
+                // Tampilkan pesan gagal
+                $response = [
+                    'success' => false,
+                    'message' => 'Gagal Memperbarui Status Data.'
+                ];
+            }
         } else {
-            // Tampilkan pesan gagal
-            session()->setFlashdata('gagal', 'Gagal Memperbarui Status Data.');
-            return redirect()->back()->withInput();
+            // Tampilkan pesan error jika status tidak valid
+            $response = [
+                'success' => false,
+                'message' => 'Status Saat Ini Tidak Valid.'
+            ];
         }
+
+        return $this->response->setJSON($response);
     }
-    public function search()
+
+    public function export()
     {
-        $keyword = $this->request->getPost('carisales'); // Mengambil data dari POST
+        $sales = $this->modelSales->findAll();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
 
-        $data['salesData'] = $this->modelSales->searchSales($keyword);
+        $sheet->setCellValue('A2', 'Data Sales Telkom Witel Sumbar');
+        $sheet->mergeCells('A2:I2'); 
+        $sheet->getStyle('A2')->getFont()->setBold(true);
+        $sheet->getStyle('A2')->getFont()->setSize(13); 
+        $sheet->getStyle('A2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER); 
+        $sheet->getStyle('A2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); 
 
-        return view('Pages/SALES', $data); // Menampilkan view dengan data hasil pencarian
+        $sheet->setCellValue('A4', 'No');
+        $sheet->setCellValue('B4', 'Tanggal Order');
+        $sheet->setCellValue('C4', 'Tanggal Update');
+        $sheet->setCellValue('D4', 'Nomor SC');
+        $sheet->setCellValue('E4', 'Nama Pengguna');
+        $sheet->setCellValue('F4', 'Alamat Instalasi');
+        $sheet->setCellValue('G4', 'Sektor');
+        $sheet->setCellValue('H4', 'STO');
+        $sheet->setCellValue('I4', 'Status');
+
+        $sheet->getStyle('A4:I4')->getFont()->setBold(true);
+        $sheet->getStyle('A4:I4')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('FFFACD');
+
+       
+        $column = 5;
+        foreach ($sales as $key => $value) {
+            $sheet->setCellValue('A'.$column, ($column-4));
+            $sheet->setCellValue('B'.$column, $value['tanggal_order']); 
+            $sheet->setCellValue('C'.$column, $value['tanggal_update']);
+            $sheet->setCellValue('D'.$column, $value['noSC']);
+            $sheet->setCellValue('E'.$column, $value['nama_pengguna']); 
+            $sheet->setCellValue('F'.$column, $value['alamat_instl']); 
+            $sheet->setCellValue('G'.$column, $value['sektor']); 
+            $sheet->setCellValue('H'.$column, $value['sto']); 
+            $sheet->setCellValue('I'.$column, $value['status']); 
+            $column++;
+        }  
+        
+        $styleArray = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'],
+                ],
+            ],
+        ];
+        $endRow = max($column, 4); 
+        $sheet->getStyle('A4:I'.$endRow)->applyFromArray($styleArray);
+
+
+        $sheet->getColumnDimension('A')->SetAutoSize(true);
+        $sheet->getColumnDimension('B')->SetAutoSize(true);
+        $sheet->getColumnDimension('C')->SetAutoSize(true);
+        $sheet->getColumnDimension('D')->SetAutoSize(true);
+        $sheet->getColumnDimension('E')->SetAutoSize(true);
+        $sheet->getColumnDimension('F')->SetAutoSize(true);
+        $sheet->getColumnDimension('G')->SetAutoSize(true);
+        $sheet->getColumnDimension('H')->SetAutoSize(true);
+        $sheet->getColumnDimension('I')->SetAutoSize(true);
+
+
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=sales.xlsx');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        exit();
+            
     }
+
 }

@@ -8,7 +8,7 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Registrasi</h1>
         <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
-
+    
     </div>
 
     <hr>
