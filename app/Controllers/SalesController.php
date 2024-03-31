@@ -188,4 +188,12 @@ class SalesController extends BaseController
             return redirect()->back()->withInput();
         }
     }
+    public function search()
+    {
+        $keyword = $this->request->getPost('carisales'); // Mengambil data dari POST
+
+        $data['salesData'] = $this->modelSales->searchSales($keyword);
+
+        return view('Pages/SALES', $data); // Menampilkan view dengan data hasil pencarian
+    }
 }

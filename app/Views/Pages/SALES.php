@@ -97,26 +97,51 @@
 
                 <!-- form pencarian -->
                 <div class="card-body">
-                    <div class="row mb-3" id="cari-sales">
-                        <div class="col-md-6 d-flex justify-content-start align-items-center">
-                            <form action="" method="get" class="form-inline my-2">
-                                <input class="form-control" type="text" placeholder="Search..." aria-label="Search" name="carisales">
-                            </form>
-                        </div>
+                    <div class="row mb-3" style="margin-left: 0px" id="cari-sales">
+                        <form action="<?= base_url('search') ?>" method="post" class="form-inline my-2">
+                            <input class="form-control" type="text" placeholder="Search..." aria-label="Search" name="carisales">
+                        </form>
 
-                        <!-- Button trigger modal tambahdata & lewat-->
-                        <div class="col-md-6 d-flex justify-content-end align-items-center ">
+                        <!-- Tampilkan hasil pencarian jika sudah ada hasil -->
+                        <?php if (isset($sales) && !empty($sales)) : ?>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>NoSC</th>
+                                        <th>Nama Pengguna</th>
+                                        <th>Alamat Instalasi</th>
+                                        <th>Sektor</th>
+                                        <th>STO</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($sales as $sale) : ?>
+                                        <tr>
+                                            <td><?= $sale['noSC'] ?></td>
+                                            <td><?= $sale['nama_pengguna'] ?></td>
+                                            <td><?= $sale['alamat_instl'] ?></td>
+                                            <td><?= $sale['sektor'] ?></td>
+                                            <td><?= $sale['sto'] ?></td>
+                                            <td><?= $sale['status'] ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        <?php elseif (isset($sales) && empty($sales)) : ?>
+                            <p>No data found</p>
+                        <?php endif; ?>
+
+                        <div class="col-md-6 d-flex justify-content-end align-items-center" style="margin-left: 320px">
                             <button class="btn btn-danger shadow-sm ml-2" data-bs-toggle="modal" data-bs-target="#tambahSales">
                                 <i class="fas fa-plus fa-sm"></i> Tambah Data Sales
                             </button>
-
                             <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
-
                         </div>
-
                     </div>
 
                     <!-- UPDATE -->
+
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead style="background-color: #184240; color: white; text-align: center;">
