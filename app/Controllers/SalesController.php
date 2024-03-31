@@ -18,13 +18,12 @@ class SalesController extends BaseController
         $this->modelSales = new ModelSales();
         $this->modelSTO = new STOModel();
         $this->modelSektor = new SektorModel();
-
     }
 
     public function listSales(): string
     {
         $data['salesData'] = $this->modelSales->getSales();
-        $data['sd'] = ['id_sales' => 0]; 
+        $data['sd'] = ['id_sales' => 0];
 
         $data['stos'] = $this->modelSTO->getformSTO();
         $data['sektors'] = $this->modelSektor->getformSektor();
@@ -219,4 +218,12 @@ class SalesController extends BaseController
         return $this->response->setJSON($response);
     }
 
+    public function search()
+    {
+        $keyword = $this->request->getPost('carisales'); // Mengambil data dari POST
+
+        $data['salesData'] = $this->modelSales->searchSales($keyword);
+
+        return view('Pages/SALES', $data); // Menampilkan view dengan data hasil pencarian
+    }
 }
