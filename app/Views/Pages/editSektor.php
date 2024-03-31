@@ -16,9 +16,9 @@
                             <select class="form-control" name="nama_datel" id="nama_datel">
                                 <option value="<?= $modelSektor['nama_datel']; ?>"><?= $modelSektor['nama_datel']; ?></option>
                                 <option value="" disabled selected>--Pilih Datel--</option>                                
-                                <option value="Datel BKT (Bukittinggi)">Datel BKT (Bukittinggi)</option>
-                                <option value="Datel SLK (Solok)">Datel SLK (Solok)</option>
-                                <option value="Non Hero PDG (Padang)">Non Hero PDG (Padang)</option>
+                                <option value="Datel BKT (Bukittinggi)">Datel BKT</option>
+                                <option value="Datel SLK (Solok)">Datel SLK</option>
+                                <option value="Inner PDG">Inner PDG</option>
                             </select>
                         </div>
 

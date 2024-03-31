@@ -65,7 +65,7 @@ $routes->post('simpanSales', 'SalesController::simpanSales');
 $routes->post('editSales', 'SalesController::editSales');
 $routes->post('deleteSales/(:num)', 'SalesController::deleteSales/$1');
 $routes->post('updateStatus/(:num)', 'SalesController::updateStatus/$1');
-$routes->get('cariDataSales', 'SalesController::cariDataSales');
+$routes->post('search', 'SalesController::search');
 
 
 $routes->get('laporan', 'Home::laporan');

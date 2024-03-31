@@ -97,15 +97,42 @@
 
                 <!-- form pencarian -->
                 <div class="card-body">
-                    <div class="row mb-3" id="cari-sales">
-                        <div class="col-md-6 d-flex justify-content-start align-items-center">
-                            <form action="" method="get" class="form-inline my-2">
-                                <input class="form-control" type="text" placeholder="Search..." aria-label="Search" name="carisales">
-                            </form>
-                        </div>
+                    <div class="row mb-3" style="margin-left: 0px" id="cari-sales">
+                        <form action="<?= base_url('search') ?>" method="post" class="form-inline my-2">
+                            <input class="form-control" type="text" placeholder="Search..." aria-label="Search" name="carisales">
+                        </form>
 
-                        <!-- Button trigger modal tambahdata & lewat-->
-                        <div class="col-md-6 d-flex justify-content-end align-items-center ">
+                        <!-- Tampilkan hasil pencarian jika sudah ada hasil -->
+                        <?php if (isset($sales) && !empty($sales)) : ?>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>NoSC</th>
+                                        <th>Nama Pengguna</th>
+                                        <th>Alamat Instalasi</th>
+                                        <th>Sektor</th>
+                                        <th>STO</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($sales as $sale) : ?>
+                                        <tr>
+                                            <td><?= $sale['noSC'] ?></td>
+                                            <td><?= $sale['nama_pengguna'] ?></td>
+                                            <td><?= $sale['alamat_instl'] ?></td>
+                                            <td><?= $sale['sektor'] ?></td>
+                                            <td><?= $sale['sto'] ?></td>
+                                            <td><?= $sale['status'] ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        <?php elseif (isset($sales) && empty($sales)) : ?>
+                            <p>No data found</p>
+                        <?php endif; ?>
+
+                        <div class="col-md-6 d-flex justify-content-end align-items-center" style="margin-left: 320px">
                             <button class="btn btn-danger shadow-sm ml-2" data-bs-toggle="modal" data-bs-target="#tambahSales">
                                 <i class="fas fa-plus fa-sm"></i> Tambah Data Sales
                             </button>
@@ -115,9 +142,9 @@
                                 <i class="fas fa-file-download"></i> Export Excel
                             </a>                           
                         </div>
-
                     </div>
 
+                    <!-- UPDATE -->
 
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -152,9 +179,38 @@
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
-                                            <form action="<?= base_url('updateStatus/'  . $sd['id_sales']); ?>" method="post" class="d-inline">
+                                            <!-- Formulir update status -->
+                                            <form action="<?= base_url('updateStatus/' . $sd['id_sales']); ?>" method="post" class="d-inline">
                                                 <input type="hidden" name="_method" id="DELETE">
-                                                <button type="submit" class="btn btn-outline-danger">Update</button>
+
+                                                <!-- Tombol untuk memunculkan modal dropdown -->
+                                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#statusModal<?= $sd['id_sales']; ?>">Update</button>
+
+                                                <!-- Modal dropdown status -->
+                                                <div class="modal fade" id="statusModal<?= $sd['id_sales']; ?>" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="statusModalLabel">Pilih Status Baru</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <select name="status" class="form-control">
+                                                                    <option value="RE">RE</option>
+                                                                    <option value="FCC">FCC</option>
+                                                                    <option value="PI">PI</option>
+                                                                    <option value="PS">PS</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </form>
                                         </td>
                                     </tr>
@@ -469,6 +525,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
+        <!-- UPDATE -->
         <script>
             $(document).ready(function() {
                 $('.btn-update').click(function() {
@@ -495,6 +552,14 @@
             });
         </script>
 
+        <script>
+            $(document).ready(function() {
+                // Tampilkan modal dropdown saat tombol "Update" di klik
+                $('.btn-outline-danger').click(function() {
+                    $($(this).data('target')).modal('show');
+                });
+            });
+        </script>
 
 
     </div>

@@ -273,8 +273,7 @@ class SalesController extends BaseController
                 ],
             ],
         ];
-        // $sheet->getStyle('A4:I'.($column-4))->applyFromArray($styleArray);
-        $endRow = max($column, 4); // Pastikan endRow tidak kurang dari 4
+        $endRow = max($column, 4); 
         $sheet->getStyle('A4:I'.$endRow)->applyFromArray($styleArray);
 
 
