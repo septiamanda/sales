@@ -14,20 +14,15 @@
                             <label style="color: black" for="datel">Datel (Daerah Telkom)</label>
                             <select class="form-control" name="nama_datel" id="nama_datel" required>
                                 <option value="" disabled selected>--Pilih Datel--</option>
-                                <option value="Datel BKT (Bukittinggi)">Datel BKT (Bukittinggi)</option>
-                                <option value="Datel SLK (Solok)">Datel SLK (Solok)</option>
-                                <option value="Inner PDG (Padang)">Inner PDG (Padang)</option>
+                                <option value="Datel BKT">Datel BKT</option>
+                                <option value="Datel SLK">Datel SLK</option>
+                                <option value="Inner PDG">Inner PDG</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label style="color: black" for="nama-sektor">Nama Sektor</label>
                             <input type="text" class="form-control" name="nama_sektor" id="nama_sektor" required>
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label style="color: black" for="hero_sektor">Hero Sektor</label>
-                            <input type="text" class="form-control" name="hero_sektor" id="hero_sektor" required>
                         </div>
 
                         <div class="input-group d-flex justify-content-center">

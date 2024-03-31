@@ -16,9 +16,9 @@
                             <select class="form-control" name="nama_datel" id="nama_datel">
                                 <option value="<?= $modelSektor['nama_datel']; ?>"><?= $modelSektor['nama_datel']; ?></option>
                                 <option value="" disabled selected>--Pilih Datel--</option>                                
-                                <option value="Datel BKT (Bukittinggi)">Datel BKT (Bukittinggi)</option>
-                                <option value="Datel SLK (Solok)">Datel SLK (Solok)</option>
-                                <option value="Non Hero PDG (Padang)">Non Hero PDG (Padang)</option>
+                                <option value="Datel BKT (Bukittinggi)">Datel BKT</option>
+                                <option value="Datel SLK (Solok)">Datel SLK</option>
+                                <option value="Inner PDG">Inner PDG</option>
                             </select>
                         </div>
 
@@ -26,12 +26,6 @@
                         <div class="form-group">
                             <label style="color: black" for="nama-sektor">Nama Sektor</label>
                             <input type="text" class="form-control" placeholder="Masukkan nama sektor"  name="nama_sektor" id="nama_sektor" value="<?= $modelSektor['nama_sektor']; ?>" required >  
-                        </div>
-                        
-                        <!-- Field Hero Sektor -->
-                        <div class="form-group">
-                            <label style="color: black" for="hero-sektor" >Hero Sektor</label>
-                            <input type="text" class="form-control" placeholder="Masukkan hero sektor"  name="hero_sektor" id="hero_sektor" value="<?= $modelSektor['hero_sektor']; ?>" required >
                         </div>
 
                         <div class="input-group mb-3 d-flex justify-content-center">
