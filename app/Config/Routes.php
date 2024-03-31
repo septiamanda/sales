@@ -67,7 +67,5 @@ $routes->post('deleteSales/(:num)', 'SalesController::deleteSales/$1');
 $routes->post('updateStatus/(:num)', 'SalesController::updateStatus/$1');
 $routes->post('search', 'SalesController::search');
 
-
 $routes->get('laporan', 'Home::laporan');
-
 $routes->get('growth', 'Home::growth');
