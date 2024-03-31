@@ -12,7 +12,7 @@
 namespace CodeIgniter\Database\SQLite3;
 
 use CodeIgniter\Database\Exceptions\DataException;
-use stdclass;
+use stdClass;
 
 /**
  * Class Table
@@ -28,7 +28,7 @@ class Table
     /**
      * All of the fields this table represents.
      *
-     * @var array<string, array<string, bool|int|string|null>>
+     * @var array<string, array<string, bool|int|string|null>> [name => attributes]
      */
     protected $fields = [];
 
@@ -156,7 +156,7 @@ class Table
     /**
      * Drops columns from the table.
      *
-     * @param array|string $columns
+     * @param list<string>|string $columns Column names to drop.
      *
      * @return Table
      */
@@ -177,14 +177,15 @@ class Table
     }
 
     /**
-     * Modifies a field, including changing data type,
-     * renaming, etc.
+     * Modifies a field, including changing data type, renaming, etc.
+     *
+     * @param list<array<string, bool|int|string|null>> $fieldsToModify
      *
      * @return Table
      */
-    public function modifyColumn(array $fields)
+    public function modifyColumn(array $fieldsToModify)
     {
-        foreach ($fields as $field) {
+        foreach ($fieldsToModify as $field) {
             $oldName = $field['name'];
             unset($field['name']);
 
@@ -373,7 +374,7 @@ class Table
      *
      * @param array|bool $fields
      *
-     * @return mixed
+     * @return         mixed
      * @phpstan-return ($fields is array ? array : mixed)
      */
     protected function formatFields($fields)
@@ -391,6 +392,24 @@ class Table
                 'null'    => $field->nullable,
             ];
 
+            if ($field->default === null) {
+                // `null` means that the default value is not defined.
+                unset($return[$field->name]['default']);
+            } elseif ($field->default === 'NULL') {
+                // 'NULL' means that the default value is NULL.
+                $return[$field->name]['default'] = null;
+            } else {
+                $default = trim($field->default, "'");
+
+                if ($this->isIntegerType($field->type)) {
+                    $default = (int) $default;
+                } elseif ($this->isNumericType($field->type)) {
+                    $default = (float) $default;
+                }
+
+                $return[$field->name]['default'] = $default;
+            }
+
             if ($field->primary_key) {
                 $this->keys['primary'] = [
                     'fields' => [$field->name],
@@ -400,6 +419,30 @@ class Table
         }
 
         return $return;
+    }
+
+    /**
+     * Is INTEGER type?
+     *
+     * @param string $type SQLite data type (case-insensitive)
+     *
+     * @see https://www.sqlite.org/datatype3.html
+     */
+    private function isIntegerType(string $type): bool
+    {
+        return strpos(strtoupper($type), 'INT') !== false;
+    }
+
+    /**
+     * Is NUMERIC type?
+     *
+     * @param string $type SQLite data type (case-insensitive)
+     *
+     * @see https://www.sqlite.org/datatype3.html
+     */
+    private function isNumericType(string $type): bool
+    {
+        return in_array(strtoupper($type), ['NUMERIC', 'DECIMAL'], true);
     }
 
     /**
