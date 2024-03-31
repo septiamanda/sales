@@ -18,13 +18,12 @@ class SalesController extends BaseController
         $this->modelSales = new ModelSales();
         $this->modelSTO = new STOModel();
         $this->modelSektor = new SektorModel();
-
     }
 
     public function listSales(): string
     {
         $data['salesData'] = $this->modelSales->getSales();
-        $data['sd'] = ['id_sales' => 0]; 
+        $data['sd'] = ['id_sales' => 0];
 
         $data['stos'] = $this->modelSTO->getformSTO();
         $data['sektors'] = $this->modelSektor->getformSektor();
@@ -174,49 +173,19 @@ class SalesController extends BaseController
 
     public function updateStatus($id_sales)
     {
-        // Get the current status of the sales data
-        $currentStatus = $this->modelSales->getStatus($id_sales);
+        $newStatus = $this->request->getVar('status');
 
-        // Define the mapping of current status to new status
-        $statusMapping = [
-            'RE' => 'FCC',
-            'FCC' => 'PI',
-            'PI' => 'PS'
-        ];
+        // Update the status of the sales data
+        $success = $this->modelSales->updateStatus($id_sales, $newStatus);
 
-        // Check if the current status exists in the mapping
-        if (array_key_exists($currentStatus, $statusMapping)) {
-            // Get the new status based on the mapping
-            $newStatus = $statusMapping[$currentStatus];
-
-            // Update the status of the sales data
-            $success = $this->modelSales->updateStatus($id_sales, $newStatus);
-
-            if ($success) {
-                // Tampilkan pesan sukses
-                $response = [
-                    'success' => true,
-                    'message' => 'Status Data Berhasil Diperbarui.'
-                ];
-
-                session()->setFlashdata('success', 'Status Data Berhasil Diperbarui.');
-                return redirect()->to('listSales');
-            } else {
-                // Tampilkan pesan gagal
-                $response = [
-                    'success' => false,
-                    'message' => 'Gagal Memperbarui Status Data.'
-                ];
-            }
+        if ($success) {
+            // Tampilkan pesan sukses
+            session()->setFlashdata('success', 'Status Data Berhasil Diperbarui.');
+            return redirect()->to('listSales');
         } else {
-            // Tampilkan pesan error jika status tidak valid
-            $response = [
-                'success' => false,
-                'message' => 'Status Saat Ini Tidak Valid.'
-            ];
+            // Tampilkan pesan gagal
+            session()->setFlashdata('gagal', 'Gagal Memperbarui Status Data.');
+            return redirect()->back()->withInput();
         }
-
-        return $this->response->setJSON($response);
     }
-
 }

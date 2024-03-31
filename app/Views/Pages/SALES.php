@@ -116,7 +116,7 @@
 
                     </div>
 
-
+                    <!-- UPDATE -->
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead style="background-color: #184240; color: white; text-align: center;">
@@ -150,9 +150,38 @@
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
-                                            <form action="<?= base_url('updateStatus/'  . $sd['id_sales']); ?>" method="post" class="d-inline">
+                                            <!-- Formulir update status -->
+                                            <form action="<?= base_url('updateStatus/' . $sd['id_sales']); ?>" method="post" class="d-inline">
                                                 <input type="hidden" name="_method" id="DELETE">
-                                                <button type="submit" class="btn btn-outline-danger">Update</button>
+
+                                                <!-- Tombol untuk memunculkan modal dropdown -->
+                                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#statusModal<?= $sd['id_sales']; ?>">Update</button>
+
+                                                <!-- Modal dropdown status -->
+                                                <div class="modal fade" id="statusModal<?= $sd['id_sales']; ?>" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="statusModalLabel">Pilih Status Baru</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <select name="status" class="form-control">
+                                                                    <option value="RE">RE</option>
+                                                                    <option value="FCC">FCC</option>
+                                                                    <option value="PI">PI</option>
+                                                                    <option value="PS">PS</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </form>
                                         </td>
                                     </tr>
@@ -467,6 +496,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
+        <!-- UPDATE -->
         <script>
             $(document).ready(function() {
                 $('.btn-update').click(function() {
@@ -493,6 +523,14 @@
             });
         </script>
 
+        <script>
+            $(document).ready(function() {
+                // Tampilkan modal dropdown saat tombol "Update" di klik
+                $('.btn-outline-danger').click(function() {
+                    $($(this).data('target')).modal('show');
+                });
+            });
+        </script>
 
 
     </div>
