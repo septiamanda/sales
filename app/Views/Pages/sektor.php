@@ -38,10 +38,6 @@
                         <div class="card-body">
                             <form action="<?= base_url('sektor/cari'); ?>" method="get">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control col-8" name="cari" placeholder="Masukkan kata kunci..." aria-label="Cari.." aria-describedby="button-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit" id="cari">Cari</button>
-                                    </div>
                                     <div class="col-md-6 d-flex justify-content-end align-items-center ml-auto">
                                         <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
                                             <i class="fas fa-plus fa-sm"></i> Tambah Data Sektor
