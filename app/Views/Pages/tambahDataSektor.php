@@ -25,11 +25,6 @@
                             <input type="text" class="form-control" name="nama_sektor" id="nama_sektor" required>
                         </div>
 
-                        <div class="form-group mb-4">
-                            <label style="color: black" for="hero_sektor">Hero Sektor</label>
-                            <input type="text" class="form-control" name="hero_sektor" id="hero_sektor" required>
-                        </div>
-
                         <div class="input-group d-flex justify-content-center">
                             <button id="btn-simpan" type="submit" value="Simpan" name="simpan" class="btn btn-success btn mb-4 mr-4">Simpan</button>
                             <a href="<?=base_url('sektor')?>" class="btn btn-danger btn mb-4">Cancel</a>

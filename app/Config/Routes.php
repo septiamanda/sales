@@ -59,6 +59,7 @@ $routes->post('chartRE', 'REController::tampilChartRE');
 $routes->get('listFCC', 'FCCController::listFCC');
 $routes->post('chartFCC', 'FCCController::tampilChartFCC');
 
+$routes->get('sales/export', 'SalesController::export');
 $routes->get('listSales', 'SalesController::listSales');
 $routes->post('simpanSales', 'SalesController::simpanSales');
 $routes->post('editSales', 'SalesController::editSales');

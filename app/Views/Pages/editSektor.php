@@ -27,12 +27,6 @@
                             <label style="color: black" for="nama-sektor">Nama Sektor</label>
                             <input type="text" class="form-control" placeholder="Masukkan nama sektor"  name="nama_sektor" id="nama_sektor" value="<?= $modelSektor['nama_sektor']; ?>" required >  
                         </div>
-                        
-                        <!-- Field Hero Sektor -->
-                        <div class="form-group">
-                            <label style="color: black" for="hero-sektor" >Hero Sektor</label>
-                            <input type="text" class="form-control" placeholder="Masukkan hero sektor"  name="hero_sektor" id="hero_sektor" value="<?= $modelSektor['hero_sektor']; ?>" required >
-                        </div>
 
                         <div class="input-group mb-3 d-flex justify-content-center">
                             <button type="submit" name="simpan" id="btn-simpan" class="btn btn-primary btn mt-2 mb-1 mr-2">Update</button>

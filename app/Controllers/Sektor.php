@@ -46,12 +46,10 @@ class Sektor extends BaseController
 
         $nama_datel = $this->request->getVar('nama_datel');
         $nama_sektor = $this->request->getVar('nama_sektor');
-        $hero_sektor = $this->request->getVar('hero_sektor');
 
         $data = [
             'nama_datel'=>$nama_datel,
-            'nama_sektor'=>$nama_sektor,
-            'hero_sektor'=>$hero_sektor
+            'nama_sektor'=>$nama_sektor
         ];
 
         session()->setFlashdata('Pesan', 'Data Berhasil Ditambahkan');
@@ -70,12 +68,10 @@ class Sektor extends BaseController
         $id_sektor = $this->request->getVar('kode_sektor');
         $nama_datel = $this->request->getVar('nama_datel');
         $nama_sektor = $this->request->getVar('nama_sektor');
-        $hero_sektor = $this->request->getVar('hero_sektor');
 
         $data = [
             'nama_datel'=>$nama_datel,
-            'nama_sektor'=>$nama_sektor,
-            'hero_sektor'=>$hero_sektor
+            'nama_sektor'=>$nama_sektor
         ];
 
         $this->modelSektor->update($id_sektor, $data);

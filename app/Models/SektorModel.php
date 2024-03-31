@@ -10,7 +10,7 @@ class SektorModel extends Model
     protected $table = 'sektor';
     protected $primaryKey = 'id_sektor';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['id_sektor','nama_datel','nama_sektor','hero_sektor'];
+    protected $allowedFields = ['id_sektor','nama_datel','nama_sektor'];
 
     public function getSektor($id = false) 
     {   
@@ -29,8 +29,7 @@ class SektorModel extends Model
     {
         $query = "SELECT * FROM `sektor` WHERE
                                 `nama_datel` LIKE '%$keyword%' OR
-                                `nama_sektor` LIKE '%$keyword%' OR
-                                `hero_sektor` LIKE '%$keyword%' 
+                                `nama_sektor` LIKE '%$keyword%'
                                 ORDER BY `id_sektor` DESC";
         return $this->db->query($query)->getResultArray();
     }

@@ -36,19 +36,19 @@
 
                         <!-- Form pencarian dan Tambah Data Sektor -->
                         <div class="card-body">
-                            <form action="<?= base_url('sektor/cari'); ?>" method="get">
+                            <form action="" method="get">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control col-8" name="cari" placeholder="Masukkan kata kunci..." aria-label="Cari.." aria-describedby="button-addon2">
+                                    <input type="text" class="form-control col-8" name="cari_sektor" value="" placeholder="Masukkan kata kunci..." aria-label="Cari.." aria-describedby="button-addon2">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit" id="cari">Cari</button>
+                                        <button class="btn btn-primary" type="submit" id="cariSektor">Cari</button>
                                     </div>
+                            </form>
                                     <div class="col-md-6 d-flex justify-content-end align-items-center ml-auto">
                                         <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
                                             <i class="fas fa-plus fa-sm"></i> Tambah Data Sektor
                                         </a>
                                     </div>
                                 </div>
-                            </form>
 
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="sektorTable" width="100%" cellspacing="0">
@@ -57,7 +57,6 @@
                                             <th>No.</th>
                                             <th>Datel (Daerah Telkom)</th>
                                             <th>Nama Sektor</th>
-                                            <th style="width: 20%;">HERO Sektor</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -72,7 +71,6 @@
                                                 <td style="text-align:center;"><?= $no++; ?></td>
                                                 <td><?= $data['nama_datel']; ?></td>
                                                 <td><?= $data['nama_sektor']; ?></td>
-                                                <td><?= $data['hero_sektor']; ?></td>
                                                 <td>
                                                     <div style="display:flex; justify-content:center; gap:10px;">
                                                         <a href="<?= base_url('editSektor/'.$data['id_sektor']); ?>" class="btn btn" style="border-color: #184240; color: #184240;">  
@@ -100,7 +98,7 @@
                                                                     <input type="hidden" name="id_sektor" value="<?= $data['id_sektor']?>">
                                                                     <div class="modal-body"> 
                                                                         <h6 class="text-center">Apakah Anda yakin akan menghapus data ini? <br> 
-                                                                            <span class="text-danger"><?= $data['nama_datel']?> - <?= $data['nama_sektor']?> - <?= $data['hero_sektor']?></span>
+                                                                            <span class="text-danger"><?= $data['nama_datel']?> - <?= $data['nama_sektor']?></span>
                                                                         </h6>
                                                                     </div>
                                                                     <div class="modal-footer">
