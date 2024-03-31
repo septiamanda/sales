@@ -253,12 +253,13 @@ class SalesController extends BaseController
         $sheet->setCellValue('D4', 'Nomor SC');
         $sheet->setCellValue('E4', 'Nama Pengguna');
         $sheet->setCellValue('F4', 'Alamat Instalasi');
-        $sheet->setCellValue('G4', 'Sektor');
-        $sheet->setCellValue('H4', 'STO');
-        $sheet->setCellValue('I4', 'Status');
+        $sheet->setCellValue('G4', 'Datel');
+        $sheet->setCellValue('H4', 'Sektor');
+        $sheet->setCellValue('I4', 'STO');
+        $sheet->setCellValue('J4', 'Status');
 
-        $sheet->getStyle('A4:I4')->getFont()->setBold(true);
-        $sheet->getStyle('A4:I4')->getFill()
+        $sheet->getStyle('A4:J4')->getFont()->setBold(true);
+        $sheet->getStyle('A4:J4')->getFill()
             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
             ->getStartColor()->setARGB('FFFACD');
 
@@ -271,9 +272,10 @@ class SalesController extends BaseController
             $sheet->setCellValue('D'.$column, $value['noSC']);
             $sheet->setCellValue('E'.$column, $value['nama_pengguna']); 
             $sheet->setCellValue('F'.$column, $value['alamat_instl']); 
-            $sheet->setCellValue('G'.$column, $value['sektor']); 
-            $sheet->setCellValue('H'.$column, $value['sto']); 
-            $sheet->setCellValue('I'.$column, $value['status']); 
+            $sheet->setCellValue('G'.$column, $value['datel']); 
+            $sheet->setCellValue('H'.$column, $value['sektor']); 
+            $sheet->setCellValue('I'.$column, $value['sto']); 
+            $sheet->setCellValue('J'.$column, $value['status']); 
             $column++;
         }  
         
@@ -286,7 +288,7 @@ class SalesController extends BaseController
             ],
         ];
         $endRow = max($column, 4); 
-        $sheet->getStyle('A4:I'.$endRow)->applyFromArray($styleArray);
+        $sheet->getStyle('A4:J'.$endRow)->applyFromArray($styleArray);
 
 
         $sheet->getColumnDimension('A')->SetAutoSize(true);
@@ -298,6 +300,7 @@ class SalesController extends BaseController
         $sheet->getColumnDimension('G')->SetAutoSize(true);
         $sheet->getColumnDimension('H')->SetAutoSize(true);
         $sheet->getColumnDimension('I')->SetAutoSize(true);
+        $sheet->getColumnDimension('J')->SetAutoSize(true);
 
 
         $writer = new Xlsx($spreadsheet);

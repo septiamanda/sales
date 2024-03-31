@@ -29,7 +29,7 @@
 /* Gaya umum */
 @media print {
     .navbar-nav, .pagination, #container-sales, #cari-sales, #alert, #debug-icon,
-    .btn, th:nth-child(10), td:nth-child(10) {
+    .btn, th:nth-child(11), td:nth-child(11) {
         display: none;
     }
     th {
