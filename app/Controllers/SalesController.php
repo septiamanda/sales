@@ -6,18 +6,21 @@ use App\Controllers\BaseController;
 use App\Models\ModelSales;
 use App\Models\SektorModel;
 use App\Models\STOModel;
+use App\Models\ModelDatel;
 
 class SalesController extends BaseController
 {
     protected $modelSales;
     protected $modelSTO;
     protected $modelSektor;
+    protected $modelDatel;
 
     public function __construct()
     {
         $this->modelSales = new ModelSales();
         $this->modelSTO = new STOModel();
         $this->modelSektor = new SektorModel();
+        $this->modelDatel = new ModelDatel();
 
     }
 
@@ -28,6 +31,7 @@ class SalesController extends BaseController
 
         $data['stos'] = $this->modelSTO->getformSTO();
         $data['sektors'] = $this->modelSektor->getformSektor();
+        $data['datels']=$this->modelDatel->getDatel();
 
         $date = $this->request->getGet('tanggal_order');
 
@@ -47,6 +51,7 @@ class SalesController extends BaseController
             'namaPel' => 'required',
             'alamatInt' => 'required',
             'tanggal_sales' => 'required',
+            'datelsales' => 'required',
             'sektorsales' => 'required',
             'stosales' => 'required',
             'status' => 'required'
@@ -65,6 +70,9 @@ class SalesController extends BaseController
             ],
             'tanggal_sales' => [
                 'required' => 'Kolom Tanggal Order harus diisi'
+            ],
+            'datelsales' => [
+                'required' => 'Kolom Datel harus diisi'
             ],
             'sektorsales' => [
                 'required' => 'Kolom Sektor harus diisi'
@@ -89,6 +97,7 @@ class SalesController extends BaseController
         $namapel = $this->request->getVar('namaPel');
         $almatint = $this->request->getVar('alamatInt');
         $tanggalder = $this->request->getVar('tanggal_sales');
+        $datelles = $this->request->getVar('datelsales');
         $sektorles = $this->request->getVar('sektorsales');
         $stoles = $this->request->getVar('stosales');
         $status = $this->request->getVar('status');
@@ -109,6 +118,7 @@ class SalesController extends BaseController
             'alamat_instl' => $almatint,
             'tanggal_order' => $tanggal_order,
             'tanggal_update' => $tanggal_update,
+            'datel' => $datelles,
             'sektor' => $sektorles,
             'sto' => $stoles,
             'status' => $status
@@ -131,6 +141,7 @@ class SalesController extends BaseController
         $namapel = $this->request->getVar('namaPel');
         $almatint = $this->request->getVar('alamatInt');
         $tanggalder = $this->request->getVar('tanggal_sales');
+        $datelles = $this->request->getVar('datelsales');
         $sektorles = $this->request->getVar('sektorsales');
         $stoles = $this->request->getVar('stosales');
         // $status = $this->request->getVar('status');
@@ -141,6 +152,7 @@ class SalesController extends BaseController
             'nama_pengguna' => $namapel,
             'alamat_instl' => $almatint,
             'tanggal_order' => $tanggalder,
+            'datel' => $datelles,
             'sektor' => $sektorles,
             'sto' => $stoles,
             // 'status' => $status
