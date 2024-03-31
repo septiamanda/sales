@@ -308,5 +308,4 @@ class SalesController extends BaseController
         exit();
             
     }
-
 }
