@@ -1,36 +1,56 @@
 <?= $this->extend('Layout/navbar'); ?>
 <?= $this->section('pageContent'); ?>
+<style>
+    .card-header {
+        background-color: #DE5858;
+        border-color: #DE5858;
+        color: white;
+    }
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+    .form-control {
+        border-color: #DE5858;
+    }
+
+    body {
+        background-color: #DE5858;
+    }
+</style>
+
+
+<div class="container" style="max-width: 900px; margin-top: 100px;">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card text-center" style="background-color: #DE5858; border-color: #DE5858;">
+                <div class="card-header">
+                    <h3 class="h3 mb-3 mt-4" style="color:white; font-weight: bold;">Edit Data Sektor</h3>
+                </div>
+
                 <div class="card-body">
-                    <h3 style="color:black" class="mb-4">Edit Data Sektor</h3>
-
                     <form action="<?= base_url('updateSektor'); ?>" method="post">
                         <input type="hidden" name="kode_sektor" value="<?=$modelSektor['id_sektor']; ?>">
-                        <!-- Field Datel -->
-                        <div class="form-group">
-                            <label style="color: black" for="datel">Datel (Daerah Telkom)</label>
-                            <select class="form-control" name="nama_datel" id="nama_datel">
-                                <option value="<?= $modelSektor['nama_datel']; ?>"><?= $modelSektor['nama_datel']; ?></option>
-                                <option value="" disabled selected>--Pilih Datel--</option>                                
-                                <option value="Datel BKT (Bukittinggi)">Datel BKT</option>
-                                <option value="Datel SLK (Solok)">Datel SLK</option>
-                                <option value="Inner PDG">Inner PDG</option>
-                            </select>
+                        <div class="form-group row mb-3">
+                            <label for="datel" class="col-sm-3 col-form-label" style="color: white;">Datel</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="nama_datel" id="nama_datel">
+                                    <option value="<?= $modelSektor['nama_datel']; ?>"><?= $modelSektor['nama_datel']; ?></option>
+                                    <option value="" disabled>--Pilih Datel--</option> <!-- Dipindahkan ke atas opsi yang dipilih -->
+                                    <option value="Datel BKT">Datel Bukittinggi (BKT)</option>
+                                    <option value="Datel SLK">Datel Solok (SLK)</option>
+                                    <option value="Inner PDG">Inner Padang (PDG)</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <!-- Field Nama Sektor -->
-                        <div class="form-group">
-                            <label style="color: black" for="nama-sektor">Nama Sektor</label>
-                            <input type="text" class="form-control" placeholder="Masukkan nama sektor"  name="nama_sektor" id="nama_sektor" value="<?= $modelSektor['nama_sektor']; ?>" required >  
+                        <div class="form-group row mb-3"> <!-- Tambahkan mb-3 untuk menambahkan margin bottom -->
+                            <label for="nama-sektor" class="col-sm-3 col-form-label" style="color: white;"> Sektor</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="nama_sektor" id="nama_sektor" placeholder="Masukkan Nama Sektor" value="<?= $modelSektor['nama_sektor']; ?>" required>
+                            </div>
                         </div>
 
-                        <div class="input-group mb-3 d-flex justify-content-center">
-                            <button type="submit" name="simpan" id="btn-simpan" class="btn btn-primary btn mt-2 mb-1 mr-2">Update</button>
-                            <a href="<?= base_url('sektor'); ?>" class="btn btn-danger btn mt-2 mb-1">Cancel</a>
+                        <div class="input-group d-flex justify-content-center mt-3">
+                            <button type="submit" name="Simpan" class="btn btn-berhasil mb-3 mr-2 mt-4" style="border-radius: 20px; width: fit-content; padding: 8px 16px; max-width: 150px;">Simpan</button>
+                            <a href="<?= base_url('sektor'); ?>" class="btn btn-warning btn mt-4 mb-3 ml-3" style="border-radius: 20px; width: fit-content; padding: 8px 16px; max-width: 150px;">Cancel</a>
                         </div>
                     </form>
                 </div>
