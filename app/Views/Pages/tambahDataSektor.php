@@ -32,8 +32,9 @@
                                     <option value="" disabled selected>--Pilih Datel--</option>
                                     <option value="Datel BKT">DATEL BKT</option>
                                     <option value="Datel SLK">DATEL SLK</option>
-                                    <option value="Inner PDG">INNER PDG</option>
+                                    <option value="Inner PDG">Inner PDG</option>
                                 </select>
+                                
                             </div>
                         </div>
 

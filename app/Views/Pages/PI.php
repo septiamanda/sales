@@ -8,9 +8,9 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Profesioning Issue</h1>
         <div>
-            <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
+            <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> PDF</button>
             <a href="<?= site_url('pi/export') ?>" class="btn btn-success ml-3">
-                <i class="fas fa-file-download"></i> Export Excel
+                <i class="fas fa-file-download"></i> Excel
             </a>
         </div>
     </div>
@@ -54,8 +54,10 @@
                                         <th>No. SC</th>
                                         <th>Nama Pengguna</th>
                                         <th>Alamat Instalasi</th>
-                                        <th>Sektor/Hero</th>
+                                        <th>Datel</th>
+                                        <th>Sektor</th>
                                         <th>STO</th>
+                                    
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,6 +70,7 @@
                                             <td><?= $pi['noSC']; ?></td>
                                             <td><?= $pi['nama_pengguna']; ?></td>
                                             <td><?= $pi['alamat_instl']; ?></td>
+                                            <td><?= $sd['datel']; ?></td>
                                             <td><?= $pi['sektor']; ?></td>
                                             <td><?= $pi['sto']; ?></td>
                                         </tr>

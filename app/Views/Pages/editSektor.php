@@ -33,7 +33,7 @@
                             <div class="col-sm-8">
                                 <select class="form-control" name="nama_datel" id="nama_datel">
                                     <option value="<?= $modelSektor['nama_datel']; ?>"><?= $modelSektor['nama_datel']; ?></option>
-                                    <option value="" disabled>--Pilih Datel--</option> <!-- Dipindahkan ke atas opsi yang dipilih -->
+                                    <option value="" disabled>--Pilih Datel--</option> 
                                     <option value="Datel BKT">DATEL BKT</option>
                                     <option value="Datel SLK">DATEL SLK</option>
                                     <option value="Inner PDG">INNER PDG</option>

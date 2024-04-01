@@ -8,9 +8,9 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Profesioning Service</h1>
         <div>
-            <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
+            <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> PDF</button>
             <a href="<?= site_url('ps/export') ?>" class="btn btn-success ml-3">
-                <i class="fas fa-file-download"></i> Export Excel
+                <i class="fas fa-file-download"></i> Excel
             </a>
         </div>
     </div>
@@ -56,6 +56,7 @@
                                             <th>No. SC</th>
                                             <th>Nama Pengguna</th>
                                             <th>Alamat Instalasi</th>
+                                            <th>Datel</th>
                                             <th>Sektor/Hero</th>
                                             <th>STO</th>
                                         </tr>
@@ -70,8 +71,10 @@
                                                 <td><?= $ps['noSC']; ?></td>
                                                 <td><?= $ps['nama_pengguna']; ?></td>
                                                 <td><?= $ps['alamat_instl']; ?></td>
+                                                <td><?= $ps['datel']; ?></td>
                                                 <td><?= $ps['sektor']; ?></td>
                                                 <td><?= $ps['sto']; ?></td>
+                                                <th scope='row'><?= $no; ?></th>
                                             </tr>
                                         <?php $no++;
                                         endforeach; ?>

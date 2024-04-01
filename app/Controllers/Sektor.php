@@ -90,4 +90,10 @@ class Sektor extends BaseController
         return redirect()->to('sektor');
     }
 
+    // public function hapusSemuaSektor() {
+    //     $this->modelSektor->hapusSemua();
+    //     return redirect()->to('/sektor');
+    // }
+    
+
 }

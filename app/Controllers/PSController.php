@@ -40,7 +40,7 @@ class PSController extends BaseController
         $sheet = $spreadsheet->getActiveSheet();
 
         $sheet->setCellValue('A2', 'Data PS Telkom Witel Sumbar');
-        $sheet->mergeCells('A2:I2'); 
+        $sheet->mergeCells('A2:J2'); 
         $sheet->getStyle('A2')->getFont()->setBold(true);
         $sheet->getStyle('A2')->getFont()->setSize(13); 
         $sheet->getStyle('A2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER); 
