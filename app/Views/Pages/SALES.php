@@ -79,7 +79,7 @@
                                     <input type="date" id="date" name="tanggal_order" class="form-control">
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="height: 40px; margin-left: 10px ; margin-right: 10px">Cari</button>
-                                <button type="reset" class="btn btn-warning" style="height: 40px; margin-left: 5 px ; margin-right: 10px">Reset</button>
+                                <a href="<?= base_url('listSales') ?>" class="btn btn-warning" style="height: 40px; margin-left: 5 px ; margin-right: 10px">Reset</a>
                             </form>
                         </div>
 
@@ -167,8 +167,10 @@
                             </button>
 
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<?= base_url('exampleFile')?>">Example Dataset</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="<?= base_url('exampleFile') ?>">Example Dataset</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#uploadFile">Upload File</a></li>
                             </ul>
 
@@ -215,7 +217,7 @@
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>" data-datel="<?= $sd['datel']; ?>">
                                                 <i class="fas fa-edit"></i>
                                             </button>
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales<?= $key ?>"  id="btn-delete" data-id="<?= $sd['id_sales']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>"><i class="fas fa-trash-alt"></i></button>
                                             <!-- Formulir update status -->
                                             <form action="<?= base_url('updateStatus/' . $sd['id_sales']); ?>" method="post" class="d-inline">
                                                 <input type="hidden" name="_method" id="DELETE">
@@ -251,6 +253,29 @@
                                             </form>
                                         </td>
                                     </tr>
+                                    <!-- Modal delete sales-->
+                                    <div class="modal fade" id="deleteSales<?= $key ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+
+                                                <div class="modal-body">
+                                                    <h5 class="font-weight-bold" style="text-align: center;"> Apakah Anda ingin menghapus data ini? </h5>
+                                                </div>
+                                                <form method="post" action="<?= base_url('deleteSales/' . $sd['id_sales']); ?>">
+                                                    <input type="hidden" name="id_sektor" value="<?= $sd['id_sales'] ?>">
+                                                    <div class="modal-body">
+                                                        <h6 class="text-center">Apakah Anda yakin akan menghapus data ini? <br>
+                                                            <span class="text-danger"><?= $sd['noSC']; ?> - <?= $sd['nama_pengguna']; ?></span>
+                                                        </h6>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" data-id="<?= $sd['id_sales']; ?>" class="btn btn-primary" name="btnYa">Ya</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -274,7 +299,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <!-- Modal upload file-->
                     <div class="modal fade" id="uploadFile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog ">
@@ -501,28 +526,8 @@
                         </form>
                     </div>
 
-                    <!-- Modal delete sales-->
-                    <div class="modal fade" id="deleteSales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
 
-                                <div class="modal-body">
-                                    <h5 class="font-weight-bold" style="text-align: center;"> Apakah Anda ingin menghapus data ini? </h5>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <form action="<?= isset($sd['id_sales']) ? base_url('deleteSales/' . $sd['id_sales']) : '#' ?>" method="post" class="d-inline">
-                                        <input type="hidden" name="_method" id="DELETE">
-                                        <button type="submit" class="btn btn-danger">
-                                            Hapus
-                                        </button>
-                                    </form>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
                     <!-- END UPDATE -->
 
                     <!-- /.container-fluid -->

@@ -257,17 +257,39 @@ class SalesController extends BaseController
             // Ambil data dari sheet aktif
             $contacts = $spreadsheet->getActiveSheet()->toArray();
 
+            $contacts = array_slice($contacts, 4);
+
             // Loop untuk setiap baris data
             foreach ($contacts as $key => $value) {
-                // Lewati header baris pertama
-                if ($key == 0) {
-                    continue;
+
+                // Validasi apakah ada nilai yang kosong
+                for ($i = 3; $i <= 7; $i++) {
+                    if (empty($value[$i])) {
+                        $errors[] = 'Kolom ' . $i . ' kosong pada baris ' . ($key + 5);
+                    }
+                }
+                if (!empty($value[1])) {
+                    $date = date_create_from_format('m/d/Y', $value[1]);
+                    if (!$date) {
+                        // Konversi ke format tanggal yyyy-mm-dd jika format tidak sesuai
+                        $date = date_create_from_format('Y-m-d', $value[1]);
+                        if ($date) {
+                            $value[1] = $date->format('Y-m-d');
+                        } else {
+                            $errors[] = 'Format tanggal tidak sesuai pada baris ' . ($key + 5);
+                        }
+                    } else {
+                        $value[1] = $date->format('Y-m-d');
+                    }
                 }
 
-                if (count($value) != 9) { // Sesuaikan dengan jumlah kolom yang diharapkan
-                    // Set pesan flash gagal jika format data tidak sesuai
-                    session()->setFlashdata('gagal', 'Format data tidak sesuai');
-                    return redirect()->back()->withInput();
+                $validStatus = ['RE', 'FCC', 'PI', 'PS'];
+                if (!in_array($value[8], $validStatus)) {
+                    $errors[] = 'Nilai status tidak valid pada baris ' . ($key + 5);
+                }
+                // Jika ada pesan error, lanjutkan ke baris data berikutnya
+                if (!empty($errors)) {
+                    continue;
                 }
 
                 // Simpan data ke dalam array
@@ -275,7 +297,7 @@ class SalesController extends BaseController
                     'tanggal_order' => $value[1], // Sesuaikan dengan indeks kolom yang sesuai
                     'noSC' => $value[2],
                     'nama_pengguna' => $value[3],
-                    'alamat_instl' => $value[   4],
+                    'alamat_instl' => $value[4],
                     'datel' => $value[5],
                     'sektor' => $value[6],
                     'sto' => $value[7],
@@ -285,11 +307,13 @@ class SalesController extends BaseController
 
                 $this->modelSales->insert($data);
             }
-                // Set pesan flash sukses
-                session()->setFlashdata('success', 'Data berhasil ditambah');
 
-                // Redirect ke halaman listSales
-                return redirect()->to('listSales');
+            if (!empty($errors)) {
+                session()->setFlashdata('errors', $errors);
+            } else {
+                session()->setFlashdata('success', 'Data berhasil ditambah');
+            }
+            return redirect()->to('listSales');
         } else {
             // Set pesan flash gagal jika format file tidak sesuai
             session()->setFlashdata('gagal', 'Format File tidak sesuai');
@@ -301,19 +325,36 @@ class SalesController extends BaseController
     {
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A2', 'Data Sales Telkom Witel Sumbar');
+        $sheet->mergeCells('A2:J2');
+        $sheet->getStyle('A2')->getFont()->setBold(true);
+        $sheet->getStyle('A2')->getFont()->setSize(13);
+        $sheet->getStyle('A2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
-        $sheet->setCellValue('A1', 'No');
-        $sheet->setCellValue('B1', 'Tanggal Order');
-        $sheet->setCellValue('C1', 'Nomor SC');
-        $sheet->setCellValue('D1', 'Nama Pengguna');
-        $sheet->setCellValue('E1', 'Alamat Instalasi');
-        $sheet->setCellValue('F1', 'Sektor');
-        $sheet->setCellValue('G1', 'STO');
-        $sheet->setCellValue('H1', 'Status');
+        $sheet->setCellValue('A4', 'No');
+        $sheet->setCellValue('B4', 'Tanggal Order');
+        $sheet->setCellValue('C4', 'Nomor SC');
+        $sheet->setCellValue('D4', 'Nama Pengguna');
+        $sheet->setCellValue('E4', 'Alamat Instalasi');
+        $sheet->setCellValue('F4', 'Datel');
+        $sheet->setCellValue('G4', 'Sektor');
+        $sheet->setCellValue('H4', 'STO');
+        $sheet->setCellValue('I4', 'Status');
 
-       
-        $sheet->getStyle('A1:I1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:I1')->getFill()
+
+
+        $sheet->setCellValue('A3', '1');
+        $sheet->setCellValue('B3', 'yyyy-mm-dd');
+        $sheet->setCellValue('F3', 'Datel BKT');
+        $sheet->setCellValue('G3', 'Hero BKT');
+        $sheet->setCellValue('H3', 'BKT');
+        $sheet->setCellValue('I3', 'RE/FCC/PI/PS');
+
+
+        $sheet->getStyle('A3:I3')->getFont()->setItalic(true);
+        $sheet->getStyle('A4:I4')->getFont()->setBold(true);
+        $sheet->getStyle('A4:I4')->getFill()
             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
             ->getStartColor()->setARGB('FFFACD');
 
@@ -331,7 +372,7 @@ class SalesController extends BaseController
 
         $writer = new Xlsx($spreadsheet);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename=sales.xlsx');
+        header('Content-Disposition: attachment;filename= examaple_sales.xlsx');
         header('Cache-Control: max-age=0');
         $writer->save('php://output');
         exit();
