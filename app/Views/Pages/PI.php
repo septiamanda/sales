@@ -70,7 +70,7 @@
                                             <td><?= $pi['noSC']; ?></td>
                                             <td><?= $pi['nama_pengguna']; ?></td>
                                             <td><?= $pi['alamat_instl']; ?></td>
-                                            <td><?= $sd['datel']; ?></td>
+                                            <td><?= $pi['datel']; ?></td>
                                             <td><?= $pi['sektor']; ?></td>
                                             <td><?= $pi['sto']; ?></td>
                                         </tr>
