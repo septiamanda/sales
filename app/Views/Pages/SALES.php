@@ -74,11 +74,12 @@
                         </div>
                         <div class="card-body">
                             <form action="<?php base_url('SalesController/listSales') ?>" method="get">
-                                <label for="date">Tanggal:</label>
+                                <label for="date">Tanggal Order:</label>
                                 <div class="form-group">
                                     <input type="date" id="date" name="tanggal_order" class="form-control">
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="height: 40px; margin-left: 10px ; margin-right: 10px">Cari</button>
+                                <button type="reset" class="btn btn-warning" style="height: 40px; margin-left: 5 px ; margin-right: 10px">Reset</button>
                             </form>
                         </div>
 
@@ -107,23 +108,47 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>NoSC</th>
+                                        <th>No.</th>
+                                        <th>Tanggal Order </th>
+                                        <th>Tanggal Update </th>
+                                        <th>Nomor SC </th>
                                         <th>Nama Pengguna</th>
                                         <th>Alamat Instalasi</th>
+                                        <th>Datel</th>
                                         <th>Sektor</th>
                                         <th>STO</th>
                                         <th>Status</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($sales as $sale) : ?>
+                                    <?php foreach ($salesData as $key => $sd) : ?>
                                         <tr>
-                                            <td><?= $sale['noSC'] ?></td>
-                                            <td><?= $sale['nama_pengguna'] ?></td>
-                                            <td><?= $sale['alamat_instl'] ?></td>
-                                            <td><?= $sale['sektor'] ?></td>
-                                            <td><?= $sale['sto'] ?></td>
-                                            <td><?= $sale['status'] ?></td>
+                                            <td style="width: 30px; text-align: center;"><?= $key + 1; ?></td>
+                                            <td><?= $sd['tanggal_order']; ?></td>
+                                            <td><?= $sd['tanggal_update']; ?></td>
+                                            <td><?= $sd['noSC']; ?></td>
+                                            <td><?= $sd['nama_pengguna']; ?></td>
+                                            <td><?= $sd['alamat_instl']; ?></td>
+                                            <td><?= $sd['datel']; ?></td>
+                                            <td><?= $sd['sektor']; ?></td>
+                                            <td><?= $sd['sto']; ?></td>
+                                            <td><?= $sd['status']; ?></td>
+                                            <td style="width: 210px;">
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>" data-datel="<?= $sd['datel']; ?>">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
+                                                <!-- Formulir update status -->
+                                                <form action="<?= base_url('updateStatus/' . $sd['id_sales']); ?>" method="post" class="d-inline">
+                                                    <input type="hidden" name="_method" id="DELETE">
+
+                                                    <!-- Tombol untuk memunculkan modal dropdown -->
+                                                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#statusModal<?= $sd['id_sales']; ?>">Update</button>
+
+
+                                                </form>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -132,10 +157,20 @@
                             <p>No data found</p>
                         <?php endif; ?>
 
-                        <div class="col-md-6 d-flex justify-content-end align-items-center" style="margin-left: 320px">
+                        <div class="col-md-8 d-flex justify-content-end align-items-center" style="margin-left: 150px">
+
                             <button class="btn btn-danger shadow-sm ml-2" data-bs-toggle="modal" data-bs-target="#tambahSales">
                                 <i class="fas fa-plus fa-sm"></i> Tambah Data Sales
                             </button>
+                            <button class="btn btn-outline-danger dropdown-toggle ml-3" data-bs-toggle="dropdown" data-bs-target="#tambahBanyakSales">
+                                <i class="fas fa-file-download"></i> Import Excel
+                            </button>
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="<?= base_url('exampleFile')?>">Example Dataset</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#uploadFile">Upload File</a></li>
+                            </ul>
 
                             <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> PDF</button>
                             <a href="<?= site_url('sales/export') ?>" class="btn btn-success ml-3">
@@ -239,6 +274,29 @@
                             </ul>
                         </div>
                     </div>
+                    
+                    <!-- Modal upload file-->
+                    <div class="modal fade" id="uploadFile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog ">
+                            <div class="modal-content">
+                                <div class="modal-header center">
+                                    <h3>Upload File</h3>
+                                </div>
+                                <form action="<?= site_url('import') ?>" method="post" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <label>File Excel</label>
+                                        <div class="custom-file">
+                                            <input type="file" name="file_excel" id="file_excel" class="form-control" accept=".xlsx, .xls">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Upload</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
 
                     <!-- Modal tambah sales-->
@@ -250,23 +308,22 @@
                                         <h3>Tambah Sales</h3>
                                     </div>
                                     <div class="modal-body">
-
                                         <div class="mb-3 row">
                                             <label for="inputNoSC" class="col-sm-3 col-form-label">Nomor SC</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="inputNomorSC">
+                                                <input type="text" class="form-control" name="inputNomorSC" placeholder="Masukan nomor SC">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="namaPel" class="col-sm-3 col-form-label">Nama Pelanggan</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="namaPel">
+                                                <input type="text" class="form-control" name="namaPel" placeholder="Masukan nama pelanggan" />
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="alamatInt" class="col-sm-3 col-form-label">Alamat Instalasi</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="alamatInt">
+                                                <input type="text" class="form-control" name="alamatInt" placeholder="Masukan alamat instalasi">
                                             </div>
                                         </div>
 

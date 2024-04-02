@@ -235,6 +235,108 @@ class SalesController extends BaseController
         }
     }
 
+
+
+    public function import()
+    {
+        $file = $this->request->getFile('file_excel');
+        $extension = $file->getClientExtension();
+
+        // Validasi ekstensi file
+        if ($extension == 'xlsx' || $extension == 'xls') {
+            // Pilih pembaca berdasarkan ekstensi file
+            if ($extension == 'xls') {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+
+            // Load file spreadsheet
+            $spreadsheet = $reader->load($file);
+
+            // Ambil data dari sheet aktif
+            $contacts = $spreadsheet->getActiveSheet()->toArray();
+
+            // Loop untuk setiap baris data
+            foreach ($contacts as $key => $value) {
+                // Lewati header baris pertama
+                if ($key == 0) {
+                    continue;
+                }
+
+                if (count($value) != 9) { // Sesuaikan dengan jumlah kolom yang diharapkan
+                    // Set pesan flash gagal jika format data tidak sesuai
+                    session()->setFlashdata('gagal', 'Format data tidak sesuai');
+                    return redirect()->back()->withInput();
+                }
+
+                // Simpan data ke dalam array
+                $data = [
+                    'tanggal_order' => $value[1], // Sesuaikan dengan indeks kolom yang sesuai
+                    'noSC' => $value[2],
+                    'nama_pengguna' => $value[3],
+                    'alamat_instl' => $value[   4],
+                    'datel' => $value[5],
+                    'sektor' => $value[6],
+                    'sto' => $value[7],
+                    'status' => $value[8],
+                    'tanggal_update' => date('Y-m-d'), // Tanggal hari ini
+                ];
+
+                $this->modelSales->insert($data);
+            }
+                // Set pesan flash sukses
+                session()->setFlashdata('success', 'Data berhasil ditambah');
+
+                // Redirect ke halaman listSales
+                return redirect()->to('listSales');
+        } else {
+            // Set pesan flash gagal jika format file tidak sesuai
+            session()->setFlashdata('gagal', 'Format File tidak sesuai');
+            return redirect()->back()->withInput();
+        }
+    }
+
+    public function exampleFile()
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Tanggal Order');
+        $sheet->setCellValue('C1', 'Nomor SC');
+        $sheet->setCellValue('D1', 'Nama Pengguna');
+        $sheet->setCellValue('E1', 'Alamat Instalasi');
+        $sheet->setCellValue('F1', 'Sektor');
+        $sheet->setCellValue('G1', 'STO');
+        $sheet->setCellValue('H1', 'Status');
+
+       
+        $sheet->getStyle('A1:I1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:I1')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('FFFACD');
+
+
+        $sheet->getColumnDimension('A')->SetAutoSize(true);
+        $sheet->getColumnDimension('B')->SetAutoSize(true);
+        $sheet->getColumnDimension('C')->SetAutoSize(true);
+        $sheet->getColumnDimension('D')->SetAutoSize(true);
+        $sheet->getColumnDimension('E')->SetAutoSize(true);
+        $sheet->getColumnDimension('F')->SetAutoSize(true);
+        $sheet->getColumnDimension('G')->SetAutoSize(true);
+        $sheet->getColumnDimension('H')->SetAutoSize(true);
+        $sheet->getColumnDimension('I')->SetAutoSize(true);
+
+
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=sales.xlsx');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        exit();
+    }
+
     public function export()
     {
         $sales = $this->modelSales->findAll();

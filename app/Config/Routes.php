@@ -64,6 +64,9 @@ $routes->get('listFCC', 'FCCController::listFCC');
 $routes->post('chartFCC', 'FCCController::tampilChartFCC');
 
 $routes->get('sales/export', 'SalesController::export');
+$routes->get('exampleFile', 'SalesController::exampleFile');
+$routes->post('import', 'SalesController::import');
+
 $routes->get('listSales', 'SalesController::listSales');
 $routes->post('simpanSales', 'SalesController::simpanSales');
 $routes->post('editSales', 'SalesController::editSales');
