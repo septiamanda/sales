@@ -13,7 +13,7 @@ class Sektor extends BaseController
     }
     public function sektor()
     {
-        $data ['sektor'] = $this->modelSektor->getSektor();
+        $data['sektor'] = $this->modelSektor->getSektor();
 
         return view('Pages/sektor', $data);
     }
@@ -33,8 +33,12 @@ class Sektor extends BaseController
 
     public function tambahDataSektor()
     {
-        return view('Pages/tambahDataSektor');
+        $modelDatel = new \App\Models\ModelDatel();
+        $data['datels'] = $modelDatel->getDatel();
+
+        return view('Pages/tambahDataSektor', $data);
     }
+
 
     public function simpan()
     {
@@ -48,18 +52,24 @@ class Sektor extends BaseController
         $nama_sektor = $this->request->getVar('nama_sektor');
 
         $data = [
-            'nama_datel'=>$nama_datel,
-            'nama_sektor'=>$nama_sektor
+            'nama_datel' => $nama_datel,
+            'nama_sektor' => $nama_sektor
         ];
 
         session()->setFlashdata('Pesan', 'Data Berhasil Ditambahkan');
-    
+
         $this->modelSektor->save($data);
         return redirect()->to('sektor');
     }
-    public function editSektor ($id_sektor)
+
+    public function editSektor($id_sektor)
     {
         $data['modelSektor'] = $this->modelSektor->getSektor($id_sektor);
+
+        // Ambil data Datel dari database
+        $modelDatel = new \App\Models\ModelDatel();
+        $data['datels'] = $modelDatel->getDatel();
+
         return view('Pages/editSektor', $data);
     }
 
@@ -70,8 +80,8 @@ class Sektor extends BaseController
         $nama_sektor = $this->request->getVar('nama_sektor');
 
         $data = [
-            'nama_datel'=>$nama_datel,
-            'nama_sektor'=>$nama_sektor
+            'nama_datel' => $nama_datel,
+            'nama_sektor' => $nama_sektor
         ];
 
         $this->modelSektor->update($id_sektor, $data);
@@ -94,6 +104,6 @@ class Sektor extends BaseController
     //     $this->modelSektor->hapusSemua();
     //     return redirect()->to('/sektor');
     // }
-    
+
 
 }

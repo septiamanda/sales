@@ -1,5 +1,6 @@
 <?= $this->extend('Layout/navbar'); ?>
 <?= $this->section('pageContent'); ?>
+
 <style>
     .card-header {
         background-color: #DE5858;
@@ -30,11 +31,10 @@
                             <div class="col-sm-8">
                                 <select class="form-control" name="nama_datel" id="nama_datel" required>
                                     <option value="" disabled selected>--Pilih Datel--</option>
-                                    <option value="Datel BKT">DATEL BKT</option>
-                                    <option value="Datel SLK">DATEL SLK</option>
-                                    <option value="Inner PDG">Inner PDG</option>
+                                    <?php foreach ($datels as $datel) : ?>
+                                        <option value="<?= $datel['nama_datel']; ?>"><?= $datel['nama_datel']; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
-                                
                             </div>
                         </div>
 
