@@ -82,8 +82,8 @@ class ComposerStaticInitd648ee3b65e8d352e12e15817702e7cd
         ),
         'voku\\' => 
         array (
-            0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
-            1 => __DIR__ . '/..' . '/voku/portable-utf8/src/voku',
+            0 => __DIR__ . '/..' . '/voku/portable-utf8/src/voku',
+            1 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
         ),
         'ZipStream\\' => 
         array (
@@ -123,8 +123,8 @@ class ComposerStaticInitd648ee3b65e8d352e12e15817702e7cd
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -401,6 +401,7 @@ class ComposerStaticInitd648ee3b65e8d352e12e15817702e7cd
         'CodeIgniter\\HTTP\\CURLRequest' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/CURLRequest.php',
         'CodeIgniter\\HTTP\\ContentSecurityPolicy' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/ContentSecurityPolicy.php',
         'CodeIgniter\\HTTP\\DownloadResponse' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/DownloadResponse.php',
+        'CodeIgniter\\HTTP\\Exceptions\\BadRequestException' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/Exceptions/BadRequestException.php',
         'CodeIgniter\\HTTP\\Exceptions\\HTTPException' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/Exceptions/HTTPException.php',
         'CodeIgniter\\HTTP\\Exceptions\\RedirectException' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/Exceptions/RedirectException.php',
         'CodeIgniter\\HTTP\\Files\\FileCollection' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/Files/FileCollection.php',
@@ -503,6 +504,7 @@ class ComposerStaticInitd648ee3b65e8d352e12e15817702e7cd
         'CodeIgniter\\Test\\FeatureTestTrait' => __DIR__ . '/..' . '/codeigniter4/framework/system/Test/FeatureTestTrait.php',
         'CodeIgniter\\Test\\FilterTestTrait' => __DIR__ . '/..' . '/codeigniter4/framework/system/Test/FilterTestTrait.php',
         'CodeIgniter\\Test\\Filters\\CITestStreamFilter' => __DIR__ . '/..' . '/codeigniter4/framework/system/Test/Filters/CITestStreamFilter.php',
+        'CodeIgniter\\Test\\IniTestTrait' => __DIR__ . '/..' . '/codeigniter4/framework/system/Test/IniTestTrait.php',
         'CodeIgniter\\Test\\Interfaces\\FabricatorModel' => __DIR__ . '/..' . '/codeigniter4/framework/system/Test/Interfaces/FabricatorModel.php',
         'CodeIgniter\\Test\\Mock\\MockAppConfig' => __DIR__ . '/..' . '/codeigniter4/framework/system/Test/Mock/MockAppConfig.php',
         'CodeIgniter\\Test\\Mock\\MockAutoload' => __DIR__ . '/..' . '/codeigniter4/framework/system/Test/Mock/MockAutoload.php',
@@ -1569,6 +1571,7 @@ class ComposerStaticInitd648ee3b65e8d352e12e15817702e7cd
         'PharIo\\Manifest\\ManifestLoader' => __DIR__ . '/..' . '/phar-io/manifest/src/ManifestLoader.php',
         'PharIo\\Manifest\\ManifestLoaderException' => __DIR__ . '/..' . '/phar-io/manifest/src/exceptions/ManifestLoaderException.php',
         'PharIo\\Manifest\\ManifestSerializer' => __DIR__ . '/..' . '/phar-io/manifest/src/ManifestSerializer.php',
+        'PharIo\\Manifest\\NoEmailAddressException' => __DIR__ . '/..' . '/phar-io/manifest/src/exceptions/NoEmailAddressException.php',
         'PharIo\\Manifest\\PhpElement' => __DIR__ . '/..' . '/phar-io/manifest/src/xml/PhpElement.php',
         'PharIo\\Manifest\\PhpExtensionRequirement' => __DIR__ . '/..' . '/phar-io/manifest/src/values/PhpExtensionRequirement.php',
         'PharIo\\Manifest\\PhpVersionRequirement' => __DIR__ . '/..' . '/phar-io/manifest/src/values/PhpVersionRequirement.php',
