@@ -186,6 +186,22 @@ class SalesController extends BaseController
         }
     }
 
+    public function search()
+    {
+        $keyword = $this->request->getVar('carisales');
+
+        // Ambil data penjualan berdasarkan kata kunci pencarian
+        $data['salesData'] = $this->modelSales->searchSales($keyword);
+        $data['sd'] = ['id_sales' => 0];
+
+        // Ambil data STO dan sektor untuk dropdown
+        $data['stos'] = $this->modelSTO->getformSTO();
+        $data['sektors'] = $this->modelSektor->getformSektor();
+
+        // Kirim data hasil pencarian ke view
+        return view('Pages/SALES', $data);
+    }
+
     public function updateStatus($id_sales)
     {
         $newStatus = $this->request->getVar('status');
@@ -218,7 +234,7 @@ class SalesController extends BaseController
             return redirect()->back();
         }
     }
-    
+
     public function export()
     {
         $sales = $this->modelSales->findAll();
