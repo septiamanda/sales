@@ -259,7 +259,7 @@
                                             <div class="modal-content">
 
                                                 <div class="modal-body">
-                                                    <h5 class="font-weight-bold" style="text-align: center;"> Apakah Anda ingin menghapus data ini? </h5>
+                                                    <h5 class="font-weight-bold" style="text-align: center;"> Hapus Data</h5>
                                                 </div>
                                                 <form method="post" action="<?= base_url('deleteSales/' . $sd['id_sales']); ?>">
                                                     <input type="hidden" name="id_sektor" value="<?= $sd['id_sales'] ?>">
@@ -269,7 +269,7 @@
                                                         </h6>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" data-id="<?= $sd['id_sales']; ?>" class="btn btn-primary" name="btnYa">Ya</button>
+                                                        <button type="submit" data-id="<?= $sd['id_sales']; ?>" class="btn btn-danger" name="btnYa">Ya</button>
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
                                                     </div>
                                                 </form>
