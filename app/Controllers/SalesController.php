@@ -113,6 +113,12 @@ class SalesController extends BaseController
             $tanggal_update = date('Y-m-d');
         }
 
+        $nosc = $this->request->getVar('inputNomorSC');
+        $existingSales = $this->modelSales->where('noSC', $nosc)->first();
+        if ($existingSales) {
+            session()->setFlashdata('errors', ['noSC' => 'Nomor SC ' .$nosc. ' sudah ada']);
+            return redirect()->back()->withInput();
+        }
         $data = [
             'id_sales' => $id_sales,
             'noSC' => $nosc,
@@ -286,6 +292,12 @@ class SalesController extends BaseController
                 $validStatus = ['RE', 'FCC', 'PI', 'PS'];
                 if (!in_array($value[8], $validStatus)) {
                     $errors[] = 'Nilai status tidak valid pada baris ' . ($key + 5);
+                }
+
+                $existingSales = $this->modelSales->where('noSC', $value[2])->first();
+                if ($existingSales) {
+                    $errors[] = 'Nomor SC ' . $value[2] . ' sudah ada pada baris ' . ($key + 5);
+                    continue; // Lanjutkan ke baris data berikutnya
                 }
                 // Jika ada pesan error, lanjutkan ke baris data berikutnya
                 if (!empty($errors)) {
