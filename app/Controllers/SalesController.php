@@ -116,7 +116,7 @@ class SalesController extends BaseController
         $nosc = $this->request->getVar('inputNomorSC');
         $existingSales = $this->modelSales->where('noSC', $nosc)->first();
         if ($existingSales) {
-            session()->setFlashdata('errors', ['noSC' => 'Nomor SC ' .$nosc. ' sudah ada']);
+            session()->setFlashdata('errors', ['noSC' => 'Nomor SC ' . $nosc . ' sudah ada']);
             return redirect()->back()->withInput();
         }
         $data = [
@@ -227,8 +227,9 @@ class SalesController extends BaseController
             return redirect()->back();
         }
 
-        // Update the status of the sales data
-        $success = $this->modelSales->updateStatus($id_sales, $newStatus);
+        // Update the status and update date of the sales data
+        $updateDate = date('Y-m-d'); // Get today's date in 'year-month-day' format
+        $success = $this->modelSales->updateStatusAndDate($id_sales, $newStatus, $updateDate);
 
         if ($success) {
             // Tampilkan pesan sukses
@@ -240,7 +241,6 @@ class SalesController extends BaseController
             return redirect()->back();
         }
     }
-
 
 
     public function import()
