@@ -38,4 +38,10 @@ class SektorModel extends Model
     {
         return $this->findAll(); // Mengambil semua datasektor dari tabel
     }
+
+    // public function hapusSemua() {
+    //     return $this->db->query("TRUNCATE TABLE sektor");
+    // }
+    
+    
 }

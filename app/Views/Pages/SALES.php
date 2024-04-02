@@ -139,7 +139,7 @@
 
                             <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> PDF</button>
                             <a href="<?= site_url('sales/export') ?>" class="btn btn-success ml-3">
-                                <i class="fas fa-file-download"></i> Export Excel
+                                <i class="fas fa-file-download"></i> Excel
                             </a>
                         </div>
                     </div>

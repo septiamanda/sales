@@ -30,10 +30,11 @@
                             <div class="col-sm-8">
                                 <select class="form-control" name="nama_datel" id="nama_datel" required>
                                     <option value="" disabled selected>--Pilih Datel--</option>
-                                    <option value="Datel BKT">Datel Bukittinggi (BKT)</option>
-                                    <option value="Datel SLK">Datel Solok (SLK)</option>
-                                    <option value="Inner PDG">Inner Padang (PDG)</option>
+                                    <option value="Datel BKT">DATEL BKT</option>
+                                    <option value="Datel SLK">DATEL SLK</option>
+                                    <option value="Inner PDG">Inner PDG</option>
                                 </select>
+                                
                             </div>
                         </div>
 
