@@ -219,7 +219,7 @@ class ModelSales extends Model
                 ->where('id_sales', $id_sales)
                 ->update([
                     'status' => $newStatus,
-                    'tanggal_update' => date('Y-m-d H:i:s') // Update tanggal_update
+                    'tanggal_update' => date('Y-m-d') // Update tanggal_update
                 ]);
 
             // Commit transaction
@@ -233,6 +233,18 @@ class ModelSales extends Model
         }
 
         return $success;
+    }
+
+     public function updateStatusAndDate($id_sales, $newStatus, $updateDate)
+    {
+        $data = [
+            'status' => $newStatus,
+            'tanggal_update' => $updateDate
+        ];
+
+        $this->set($data);
+        $this->where('id_sales', $id_sales);
+        return $this->update();
     }
 
     public function searchSales($keyword)
