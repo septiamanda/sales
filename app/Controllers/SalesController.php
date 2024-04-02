@@ -24,17 +24,16 @@ class SalesController extends BaseController
         $this->modelSTO = new STOModel();
         $this->modelSektor = new SektorModel();
         $this->modelDatel = new ModelDatel();
-
     }
 
     public function listSales(): string
     {
         $data['salesData'] = $this->modelSales->getSales();
-        $data['sd'] = ['id_sales' => 0]; 
+        $data['sd'] = ['id_sales' => 0];
 
         $data['stos'] = $this->modelSTO->getformSTO();
         $data['sektors'] = $this->modelSektor->getformSektor();
-        $data['datels']=$this->modelDatel->getDatel();
+        $data['datels'] = $this->modelDatel->getDatel();
 
         $date = $this->request->getGet('tanggal_order');
 
@@ -189,51 +188,37 @@ class SalesController extends BaseController
 
     public function updateStatus($id_sales)
     {
-        // Get the current status of the sales data
+        $newStatus = $this->request->getVar('status');
+
+        // Check if status can be updated based on current status
         $currentStatus = $this->modelSales->getStatus($id_sales);
 
-        // Define the mapping of current status to new status
-        $statusMapping = [
-            'RE' => 'FCC',
-            'FCC' => 'PI',
-            'PI' => 'PS'
-        ];
-
-        // Check if the current status exists in the mapping
-        if (array_key_exists($currentStatus, $statusMapping)) {
-            // Get the new status based on the mapping
-            $newStatus = $statusMapping[$currentStatus];
-
-            // Update the status of the sales data
-            $success = $this->modelSales->updateStatus($id_sales, $newStatus);
-
-            if ($success) {
-                // Tampilkan pesan sukses
-                $response = [
-                    'success' => true,
-                    'message' => 'Status Data Berhasil Diperbarui.'
-                ];
-
-                session()->setFlashdata('success', 'Status Data Berhasil Diperbarui.');
-                return redirect()->to('listSales');
-            } else {
-                // Tampilkan pesan gagal
-                $response = [
-                    'success' => false,
-                    'message' => 'Gagal Memperbarui Status Data.'
-                ];
-            }
-        } else {
-            // Tampilkan pesan error jika status tidak valid
-            $response = [
-                'success' => false,
-                'message' => 'Status Saat Ini Tidak Valid.'
-            ];
+        if (($currentStatus == 'FCC' || $currentStatus == 'PI' || $currentStatus == 'PS') && $newStatus == 'RE') {
+            // Status cannot be changed back to RE from FCC, PI, or PS
+            session()->setFlashdata('gagal', 'Status tidak dapat kembali ke RE.');
+            return redirect()->back();
         }
 
-        return $this->response->setJSON($response);
-    }
+        if ($currentStatus == 'PS') {
+            // Status PS cannot be updated again
+            session()->setFlashdata('gagal', 'Status PS tidak dapat diupdate lagi.');
+            return redirect()->back();
+        }
 
+        // Update the status of the sales data
+        $success = $this->modelSales->updateStatus($id_sales, $newStatus);
+
+        if ($success) {
+            // Tampilkan pesan sukses
+            session()->setFlashdata('success', 'Status Data Berhasil Diperbarui.');
+            return redirect()->to('listSales');
+        } else {
+            // Tampilkan pesan gagal
+            session()->setFlashdata('gagal', 'Gagal Memperbarui Status Data.');
+            return redirect()->back();
+        }
+    }
+    
     public function export()
     {
         $sales = $this->modelSales->findAll();
@@ -241,11 +226,11 @@ class SalesController extends BaseController
         $sheet = $spreadsheet->getActiveSheet();
 
         $sheet->setCellValue('A2', 'Data Sales Telkom Witel Sumbar');
-        $sheet->mergeCells('A2:J2'); 
+        $sheet->mergeCells('A2:J2');
         $sheet->getStyle('A2')->getFont()->setBold(true);
-        $sheet->getStyle('A2')->getFont()->setSize(13); 
-        $sheet->getStyle('A2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER); 
-        $sheet->getStyle('A2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); 
+        $sheet->getStyle('A2')->getFont()->setSize(13);
+        $sheet->getStyle('A2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
         $sheet->setCellValue('A4', 'No');
         $sheet->setCellValue('B4', 'Tanggal Order');
@@ -263,22 +248,22 @@ class SalesController extends BaseController
             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
             ->getStartColor()->setARGB('FFFACD');
 
-       
+
         $column = 5;
         foreach ($sales as $key => $value) {
-            $sheet->setCellValue('A'.$column, ($column-4));
-            $sheet->setCellValue('B'.$column, $value['tanggal_order']); 
-            $sheet->setCellValue('C'.$column, $value['tanggal_update']);
-            $sheet->setCellValue('D'.$column, $value['noSC']);
-            $sheet->setCellValue('E'.$column, $value['nama_pengguna']); 
-            $sheet->setCellValue('F'.$column, $value['alamat_instl']); 
-            $sheet->setCellValue('G'.$column, $value['datel']); 
-            $sheet->setCellValue('H'.$column, $value['sektor']); 
-            $sheet->setCellValue('I'.$column, $value['sto']); 
-            $sheet->setCellValue('J'.$column, $value['status']); 
+            $sheet->setCellValue('A' . $column, ($column - 4));
+            $sheet->setCellValue('B' . $column, $value['tanggal_order']);
+            $sheet->setCellValue('C' . $column, $value['tanggal_update']);
+            $sheet->setCellValue('D' . $column, $value['noSC']);
+            $sheet->setCellValue('E' . $column, $value['nama_pengguna']);
+            $sheet->setCellValue('F' . $column, $value['alamat_instl']);
+            $sheet->setCellValue('G' . $column, $value['datel']);
+            $sheet->setCellValue('H' . $column, $value['sektor']);
+            $sheet->setCellValue('I' . $column, $value['sto']);
+            $sheet->setCellValue('J' . $column, $value['status']);
             $column++;
-        }  
-        
+        }
+
         $styleArray = [
             'borders' => [
                 'allBorders' => [
@@ -287,8 +272,8 @@ class SalesController extends BaseController
                 ],
             ],
         ];
-        $endRow = max($column, 4); 
-        $sheet->getStyle('A4:J'.$endRow)->applyFromArray($styleArray);
+        $endRow = max($column, 4);
+        $sheet->getStyle('A4:J' . $endRow)->applyFromArray($styleArray);
 
 
         $sheet->getColumnDimension('A')->SetAutoSize(true);
@@ -309,6 +294,5 @@ class SalesController extends BaseController
         header('Cache-Control: max-age=0');
         $writer->save('php://output');
         exit();
-            
     }
 }

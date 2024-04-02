@@ -9,7 +9,7 @@ class ModelSales extends Model
     protected $table = "datasales";
     protected $primaryKey = "id_sales";
     protected $useAutoIncrement = "true";
-    protected $allowedFields = ['noSC', 'nama_pengguna', 'alamat_instl', 'tanggal_order', 'tanggal_update','datel', 'sektor', 'sto', 'status'];
+    protected $allowedFields = ['noSC', 'nama_pengguna', 'alamat_instl', 'tanggal_order', 'tanggal_update', 'datel', 'sektor', 'sto', 'status'];
 
     public function getSales()
     {
