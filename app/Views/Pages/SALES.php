@@ -174,7 +174,7 @@
 
                             <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> PDF</button>
                             <a href="<?= site_url('sales/export') ?>" class="btn btn-success ml-3">
-                                <i class="fas fa-file-download"></i> Export Excel
+                                <i class="fas fa-file-download"></i> Excel
                             </a>
                         </div>
                     </div>
@@ -235,10 +235,10 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <select name="status" class="form-control">
-                                                                    <option value="RE">RE</option>
-                                                                    <option value="FCC">FCC</option>
-                                                                    <option value="PI">PI</option>
-                                                                    <option value="PS">PS</option>
+                                                                    <option value="RE" <?= $sd['status'] == 'RE' ? 'selected' : ''; ?>>RE</option>
+                                                                    <option value="FCC" <?= $sd['status'] == 'FCC' ? 'selected' : ''; ?>>FCC</option>
+                                                                    <option value="PI" <?= $sd['status'] == 'PI' ? 'selected' : ''; ?>>PI</option>
+                                                                    <option value="PS" <?= $sd['status'] == 'PS' ? 'selected' : ''; ?>>PS</option>
                                                                 </select>
                                                             </div>
                                                             <div class="modal-footer">
@@ -522,8 +522,8 @@
                             </div>
                         </div>
                     </div>
-
-
+                
+                    <!-- END UPDATE -->
 
                     <!-- /.container-fluid -->
 
@@ -581,20 +581,18 @@
         <!-- UPDATE -->
         <script>
             $(document).ready(function() {
-                $('.btn-update').click(function() {
+                // Saat halaman dimuat, cek status setiap data penjualan
+                $('.btn-update').each(function() {
                     var id_sales = $(this).data('id');
 
-                    // Kirim permintaan AJAX untuk memperbarui status
+                    // Kirim permintaan AJAX untuk memeriksa status
                     $.ajax({
-                        url: "updateStatus/" + id_sales,
+                        url: "checkStatus/" + id_sales,
                         method: "post",
                         success: function(response) {
-                            // Tampilkan pesan sukses atau gagal
-                            alert(response.message);
-
-                            // Muat ulang halaman jika berhasil
-                            if (response.success) {
-                                location.reload();
+                            // Jika status adalah PS, nonaktifkan tombol update
+                            if (response.status == 'PS') {
+                                $('#btn-update-' + id_sales).prop('disabled', true);
                             }
                         },
                         error: function(xhr, status, error) {
@@ -605,6 +603,16 @@
             });
         </script>
 
+
+        <!-- UPDATE -->
+        <script>
+            $(document).ready(function() {
+                // Tampilkan modal dropdown saat tombol "Update" di klik
+                $('.btn-outline-danger').click(function() {
+                    $($(this).data('target')).modal('show');
+                });
+            });
+        </script>
 
 
     </div>

@@ -186,52 +186,56 @@ class SalesController extends BaseController
         }
     }
 
+    public function search()
+    {
+        $keyword = $this->request->getVar('carisales');
+
+        // Ambil data penjualan berdasarkan kata kunci pencarian
+        $data['salesData'] = $this->modelSales->searchSales($keyword);
+        $data['sd'] = ['id_sales' => 0];
+
+        // Ambil data STO dan sektor untuk dropdown
+        $data['stos'] = $this->modelSTO->getformSTO();
+        $data['sektors'] = $this->modelSektor->getformSektor();
+
+        // Kirim data hasil pencarian ke view
+        return view('Pages/SALES', $data);
+    }
+
     public function updateStatus($id_sales)
     {
-        // Get the current status of the sales data
+        $newStatus = $this->request->getVar('status');
+
+        // Check if status can be updated based on current status
         $currentStatus = $this->modelSales->getStatus($id_sales);
 
-        // Define the mapping of current status to new status
-        $statusMapping = [
-            'RE' => 'FCC',
-            'FCC' => 'PI',
-            'PI' => 'PS'
-        ];
-
-        // Check if the current status exists in the mapping
-        if (array_key_exists($currentStatus, $statusMapping)) {
-            // Get the new status based on the mapping
-            $newStatus = $statusMapping[$currentStatus];
-
-            // Update the status of the sales data
-            $success = $this->modelSales->updateStatus($id_sales, $newStatus);
-
-            if ($success) {
-                // Tampilkan pesan sukses
-                $response = [
-                    'success' => true,
-                    'message' => 'Status Data Berhasil Diperbarui.'
-                ];
-
-                session()->setFlashdata('success', 'Status Data Berhasil Diperbarui.');
-                return redirect()->to('listSales');
-            } else {
-                // Tampilkan pesan gagal
-                $response = [
-                    'success' => false,
-                    'message' => 'Gagal Memperbarui Status Data.'
-                ];
-            }
-        } else {
-            // Tampilkan pesan error jika status tidak valid
-            $response = [
-                'success' => false,
-                'message' => 'Status Saat Ini Tidak Valid.'
-            ];
+        if (($currentStatus == 'FCC' || $currentStatus == 'PI' || $currentStatus == 'PS') && $newStatus == 'RE') {
+            // Status cannot be changed back to RE from FCC, PI, or PS
+            session()->setFlashdata('gagal', 'Status tidak dapat kembali ke RE.');
+            return redirect()->back();
         }
 
-        return $this->response->setJSON($response);
+        if ($currentStatus == 'PS') {
+            // Status PS cannot be updated again
+            session()->setFlashdata('gagal', 'Status PS tidak dapat diupdate lagi.');
+            return redirect()->back();
+        }
+
+        // Update the status of the sales data
+        $success = $this->modelSales->updateStatus($id_sales, $newStatus);
+
+        if ($success) {
+            // Tampilkan pesan sukses
+            session()->setFlashdata('success', 'Status Data Berhasil Diperbarui.');
+            return redirect()->to('listSales');
+        } else {
+            // Tampilkan pesan gagal
+            session()->setFlashdata('gagal', 'Gagal Memperbarui Status Data.');
+            return redirect()->back();
+        }
     }
+
+
 
     public function import()
     {
@@ -340,7 +344,7 @@ class SalesController extends BaseController
         $sheet = $spreadsheet->getActiveSheet();
 
         $sheet->setCellValue('A2', 'Data Sales Telkom Witel Sumbar');
-        $sheet->mergeCells('A2:I2');
+        $sheet->mergeCells('A2:J2');
         $sheet->getStyle('A2')->getFont()->setBold(true);
         $sheet->getStyle('A2')->getFont()->setSize(13);
         $sheet->getStyle('A2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
@@ -352,12 +356,13 @@ class SalesController extends BaseController
         $sheet->setCellValue('D4', 'Nomor SC');
         $sheet->setCellValue('E4', 'Nama Pengguna');
         $sheet->setCellValue('F4', 'Alamat Instalasi');
-        $sheet->setCellValue('G4', 'Sektor');
-        $sheet->setCellValue('H4', 'STO');
-        $sheet->setCellValue('I4', 'Status');
+        $sheet->setCellValue('G4', 'Datel');
+        $sheet->setCellValue('H4', 'Sektor');
+        $sheet->setCellValue('I4', 'STO');
+        $sheet->setCellValue('J4', 'Status');
 
-        $sheet->getStyle('A4:I4')->getFont()->setBold(true);
-        $sheet->getStyle('A4:I4')->getFill()
+        $sheet->getStyle('A4:J4')->getFont()->setBold(true);
+        $sheet->getStyle('A4:J4')->getFill()
             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
             ->getStartColor()->setARGB('FFFACD');
 
@@ -370,9 +375,10 @@ class SalesController extends BaseController
             $sheet->setCellValue('D' . $column, $value['noSC']);
             $sheet->setCellValue('E' . $column, $value['nama_pengguna']);
             $sheet->setCellValue('F' . $column, $value['alamat_instl']);
-            $sheet->setCellValue('G' . $column, $value['sektor']);
-            $sheet->setCellValue('H' . $column, $value['sto']);
-            $sheet->setCellValue('I' . $column, $value['status']);
+            $sheet->setCellValue('G' . $column, $value['datel']);
+            $sheet->setCellValue('H' . $column, $value['sektor']);
+            $sheet->setCellValue('I' . $column, $value['sto']);
+            $sheet->setCellValue('J' . $column, $value['status']);
             $column++;
         }
 
@@ -385,7 +391,7 @@ class SalesController extends BaseController
             ],
         ];
         $endRow = max($column, 4);
-        $sheet->getStyle('A4:I' . $endRow)->applyFromArray($styleArray);
+        $sheet->getStyle('A4:J' . $endRow)->applyFromArray($styleArray);
 
 
         $sheet->getColumnDimension('A')->SetAutoSize(true);
@@ -397,6 +403,7 @@ class SalesController extends BaseController
         $sheet->getColumnDimension('G')->SetAutoSize(true);
         $sheet->getColumnDimension('H')->SetAutoSize(true);
         $sheet->getColumnDimension('I')->SetAutoSize(true);
+        $sheet->getColumnDimension('J')->SetAutoSize(true);
 
 
         $writer = new Xlsx($spreadsheet);

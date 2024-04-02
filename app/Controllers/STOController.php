@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\STOModel;
+use App\Models\ModelDatel;
+use App\Models\SektorModel;
 
 class STOController extends BaseController
 {
@@ -18,14 +20,20 @@ class STOController extends BaseController
         return view('Pages/sto', $data);
     }
 
-    public function TambahSTO(): string
+    public function TambahSTO()
     {
-        return view('Pages/TambahSTO');
+        $datelModel = new ModelDatel();
+        $sektorModel = new SektorModel();
+
+        $data['datels'] = $datelModel->getDatel();
+        $data['sektors'] = $sektorModel->getformSektor();
+
+        return view('Pages/TambahSTO', $data);
     }
 
     public function save()
     {
-        
+
         $datel = $this->request->getVar('Datel');
         $sektor = $this->request->getVar('Sektor');
         $sto = $this->request->getVar('STO');
@@ -45,6 +53,15 @@ class STOController extends BaseController
     public function editSTO($id)
     {
         $data['stoModel'] = $this->stoModel->getsto($id);
+
+        // Load model ModelDatel dan SektorModel
+        $modelDatel = new \App\Models\ModelDatel();
+        $modelSektor = new \App\Models\SektorModel();
+
+        // Ambil data Datel dan Sektor dari database
+        $data['datels'] = $modelDatel->getDatel();
+        $data['sektors'] = $modelSektor->getSektor();
+
         return view('Pages/editSTO', $data);
     }
 

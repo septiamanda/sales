@@ -28,36 +28,32 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-2 text-gray-800">Tabel Sektor</h1>
+                        <a href="<?= base_url('tambahDataSektor'); ?>" class="d-none d-sm-inline-block btn btn-danger shadow-sm ml-auto mr-3">
+                            <i class="fas fa-plus fa-sm text-#184240"></i> Sektor
+                        </a>
+                        <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapusSemuaModal">
+                            <i class="fas fa-trash-alt"></i> Hapus Semua Data 
+                        </button> -->
+
+                    </div>
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-sm-flex justify-content-between align-items-center">
-                            <h6 class="m-0 font-weight-bold text-primary">List Data Sektor</h6>
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-#184240">Data Sektor</h6>
                         </div>
-
-                        <!-- Form pencarian dan Tambah Data Sektor -->
                         <div class="card-body">
-                            <form action="" method="get">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control col-8" name="cari_sektor" value="" placeholder="Masukkan kata kunci..." aria-label="Cari.." aria-describedby="button-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit" id="cariSektor">Cari</button>
-                                    </div>
-                            </form>
-                                    <div class="col-md-6 d-flex justify-content-end align-items-center ml-auto">
-                                        <a href="<?= base_url('tambahDataSektor'); ?>" class="btn btn-primary shadow-sm ml-auto">
-                                            <i class="fas fa-plus fa-sm"></i> Tambah Data Sektor
-                                        </a>
-                                    </div>
-                                </div>
 
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="sektorTable" width="100%" cellspacing="0">
-                                    <thead style="text-align:center; color:black;" >
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead style="background-color: #184240; color: white; text-align: center;">
                                         <tr>
                                             <th>No.</th>
-                                            <th>Datel (Daerah Telkom)</th>
-                                            <th>Nama Sektor</th>
-                                            <th>Aksi</th>
+                                            <th>Datel</th>
+                                            <th>Sektor</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -102,7 +98,7 @@
                                                                         </h6>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="submit" class="btn btn-primary" name="btnYa">Ya</button>
+                                                                        <button type="submit" data-id_sektor="<?= $data['id_sektor']?>" class="btn btn-primary" name="btnYa">Ya</button>
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
                                                                     </div>
                                                                 </form>
@@ -121,26 +117,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
-                            <!-- Fitur paginasi -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"></div>
-                                <div class="dataTables_paginate paging_simple_numbers">
-                                    <ul class="pagination">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
-                                        </li>
-                                        <li class="page-item active" aria-current="page">
-                                            <a class="page-link" href="#">1</a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -156,6 +132,28 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+
+    <!-- Membuat Modal Hapus Semua Data -->
+    <!-- <div class="modal fade" id="hapusSemuaModal" tabindex="-1" aria-labelledby="hapusSemuaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hapusSemuaModalLabel">Konfirmasi Hapus Semua Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/></svg>
+                    </button>                                                         
+                </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus semua data sektor?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btnHapusSemua">Ya</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+            </div>
+            </div>
+        </div>
+    </div> -->
+
 
     <?= $this->endSection(); ?>
 
@@ -175,26 +173,46 @@
 
     <!-- Skrip JavaScript untuk menangani penghapusan -->
     <script>
-        $(document).ready(function() {
+    $(document).ready(function() {
         // Tangkap klik pada tombol hapus
-        $('.btn-hapus').click(function() {
+        $(document).on('click', '.btn-hapus', function() {
             var id_sektor = $(this).data('id_sektor');
             $('#hapusModal' + id_sektor).modal('show');
-            $('#hapusModal' + id_sektor + ' button[name="btnYa"]').click(function() {
-                // Menghapus data menggunakan AJAX
-                $.ajax({
-                    type: "POST",
-                    url: "<?= base_url('deleteSektor'); ?>/" + id_sektor,
-                    success: function(response) {
-                        // Redirect ke halaman sektor setelah penghapusan data
-                        window.location.href = "<?= base_url('sektor'); ?>"
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
+        });
+
+        // Tangkap klik pada tombol "Ya" di dalam modal
+        $(document).on('click', '.btn-ya', function() {
+            var id_sektor = $(this).data('id_sektor');
+            // Menghapus data menggunakan AJAX
+            $.ajax({
+                type: "POST",
+                url: "<?= base_url('deleteSektor'); ?>/" + id_sektor,
+                success: function(response) {
+                    // Redirect ke halaman sektor setelah penghapusan data
+                    window.location.href = "<?= base_url('sektor'); ?>"
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
             });
         });
     });
 
-    </script>
+    // // Membuat script hapus semua data
+    //     $('#btnHapusSemua').click(function() {
+    //         $.ajax({
+    //             type: "POST",
+                // url: "",
+    //             success: function(response) {
+    //                 // Redirect ke halaman sektor setelah penghapusan data
+    //                 window.location.href = ""
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 console.error(xhr.responseText);
+    //             }
+    //         });
+    //     });
+    
+
+
+</script>

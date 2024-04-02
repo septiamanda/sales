@@ -31,15 +31,18 @@
                         <div class="form-group">
                             <select type="text" class="form-control" placeholder="Datel" name="Datel" id="datel" style="border-radius: 50px; height: 50px;">
                                 <option value="" disabled selected>Pilih Datel</option>
-                                <option value="DATEL BKT">DATEL BKT</option>
-                                <option value="DATEL SLK">DATEL SLK</option>
-                                <option value="Inner PDG">Inner PDG</option>
+                                <?php foreach ($datels as $datel) : ?>
+                                    <option value="<?= esc($datel['nama_datel']); ?>"><?= esc($datel['nama_datel']); ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 
                         <div class="form-group mt-4">
                             <select class="form-control" name="Sektor" id="sektor" style="border-radius: 50px; height: 50px;">
                                 <option value="" disabled selected>Pilih Sektor</option>
+                                <?php foreach ($sektors as $sektor) : ?>
+                                    <option value="<?= esc($sektor['nama_sektor']); ?>"><?= esc($sektor['nama_sektor']); ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 
@@ -57,51 +60,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    // Mendapatkan elemen dropdown Datel dan Sektor
-    var DatelDropdown = document.getElementById("datel");
-    var SektorDropdown = document.getElementById("sektor");
-
-    // Menambahkan pilihan berdasarkan Datel yang dipilih
-    DatelDropdown.addEventListener("change", function() {
-        // Mengosongkan elemen dropdown Sektor
-        SektorDropdown.innerHTML = "<option value='' disabled selected>Pilih Sektor</option>";
-
-        // Mendapatkan nilai Datel yang dipilih
-        var selectedDatel = this.value;
-
-        // Menambahkan pilihan berdasarkan Datel yang dipilih
-        switch (selectedDatel) {
-            case "DATEL BKT":
-                addOption(SektorDropdown, "Hero BKT (Bukittinggi)", "Hero BKT");
-                addOption(SektorDropdown, "Hero PYK (Payakumbuh)", "Hero PYK");
-                addOption(SektorDropdown, "Non Hero BKT", "Non-Hero BKT");
-                break;
-            case "DATEL SLK":
-                addOption(SektorDropdown, "Hero SLK (Solok)", "Hero SLK");
-                addOption(SektorDropdown, "Non Hero SLK", "Non-Hero SLK");
-                break;
-            case "Inner PDG":
-                addOption(SektorDropdown, "Hero BDT (Bandar Buat)", "Hero BDT");
-                addOption(SektorDropdown, "Hero KJI (Kuranji)", "Hero KJI");
-                addOption(SektorDropdown, "Hero PAM", "Hero PAM");
-                addOption(SektorDropdown, "Non Hero PDG", "Non-Hero PDG");
-                break;
-            default:
-                break;
-        }
-    });
-
-    function addOption(selectElement, text, value) {
-        // Membuat elemen option
-        var option = document.createElement("option");
-        option.text = text;
-        option.value = value;
-
-        // Menambahkan option ke dropdown
-        selectElement.add(option);
-    }
-</script>
 
 <?= $this->endSection(); ?>
