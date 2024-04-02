@@ -73,6 +73,8 @@
                             <h6 class="m-0 font-weight-bold text-gray-800">Cari Data Sales</h6>
                         </div>
                         <div class="card-body">
+                        <!-- <p>Zona Waktu Server: <?php echo date_default_timezone_get(); ?></p> -->
+
                             <form action="<?php base_url('SalesController/listSales') ?>" method="get">
                                 <label for="date">Tanggal Order:</label>
                                 <div class="form-group">
