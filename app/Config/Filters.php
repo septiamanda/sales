@@ -49,10 +49,10 @@ class Filters extends BaseConfig
         ],
         'after' => [
             'filterAdmin' => [
-                'except' => ['dashboard', 'chartSales', 'pieSales', 'totalSales', 'totalRE', 'totalPI', 'totalPS', 'updateStatus*', 'search', 'listRE', 'chartRE', 'listFCC', 'chartFCC', 'listPI', 'chartPI', 'listPS', 'chartPS', 'listA', 'listK', 'sektor', 'sto', 'laporan', 'TambahSTO', 'editSTO*', 'deleteSTO*', 'updateSTO', 'save', 'tambahDataSektor', 'editSektor*', 'updateSektor', 'deleteSektor*', 'simpan', 'regis', 'tambahA', 'simpanA', 'tambahK', 'simpanK', 'listSales', 'editA*', 'editK*', 'updateA', 'updateK', 'simpanSales', 'deleteAdmin', 'deleteKaryawan', 'editSales', 'deleteSales*', 'growth']
+                'except' => ['dashboard', 'chartSales', 'pieSales', 'totalSales', 'totalRE', 'totalPI', 'totalPS', 'updateStatus*', 'search', 'listRE', 'chartRE', 'listFCC', 'chartFCC', 'listPI', 'chartPI', 'listPS', 'chartPS', 'listA', 'listK', 'sektor', 'sto', 'laporan', 'TambahSTO', 'editSTO*', 'deleteSTO*', 'updateSTO', 'save', 'tambahDataSektor', 'editSektor*', 'updateSektor', 'deleteSektor*', 'simpan', 'regis', 'tambahA', 'simpanA', 'tambahK', 'simpanK', 'listSales', 'editA*', 'editK*', 'updateA', 'updateK', 'simpanSales', 'deleteAdmin', 'deleteKaryawan', 'editSales', 'deleteSales*', 'growth','import','exampleFile']
             ],
             'filterKaryawan' => [
-                'except' => ['dashboard', 'chartSales', 'pieSales', 'totalSales', 'totalRE', 'totalPI', 'totalPS', 'updateStatus*', 'search', 'listRE', 'chartRE', 'listFCC', 'chartFCC', 'listPI', 'chartPI', 'listPS', 'chartPS', 'laporan', 'listSales', 'simpanSales', 'editSales', 'deleteSales*', 'growth']
+                'except' => ['dashboard', 'chartSales', 'pieSales', 'totalSales', 'totalRE', 'totalPI', 'totalPS', 'updateStatus*', 'search', 'listRE', 'chartRE', 'listFCC', 'chartFCC', 'listPI', 'chartPI', 'listPS', 'chartPS', 'laporan', 'listSales', 'simpanSales', 'editSales', 'deleteSales*', 'growth','import','exampleFile']
             ],
             
             'toolbar',

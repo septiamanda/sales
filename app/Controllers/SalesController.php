@@ -24,17 +24,16 @@ class SalesController extends BaseController
         $this->modelSTO = new STOModel();
         $this->modelSektor = new SektorModel();
         $this->modelDatel = new ModelDatel();
-
     }
 
     public function listSales(): string
     {
         $data['salesData'] = $this->modelSales->getSales();
-        $data['sd'] = ['id_sales' => 0]; 
+        $data['sd'] = ['id_sales' => 0];
 
         $data['stos'] = $this->modelSTO->getformSTO();
         $data['sektors'] = $this->modelSektor->getformSektor();
-        $data['datels']=$this->modelDatel->getDatel();
+        $data['datels'] = $this->modelDatel->getDatel();
 
         $date = $this->request->getGet('tanggal_order');
 
@@ -234,59 +233,85 @@ class SalesController extends BaseController
         return $this->response->setJSON($response);
     }
 
-    public function export()
+    public function import()
     {
-        $sales = $this->modelSales->findAll();
+        $file = $this->request->getFile('file_excel');
+        $extension = $file->getClientExtension();
+
+        // Validasi ekstensi file
+        if ($extension == 'xlsx' || $extension == 'xls') {
+            // Pilih pembaca berdasarkan ekstensi file
+            if ($extension == 'xls') {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+
+            // Load file spreadsheet
+            $spreadsheet = $reader->load($file);
+
+            // Ambil data dari sheet aktif
+            $contacts = $spreadsheet->getActiveSheet()->toArray();
+
+            // Loop untuk setiap baris data
+            foreach ($contacts as $key => $value) {
+                // Lewati header baris pertama
+                if ($key == 0) {
+                    continue;
+                }
+
+                if (count($value) != 9) { // Sesuaikan dengan jumlah kolom yang diharapkan
+                    // Set pesan flash gagal jika format data tidak sesuai
+                    session()->setFlashdata('gagal', 'Format data tidak sesuai');
+                    return redirect()->back()->withInput();
+                }
+
+                // Simpan data ke dalam array
+                $data = [
+                    'tanggal_order' => $value[1], // Sesuaikan dengan indeks kolom yang sesuai
+                    'noSC' => $value[2],
+                    'nama_pengguna' => $value[3],
+                    'alamat_instl' => $value[   4],
+                    'datel' => $value[5],
+                    'sektor' => $value[6],
+                    'sto' => $value[7],
+                    'status' => $value[8],
+                    'tanggal_update' => date('Y-m-d'), // Tanggal hari ini
+                ];
+
+                $this->modelSales->insert($data);
+            }
+                // Set pesan flash sukses
+                session()->setFlashdata('success', 'Data berhasil ditambah');
+
+                // Redirect ke halaman listSales
+                return redirect()->to('listSales');
+        } else {
+            // Set pesan flash gagal jika format file tidak sesuai
+            session()->setFlashdata('gagal', 'Format File tidak sesuai');
+            return redirect()->back()->withInput();
+        }
+    }
+
+    public function exampleFile()
+    {
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
-        $sheet->setCellValue('A2', 'Data Sales Telkom Witel Sumbar');
-        $sheet->mergeCells('A2:I2'); 
-        $sheet->getStyle('A2')->getFont()->setBold(true);
-        $sheet->getStyle('A2')->getFont()->setSize(13); 
-        $sheet->getStyle('A2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER); 
-        $sheet->getStyle('A2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER); 
-
-        $sheet->setCellValue('A4', 'No');
-        $sheet->setCellValue('B4', 'Tanggal Order');
-        $sheet->setCellValue('C4', 'Tanggal Update');
-        $sheet->setCellValue('D4', 'Nomor SC');
-        $sheet->setCellValue('E4', 'Nama Pengguna');
-        $sheet->setCellValue('F4', 'Alamat Instalasi');
-        $sheet->setCellValue('G4', 'Sektor');
-        $sheet->setCellValue('H4', 'STO');
-        $sheet->setCellValue('I4', 'Status');
-
-        $sheet->getStyle('A4:I4')->getFont()->setBold(true);
-        $sheet->getStyle('A4:I4')->getFill()
-            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-            ->getStartColor()->setARGB('FFFACD');
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Tanggal Order');
+        $sheet->setCellValue('C1', 'Nomor SC');
+        $sheet->setCellValue('D1', 'Nama Pengguna');
+        $sheet->setCellValue('E1', 'Alamat Instalasi');
+        $sheet->setCellValue('F1', 'Sektor');
+        $sheet->setCellValue('G1', 'STO');
+        $sheet->setCellValue('H1', 'Status');
 
        
-        $column = 5;
-        foreach ($sales as $key => $value) {
-            $sheet->setCellValue('A'.$column, ($column-4));
-            $sheet->setCellValue('B'.$column, $value['tanggal_order']); 
-            $sheet->setCellValue('C'.$column, $value['tanggal_update']);
-            $sheet->setCellValue('D'.$column, $value['noSC']);
-            $sheet->setCellValue('E'.$column, $value['nama_pengguna']); 
-            $sheet->setCellValue('F'.$column, $value['alamat_instl']); 
-            $sheet->setCellValue('G'.$column, $value['sektor']); 
-            $sheet->setCellValue('H'.$column, $value['sto']); 
-            $sheet->setCellValue('I'.$column, $value['status']); 
-            $column++;
-        }  
-        
-        $styleArray = [
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                    'color' => ['argb' => 'FF000000'],
-                ],
-            ],
-        ];
-        $endRow = max($column, 4); 
-        $sheet->getStyle('A4:I'.$endRow)->applyFromArray($styleArray);
+        $sheet->getStyle('A1:I1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:I1')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('FFFACD');
 
 
         $sheet->getColumnDimension('A')->SetAutoSize(true);
@@ -306,6 +331,79 @@ class SalesController extends BaseController
         header('Cache-Control: max-age=0');
         $writer->save('php://output');
         exit();
-            
+    }
+
+    public function export()
+    {
+        $sales = $this->modelSales->findAll();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A2', 'Data Sales Telkom Witel Sumbar');
+        $sheet->mergeCells('A2:I2');
+        $sheet->getStyle('A2')->getFont()->setBold(true);
+        $sheet->getStyle('A2')->getFont()->setSize(13);
+        $sheet->getStyle('A2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+        $sheet->setCellValue('A4', 'No');
+        $sheet->setCellValue('B4', 'Tanggal Order');
+        $sheet->setCellValue('C4', 'Tanggal Update');
+        $sheet->setCellValue('D4', 'Nomor SC');
+        $sheet->setCellValue('E4', 'Nama Pengguna');
+        $sheet->setCellValue('F4', 'Alamat Instalasi');
+        $sheet->setCellValue('G4', 'Sektor');
+        $sheet->setCellValue('H4', 'STO');
+        $sheet->setCellValue('I4', 'Status');
+
+        $sheet->getStyle('A4:I4')->getFont()->setBold(true);
+        $sheet->getStyle('A4:I4')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('FFFACD');
+
+
+        $column = 5;
+        foreach ($sales as $key => $value) {
+            $sheet->setCellValue('A' . $column, ($column - 4));
+            $sheet->setCellValue('B' . $column, $value['tanggal_order']);
+            $sheet->setCellValue('C' . $column, $value['tanggal_update']);
+            $sheet->setCellValue('D' . $column, $value['noSC']);
+            $sheet->setCellValue('E' . $column, $value['nama_pengguna']);
+            $sheet->setCellValue('F' . $column, $value['alamat_instl']);
+            $sheet->setCellValue('G' . $column, $value['sektor']);
+            $sheet->setCellValue('H' . $column, $value['sto']);
+            $sheet->setCellValue('I' . $column, $value['status']);
+            $column++;
+        }
+
+        $styleArray = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'],
+                ],
+            ],
+        ];
+        $endRow = max($column, 4);
+        $sheet->getStyle('A4:I' . $endRow)->applyFromArray($styleArray);
+
+
+        $sheet->getColumnDimension('A')->SetAutoSize(true);
+        $sheet->getColumnDimension('B')->SetAutoSize(true);
+        $sheet->getColumnDimension('C')->SetAutoSize(true);
+        $sheet->getColumnDimension('D')->SetAutoSize(true);
+        $sheet->getColumnDimension('E')->SetAutoSize(true);
+        $sheet->getColumnDimension('F')->SetAutoSize(true);
+        $sheet->getColumnDimension('G')->SetAutoSize(true);
+        $sheet->getColumnDimension('H')->SetAutoSize(true);
+        $sheet->getColumnDimension('I')->SetAutoSize(true);
+
+
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=sales.xlsx');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        exit();
     }
 }
