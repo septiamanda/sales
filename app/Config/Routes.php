@@ -47,15 +47,19 @@ $routes->get('editSektor/(:num)', 'Sektor::editSektor/$1');
 $routes->post('updateSektor', 'Sektor::updateSektor');
 $routes->post('deleteSektor/(:num)', 'Sektor::deleteSektor/$1');
 
+$routes->get('pi/export', 'PIController::export');
 $routes->get('listPI', 'PIController::listPI');
 $routes->post('chartPI', 'PIController::tampilChartPI');
 
+$routes->get('ps/export', 'PSController::export');
 $routes->get('listPS', 'PSController::listPS');
 $routes->post('chartPS', 'PSController::tampilChartPS');
 
+$routes->get('re/export', 'REController::export');
 $routes->get('listRE', 'REController::listRE');
 $routes->post('chartRE', 'REController::tampilChartRE');
 
+$routes->get('fcc/export', 'FCCController::export');
 $routes->get('listFCC', 'FCCController::listFCC');
 $routes->post('chartFCC', 'FCCController::tampilChartFCC');
 

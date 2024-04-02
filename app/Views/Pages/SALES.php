@@ -138,9 +138,9 @@
                             </button>
 
                             <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> PDF</button>
-                            <a href="<?=site_url('sales/export')?>" class="btn btn-success ml-3"> 
-                                <i class="fas fa-file-download"></i> Export Excel
-                            </a>                           
+                            <a href="<?= site_url('sales/export') ?>" class="btn btn-success ml-3">
+                                <i class="fas fa-file-download"></i> Excel
+                            </a>
                         </div>
                     </div>
 
@@ -156,6 +156,7 @@
                                     <th>Nomor SC </th>
                                     <th>Nama Pengguna</th>
                                     <th>Alamat Instalasi</th>
+                                    <th>Datel</th>
                                     <th>Sektor</th>
                                     <th>STO</th>
                                     <th>Status</th>
@@ -171,11 +172,12 @@
                                         <td><?= $sd['noSC']; ?></td>
                                         <td><?= $sd['nama_pengguna']; ?></td>
                                         <td><?= $sd['alamat_instl']; ?></td>
+                                        <td><?= $sd['datel']; ?></td>
                                         <td><?= $sd['sektor']; ?></td>
                                         <td><?= $sd['sto']; ?></td>
                                         <td><?= $sd['status']; ?></td>
                                         <td style="width: 210px;">
-                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>">
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editSales" id="btn-edit" data-id="<?= $sd['id_sales']; ?>" data-tanggal="<?= $sd['tanggal_order']; ?>" data-nosc="<?= $sd['noSC']; ?>" data-nama="<?= $sd['nama_pengguna']; ?>" data-alamat="<?= $sd['alamat_instl']; ?>" data-sektor="<?= $sd['sektor']; ?>" data-sto="<?= $sd['sto']; ?>" data-datel="<?= $sd['datel']; ?>">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSales" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
@@ -198,10 +200,10 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <select name="status" class="form-control">
-                                                                    <option value="RE">RE</option>
-                                                                    <option value="FCC">FCC</option>
-                                                                    <option value="PI">PI</option>
-                                                                    <option value="PS">PS</option>
+                                                                    <option value="RE" <?= $sd['status'] == 'RE' ? 'selected' : ''; ?>>RE</option>
+                                                                    <option value="FCC" <?= $sd['status'] == 'FCC' ? 'selected' : ''; ?>>FCC</option>
+                                                                    <option value="PI" <?= $sd['status'] == 'PI' ? 'selected' : ''; ?>>PI</option>
+                                                                    <option value="PS" <?= $sd['status'] == 'PS' ? 'selected' : ''; ?>>PS</option>
                                                                 </select>
                                                             </div>
                                                             <div class="modal-footer">
@@ -276,6 +278,22 @@
                                         </div>
 
                                         <div class="mb-3 row">
+                                            <label for="datelsales" class="col-sm-3 col-form-label">Datel</label>
+                                            <div class="col-sm-9">
+
+                                                <select class="form-control" name="datelsales">
+                                                    <option value="" disabled selected>Pilih Datel</option>
+                                                    <?php if (!empty($datels)) : ?>
+                                                        <?php foreach ($datels as $datel) : ?>
+                                                            <option value="<?= esc($datel['nama_datel']) ?>"><?= esc($datel['nama_datel']) ?></option>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
                                             <label for="sektorsales" class="col-sm-3 col-form-label">Sektor</label>
                                             <div class="col-sm-9">
 
@@ -289,9 +307,8 @@
 
                                                 </select>
                                             </div>
-
-
                                         </div>
+
                                         <div class="mb-3 row">
                                             <label for="stosales" class="col-sm-3 col-form-label">STO</label>
                                             <div class="col-sm-9">
@@ -369,21 +386,32 @@
                                         </div>
 
                                         <div class="mb-3 row">
+                                            <label for="datelsales" class="col-sm-3 col-form-label">Datel</label>
+                                            <div class="col-sm-9">
+
+                                                <select class="form-control" name="datelsales" id="datelsales">
+                                                    <option value="" disabled selected>Pilih Datel</option>
+                                                    <?php if (!empty($datels)) : ?>
+                                                        <?php foreach ($datels as $datel) : ?>
+                                                            <option value="<?= esc($datel['nama_datel']) ?>"><?= esc($datel['nama_datel']) ?></option>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
                                             <label for="sektorsales" class="col-sm-3 col-form-label">Sektor</label>
                                             <div class="col-sm-9">
 
                                                 <select class="form-control" name="sektorsales" id="sektorsales">
-                                                    <option value=""></option>
-                                                    <option value="" disabled selected> Pilih Sektor</option>
-                                                    <option value="Hero BKT">Hero BKT</option>
-                                                    <option value="Hero Non-BKT">Non-Hero BKT</option>
-                                                    <option value="Hero PYK">Hero PYK</option>
-                                                    <option value="Hero SLK">Hero SLK</option>
-                                                    <option value="Hero Non-SLK">Non-Hero SLK</option>
-                                                    <option value="Hero BDT">Hero BDT</option>
-                                                    <option value="Hero KJI">Hero KJI</option>
-                                                    <option value="Hero PAM">Hero PAM</option>
-                                                    <option value="Hero Non-PDG">Non Hero PDG</option>
+                                                    <option value="" disabled selected>Pilih Sektor</option>
+                                                    <?php if (!empty($sektors)) : ?>
+                                                        <?php foreach ($sektors as $sektor) : ?>
+                                                            <option value="<?= esc($sektor['nama_sektor']) ?>"><?= esc($sektor['nama_sektor']) ?></option>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
                                                 </select>
 
                                             </div>
@@ -395,30 +423,17 @@
                                             <div class="col-sm-9">
 
                                                 <select class="form-control" name="stosales" id="stosales">
-                                                    <option value="" disabled selected></option>
-                                                    <option value="Datel BKT">Datel BKT (Bukittinggi)</option>
-                                                    <option value="Datel SLK">Datel SLK (Solok)</option>
-                                                    <option value="Inner PDG">Inner PDG (Padang)</option>
+                                                    <option value="" disabled selected>Pilih STO</option>
+                                                    <?php if (!empty($stos)) : ?>
+                                                        <?php foreach ($stos as $sto) : ?>
+                                                            <option value="<?= $sto['STO'] ?>"><?= $sto['STO'] ?></option>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
                                                 </select>
 
 
                                             </div>
                                         </div>
-                                        <!-- <div class="mb-3 row">
-                                            <label for="sektorsales" class="col-sm-3 col-form-label">Status</label>
-                                            <div class="col-sm-9">
-
-                                                <select class="form-control" name="status" id="status" disabled aria-label="Disabled select example" disabled>
-                                                    <option value="" disabled selected> </option>
-                                                    <option value="RE">RE</option>
-                                                    <option value="FCC">FCC</option>
-                                                    <option value="PI">PI</option>
-                                                    <option value="PS">PS</option>
-                                                </select>
-
-
-                                            </div>
-                                        </div> -->
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -450,8 +465,8 @@
                             </div>
                         </div>
                     </div>
-
-
+                
+                    <!-- END UPDATE -->
 
                     <!-- /.container-fluid -->
 
@@ -472,26 +487,6 @@
         <!-- Tambahkan JS jQuery -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-        <script>
-            $(document).ready(function() {
-                // Mengambil data STO saat modal ditampilkan
-                $('#tambahSales').on('shown.bs.modal', function() {
-                    $.ajax({
-                        url: '<?= base_url('getSTO') ?>', // Sesuaikan dengan URL method getSTO di controller Anda
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data) {
-                            var stoDropdown = $('#stosales');
-                            stoDropdown.empty();
-                            stoDropdown.append($('<option>').val('').text('Pilih STO'));
-                            $.each(data, function(index, sto) {
-                                stoDropdown.append($('<option>').val(sto.id).text(sto.nama_sto)); // Sesuaikan dengan struktur data STO Anda
-                            });
-                        }
-                    });
-                });
-            });
-        </script>
 
 
         <script>
@@ -503,6 +498,7 @@
                 $('.modal-body #nomorSC').val($(this).data('nosc'));
                 $('.modal-body #namaPel').val($(this).data('nama'));
                 $('.modal-body #alamatInt').val($(this).data('alamat'));
+                $('.modal-body #datelsales').val($(this).data('datel'));
                 $('.modal-body #sektorsales').val($(this).data('sektor'));
                 $('.modal-body #stosales').val($(this).data('sto'));
 
@@ -528,20 +524,18 @@
         <!-- UPDATE -->
         <script>
             $(document).ready(function() {
-                $('.btn-update').click(function() {
+                // Saat halaman dimuat, cek status setiap data penjualan
+                $('.btn-update').each(function() {
                     var id_sales = $(this).data('id');
 
-                    // Kirim permintaan AJAX untuk memperbarui status
+                    // Kirim permintaan AJAX untuk memeriksa status
                     $.ajax({
-                        url: "updateStatus/" + id_sales,
+                        url: "checkStatus/" + id_sales,
                         method: "post",
                         success: function(response) {
-                            // Tampilkan pesan sukses atau gagal
-                            alert(response.message);
-
-                            // Muat ulang halaman jika berhasil
-                            if (response.success) {
-                                location.reload();
+                            // Jika status adalah PS, nonaktifkan tombol update
+                            if (response.status == 'PS') {
+                                $('#btn-update-' + id_sales).prop('disabled', true);
                             }
                         },
                         error: function(xhr, status, error) {
@@ -552,6 +546,8 @@
             });
         </script>
 
+
+        <!-- UPDATE -->
         <script>
             $(document).ready(function() {
                 // Tampilkan modal dropdown saat tombol "Update" di klik

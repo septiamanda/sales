@@ -7,8 +7,12 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Verifikasi</h1>
-        <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> Cetak</button>
-
+        <div>
+            <button class="btn btn-success ml-3" onclick="window.print()"><i class="bi bi-printer"></i> PDF</button>
+            <a href="<?= site_url('fcc/export') ?>" class="btn btn-success ml-3">
+                <i class="fas fa-file-download"></i> Excel
+            </a>
+        </div>
     </div>
 
     <hr>
@@ -56,6 +60,7 @@
                                             <th>No. SC</th>
                                             <th>Nama Pengguna</th>
                                             <th>Alamat Instalasi</th>
+                                            <th>Datel</th>
                                             <th>Sektor</th>
                                             <th>STO</th>
                                         </tr>
@@ -70,6 +75,7 @@
                                                 <td><?= $fcc['noSC']; ?></td>
                                                 <td><?= $fcc['nama_pengguna']; ?></td>
                                                 <td><?= $fcc['alamat_instl']; ?></td>
+                                                <td><?= $fcc['datel']; ?></td>
                                                 <td><?= $fcc['sektor']; ?></td>
                                                 <td><?= $fcc['sto']; ?></td>
                                             </tr>
